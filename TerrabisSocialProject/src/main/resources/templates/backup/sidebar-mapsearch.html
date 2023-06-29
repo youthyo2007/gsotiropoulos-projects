@@ -1,0 +1,214 @@
+      <!-- sidebar-->
+      <aside class="aside" th:fragment="sidebar">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <form id="advsearchqueryform" th:action="@{'/video/map-advanced/search'}" method="POST" th:object="${VIDEOQUERYFRM}"> <nav data-sidebar-anyclick-close="" class="sidebar">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER">video advanced search</span>
+                  </li>
+                  
+                  
+
+
+                  <li class=" ">
+                     <a href="#category" title="Category Filter" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-th-list fa-2x advmenu_category"></em>
+                        <span class="text-inverse text-bold advmenu_category" data-localize="sidebar.nav.CATEGORY">Category</span>
+                     </a>
+                     <ul id="category" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-inverse advmenu_category">Category</span></li>
+         
+                        <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Category</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.category}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox categorycheckbox">
+					                                 <label>
+					                                  <input type="checkbox" th:checked="${item.value}" th:value="${item.key}"/>  <!-- th:attr="id='advfilter-footagedate-'+${item.key}" -->
+					                                    <span class="fa fa-check"></span><label class="text-inverse"  th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>    
+                       								</div>
+                       						</div>
+                        </li>
+                        <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+
+                  
+                  
+        
+                  
+                  <li class=" ">
+                     <a href="#uploaddate" title="Upload Date Filter" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-calendar fa-2x advmenu_uploaddate"></em>
+                        <span class="text-inverse text-bold advmenu_uploaddate" data-localize="sidebar.nav.UPLOADDATE">Upload Date</span>
+                     </a>
+                     <ul id="uploaddate" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span class="text-inverse advmenu_uploaddate">Upload Date</span></li>
+
+                        <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Upload Date</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.uploaddate}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox c-checkbox-rounded uploadradiobox">
+					                                 <label>
+					                                  <input type="radio" th:checked="${item.value}" name="uploaddate" th:value="${item.key}"/>  <!-- th:attr="id='advfilter-footagedate-'+${item.key}" -->
+					                                    <span class="fa fa-check"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+
+
+                        <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+                  
+
+ 	 			<li class=" ">
+                     <a href="#advfootagedate" title="Footage Date Filter" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-calendar fa-2x advmenu_footagedate"></em>
+                        <span class="text-inverse text-bold advmenu_footagedate" data-localize="sidebar.nav.FOOTAGEDATE">Footage Date</span>
+                     </a>
+                     <ul id="advfootagedate" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span class="text-inverse advmenu_footagedate">Footage Date</span></li>
+
+                        <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Footage Date</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.footagedate}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox c-checkbox-rounded footageradiobox">
+					                                 <label>
+					                                  <input type="radio" th:checked="${item.value}" name="advfootagedate" th:value="${item.key}"/>  <!-- th:attr="id='advfilter-footagedate-'+${item.key}" -->
+					                                    <span class="fa fa-check"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+
+
+                        <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+    
+                  
+                  <li class=" ">
+                     <a href="#weather" title="Weather Filter" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="wi wi-day-rain-wind fa-2x advmenu_weather"></em>
+                        <span class="text-inverse text-bold advmenu_weather" data-localize="sidebar.nav.WEATHER">Weather</span>
+                     </a>
+                     <ul id="weather" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span class="text-inverse advmenu_weather">Weather</span></li>
+                            <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Weather</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.weather}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox weathercheckbox">
+					                                 <label>
+					                                  <input type="checkbox" th:checked="${item.value}" th:value="${item.key}"/>  <!-- th:attr="id='advfilter-footagedate-'+${item.key}" -->
+					                                    <span class="wi wi-day-thunderstorm"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+                        <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					               
+					    </li>                         
+                     </ul>
+                  </li>
+                  
+                  
+                  
+                  
+
+         			
+<!--          			<li class=" ">
+                     <a href="#more" title="More" data-toggle="collapse">
+                        <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div>
+                        <em class="fa fa-ellipsis-h fa-2x advmenu_morefilters"></em>
+                        <span class="text-inverse text-bold advmenu_morefilters" data-localize="sidebar.nav.MOREFILTERS">More filters</span>
+                     </a>
+                     <ul id="more" class="nav sidebar-subnav collapse-in">
+                        <li class="sidebar-subnav-header"><span class="text-inverse advmenu_morefilters">More filters</span></li>
+         
+                        <li class="">
+	                           <div class="form-group">
+                            		  <label class="text-normal text-inverse">max radius in (m)</label>
+                            		  <input id="advmapradius" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="200" data-slider-step="1" data-slider-value="0" class="m-sm"/>
+         			           </div>
+                        </li>
+                        <li class="">
+	                           <div class="form-group m-sm mt-lg">
+                            		  <label class="text-normal  text-inverse">tags</label>
+    	                       									<span class="text-sm text-muted">Type and press Enter</span>
+									                              <input type="text" data-role="tagsinput"  class="form-control text-sm advtags">
+         			           </div>                        
+                        </li>
+                        
+                        <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					               
+					    </li>                         
+                        
+                     </ul>
+                  </li> -->
+                  
+                  
+                    
+                  
+                  
+                </ul>
+               <!-- END sidebar nav-->
+            </nav></form>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+
+     

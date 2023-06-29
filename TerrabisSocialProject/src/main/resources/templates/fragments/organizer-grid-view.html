@@ -1,0 +1,733 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+		<!-- WEATHER AND LIKE BTN THUMB -->
+		<div class="row text-info ml-sm" th:fragment="weather-and-likebtn-thumb(video,showlike)">
+		   <div class="col-md-4 col-xs-12 col-sm-12">
+		   <div class="row">
+<!-- 				  <div class="col-md-4 col-xs-6 col-sm-6 hidden-sm hidden-xs" th:each="weather, weatherStat : ${video.weatherList}">
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='sunny' and weatherStat.index<2}"><span class="wi wi-day-sunny"></span></label>
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='cloudy' and weatherStat.index<2}"><span class="wi wi-day-cloudy"></span></label>
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='rain' and weatherStat.index<2}"><span class="wi wi-day-rain-wind"></span></label>
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='snow' and weatherStat.index<2}"><span class="wi wi-day-snow"></span></label>
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='windy' and weatherStat.index<2}"><span class="wi wi-day-cloudy-windy"></span></label>
+								<label class="mt-sm text-yellow-dark" th:if="${weather=='storm' and weatherStat.index<2}"><span class="wi wi-day-thunderstorm"></span></label>
+				</div>  -->
+			</div>
+			</div>
+		   <div class="col-md-8 col-xs-12 col-sm-12">
+		   <div class="row">
+                      <div class="col-md-3 col-xs-4 col-sm-4 hidden-xs hidden-sm">
+                          <em  class="text-gray-dark fa fa-star" title="rating"></em><span  th:attr="id=${'vidratestxt_'+{video.id}}" class="text-muted text-bold text-sm-sm" th:if="${video.ratingssum>0}" th:text="${video.ratingssum}">5.7</span>
+                      </div>
+                       
+                      <div class="col-md-4 col-xs-4 col-sm-4 hidden-xs hidden-sm">
+                           <a class="text-white" title="watched"><em  th:attr="id=${'vidcount-play-icon_'+{video.id}}" class="text-gray-dark fa fa-youtube-play - "></em></a>
+                           	<span  th:attr="id=${'vidplaystxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.playscount>0}" th:text="${video.playscount}">15000</span>
+	                       <span th:attr="id=${'vidplaystxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.playscount==0}"></span>
+                      </div>
+
+                      
+                      <div class="col-md-5 col-xs-12 col-sm-12 pull-right" th:if="${showlike=='true'}">
+                      <a  class="vidaction-like cursor-pointer" title="like"><em class="fa fa-thumbs-up text-info-light - " title="like"></em></a>
+                       <span th:attr="id=${'vidlikestxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.likescount>0}" th:text="${video.likescount}">15000</span>
+                       <span th:attr="id=${'vidlikestxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.likescount==0}"></span>
+                      </div>
+            </div>         
+           </div>           
+		</div>
+		
+		
+		
+				<!-- WEATHER AND LIKE BTN -->
+		<div class="row text-info" th:fragment="weather-and-likebtn(video,showlike)">
+		   <div class="col-md-8 col-xs-12 col-sm-12">
+		   <div class="row">
+                      <div class="col-md-4 col-xs-4 col-sm-4 hidden-xs hidden-sm">
+                        <em  class="text-gray-dark fa fa-star fa-2x" title="rating"></em><span  th:attr="id=${'vidratestxt_'+{video.id}}" class="text-muted text-bold text-sm-sm" th:if="${video.ratingssum>0}" th:text="${video.ratingssum}">5.7</span>
+                      </div>
+                       
+                      <div class="col-md-4 col-xs-4 col-sm-4 hidden-xs hidden-sm">
+                           <a class="text-white" title="watched"><em   th:attr="id=${'vidcount-play-icon_'+{video.id}}" class="text-gray-dark fa fa-youtube-play fa-2x - "></em></a>
+                           	<span  th:attr="id=${'vidplaystxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.playscount>0}" th:text="${video.playscount}">15000</span>
+	                       <span th:attr="id=${'vidplaystxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.playscount==0}"></span>
+                      </div>
+
+                      
+                      <div class="col-md-4 col-xs-12 col-sm-12 pull-right" th:if="${showlike=='true'}">
+                      <a  class="vidaction-like cursor-pointer" title="like"><em class="fa fa-thumbs-up fa-2x text-info-light - " title="like"></em></a>
+                       <span th:attr="id=${'vidlikestxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.likescount>0}" th:text="${video.likescount}">15000</span>
+                       <span th:attr="id=${'vidlikestxt_'+{video.id}}" class="text-muted text-sm" th:if="${video.likescount==0}"></span>
+                      </div>
+            </div>          
+           </div>           
+		</div>
+		
+
+
+
+		<!-- VIDEO OVERLAY PLAY -->
+		<div class="row" th:fragment="video-overlay-play(video,colstyle)">
+		<iframe  th:attr="id=${'vidoverlay_play_iframe'+{video.id}}" th:class="${colstyle}" src="" frameborder="0" allowfullscreen></iframe>
+		<div class="col-md-12 col-xs-12 col-sm-12 bg-info-dark mb-sm" style="position:absolute; top:0px;">
+		<div class="row row-table">
+						                           <div class="col-md-12">
+	                         						     <a  class="text-danger vidaction-close cursor-pointer pull-right" title="close video">
+	                                 					<em class="fa fa-remove fa-2x"></em>
+	                              						</a>
+	                           					  </div>
+		
+		</div>
+
+		</div>
+		 </div>
+
+
+
+
+
+		<!-- VIDEO OVERLAY PATH -->
+		<div class="row" th:fragment="video-overlay-path(pathtitle)">
+		<div class="col-md-12 col-xs-12 col-sm-12 bg-info-dark mb-sm">
+		<div class="row row-table">
+						                           <div class="col-md-12">
+	                         						     <span class="h3 text-white" th:text="${pathtitle}"></span>
+	                           					  </div>
+		
+		</div>
+
+		</div>
+		
+		 
+		 
+		  
+		 </div>
+
+
+
+
+
+		<!-- VIDEO OVERLAY ACTION -->
+		<div class="row" th:fragment="video-overlay-action(video,colstyle)">
+ 		<div class="col-md-12 col-xs-12 col-sm-12 bg-info-dark" style="position:absolute; bottom:0px;">
+		<div class="row row-table">
+		
+						                           <div class="col-md-2" th:if="${PERS.view=='playlists'}">
+						                                <a  class="text-white vidaction-path-move-down cursor-pointer" title="move down the path">
+						                                 <em class="fa fa-arrow-left fa-2x"></em>
+						                              </a>
+						                           </div>	
+
+													<div class="col-md-8" th:if="${PERS.view=='playlists'}">
+													</div>
+
+						                           <div class="col-md-2" th:if="${PERS.view=='playlists'}">
+						                                <a  class="text-white vidaction-path-move-up cursor-pointer" title="move up the path">
+						                                 <em class="fa fa-arrow-right fa-2x"></em>
+						                              </a>
+						                           </div>	
+
+
+		</div>
+
+		</div>
+		
+
+
+
+
+
+		
+		
+		<div class="col-md-12 col-xs-12 col-sm-12" style="position:absolute; top:25%">
+		<div class="row row-table">
+		               <div class="col-md-5 col-xs-6 col-sm-6 border_5x text-center">
+		               <a class="text-white vidaction-select cursor-pointer" title="select">
+									<em class="fa fa-check fa-4x text-white"></em>
+						</a>			
+		               </div>
+		               <div class="col-md-5 col-xs-6 col-sm-6 border_5x text-center">
+	            				<button  type="button" class="btn btn-labeled bg-info-dark vidoverlay_playvidbtn">
+									<span  class="h4 mt0 text-uppercase text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa  fa-play fa-1point7x m-sm"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</span>
+					            </button>						               
+		               </div>
+		 </div>
+		 </div>
+		
+		
+		
+		</div>		  
+
+		  
+	
+
+
+      	<!-- DETAIL VIEW ONLY ONE LIST PARTITION -->
+      	 <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="detail(videoListDTO)">	 
+      	 <div th:if="${videoListDTO.size()>0}">
+		<div ID="ITERATION" class="row mt-lg bg-white" th:each="vid, iterStat : ${videoListDTO[0]}">
+				    <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12">
+				    			<div id="panelblock" th:attr="data-videoid=${{vid.id}},data-videourl=${{vid.videourl}},data-thumburl=${{vid.thumburl}},data-select='true'" class="panel widget w-XL videopanel" style="background: none;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+       									<div th:attr="id=${'vidoverlay_play_'+{vid.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-play(video=${vid},colstyle='w-XL h-XL')"></div>
+	 									</div>	                           				
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action  bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-action(video=${vid},colstyle='w-XL h-XL')"></div>
+										</div>                           				
+										<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XL h-XL" th:src="${vid.thumburl}"/> 
+									    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XL h-XL"  th:attr="src=${vid.thumburl}"/>
+									    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-XL h-XL"  th:attr="src=@{'/video/play?uri='+${vid.videourl}+'&style=\'detail\''}"  scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                          			 </div>
+                        		</div>
+                     		</div>
+	                        <div class="row" id="subpanelblockB">
+									<div class="col-md-12 col-xs-12 col-sm-12">
+											  <div class="pull-right">	
+				                              <span class="bg-info-dark text-white text-bold h4 mr-sm" title="number of likes" th:if="${vid.likescount>0}" th:text="${vid.likescount}">15000</span>
+				                              <a href="#"  title="like"><span class="fa fa-thumbs-up fa-2x text-info-dark" title="like"></span></a>
+				                              </div>
+											  <div class="pull-left mt-sm">	
+		                               			<span class="bg-info-dark text-white text-bold h4" title="duration" th:text="${vid.durationtxt}">15:45</span>
+				                              </div>
+											                           
+		                    		</div>
+		                    </div>	 	                    
+		              </div>
+	  		  	 </div>  
+        	 <div class="col-lg-7 col-md-4 col-xs-12 col-sm-12">
+        	 		<div class="row">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                              <div class="h2 m0 text-bold text-inverse" th:text="${vid.title}"></div>
+		                           </div>
+		                    </div>
+		                    
+		                    <div class="row">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="h4 text-inverse">
+										  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+										  added <span class="text-bold" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+		                              </p>
+		                           </div>
+		                    </div>  
+		 
+		                    
+     	 				<div class="row mt-sm">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                              <div class="tex-sm" th:text="${vid.description}"></div>
+		                           </div>
+		                    </div>		                    
+		                    		                    
+		 				<div class="row mt-sm">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                             					<div class="row text-muted" th:replace="/fragments/organizer-grid-view :: weather-and-likebtn(video=${vid},showlike=false)"></div>
+                           			</div>
+		                </div>
+		       </div> <!-- END RIGHT COLUMN  -->	
+		 	 </div>
+		 	 </div>
+        	 
+        	  
+		</div>
+		</div>
+		<!-- DETAIL VIEW -->
+
+
+      	<!-- BOX VIEW -->
+
+       	<div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="box(videoListDTO)">
+					<div class="row mt-lg">		
+					<div ID="ITERATION" th:each="vid, iterStat : ${videoListDTO}">
+				    <div class="col-lg-4 col-md-6 col-xs-12 col-sm-6">
+				    
+				    
+				    
+ 	                   			<div th:attr="data-videoid=${{vid.id}},data-videourl=${{vid.videourl}},data-thumburl=${{vid.thumburl}},data-select='true'" class="panel widget w-MD videopanel" style="background: none;">
+ 	                   			
+ 	               
+ 	               
+ 	               <div class="btn-group pull-right  mb-sm vidaction-menu" th:if="${PERS.view=='videos' or PERS.view=='rejected' or PERS.view=='pending'}">
+                     
+                     
+                     
+                     
+                      <button  th:if="${!vid.markasunwanted}" class="btn btn-muted mr-lg">
+                       <a  th:href="@{'/video-organizer/video/'+${vid.id}+'/unwanted'}" title="mark as unwanted">
+						                                 <em class="text-white text-bold fa fa-ban"></em>
+						</a>                           
+                        </button>
+                        
+                       <button  th:if="${vid.markasunwanted}" class="btn btn-danger mr-lg">
+                       <a  th:href="@{'/video-organizer/video/'+${vid.id}+'/wanted'}" title="remove unwanted">
+						                                 <em class="text-white text-bold fa fa-ban"></em>
+						</a>                           
+                        </button>
+                        
+                     
+                      <button  class="btn btn-green mr-lg">
+                       <a  th:href="@{'/video-organizer/video-settings/'+${vid.id}}" title="edit">
+						                                 <em class="text-white text-bold fa fa-file-text-o"></em>
+						</a>                           
+                        </button>
+                        
+                        
+                                              <button  class="btn btn-info mr-lg">
+                       <a  th:href="@{'/video/map/normal/_?videouuid='+${vid.UUID}}" title="go to map">
+						                                 <em class="text-white text-bold fa fa-map-marker"></em>
+						</a>                           
+                        </button> 
+                        
+                        <button  class="btn btn-inverse mr-lg">
+                       <a  th:href="@{'/video/'+${vid.UUID}}" title="go to video view">
+						                                 <em class="text-white text-bold fa fa-television"></em>
+						</a>                           
+                        </button> 
+                     
+                     </div>
+ 	                   			
+ 	                   			
+ 	                   			
+ 	              
+ 	                   			
+ 	     							<div class="text-center bg-center" id="subpanelblockA">
+ 	     							
+
+ 	                   			
+ 	                   			 	     <div class="row">
+ 	     									   <div class="col-md-4 col-xs-12 col-sm-12 bg-danger-dark text-center" th:if="${vid.id==previousEditVideoID}">
+														<span class="text-white text-sm">JUST EDITED</span>
+												</div>
+										</div>	 	     							
+ 	     							
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+	                   					<div th:attr="id=${'vidoverlay_play_'+{vid.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-play(video=${vid},colstyle='w-MD h-MD')"></div>
+	 									</div>	                           				
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-action(video=${vid},colstyle='w-MD h-MD')"></div>
+										</div>
+										<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-MD h-MD" th:src="${vid.thumburl}"/> 
+									    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-MD h-MD"  th:attr="src=${vid.thumburl}"/>
+									    <!-- IFRAME SPOT -->										
+									    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-MD h-MD"  th:attr="src=@{'/video/play?uri='+${vid.videourl}+'&style=\'detail\''}"  scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                          			 </div>
+                        		</div>
+                     		</div>
+
+                             <div class="row mt-sm" id="subpanelblockB">
+		                             <div class="col-md-10 col-xs-12 col-sm-12">
+		                              <div class="h4 m0 text-bold text-inverse" th:text="${vid.title}"></div>
+		                           </div>
+									<div class="col-md-2 col-xs-12 col-sm-12">
+		                             <div class="pull-right">
+		                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+									</div>				                           
+		                    </div>
+		                    </div>
+		                    
+		                    <div class="row" id="subpanelblockC">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="m0 text-sm">
+										  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+										  added <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+		                              </p>
+		                           </div>
+		                    </div>  
+		                    
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 font14">
+            											<div class="row text-info" th:replace="/fragments/organizer-grid-view ::weather-and-likebtn(video=${vid},showlike='true')">
+                     		                           </div>
+                           								</div>
+		                           </div>		                    
+		              </div>
+        	 </div> 
+        	 <div class="visible-sm visible-md clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%2==0}"></div>
+			 <div class="visible-lg clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%3==0}"></div>        	 
+        	 
+        	 </div>  
+		</div>
+		</div></div>
+      	<!-- BOX VIEW -->
+
+
+       	<!-- THUMB VIEW -->
+     	<div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="thumb(videoListDTO)">	
+			<div  class="row mt-lg">	
+		    <div ID="ITERATION" th:each="vid, iterStat : ${videoListDTO}">
+			    <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6">
+       	                			<div th:attr="data-videoid=${{vid.id}},data-videourl=${{vid.videourl}},data-thumburl=${{vid.thumburl}},data-select='true'" class="panel widget w-XS videopanel" style="background: none;">
+       	                			
+       	           <div class="btn-group pull-right  mb-sm vidaction-menu" th:if="${PERS.view=='videos' or PERS.view=='rejected' or PERS.view=='pending'}">
+                     
+                     
+                      <button  th:if="${!vid.markasunwanted}" class="btn btn-muted mr-lg">
+                       <a  th:href="@{'/video-organizer/video/'+${vid.id}+'/unwanted'}" title="mark as unwanted">
+						                                 <em class="text-white text-bold fa fa-ban"></em>
+						</a>                           
+                        </button>
+                        
+                       <button  th:if="${vid.markasunwanted}" class="btn btn-danger mr-lg">
+                       <a  th:href="@{'/video-organizer/video/'+${vid.id}+'/wanted'}" title="remove unwanted">
+						                                 <em class="text-white text-bold fa fa-ban"></em>
+						</a>                           
+                        </button>
+                        
+                     
+                      <button  class="btn btn-green mr-lg">
+                       <a  th:href="@{'/video-organizer/video-settings/'+${vid.id}}" title="edit">
+						                                 <em class="text-white text-bold fa fa-file-text-o"></em>
+						</a>                           
+                        </button>
+                        
+                        
+                                              <button  class="btn btn-info mr-lg">
+                       <a  th:href="@{'/video/map/normal/_?videouuid='+${vid.UUID}}" title="go to map">
+						                                 <em class="text-white text-bold fa fa-map-marker"></em>
+						</a>                           
+                        </button> 
+                        
+                        <button  class="btn btn-inverse mr-lg">
+                       <a  th:href="@{'/video/'+${vid.UUID}}" title="go to video view">
+						                                 <em class="text-white text-bold fa fa-television"></em>
+						</a>                           
+                        </button> 
+                     
+                     </div>
+       	                			
+       	                			
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+	                   					<div th:attr="id=${'vidoverlay_play_'+{vid.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-play(video=${vid},colstyle='w-XS h-XS')"></div>
+	 									</div>	                           				
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-action(video=${vid},colstyle='w-XS h-XS')"></div>
+										</div>                        				
+                           				
+										<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XS h-XS" th:src="${vid.thumburl}"/> 
+									    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XS h-XS"  th:attr="src=${vid.thumburl}"/>
+									    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-XS h-XS"  th:attr="src=@{'/video/play?uri='+${vid.videourl}+'&style=\'detail\''}"  scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                          			 </div>
+                        		</div>
+                     		</div>
+
+                             <div class="row mt-sm">
+		                             <div class="col-md-10 col-xs-12 col-sm-12">
+		                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+		                           </div>
+									<div class="col-md-2 col-xs-12 col-sm-12">
+		                             <div class="pull-right">
+		                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+									</div>				                           
+		                    </div>
+		                    </div>
+		                    
+		                    <div class="row">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="m0 text-sm">
+										  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+										  added <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+		                              </p>
+		                           </div>
+		                    </div>  
+		                    
+		                    
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 text-sm>
+            											<div class="row text-info" th:replace="/fragments/organizer-grid-view::weather-and-likebtn-thumb(video=${vid},showlike='true')">
+                     		                           </div>
+                           	</div>
+		                           </div>	
+                    
+		                    
+		                    
+		                    
+	                  </div>
+				    <div class="visible-sm clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%2==0}"></div>
+			 		<div class="visible-lg clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%4==0}"></div>
+			 		<div class="visible-md clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%3==0}"></div>	  	                  
+	                  </div>
+	                  
+        	 </div>   
+		</div>
+		</div>
+      	<!-- THUMB VIEW -->
+      	
+      	
+      	  <!-- VIDEO PATH VIEW -->
+      	 <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="playlist(collListDTO,colstyle,showmngbuttons)">	 
+		<div ID="ITERPOINT_ROW" class="row bg-white" th:each="coll, iterStat : ${collListDTO}">
+		              <div class="col-md-12 col-sm-12 col-xs-12">	
+			    						 <span class="h4  mt text-bold text-gray-more text-uppercase pull-left" th:text="${coll.title}"></span>
+			    
+				         </div>  					     
+		              	 
+ 		              	 <div class="col-md-12 col-sm-12 col-xs-12">	
+			    						 <span class="text-bold text-gray-more text-uppercase pull-left" th:text="${coll.description}"></span>
+			    
+				         </div>  		 			     
+		
+				    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+				    <div class="row">
+				    <div ID="ITERPOINT_COLUMN" class="col-lg-3 col-md-3 col-xs-12 col-sm-6" th:each="vid, iterStat : ${coll.videos}">
+       	                			<div th:attr="data-videoid=${{vid.id}},data-collectionid=${{coll.id}},data-videourl=${{vid.videourl}},data-thumburl=${{vid.thumburl}},data-select='true'" class="panel widget w-XS videopanel" style="background: none;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+
+    									<div th:if="${vid.pathsort==0}" th:attr="id=${'vidoverlay_path_'+{vid.id}}" class="vidoverlay_path  bg-red-fade - ">
+											<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-path('START')"></div>
+										</div>  
+
+    									<div th:if="${vid.pathsort==coll.videos.size()-1}" th:attr="id=${'vidoverlay_path_'+{vid.id}}" class="vidoverlay_path  bg-red-fade -">
+											<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-path('END')"></div>
+										</div>  
+
+
+
+	                   					<div th:attr="id=${'vidoverlay_play_'+{vid.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-play(video=${vid},colstyle='w-XS h-XS')"></div>
+	 									</div>	                           				
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-action(video=${vid},colstyle='w-XS h-XS')"></div>
+										</div>                        				
+    
+										
+										                           				
+										<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XS h-XS" th:src="${vid.thumburl}"/> 
+									    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XS h-XS"  th:attr="src=${vid.thumburl}"/>
+									    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-XS h-XS"  th:attr="src=@{'/video/play?uri='+${vid.videourl}+'&style=\'detail\''}"  scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                          			 </div>
+                        		</div>
+                     		</div>
+
+                             <div class="row mt-sm">
+		                             <div class="col-md-10 col-xs-12 col-sm-12">
+		                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+		                           </div>
+									<div class="col-md-2 col-xs-12 col-sm-12">
+		                             <div class="pull-right">
+		                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+									</div>				                           
+		                    </div>
+		                    </div>
+		                    
+		                    <div class="row">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="m0 text-sm">
+										  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+										  <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+										<!--   sort <span class="text-bold text-inverse" th:text="${vid.pathsort}"></span>  </span> -->
+		                              </p>
+		                           </div>
+		                    </div>  
+		                    
+		                    
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 text-sm>
+            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn-thumb(video=${vid},showlike='true')">
+                     		                           </div>
+                           	</div>
+		                           </div>	
+                    
+		                    
+		                    
+		                    
+	                  </div>				    
+        	 </div>  
+        	 </div> 
+        	 
+        	 
+        	 
+		              	 <div class="col-md-12 col-sm-12 col-xs-12" th:if="${showmngbuttons=='true'}">
+								<div class="pull-left">
+		                            <div class="form-group">
+					                          <a id="editplaylistModalButton" th:attr="data-collectionid=${coll.id},data-title=${coll.title},data-description=${coll.description}" data-toggle="modal" data-target="#editplaylistModal" class="btn btn-labeled  btn-info-dark">
+					                           <span class="btn-label pull-left"><i class="fa fa-cog fa-2x"></i>
+					                           </span>
+					                               <span class="h4  mt text-bold pull-left">EDIT VIDEO PATH</span>
+					                           </a>
+					                   </div>
+					             </div>    
+
+		                        <div class="pull-left ml-lg" th:if="${coll.videos.size()>0 and showmngbuttons=='true'}">
+		                            <div class="form-group">
+					                          <a th:attr="data-collectionid=${{coll.id}},data-title=${coll.title}" class="btn btn-labeled btn-info-dark disabled massaction playlistbtn-removevids">
+					                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+					                           </span>
+					                               <span id="massbtntxt" class="h4  mt text-bold pull-left">REMOVE VIDS</span>
+					                           </a>
+					                   </div>  
+								</div>	
+					                   								
+								<div class="pull-left ml-lg">
+		                            <div class="form-group">
+					                          <a  th:attr="data-collectionid=${coll.id},data-title=${coll.title}" class="btn btn-labeled  btn-danger playlistbtn-delete">
+					                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+					                           </span>
+					                               <span class="h4  mt text-bold pull-left">DELETE VIDEO PATH</span>
+					                           </a>
+					                   </div>  
+		                        
+		                        
+		                        
+								</div>
+				         </div>  	
+        	 
+        	 <div class="col-md-12 col-sm-12 col-xs-12">
+        	 
+        	 		              	        <hr class="separator"/>	
+        	 </div>
+        	 
+        	 
+        	 
+        	  
+        	 </div>
+        	 
+        	  
+		</div>
+		</div>
+		<!-- VIDEO PATH VIEW -->
+      	
+      	
+      	  <!-- ALBUM VIEW -->
+      	 <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="album(collListDTO,colstyle,showmngbuttons)">	 
+		<div ID="ITERPOINT_ROW" class="row bg-white" th:each="coll, iterStat : ${collListDTO}">
+		              <div class="col-md-12 col-sm-12 col-xs-12">	
+			    						 <span class="h4  mt text-bold text-gray-more text-uppercase pull-left" th:text="${coll.title}"></span>
+			    
+				         </div>  					     
+		              	 
+ 		              	 <div class="col-md-12 col-sm-12 col-xs-12">	
+			    						 <span class="text-bold text-gray-more text-uppercase pull-left" th:text="${coll.description}"></span>
+			    
+				         </div>  		 			     
+		
+				    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+				    <div class="row">
+				    <div ID="ITERPOINT_COLUMN" class="col-lg-3 col-md-3 col-xs-12 col-sm-6" th:each="vid, iterStat : ${coll.videos}">
+       	                			<div th:attr="data-videoid=${{vid.id}},data-collectionid=${{coll.id}},data-videourl=${{vid.videourl}},data-thumburl=${{vid.thumburl}},data-select='true'" class="panel widget w-XS videopanel" style="background: none;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+
+	                   					<div th:attr="id=${'vidoverlay_play_'+{vid.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-play(video=${vid},colstyle='w-XS h-XS')"></div>
+	 									</div>	                           				
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/organizer-grid-view :: video-overlay-action(video=${vid},colstyle='w-XS h-XS')"></div>
+										</div>                        				
+										                           				
+										<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XS h-XS" th:src="${vid.thumburl}"/> 
+									    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XS h-XS"  th:attr="src=${vid.thumburl}"/>
+									    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-XS h-XS"  th:attr="src=@{'/video/play?uri='+${vid.videourl}+'&style=\'detail\''}" scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                          			 </div>
+                        		</div>
+                     		</div>
+
+                             <div class="row mt-sm">
+		                             <div class="col-md-10 col-xs-12 col-sm-12">
+		                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+		                           </div>
+									<div class="col-md-2 col-xs-12 col-sm-12">
+		                             <div class="pull-right">
+		                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+									</div>				                           
+		                    </div>
+		                    </div>
+		                    
+		                    <div class="row">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="m0 text-sm">
+										  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+										  <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+										<!--   sort <span class="text-bold text-inverse" th:text="${vid.pathsort}"></span>  </span> -->
+		                              </p>
+		                           </div>
+		                    </div>  
+		                    
+		                    
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 text-sm>
+            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn-thumb(video=${vid},showlike='true')">
+                     		                           </div>
+                           	</div>
+		                           </div>	
+                    
+		                    
+		                    
+		                    
+	                  </div>				    
+        	 </div>  
+        	 </div> 
+        	 
+        	 
+        	 
+		              	 <div class="col-md-12 col-sm-12 col-xs-12" th:if="${showmngbuttons=='true'}">
+								<div class="pull-left">
+		                            <div class="form-group">
+					                          <a id="editalbumModalButton" th:attr="data-collectionid=${coll.id},data-title=${coll.title},data-description=${coll.description}" data-toggle="modal" data-target="#editalbumModal" class="btn btn-labeled  btn-info-dark">
+					                           <span class="btn-label pull-left"><i class="fa fa-cog fa-2x"></i>
+					                           </span>
+					                               <span class="h4  mt text-bold pull-left">EDIT ALBUM</span>
+					                           </a>
+					                   </div>
+					             </div>    
+
+		                        <div class="pull-left ml-lg" th:if="${coll.videos.size()>0 and showmngbuttons=='true'}">
+		                            <div class="form-group">
+					                          <a th:attr="data-collectionid=${{coll.id}},data-title=${coll.title}" class="btn btn-labeled btn-info-dark disabled massaction albumbtn-removevids">
+					                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+					                           </span>
+					                               <span id="massbtntxt" class="h4  mt text-bold pull-left">REMOVE VIDS</span>
+					                           </a>
+					                   </div>  
+								</div>	
+					                   								
+								<div class="pull-left ml-lg">
+		                            <div class="form-group">
+					                          <a  th:attr="data-collectionid=${coll.id},data-title=${coll.title}" class="btn btn-labeled  btn-danger albumbtn-delete">
+					                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+					                           </span>
+					                               <span class="h4  mt text-bold pull-left">DELETE ALBUM</span>
+					                           </a>
+					                   </div>  
+		                        
+		                        
+		                        
+								</div>
+				         </div>  	
+        	 
+        	 <div class="col-md-12 col-sm-12 col-xs-12">
+        	 
+        	 		              	        <hr class="separator"/>	
+        	 </div>
+        	 
+        	 
+        	 
+        	  
+        	 </div>
+        	 
+        	  
+		</div>
+		</div>
+		<!-- ALBUM VIEW -->
+
+
+
+
+</body>
+</html>
+
+

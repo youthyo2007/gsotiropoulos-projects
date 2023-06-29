@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.StatisticsMapper">
+
+  
+  
+  
+  
+  
+  
+  
+   <resultMap type="com.socialvideo.data.dto.statistics.StatisticsDayActivityDTO" id="StatisticsDayActivityDTO">
+	        <result property="videocount" column="videocount"/>   
+	        <result property="usercount" column="usercount"/>   
+	        <result property="sharecount" column="sharecount"/>   
+	        <result property="ratingcount" column="ratingcount"/>   
+	        <result property="reviewcount" column="reviewcount"/>   
+	        <result property="likecount" column="likecount"/>   
+	        <result property="playcount" column="playcount"/> 
+	        <result property="activitydate" column="activitydate"/> 
+	        <result property="datestring" column="datestring"/> 
+    </resultMap> 
+  
+
+  
+  
+   <resultMap type="com.socialvideo.data.dto.statistics.StatisticsVideoStatusDTO" id="StatisticsVideoStatusDTO">
+           <result property="total"  column="total"/>
+           <result property="status_YOUTUBETOOLUPLOADED"  column="YOUTUBETOOLUPLOADED"/>
+           <result property="status_JUSTUPLOADED"  column="JUSTUPLOADED"/>
+           <result property="status_EXCELUPLOADED"  column="EXCELUPLOADED"/>
+           <result property="status_PUBLISHED"  column="PUBLISHED"/>
+           <result property="status_APPROVED"  column="APPROVED"/>
+           <result property="status_STAGING" column="STAGING"/>
+           <result property="status_UNPUBLISHED" column="UNPUBLISHED"/>
+           <result property="status_REJECTED" column="REJECTED"/>
+           <result property="promote_status_MAP" column="PROMOTEMAP"/>
+           <result property="promote_status_SITEINDEX" column="PROMOTESITEINDEX"/>
+           <result property="health_BROKEN" column="BROKEN"/>
+           <result property="mark_UNWANTED" column="MARKASUNWANTED"/>
+           
+           
+           
+    </resultMap> 
+
+
+   <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO" id="BIChartCountsPerMonthTimeDTO">
+        <result property="month" column="monthno"/> 
+        <result property="monthString" column="monthstring"/> 
+        <result property="year" column="yearno"/> 
+        <result property="count" column="counts"/>   
+    </resultMap>  
+
+    
+   
+  <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerColumnDTO" id="BIChartCountsPerColumnDTO">
+        <result property="columnDesc" column="columnDesc"/> 
+        <result property="count" column="counts"/>   
+    </resultMap>  
+       
+    <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO" id="BIChartCountsPerDayTimeDTO">
+        <result property="day" column="dayno"/> 
+        <result property="month" column="monthno"/> 
+        <result property="monthString" column="monthstring"/> 
+        <result property="dayString" column="daystring"/> 
+        <result property="dateString" column="datestring"/> 
+        <result property="dateNumber" column="datenumber"/> 
+        <result property="dateCreated" column="datecreated"/> 
+    </resultMap>  
+
+    <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO"  extends="BIChartCountsPerDayTimeDTO" id="BIChartSingleLineCountsPerDayTimeDTO">
+        <result property="counttype" column="counttype"/> 
+        <result property="count" column="counts"/>   
+    </resultMap>  
+
+
+    <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO" extends="BIChartCountsPerDayTimeDTO" id="BIChartVideosVsUsersCountsPerDayTimeDTO">
+        <result property="videocount" column="videocount"/>   
+        <result property="usercount" column="usercount"/>   
+    </resultMap>  
+
+
+    <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO" extends="BIChartCountsPerDayTimeDTO" id="BIChartAllCountsPerDayTimeDTO">
+        <result property="videocount" column="videocount"/>   
+        <result property="usercount" column="usercount"/>   
+        <result property="sharecount" column="sharecount"/>   
+        <result property="ratingcount" column="ratingcount"/>   
+        <result property="reviewcount" column="reviewcount"/>   
+        <result property="likecount" column="likecount"/>   
+        <result property="playcount" column="playcount"/>   
+    </resultMap>  
+
+
+	
+
+	<select id="selectStatisticsDayActivityLastDate" resultType="java.util.Date">
+		select max(a.activitydate) from statisticsactivityday a
+	</select>
+	
+	
+	
+	  <select id="selectCountStatisticsDayActivityList" parameterType="map"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS TOTAL from statisticsactivityday a where 1 = 1 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+	</select>
+	
+	
+	
+   <select id="selectStatisticsDayActivityList" parameterType="map" resultMap="StatisticsDayActivityDTO">
+		SELECT DATE_FORMAT(a.activitydate,'%d/%c/%Y') as datestring, a.* from statisticsactivityday a where 1 = 1 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+		
+		order by a.activitydate desc LIMIT #{offset}, #{limit}; 
+	</select>
+
+
+
+
+
+
+
+<!--     
+    
+    <resultMap type="com.socialvideo.data.dto.statistics.BIChartCountsPerTimeDTO" extends="BIChartCountsPerDayTimeDTO" id="MultipleYaxisBIChartCountsPerDayTimeDTO">
+        <result property="yaxistype" column="yaxistype"/> 
+    </resultMap>  
+ 
+ -->
+
+    
+<!-- 	<select id="selectUsersUnionVideosPerDay" parameterType="map" resultMap="BIChartVideosVsUsersCountsPerDayTimeDTO">
+        select  a.datecreated, DATE_FORMAT(a.datecreated,'%Y%c%d') as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring,  DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS usercount, 0 as videocount from users a WHERE 1 = 1 GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')    
+		 UNION ALL
+        select  a.datecreated, DATE_FORMAT(a.datecreated,'%Y%c%d') as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring,  DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, 0 as usercount, COUNT(*) AS videocount from videos a WHERE 1 = 1 GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d'); 
+	</select> -->
+
+    
+    
+    
+    
+
+
+   <select id="selectVideosCountPerUser" parameterType="map" resultMap="BIChartCountsPerColumnDTO">
+		SELECT a.userid_fk as columnDesc, COUNT(*) as counts FROM socialvideo.videos a GROUP BY a.userid_fk;
+	</select>
+
+    
+
+
+	<select id="selectUsersVsVideosPerDay" parameterType="map" resultMap="BIChartVideosVsUsersCountsPerDayTimeDTO">
+		select a.videocount, a.usercount, a.activitydate as datecreated, CONCAT(YEAR(a.activitydate),LPAD(MONTH(a.activitydate),2,'0'),LPAD(DAY(a.activitydate),2,'0')) as datenumber, DATE_FORMAT(a.activitydate,'%Y-%c-%d') as datestring , DATE_FORMAT(a.activitydate,'%d') as dayno,  DATE_FORMAT(a.activitydate,'%a') as daystring, LPAD(MONTH(a.activitydate),2,'0') as monthno, DATE_FORMAT(a.activitydate,'%b') as monthstring, DATE_FORMAT(a.activitydate,'%Y') as yearno from statisticsactivityday a order by a.activitydate asc
+	</select>
+
+
+
+
+    
+	<select id="selectUsersCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM users a  WHERE 1 = 1  
+		
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+		
+		
+	</select>
+
+    <select id="selectUserVideoAllStatus" parameterType="map" resultMap="StatisticsVideoStatusDTO">
+       SELECT  count(*) AS total, 
+       count(case when status = -1 then 1 end) JUSTUPLOADED, 
+       count(case when status = 1 then 1 end) PUBLISHED, 
+       count(case when status = 2 then 2 end) APPROVED, 
+       count(case when status = 3 then 3 end) STAGING, 
+       count(case when status = 4 then 4 end) UNPUBLISHED, 
+       count(case when status = 5 then 5 end) REJECTED,
+       count(case when promotemap=1 then 6 end) PROMOTEMAP,
+       count(case when promotesiteindex=1 then 7 end) PROMOTESITEINDEX, 
+       count(case when W.healthstatus=2 then 8 end) BROKEN,
+       count(case when W.status=6 then 9 end) YOUTUBETOOLUPLOADED,
+       count(case when W.status=7 then 10 end) EXCELUPLOADED   
+       FROM 
+       (select a.status, a.healthstatus, a.promotemap, a.promotesiteindex  FROM videos a,  users b WHERE 1 = 1 AND a.userid_fk = #{userid} GROUP BY a.id) AS W     
+    </select>
+
+    <select id="selectAdminVideoAllStatus" parameterType="map" resultMap="StatisticsVideoStatusDTO">
+ 
+       SELECT  count(*) AS total,
+       count(case when W.status = -1 then 1 end) JUSTUPLOADED, 
+       count(case when W.status = 1 then 1 end) PUBLISHED, 
+       count(case when W.status = 2 then 2 end) APPROVED, 
+       count(case when W.status = 3 then 3 end) STAGING, 
+       count(case when W.status = 4 then 4 end) UNPUBLISHED, 
+       count(case when W.status = 5 then 5 end) REJECTED,
+   	   count(case when W.promotemap=1 then 6 end) PROMOTEMAP,
+       count(case when W.promotesiteindex=1 then 7 end) PROMOTESITEINDEX,
+       count(case when W.healthstatus=2 then 8 end) BROKEN,
+       count(case when W.status=6 then 9 end) YOUTUBETOOLUPLOADED,
+       count(case when W.status=7 then 10 end) EXCELUPLOADED,
+       count(case when W.markasunwanted=1 then 11 end) MARKASUNWANTED
+       
+       
+       
+       FROM 
+       (select a.status, a.healthstatus, a.promotemap, a.promotesiteindex, a.markasunwanted FROM videos a,  users b WHERE 1 = 1 
+		<if test="QUERY.advfilter.username != null and QUERY.advfilter.username != ''.toString()">
+       		AND a.userid_fk = b.id AND b.username LIKE #{QUERY.advfilter.username} 
+     	</if>
+     	
+     	<if test="QUERY.advfilter.ytvmusername != null and QUERY.advfilter.ytvmusername != ''.toString()">
+       		AND a.ytvmusername LIKE #{QUERY.advfilter.ytvmusername} 
+     	</if>
+     	
+     	 <if test="QUERY.advfilter.markasunwanted">
+       		AND a.markasunwanted = 1
+     	</if>
+     	
+     	
+     	<if test="QUERY.advfilter.videotitle != null and QUERY.advfilter.videotitle != ''.toString()">
+       		AND a.title LIKE #{QUERY.advfilter.videotitle} 
+     	</if>
+     	
+     	<if test="QUERY.advfilter.videoid != null and QUERY.advfilter.videoid != ''.toString()">
+       		AND a.id =  #{QUERY.advfilter.videoid} 
+     	</if>
+     	
+     	
+     	
+       GROUP BY a.id) AS W 
+    	
+    </select>
+
+
+
+
+
+    <select id="selectBIVideoAllStatus" parameterType="map" resultMap="StatisticsVideoStatusDTO">
+ 
+       SELECT  count(*) AS total,
+       count(case when W.status = -1 then 1 end) JUSTUPLOADED, 
+       count(case when W.status = 1 then 1 end) PUBLISHED, 
+       count(case when W.status = 2 then 2 end) APPROVED, 
+       count(case when W.status = 3 then 3 end) STAGING, 
+       count(case when W.status = 4 then 4 end) UNPUBLISHED, 
+       count(case when W.status = 5 then 5 end) REJECTED 
+       FROM 
+       (select a.status FROM videos a WHERE 1 = 1 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+       GROUP BY a.id) AS W    	
+    </select>
+
+
+
+	<select id="videosPerDayAvg" parameterType="map" resultType="java.lang.Double">
+			SELECT AVG(W.total) as avg from (
+			SELECT count(*) as total, DATE_FORMAT(a.datecreated, '%Y-%m-%d') as theday 
+			FROM videos a  WHERE 1 = 1  
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+			group by DATE_FORMAT(a.datecreated, '%Y-%m-%d')) as W
+	</select>
+	
+	
+	<select id="videosPerMonthAvg" parameterType="map" resultType="java.lang.Double">
+			SELECT AVG(W.total) as avg from (
+			SELECT count(*) as total, DATE_FORMAT(a.datecreated, '%Y-%m') as themonth 
+			FROM videos a  WHERE 1 = 1  
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+			group by DATE_FORMAT(a.datecreated, '%Y-%m')) as W
+	</select>
+
+
+    <select id="chartVideosPerMonth" parameterType="map" resultMap="BIChartCountsPerMonthTimeDTO">
+         select DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c') ASC        
+    </select>   
+
+
+    <select id="chartVideosPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'VIDEOCOUNT' AS counttype, a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+		 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>   
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select> 
+
+
+    <select id="chartVideosPerSource" parameterType="map" resultMap="BIChartCountsPerColumnDTO">
+         SELECT COUNT(*) AS counts, w.columnDesc FROM 
+ 		(SELECT CASE WHEN a.vimeoid IS NOT NULL THEN 'VIMEO' WHEN a.isfile = 1  then 'FILE' WHEN a.youtubeid IS NOT NULL then 'YOUTUBE'  END AS columnDesc FROM videos a WHERE 1 = 1
+
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>   
+            
+ 		) AS w GROUP BY w.columnDesc 
+    </select>  
+
+
+
+
+
+
+
+
+
+
+    
+
+ <select id="usersPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+         select 'USERCOUNT' AS counttype,  a.datecreated, DATE_FORMAT(a.datecreated,'%Y%c%d') as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring,  DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from users a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+    <select id="videosPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'VIDEOCOUNT' AS counttype, a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>    
+    
+    
+        <select id="registrationsPerMonth" parameterType="map" resultMap="BIChartCountsPerMonthTimeDTO">
+         select DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from users a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+        
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c') ASC        
+    </select>  
+    
+	 <select id="registrationsPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+         select 'USERCOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from users a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>       
+    
+    
+    
+    <select id="playsPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'PLAYCOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from playsvideos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+
+    <select id="sharesPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'SHARECOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from shares a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+    <select id="ratingsPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'RATINGCOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from ratings a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+    
+    
+    <select id="likesPerDay" parameterType="map" resultMap="BIChartSingleLineCountsPerDayTimeDTO">
+        select 'LIKECOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from likesvideos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+    
+
+   
+
+
+
+</mapper>
+
+
+
+

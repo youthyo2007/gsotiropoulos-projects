@@ -1,0 +1,30 @@
+package com.microsoft.bot.sample.data.repository;
+
+import com.microsoft.bot.sample.data.model.CorinthPOIObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import java.util.List;
+
+public class CorinthPOIRepositoryImpl {
+
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+
+    public CorinthPOIObject getItemByNameTypeAndLocation(String name,String type, String location) {
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex("^"+name));
+        query.addCriteria(Criteria.where("type").regex("^"+type));
+        CorinthPOIObject item = mongoTemplate.findOne(query, CorinthPOIObject.class);
+        return item;
+    }
+
+
+}
+
+

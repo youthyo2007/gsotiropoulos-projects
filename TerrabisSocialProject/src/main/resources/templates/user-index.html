@@ -1,0 +1,296 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title  th:text="${'Terrabis - ' + {userDTO.shortdesc} + '&#146;s profile'}"></title>
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+<!--      <div th:replace="/fragments/modal :: fullscreenoverlay-videoplay"></div> -->
+     
+         <!-- Page content-->
+        <div class="content-wrapper">
+
+            <div class="content-heading">
+		          <div th:replace="/fragments/user-index-detail :: header-user-index(title='',iconvar='fa-smile-o')"></div>
+		          
+            </div>
+
+            
+            
+             <div class="row mb-lg">
+						           <!-- USER BAR LINKS FOR VIDEOS LIKES ETC -->
+						        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">		           
+				                  <!-- START widget-->
+				                  <div class="panel widget">
+				                     <div class="row">
+				                     
+				                     	
+				                        <div class="col-md-4 col-sm-4 col-xs-6 text-inverse br  bg-info-dark">
+				                           <div class="row row-table row-flush align-top">
+				                              <div class="col-xs-2 text-center">
+				                                 <em class="fa fa-youtube-play fa-2x ml-sm"></em>
+				                              </div>
+				                              <div class="col-xs-10">
+				                                 <div class="panel-body text-center">
+				                        			<a  th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:all'}">
+					                                    <span class="h3 text-bold text-white">VIDEOS</span>
+					                                    <span class="h3 text-bold text-info-light" th:text="'('+${userDTO.videoscount}+')'">1</span>
+				                                    </a>
+				                                 </div>
+				                              </div>
+				                           </div>
+				                        </div>
+				                        
+
+<!-- 				                         <div class="col-md-4 col-sm-6 col-xs-12 br bg-gray-dark">
+				                           <div class="row row-table row-flush align-top">
+				                              <div class="col-xs-2 text-center">
+				                                 <em class="fa fa-road fa-2x"></em>
+				                              </div>
+				                              <div class="col-xs-10">
+				                                 <div class="panel-body text-center">
+				                                 <a  th:href="@{'/user-' + ${userDTO.UUID}+'/playlists/filter:all'}">
+				                                    <span class="h3 text-bold text-white">VIDEO PATHS</span>
+					                                    <span class="h3 text-bold text-white" th:text="'('+${userDTO.playlistscount}+')'">1</span>
+				                                    
+				                                 </a>   
+				                                 </div>
+				                              </div>
+				                           </div>
+				                        </div>   -->
+
+
+				                         <div class="col-md-4 col-sm-4 col-xs-6 br bg-pink-rose">
+				                           <div class="row row-table row-flush align-top">
+				                              <div class="col-xs-2 text-center">
+				                                 <em class="fa fa-map-marker fa-2x"></em>
+				                              </div>
+				                              <div class="col-xs-10">
+				                                 <div class="panel-body text-center">
+				                                 <a th:href="@{'/video/map/normal/_?useruuid=' + ${userDTO.UUID}}">
+				                                    <span class="h3 text-bold text-white">MAP</span>
+				                                 </a>   
+				                                 </div>
+				                              </div>
+				                           </div>
+				                        </div>  
+
+				                         <div class="col-md-4 col-sm-4 col-xs-6 br bg-info-dark">
+				                           <div class="row row-table row-flush align-top">
+				                              <div class="col-xs-2 text-center">
+				                                 <em class="fa fa-list fa-2x"></em>
+				                              </div>
+				                              <div class="col-xs-10">
+				                                 <div class="panel-body text-center">
+				                                 <a  th:href="@{'/user-' + ${userDTO.UUID}+'/albums/filter:all'}">
+				                                    <span class="h3 text-bold text-white">ALBUMS</span>
+					                                    <span class="h3 text-bold text-info-light" th:text="'('+${userDTO.albumscount}+')'">1</span>
+				                                    
+				                                 </a>   
+				                                 </div>
+				                              </div>
+				                           </div>
+				                        </div> 
+
+
+
+
+
+				                     </div>
+				                  </div>
+				                  <!-- END widget-->
+						        <!-- USER BAR FOR VIDEOS LIKES ETC -->                           
+		                    </div>	
+		                    </div>      
+            
+            
+            
+            <!--  FIRST ROW -->
+   			<div class="row mt-lg">               
+              
+               <!--  LEFT COLUMN -->
+               <div class="col-md-4">
+                  <!-- START PROFILE WIDGET-->
+                  <div th:replace="/fragments/user-index-detail :: edit-avatar(user=${userDTO},fasize='fa-12x')"></div>
+                  <!-- END PROFILE WIDGET -->
+             <!--  LEVEL -->
+	       <div class="row mb-lg">
+	       
+	       
+		
+
+	       
+	       
+	       
+		               <div class="col-md-12 col-xs-12 col-sm-12">
+		                  <!-- START widget-->
+		                  <div class="panel pt b0 widget bg-info-dark">
+		                     <div class="ph">
+		                        <em class="fa text-info-light  fa-diamond  pull-right" th:each="i : ${#numbers.sequence( 1, userDTO.gameLevel.level)}"></em>
+		                        <div class="h3 mt0 text-bold text-info-light" th:text="${userDTO.gameLevel.name}">GAME LEVEL
+		                           <span class="text-sm text-white"></span>
+		                        </div>
+		                     </div>
+		                        <div class="h4 text-uppercase text-bold bg-inverse"><span class="ml-sm text-white" th:text="${{userDTO.gameLevel.levelProgress}+'% Complete'}">Progress</span></div>
+
+		                  </div>
+		               </div>		               
+         	</div>  
+         	<!--  LEVEL-->
+         	
+         	
+                    <div class="row  mt-lg mb-lg">
+		               <div class="col-md-12 col-xs-12 col-sm-12">
+		                           <span class="h4 text-gray-more text-bold pull-left">ACHIEVEMENTS</span>
+		               </div>
+		            </div>   
+         	
+         	
+               		<!-- METRICS -->
+                    <div class="row">
+		               <div class="col-md-12 col-xs-12 col-sm-12">
+		                  <!-- START widget-->
+		                  <div class="panel pt b0 widget bg-info-dark">
+		                     <div class="ph">
+		                        <em class="fa text-info-light  fa-cloud-upload fa-2x pull-right"></em>
+		                        <div class="h3 mt0 text-bold text-info-light" th:text="${userDTO.videoscount}">
+		                           <span class="text-sm text-white"></span>
+		                        </div>
+		                     </div>
+		                        <div class="h4 text-uppercase text-bold bg-info-dark"><span class="ml-sm text-white">Uploads</span></div>
+
+		                  </div>
+		               </div>
+		               
+		           
+		           		<div class="col-md-12 col-xs-12 col-sm-12">
+		                  <!-- START widget-->
+		                  <div class="panel pt b0 widget bg-pink-rose">
+		                     <div class="ph">
+		                        <em class="fa text-info  fa-youtube-play fa-2x pull-right"></em>
+		                        <div class="h3 mt0 text-bold text-info" th:text="${userDTO.playscount}">
+		                           <span class="text-sm text-white"></span>
+		                        </div>
+		                     </div>
+		                        <div class="h4 text-uppercase text-bold bg-pink-rose"><span class="ml-sm text-white">Plays</span></div>
+
+		                  </div>
+		               </div>
+		           	               
+		      
+		      		  <div class="col-md-12 col-xs-12 col-sm-12">
+		                  <!-- START widget-->
+		                  <div class="panel pt b0 widget bg-info-dark">
+		                     <div class="ph">
+		                        <em class="fa text-info-light  fa-star fa-2x pull-right"></em>
+		                        <div class="h3 mt0 text-bold text-info-light" th:text="${userDTO.ratingscount}">
+		                           <span class="text-sm text-white"></span>
+		                        </div>
+		                     </div>
+		                        <div class="h4 text-uppercase text-bold bg-info-dark"><span class="ml-sm text-white">Ratings</span></div>
+
+		                  </div>
+		               </div>
+		               
+
+	           		<div class="col-md-12 col-xs-12 col-sm-12">
+		                  <!-- START widget-->
+		                  <div class="panel pt b0 widget bg-pink-rose">
+		                     <div class="ph">
+		                        <em class="fa text-info  fa-thumbs-up fa-2x pull-right"></em>
+		                        <div class="h3 mt0 text-bold text-info" th:text="${userDTO.likescount}">
+		                           <span class="text-sm text-white"></span>
+		                        </div>
+		                     </div>
+		                        <div class="h4 text-uppercase text-bold bg-pink-rose"><span class="ml-sm text-white">Likes</span></div>
+
+		                  </div>
+		               </div>
+
+		            </div>
+		            <!-- END METRICS  -->
+         	
+         	
+         	
+         	
+         	
+         	
+	       </div>
+	      	   <!--  END LEFT COLUMN-->
+               
+               
+               <!--  RIGHT COLUMN -->
+               <div class="col-md-8">
+
+		            
+				<!-- LATEST UPLOADS AND TOP RATED -->    
+		       <div class="row">
+		        <div class="col-md-12 col-xs-12 col-sm-12">	
+             
+			             <div class="col-lg-12">
+			                  <!-- START panel-->
+			                  <div id="topratedpanel" class="panel">
+			                     <div class="text-uppercase bg-info-dark h2 text-bold"><span class="mb-lg">TOP RATED VIDEOS <span class="text-uppercase h4 text-bold pull-right m-sm"><a class="text-white" th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:toprated'}">+see more</a></span></span></div>
+			                     <div class="panel-body text-sm">
+			                  
+			                          <!-- THUMB VIEW -->
+        								<div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+      									<div th:replace="/fragments/video-grid-view :: detail-user-index(videoListDTO=${topRatedVidList})"></div>
+      								</div></div>	
+      								<!-- THUMB VIEW -->  
+			                  
+			                  
+			                     </div>
+			                  </div>
+			                  <!-- END panel-->
+			               </div>		        
+		        
+		        
+		      	<!--  LATEST UPLOADS -->  		
+<!-- 			             <div class="col-lg-12">
+
+			                  <div id="hustuploadedpanel" class="panel">
+			                     <div class="text-uppercase bg-info-dark h3 text-bold">LATEST UPLOADS<span class="text-uppercase h4 text-bold pull-right"><a class="text-white" th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:latest'}">+see more</a></span></div>
+			                     <div class="panel-body text-sm">
+	
+        								<div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+        								<div th:replace="/fragments/video-grid-view :: detail-user-index(videoListDTO=${latestVidList})"></div>
+      								</div></div>	
+      	
+			                     </div>
+			                  </div>
+
+			               </div>		 -->		      
+		        </div>
+		        </div>	
+			            
+		            
+		            
+		            
+		   
+		           
+		         </div>  
+		       <!--  END RIGHT COLUMN -->    
+               
+            </div>
+          <!-- END FIRST ROW  -->   
+            
+          
+          </div>  
+          <!-- END CONTENT WRAPPER  --> 
+
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script>
+    <script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>    
+     <script src="../static/js/follow.js" th:src="@{/js/follow.js}"> </script>  
+    
+
+      </section>      
+      
+
+  </body>
+</html>  	  

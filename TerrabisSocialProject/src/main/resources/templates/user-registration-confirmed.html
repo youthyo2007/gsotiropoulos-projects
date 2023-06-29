@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Registration Confirmed</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+                     <div class="row">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span class="h2 text-bold text-gray-more text-left">ACCOUNT ACTIVATED!</span><br/>
+                           </div>  
+                    </div>	
+            </div>
+
+
+                  <div class="row mb-lg mt-lg">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+                            <span class="h2 text-bold text-gray text-left">LETS GET STARTED!</span><br/>
+                        </div>  
+                        
+                          <div class="col-md-2 col-xs-12 col-sm-12">
+                            <span class="fa fa-smile-o fa-12x text-bold text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h2 text-gray-more text-left">Sign in to start upload links from Youtube, Vimeo or your own video files!</span>
+                        </div>  
+                        
+                        
+                        
+                 </div>	
+
+
+
+ <div class="row mt-lg mb-lg">
+               <div class="col-md-5 col-xs-12 col-sm-12">
+               </div>
+  </div>   
+
+
+
+
+ <div class="row mt-lg mb-lg">
+               <div class="col-md-5 col-xs-12 col-sm-12">
+               </div>
+  </div>             
+  
+
+ 		<!-- ===================== RESULTS ============================= -->
+        <!-- BOX VIEW -->
+        <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+        <div class="text-uppercase bg-info-dark h3 text-bold">LATEST UPLOADS<span class="text-uppercase h4 text-bold pull-right"><a class="text-white" th:href="@{'/video/video-catalog/filter:latest'}">+see more</a></span></div>
+      		<div th:replace="/fragments/video-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+     
+
+   		</div>
+   		
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+
+      </section>
+
+
+
+  </body>
+</html>  	    

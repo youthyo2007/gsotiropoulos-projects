@@ -1,0 +1,196 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>terrabis:video-upload-index</title>
+    
+     <link href="../static/vendor/blueimp-file-upload/css/jquery.fileupload.css"
+          th:href="@{/vendor/blueimp-file-upload/css/jquery.fileupload.css}" rel="stylesheet"/>   
+          
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+
+      
+               <!-- Page content-->
+         <form role="form" id="videofileuploadserver" th:action="@{'/upload/user-2946946/video-submit'}" method="POST" th:object="${videouploadFrm}" enctype="multipart/form-data">
+         <div class="content-wrapper">
+			<!--  HEADING -->	         
+            <div class="content-heading" th:fragment="user-settings-heading">
+                    <div class="row">
+                             <div class="col-xs-6">
+                              <span class="fa fa-upload fa-2x text-bold text-left"></span>
+                              <span class="h2 text-bold text-left">Video Upload/_</span>
+                           </div>  
+                    </div>	                 
+            </div>
+            <!-- HEADING -->         
+
+          
+			<div class="row">
+			    <div class="col-md-12 col-xs-12 col-sm-12">
+			    
+			    
+			    				<!-- FIRST ROW WITH WIDGETS -->
+                                 <div class="row">
+	                                         <div class="col-md-4 col-xs-12 col-sm-12">
+									                  <div class="panel widget bg-gray-dark">
+									                     <div class="row row-table">
+									                        <div class="col-xs-4 text-center bg-info-dark pv-lg">
+									                           <em class="fa fa-upload fa-3x"></em>
+									                        </div>
+									                        <div class="col-xs-8 pv-lg">
+									                           <div class="h3 m0 text-bold">UPLOAD VIDEO FILE</div>
+									                           <div class="text-uppercase">pick a file from your pc to upload</div>
+									                           <div class="mt-lg">
+									                           								                     <span class="btn btn-labeled btn-info fileinput-button">
+						             					<span class="h3 mt0 text-uppercase text-left">add file</span>
+								                        <input type="file" name="file">
+								                     </span>
+									                           </div>
+									                        </div>
+									                     </div>
+									                  </div><br/>
+									           </div>
+								          
+
+                                         <div class="col-md-4 col-xs-12 col-sm-12">
+								                  <div class="panel widget bg-gray-dark">
+								                     <div class="row row-table">
+								                        <div class="col-xs-4 text-center bg-info-dark pv-lg">
+								                           <em class="icon-share fa-3x"></em>
+								                        </div>
+								                        <div class="col-xs-8 pv-lg">
+								                           <div class="h3 m0 text-bold">LINK VIDEO</div>
+								                           <div class="text-uppercase">link from Youtube or Vimeo</div>
+									                           <div class="mt-lg">
+											                           <div class="form-group">
+											                               <div class="input-group">
+											                                 <input id="querytxt" placeholder="Enter url" type="text" class="form-control input-md">
+											                                 <span class="input-group-btn" id="go">
+											                                    <button type="button" class="btn btn-info"><i class="fa fa-search"></i></button>
+											                                 </span>
+											                              </div>
+											                           </div>
+									                           </div>
+								                        </div>
+								                     </div>
+								                  </div>
+								           </div> 
+								           
+								           
+								           
+								            
+								 </div>  
+								 <!-- END FIRST ROW WIDGETS -->
+			 
+                           
+
+							
+							<!-- FILE UPLOAD PROGRESS -->
+							<div class="row">
+							 <div class="col-md-12 col-xs-12 col-sm-12">
+								       <input type="hidden" th:field="*{userid}">
+								       <input type="hidden" th:field="*{title}" value="My First Drone">
+								       <input type="hidden" th:field="*{description}" value="My First Drone Description">
+								       <input type="hidden" th:field="*{privacy}" value="0">
+								       <input type="hidden" th:field="*{latitude}" value="37.983917">
+								       <input type="hidden" th:field="*{longitude}" value="23.729360">
+								       <input type="hidden" th:field="*{duration}" value="10">
+								       
+								          
+								       
+						               <!-- Redirect browsers with JavaScript disabled to the origin page-->
+						               <noscript>
+						                  <input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/">
+						               </noscript>
+						               <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload-->
+								               <div class="row fileupload-buttonbar">
+								                  <div class="col-lg-6">
+								                     <!-- The fileinput-button span is used to style the file input field as button-->
+
+								                     
+								                     <!-- The global file processing state-->
+								                     <span class="fileupload-process"></span>
+								                  </div>
+								                  <!-- The global progress state-->
+								                  <div class="col-lg-6 fileupload-progress fade pull-right">
+								                     <!-- The global progress bar-->
+								                     <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress progress-striped active">
+								                        <div style="width:0%;" class="progress-bar progress-bar-success"></div>
+								                     </div>
+								                     <!-- The extended global progress state-->
+								                     <div class="progress-extended">&nbsp;</div>
+								                  </div>
+								               </div>						               
+						               <!-- The table listing the files available for upload/download-->
+						               <table role="presentation" class="table table-striped">
+						                  <tbody class="files"></tbody>
+						               </table>
+		
+						   			<!-- The template to display files available for upload-->
+						            <script id="template-upload" type="text/x-tmpl">
+									{% for (var i=0, file; file=o.files[i]; i++) { %}
+									<tr class="template-upload fade">
+									    <td>
+									        <span class="preview thumb24"></span>
+									    </td>
+									    <td>
+									        <p class="h4 mt0 text-uppercase text-left">{%=file.name%}</p>
+									        <strong class="error text-danger"></strong>
+									    </td>
+									    <td>
+
+									    </td>
+									    <td>
+									        {% if (!i && !o.options.autoUpload) { %}
+									            <button class="btn btn-labeled btn-danger start" disabled>
+													<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+									                    </span>   
+													<span class="h3 mt0 text-uppercase text-left">upload</span>
+									            </button>
+									        {% } %}
+										 </td><td>	
+									        {% if (!i) { %}
+									            <button class="btn btn-labeled btn-inverse cancel">
+													<span class="btn-label pull-left"><i class="fa fa-times"></i>
+									                    </span>   
+													<span class="h3 mt0 text-uppercase text-left">cancel</span>
+									            </button>
+									        {% } %}
+									    </td>
+									</tr>
+									{% } %}
+						            </script>
+						            <!-- The template to display files available for download-->
+						             <script id="template-download" type="text/x-tmpl">
+
+ 						            </script>
+							 
+							 
+							 
+							 
+							 
+							 </div>
+							</div> 
+                  									
+   		</div>
+   		</div> 
+   		</div>
+   		</form>
+          <!-- END CONTENT WRAPPER  --> 
+    								           
+								           
+								           
+								             
+
+
+
+
+</section>
+
+
+      
+  </body>
+</html>  	  

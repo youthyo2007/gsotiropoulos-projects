@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.VideoChartMapper">
+
+
+	<select id="videosPerDayAvg" parameterType="map" resultType="java.lang.Double">
+			SELECT AVG(W.total) as avg from (
+			SELECT count(*) as total, DATE_FORMAT(a.datecreated, '%Y-%m-%d') as theday 
+			FROM videos a  WHERE 1 = 1  
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+			group by DATE_FORMAT(a.datecreated, '%Y-%m-%d')) as W
+	</select>
+	
+	
+	<select id="videosPerMonthAvg" parameterType="map" resultType="java.lang.Double">
+			SELECT AVG(W.total) as avg from (
+			SELECT count(*) as total, DATE_FORMAT(a.datecreated, '%Y-%m') as themonth 
+			FROM videos a  WHERE 1 = 1  
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+			group by DATE_FORMAT(a.datecreated, '%Y-%m')) as W
+	</select>
+
+
+    <select id="chartVideosPerMonth" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartCountsPerMonthTimeDTO">
+         select DATE_FORMAT(a.datecreated,'%c') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c') ASC        
+    </select>   
+
+
+    <select id="chartVideosPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'VIDEOCOUNT' AS counttype, a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+		 
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>   
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select> 
+
+
+    <select id="chartVideosPerSource" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartCountsPerColumnDTO">
+         SELECT COUNT(*) AS counts, w.columnDesc FROM 
+ 		(SELECT CASE WHEN a.vimeoid IS NOT NULL THEN 'VIMEO' WHEN a.isfile = 1  then 'FILE' WHEN a.youtubeid IS NOT NULL then 'YOUTUBE'  END AS columnDesc FROM videos a WHERE 1 = 1
+
+		   <if test="QUERY.dateCreatedFromString != null and QUERY.dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{QUERY.dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="QUERY.dateCreatedToString != null and QUERY.dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{QUERY.dateCreatedToString} ]]>
+           </if>   
+            
+ 		) AS w GROUP BY w.columnDesc 
+    </select>  
+
+
+
+
+    <select id="videosPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'VIDEOCOUNT' AS counttype, a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from videos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>    
+    
+
+    <select id="playsPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'PLAYCOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from playsvideos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+
+    <select id="sharesPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'SHARECOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from shares a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+    <select id="ratingsPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'RATINGCOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from ratings a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+    
+    
+    <select id="likesPerDay" parameterType="map" resultMap="com.socialvideo.data.mappers.StatisticsMapper.BIChartSingleLineCountsPerDayTimeDTO">
+        select 'LIKECOUNT' AS counttype,  a.datecreated, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring , DATE_FORMAT(a.datecreated,'%d') as dayno,  DATE_FORMAT(a.datecreated,'%a') as daystring, LPAD(MONTH(a.datecreated),2,'0') as monthno, DATE_FORMAT(a.datecreated,'%b') as monthstring, DATE_FORMAT(a.datecreated,'%Y') as yearno, COUNT(*) AS counts from likesvideos a WHERE 1 = 1 
+        
+        <if test="QUERY.dateCreatedFrom != null and QUERY.dateCreatedFrom != ''.toString()">
+            <![CDATA[ AND  a.datecreated >=  #{QUERY.dateCreatedFrom,jdbcType=DATE} ]]>
+        </if>
+        
+        <if test="QUERY.dateCreatedTo != null and QUERY.dateCreatedTo != ''.toString()">
+            <![CDATA[  AND a.datecreated <=  #{QUERY.dateCreatedTo,jdbcType=DATE} ]]>
+        </if> 
+
+        <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+            AND a.userid_fk=#{QUERY.userid}
+        </if>  
+                   
+        GROUP BY  DATE_FORMAT(a.datecreated,'%Y-%c-%d')  ORDER BY DATE_FORMAT(a.datecreated,'%Y-%c-%d') ASC        
+    </select>   
+
+
+</mapper>
+
+
+
+

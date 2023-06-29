@@ -1,0 +1,94 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Claim Of Ownership New Request</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+                     <div class="row">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+                           <span class="h2 text-bold text-gray-more text-left">YOU ARE ABOUT TO FILE A 'CLAIM OF OWNERSHIP' REQUEST FOR THE FOLLOWING VIDEO LINK</span><br/>
+                           </div>  
+                    </div>	
+            </div>
+
+
+              <div class="row mb-lg mt-lg">
+                        
+                     <div class="col-md-12 col-xs-12 col-sm-12">
+	                          <div th:replace="/fragments/video-grid-view :: box-video-column(vid=${videoDTO})"></div>
+                        </div>  
+                 </div>	
+
+  
+                <div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h4 text-gray-more text-left">To verify that you are the owner click  'FILE CLAIM'</span>
+                </div>  
+                        
+<!--   
+          <div class="row mt-lg mb-lg" th:if="${(#authorization.expression('isAuthenticated()')) and (claimDTO!=null) and (claimDTO.userid!=#authentication.principal.user.id)}">
+      			<div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h2 text-danger text-left">You cannot file a 'claim of ownership' for this video. Another claim is already filed by another user</span>
+                </div>  
+        	 </div>
+  
+          <div class="row mt-lg mb-lg" th:if="${(#authorization.expression('isAuthenticated()')) and (claimDTO!=null) and (claimDTO.userid==#authentication.principal.user.id)}">
+      			<div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h2 text-info text-left">You have already filed a 'claim of ownership' for this video.</span><br/> 
+                             <span class="h4 text-info text-left">Please add the tag<span class="h3 text-bold text-info">'terrabisownershipclaim'</span> on your video</span>
+                </div>  
+        	 </div>
+ -->
+
+			
+
+
+         <!-- CLAIM REQUEST FORM  -->    
+	       <div class="row mt-lg mb-lg" th:if="${(#authorization.expression('isAuthenticated()')) and (claimDTO==null)}">
+               <div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+               <form ID="claimrequestform" role="form" th:action="@{'/claim/request/submit'}" th:object="${VIDEOCLAIMFRM}" method="post">
+			                  <input type="hidden" name="videoid" th:value="${videoDTO.id}">
+                               <div class="form-group m-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">FILE CLAIM</span>
+			                           </button>
+			                   </div>  
+ 
+ 				</form>
+               </div>
+       </div>    
+
+
+ <div class="row mt-lg mb-lg">
+               <div class="col-md-5 col-xs-12 col-sm-12">
+               </div>
+  </div>             
+  
+     
+
+   		</div>
+   		
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+
+      </section>
+
+
+
+  </body>
+</html>  	  

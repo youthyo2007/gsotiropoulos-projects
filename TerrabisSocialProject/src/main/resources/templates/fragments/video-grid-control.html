@@ -1,0 +1,620 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+
+
+
+               <div th:class="${colclass}" th:fragment="user-index">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Menu</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selected=='pins'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/map'}">Map</a></li>
+							                <li th:class="${selected=='videos'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos'}">Videos</a></li>
+							                <li th:class="${selected=='collections'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/collections/'}">Collections</a></li>
+							                <li th:class="${selected=='channels'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/channels'}">Channels</a></li>
+							                <li th:class="${selected=='friends'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/friends/'}">Friends</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>     
+     	        </div> 
+
+
+
+     	        <div th:class="${colclass}" th:fragment="video-catalog-view(colclass,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="bluefb-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Videos</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>								
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selfilter=='filter:all'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:all'}">All Videos</a></li>
+							                <li th:class="${selfilter=='filter:latest'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:latest'}">Latest</a></li>
+							                <li th:class="${selfilter=='filter:likes'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:likes'}">Likes</a></li>
+							                <li th:class="${selfilter=='filter:toprated'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:toprated'}">Top Rated</a></li>
+							                <li th:class="${selfilter=='filter:mostplayed'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:mostplayed'}">Most Played</a></li>
+							                <li th:class="${selfilter=='filter:bestof'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:bestof'}">Top Picks</a></li>
+<!-- 							                <li th:class="${selfilter=='filter:pendingapproval'} ? 'active' : '_'"><a th:href="@{'/video/video-catalog/filter:pendingapproval'}">Pending Approval</a></li>
+ -->								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+		
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li><i class="fa fa-home"></i> Filter By:</li>
+									                        <li class="active"><a href="#">Any</a></li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                     </ul>    -->
+				
+									                    
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"/>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+
+
+     	        <div th:class="${colclass}" th:fragment="admin-video-view(colclass,selview,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="bluegray-bootstrap-menu" class="navbar navbar-default " role="navigation">
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selview=='published'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:published/filter:'+${selfilter}}">Published Videos
+							                <span  class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;">-</span>
+							                </a></li>
+							                <li th:class="${selview=='uploaded'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:uploaded/filter:'+${selfilter}}">Just Uploaded
+							                <span th:if="${stDTO.videostatus.status_JUSTUPLOADED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_JUSTUPLOADED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='youtubetooluploaded'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:youtubetooluploaded/filter:'+${selfilter}}">YTB
+							                <span th:if="${stDTO.videostatus.status_YOUTUBETOOLUPLOADED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_YOUTUBETOOLUPLOADED}"></span>
+							                </a></li>
+							                
+							                <li th:class="${selview=='exceluploaded'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:exceluploaded/filter:'+${selfilter}}">Excel Loaded
+							                <span th:if="${stDTO.videostatus.status_EXCELUPLOADED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_EXCELUPLOADED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='approved'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:approved/filter:'+${selfilter}}">Approved
+             								<span th:if="${stDTO.videostatus.status_APPROVED>0}" class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_APPROVED}"></span>							                
+							                </a></li>
+							                <li th:class="${selview=='staging'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:staging/filter:'+${selfilter}}">Staging
+             								<span th:if="${stDTO.videostatus.status_STAGING>0}" class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_STAGING}"></span>							                
+							                </a></li>
+							                <li th:class="${selview=='rejected'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:rejected/filter:'+${selfilter}}">Rejected
+							                <span th:if="${stDTO.videostatus.status_REJECTED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_REJECTED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='unpublished'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:unpublished/filter:'+${selfilter}}">Unpublished
+							                <span th:if="${stDTO.videostatus.status_UNPUBLISHED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_UNPUBLISHED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='broken'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:broken/filter:'+${selfilter}}">Broken
+							                <span th:if="${stDTO.videostatus.health_BROKEN>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.health_BROKEN}"></span>
+							                </a></li>
+							                <li th:class="${selview=='unwanted'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:unwanted/filter:'+${selfilter}}">Unwanted
+							                <span th:if="${stDTO.videostatus.mark_UNWANTED>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.mark_UNWANTED}"></span>
+							                </a></li>
+
+							                
+							                <li th:class="${selview=='promotesiteindex'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:promotesiteindex/filter:'+${selfilter}}">Promoted to Index Page
+							                <span th:if="${stDTO.videostatus.promote_status_SITEINDEX>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.promote_status_SITEINDEX}"></span>
+							                </a></li>
+							                <li th:class="${selview=='promotemap'} ? 'active' : '_'"><a th:href="@{'/admin/videos/view:promotemap/filter:'+${selfilter}}">Promoted to Map
+							                <span th:if="${stDTO.videostatus.promote_status_MAP>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.promote_status_MAP}"></span>
+							                </a></li>
+									        </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">All</li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                        <li><a href="#">Alphabetical</a></li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: admin-gridviewstyle-control"></ul>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+
+
+
+     	        <div th:class="${colclass}" th:fragment="admin-user-view(colclass,selview,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="bluegray-bootstrap-menu" class="navbar navbar-default " role="navigation">
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selview=='all'} ? 'active' : '_'"><a th:href="@{'/admin/users/view:all/filter:'+${selfilter}}">Standard
+							                </a></li>
+							                <li th:class="${selview=='registered'} ? 'active' : '_'"><a th:href="@{'/admin/users/view:registered/filter:'+${selfilter}}">Group by Registration Date
+							                </a></li>
+									        </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div> 
+				         
+				         
+<!-- 				         <div class="row">
+				              <div class="col-md-12 col-sm-12">
+						              <div class="content-control">
+						              
+
+									                    breadcrumb
+									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">Username</li>
+									                    </ul>/breadcrumb
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    
+
+
+						               </div>/content-control
+				              </div>
+				         </div>    -->
+				         
+				           
+     	        </div> 
+
+
+
+     	        <div th:class="${colclass}" th:fragment="user-index-watchlater(colclass,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="mediumsea-bootstrap-menu" class="navbar navbar-default" role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Videos</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selfilter=='filter:all'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:all'}">All Videos</a></li>
+							                <li th:class="${selfilter=='filter:latest'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:latest'}">Latest</a></li>
+							                <li th:class="${selfilter=='filter:likes'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:likes'}">Likes</a></li>
+							                <li th:class="${selfilter=='filter:toprated'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:toprated'}">Top Rated</a></li>
+								            <li th:class="${selfilter=='filter:mostplayed'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:mostplayed'}">Most Played</a></li>
+							                <li th:class="${selfilter=='filter:bestof'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/watchlater/filter:bestof'}">Top Picks</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">All</li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                        <li><a href="#">Alphabetical</a></li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+
+
+     	        <div th:class="${colclass}" th:fragment="user-index-favorites(colclass,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="maroon-bootstrap-menu" class="navbar navbar-default" role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Videos</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selfilter=='filter:all'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:all'}">All Videos</a></li>
+							                <li th:class="${selfilter=='filter:latest'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:latest'}">Latest</a></li>
+							                <li th:class="${selfilter=='filter:likes'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:likes'}">Likes</a></li>
+							                <li th:class="${selfilter=='filter:toprated'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:toprated'}">Top Rated</a></li>
+								            <li th:class="${selfilter=='filter:mostplayed'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:mostplayed'}">Most Played</a></li>
+							                <li th:class="${selfilter=='filter:bestof'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/favorites/filter:bestof'}">Top Picks</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">All</li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                        <li><a href="#">Alphabetical</a></li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+
+
+     	        <div th:class="${colclass}" th:fragment="user-index-videos(colclass,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="bluefb-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Videos</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selfilter=='filter:all'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:all'}">All Videos</a></li>
+							                <li th:class="${selfilter=='filter:latest'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:latest'}">Latest</a></li>
+							                <li th:class="${selfilter=='filter:likes'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:likes'}">Likes</a></li>
+							                <li th:class="${selfilter=='filter:toprated'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:toprated'}">Top Rated</a></li>
+								            <li th:class="${selfilter=='filter:mostplayed'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:mostplayed'}">Most Played</a></li>
+							                <li th:class="${selfilter=='filter:bestof'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/videos/filter:bestof'}">Top Picks</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">All</li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                        <li><a href="#">Alphabetical</a></li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+     	  
+     	  
+     	  
+     	      	        <div th:class="${colclass}" th:fragment="video-organizer-view(colclass,selview,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="bluefb-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Menu</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${selview=='videos'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:videos/filter:'+${selfilter}}">My Published Videos
+							                <span class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_PUBLISHED}"></span>
+							                </a></li>							                
+							                <li th:class="${selview=='pending'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:pending/filter:'+${selfilter}}">Pending For Approval 
+							                <span class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_JUSTUPLOADED+stDTO.videostatus.status_EXCELUPLOADED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='rejected'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:rejected/filter:'+${selfilter}}">Rejected 
+							                <span class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;"  th:text="${stDTO.videostatus.status_REJECTED}"></span>
+							                </a></li>
+							                <li th:class="${selview=='unpublished'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:unpublished/filter:'+${selfilter}}">Unpublished
+							                <span class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.status_UNPUBLISHED}"></span>
+							                </a></li>
+							                
+<!-- 							                <li th:class="${selview=='broken'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:broken/filter:'+${selfilter}}">Broken
+							                <span class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${stDTO.videostatus.health_BROKEN}"></span>
+							                </a></li> -->
+							                
+							                <li th:class="${selview=='albums'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:albums/filter:'+${selfilter}}">Albums
+             								<span th:if="${userDTO.albumscount>0}" class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${userDTO.albumscount}"></span>							                
+							                </a></li>
+							                
+							                <li th:class="${selview=='favoritesbucket'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:favoritesbucket/filter:'+${selfilter}}">Favorites
+							                <span th:if="${userDTO.favoritescount>0}" class="label bg-danger-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${userDTO.favoritescount}"></span>
+							                </a></li>
+							                
+
+<!-- 							                <li th:class="${selview=='playlists'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:playlists/filter:'+${selfilter}}">Video Paths
+             								<span th:if="${userDTO.playlistscount>0}" class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${userDTO.playlistscount}"></span>							                
+							                </a></li> -->
+							                <li th:class="${selview=='watchlater'} ? 'active' : '_'"><a th:href="@{'/video-organizer/view:watchlater/filter:'+${selfilter}}">Watch Later
+             								<span th:if="${userDTO.watchlatercount>0}" class="label bg-gray-dark text-white text-bold" style="position: absolute; top: 0px; right:0px;" th:text="${userDTO.watchlatercount}"></span>							                
+							                </a></li>
+									        </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>   
+				         
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+						              
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li class="active animated animated-repeat flash">All</li>
+									                        <li><a href="#">This Week</a></li>
+									                        <li><a href="#">This Month</a></li>
+									                        <li><a href="#">This Year</a></li>
+									                        <li><a href="#">Alphabetical</a></li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+				         
+				           
+     	        </div> 
+
+     	        
+     	        <div th:class="${colclass}" th:fragment="user-map-view(colclass,selfilter)">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">
+						              <div class="content-control">
+
+									                    <!--breadcrumb-->
+<!-- 									                    <ul class="breadcrumb" th:if="${selfilter=='filter:all'}">
+									                        <li class="active"><i class="fa fa-home"></i> Bring On Top:</li>
+									                        <li  class="active animated animated-repeat flash"><a href="#">All</a></li>
+									                        <li>Most Liked</li>
+									                        <li>Most Reviewed</li>
+									                        <li>Most Played</li>
+									                        <li>Alphabetical</li>
+									                    </ul> -->
+									                    <!--/breadcrumb-->
+
+									                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"/>
+									                    
+
+
+						               </div><!-- /content-control -->
+				              </div>
+				         </div>     	
+     	        </div> 
+
+     	        <div th:class="${colclass}" th:fragment="user-index-channels">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Channels</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li cass="active"><a th:href="@{'/user-' + ${userDTO.UUID}+'/channels/f/all'}">All Channels</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/channels/f/latest'}">Latest</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/channels/f/likes'}">Likes</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/channels/f/likes'}">Most Viewed</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>     
+     	        </div>      	        
+     	
+     	     	<div th:class="${colclass}" th:fragment="user-index-map">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12 col-xs-12">	
+								<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        							<div class="navbar-header"><!-- <a class="navbar-brand" href="#">Filter Map</a> -->
+            							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            							</button>
+        							</div>									
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li cass="active"><a th:href="@{'/user-' + ${userDTO.UUID}+'/map/f/all'}">All Pins</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/map/f/latest'}">Latest</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/map/f/likes'}">Likes</a></li>
+							                <li><a th:href="@{'/user-' + ${userDTO.UUID}+'/map/f/likes'}">Most visited</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>     
+     	        </div>         
+
+
+
+			<!-- ADMIN GRIDVIEW CONTROL -->
+	         <ul class="control-nav pull-right" th:fragment="admin-gridviewstyle-control">
+			      <!-- LI WITH DROWN DOWN 
+	             <li>
+	                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                 <i th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'} ? 'fa fa-th-list fa-2x animated animated-repeat flash' : 'fa fa-th-list'"></i> detail view
+	                          <i class="fa fa-angle-down"></i> 
+	                 </a>                            
+	                          <ul class="dropdown-menu animated flipInX pull-right">
+	                             <li><a href="#">Some Action</a></li>
+	                             <li><a href="#">Other Action</a></li>
+	                             <li class="divider"></li>
+	                             <li><a href="#">Something Else</a></li>
+	                         </ul>
+	             </li>
+	             -->
+	          
+	          
+	             <li class="divider"></li>
+	             <li>
+	                 <a  th:href="@{${#httpServletRequest.requestURI}(grid='ANALYTIC')}" class="gridviewstyle-control">
+	                 <i id="gridviewstyle-control-ANALYTIC" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'ANALYTIC'} ? 'fa fa-th-list fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th-list -'"></i> analytic view
+	                 </a>                            
+	             </li>
+	             <li class="divider"></li>
+	             <li>
+	                 <a  th:href="@{${#httpServletRequest.requestURI}(grid='THUMB')}" class="gridviewstyle-control">
+		                 <i id="gridviewstyle-control-THUMB" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'} ? 'fa fa-th fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th -'"></i> thumbnails
+	                 </a>
+	             </li>
+	             <li class="divider"></li>
+	             <li>
+	                 <a  th:href="@{${#httpServletRequest.requestURI}(grid='DETAIL')}" class="gridviewstyle-control">
+	                 <i id="gridviewstyle-control-DETAIL" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'} ? 'fa fa-th-list fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th-list -'"></i> detail view
+	                 </a>                            
+	             </li>
+	             <li class="divider"></li>
+	             <li>
+	                 <a th:href="@{${#httpServletRequest.requestURI}(grid='BOX')}" class="gridviewstyle-control">
+	                     <i id="gridviewstyle-control-BOX" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'} ? 'fa fa-th-large fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th-large -'"></i> box view
+	                 </a>
+	             </li>
+	         </ul>
+			<!-- GRIDVIEW CONTROL -->
+
+
+			<!-- GRIDVIEW CONTROL -->
+	         <ul class="control-nav pull-right" th:fragment="gridviewstyle-control">
+			      <!-- LI WITH DROWN DOWN 
+	             <li>
+	                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                 <i th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'} ? 'fa fa-th-list fa-2x animated animated-repeat flash' : 'fa fa-th-list'"></i> detail view
+	                          <i class="fa fa-angle-down"></i> 
+	                 </a>                            
+	                          <ul class="dropdown-menu animated flipInX pull-right">
+	                             <li><a href="#">Some Action</a></li>
+	                             <li><a href="#">Other Action</a></li>
+	                             <li class="divider"></li>
+	                             <li><a href="#">Something Else</a></li>
+	                         </ul>
+	             </li>
+	             -->
+	          
+	          
+	             <li class="divider"></li>
+	             <li>
+	                 <a  th:href="@{${#httpServletRequest.requestURI}(grid='THUMB')}" class="gridviewstyle-control">
+		                 <i id="gridviewstyle-control-THUMB" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'} ? 'fa fa-th fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th -'"></i> thumbnails
+	                 </a>
+	             </li>
+	             <li class="divider"></li>
+	             <li>
+	                 <a  th:href="@{${#httpServletRequest.requestURI}(grid='DETAIL')}" class="gridviewstyle-control">
+	                 <i id="gridviewstyle-control-DETAIL" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'} ? 'fa fa-th-list fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th-list -'"></i> detail view
+	                 </a>                            
+	             </li>
+	             <li class="divider"></li>
+	             <li>
+	                 <a th:href="@{${#httpServletRequest.requestURI}(grid='BOX')}" class="gridviewstyle-control">
+	                     <i id="gridviewstyle-control-BOX" th:class="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'} ? 'fa fa-th-large fa-2x animated animated-repeat flash text-aqua' : 'fa fa-th-large -'"></i> box view
+	                 </a>
+	             </li>
+	         </ul>
+			<!-- GRIDVIEW CONTROL -->
+
+     	        
+     	        
+     	        
+     	        
+     	        
+     	        
+     	        
+     	        
+     	         
+     	        
+     	        
+     	        
+
+</body>
+</html>
+
+

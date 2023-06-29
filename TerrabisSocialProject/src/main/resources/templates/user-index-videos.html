@@ -1,0 +1,250 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title  th:text="${'Terrabis - ' + {userDTO.shortdesc} + '&#146;s Videos'}"></title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+<!--      <div th:replace="/fragments/modal :: fullscreenoverlay-videoplay"></div> -->
+     
+         <div class="content-wrapper">
+            <div class="content-heading">
+                               <div class="row">
+                               
+<!--                                
+                       			<div class="col-md-2 col-sm-2 col-xs-2">
+										<div th:replace="/fragments/user-index-detail :: small-avatar(user=${userDTO},fasize='fa-2x')"></div>
+							</div>    --> 
+							
+							
+                              <div class="col-md-6 col-xs-12 col-sm-12">
+                                                            	   <span class="text-gray fa fa-youtube-play fa-2x">&nbsp;</span><span class="text-gray text-bold h1"  th:text="${{userDTO.shortdesc} + '&#146;s Videos'}">Videos</span>     
+                                                            	    <br/><a th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id==userDTO.id)}" th:href="@{'/video-organizer/view:videos/filter:all'}"><span class="h4 text-gray-more text-right">video settings</span></a><br/>
+                 		<!--  FOLLOW BUTTONS -->
+                 		 <div th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id!=userDTO.id)}" class="pull-left">  	
+		                  <div th:replace="/fragments/video-grid-view ::follow-user-btns(user=${userDTO},isFollowing=${ISFOLLOWINGUSER})"></div>
+						</div>                                                            	    
+                 		<!--  FOLLOW BUTTONS -->
+                 		    
+                           	 </div>
+                           	 
+                           	  <div class="col-md-6 col-xs-12 col-sm-12 text-right">
+                                      <div th:replace="/fragments/adverts :: user-index-videos"></div>
+                                      
+                           		</div>
+                           	 
+                           	 
+                           	 </div>            
+            </div>
+		    
+            
+              <!-- GOOGLE MAP  -->
+<!--               <div class="row mb-lg">
+                              <div class="col-md-9 col-xs-12 col-sm-12">
+			        			<div class="box-shadow-info-lg round-corner-md">
+			               			<div id="googlemap" class="gmaplg round-corner-md"></div>
+			               		</div>
+							</div>
+							<div class="col-md-3 col-xs-12 col-sm-12">
+								<div class="row">
+						         <div class="col-md-12 col-xs-12 col-sm-12" th:replace="/fragments/video-grid-view :: user-info-column(user=${userDTO},avatarsize='fa-6x',videos='false',favorites='false',playlists='true',watchlater='false')">
+							      </div>
+							      </div>
+   								</div>	
+								
+				</div>		 -->		                              
+                              
+                              
+            
+            
+            
+            
+		          
+		     <!--  HEADING WITH AVATAR AND MAP -->	         
+<!--                     <div class="row">
+                             <div class="col-md-9 col-xs-12 col-sm-12">
+                               <div class="row">
+                              <div class="col-md-12 col-xs-12 col-sm-12">
+					   				  <span class="text-gray text-bold h1" th:text="${{userDTO.shortdesc} + '&#146;s Videos'}">User</span>           
+                           	 </div>
+                           	 </div>
+                              <div class="row mt-lg">
+                              <div class="col-md-12 col-xs-12 col-sm-12">
+								MAP
+								<div id="googlemap" class="w-XXXL h-LG"></div>
+			               	 </div>
+                           	 </div>
+                           </div>  
+
+
+
+		<div class="col-md-3 col-xs-12 col-sm-12">
+		<div class="row">
+         <div class="col-md-12 col-xs-12 col-sm-12" th:replace="/fragments/video-grid-view :: user-info-column(user=${userDTO},avatarsize='fa-6x',videos='false',favorites='false',playlists='true',watchlater='false')">
+	      </div>
+	      </div></div>		
+
+                           
+         
+         </div> -->
+            <!-- HEADING -->
+		          
+ 
+
+ 		       <div class="row mb-sm">  
+             <div class="col-md-12 col-sm-12">
+             
+				         <div class="pull-right paginator">
+				         </div>           
+             </div>    
+       </div> 
+
+		            
+         <!-- CONTENT CONTROL BAR  -->   
+         <div class="row">
+         	  <div th:replace="/fragments/video-grid-control :: user-index-videos(colclass='col-md-12 col-sm-12',selfilter='filter:'+${filter})"></div>
+         </div>     
+         <!-- CONTENT CONTROL BAR  -->    
+
+
+
+
+
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+      <div class="row">
+        	<div class="col-md-9 col-xs-12 col-sm-12">
+        	
+        <!-- DETAIL VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+    
+    
+        <!-- THUMB VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- THUMB VIEW --> 
+      	
+      	</div>
+      			<div class="col-md-3 col-xs-12 col-sm-12">
+		<div class="row">
+         <div class="col-md-12 col-xs-12 col-sm-12" th:replace="/fragments/video-grid-view :: user-info-column(user=${userDTO},avatarsize='fa-6x',videos='false',favorites='true',playlists='true',watchlater='true')">
+	      </div>
+	      </div></div>		      	
+      	</div>
+      	
+
+      	
+      	
+      	
+      	
+      	 		       <div class="row mb-sm mt-lg">  
+             <div class="col-md-12 col-sm-12">
+             
+				         <div class="pull-right paginator">
+				         </div>           
+             </div>    
+       </div> 
+      	
+      	
+      	<!-- LOAD DATA  -->
+ <!--        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+        	 <div class="col-md-12 col-xs-12 col-sm-12 load-more-data"></div>
+        	</div>
+        </div>
+-->        	
+
+		<!-- LOAD MORE  -->
+  <!--       <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <span class="h3 text-gray-more text-bold load-more-video cursor-pointer" th:if="${CATALOGPAGINATOR.currentPage+1!=CATALOGPAGINATOR.totalPages}">
+        	 LOAD MORE...
+        	 </span> 
+        	</div>
+        </div>	
+-->
+
+
+
+
+
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <br/><br/><br/><br/><br/><br/><br/><br/>
+        	 </div>
+        </div>	
+      	    
+
+   </div>
+        
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>    
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>
+	<script src="../static/js/grid-view-renderer.js" th:src="@{/js/grid-view-renderer.js}"> </script>     
+   <script src="../static/js/follow.js" th:src="@{/js/follow.js}"> </script>  
+	 
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+
+			var PARTITIONS =  [[${videoListDTO}]];
+	  		
+	  		
+	  		
+	  		/***********************************************************************SCROLL PAGINATOR SETUP ********************************************************************/
+	  		//terrabisApp.paginatorLastPage =  [[${CATALOGPAGINATOR.currentPage+1==CATALOGPAGINATOR.totalPages}]];
+
+			
+			//VISIBLE NUMBERS PAGINATOR    		
+    		if(PARTITIONS.length>0) 
+    			createHtml_PaginatorWithPageNumbers([[${CATALOGPAGINATOR}]]);
+			else
+				createHtml_EmptyPaginator();
+	  		
+	  		
+	  		
+			//SCROLL TO BOTTOM LOAD MORE	  		
+	  		/*$(window).scroll(function() {
+	  		    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+	  		    	if(!terrabisApp.paginatorLastPage) {
+	  					loadMoreVideo(terrabisApp.paginatorUserVideoCatalogURI);
+	  		    	}
+	  		    }
+	  		});*/
+	  		/***********************************************************************SCROLL PAGINATOR SETUP ********************************************************************/
+
+
+    	  
+    	  
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

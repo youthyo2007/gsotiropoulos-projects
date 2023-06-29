@@ -1,0 +1,638 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-video-one-desktop">
+  <head>
+    <title th:text="@{'Terrabis - '+${videoDTO.title}}">Terrabis - Video</title>
+    
+ 
+  </head>
+  <body>
+  
+
+  
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+
+
+         <div class="content-wrapper">
+
+  
+
+
+        <div class="row">
+		<div class="col-md-9 col-xs-12 col-sm-12"><!-- LEFT  -->
+		
+
+	                                <div class="row">
+                           <div class="col-md-12 col-xs-12 col-sm-12">
+                             <span class="h3 text-bold text-gray-dark text-left pull-left"  th:text="${videoDTO.title}">VIDEO TITLE</span>&nbsp;	
+                             															<button  class="btn btn-pink vidaction-like cursor-pointer pull-right m-sm"><span class="text-gray fa fa-thumbs-up fa-2x text-bold"></span> 
+
+											                                 <span class="text-inverse text-sm">&nbsp;Like</span>
+                       
+					             </button> 		
+                             <button  th:attr="data-id=${{videoDTO.id}},data-image=${{videoDTO.thumburl}}, data-title=${{videoDTO.title}}" class="btn btn-fb share-facebook cursor-pointer pull-right m-sm"><span class="text-gray fa fa-facebook fa-2x text-bold"></span> 
+
+											                                 <span class="text-gray-more text-sm">&nbsp;Share</span>
+                       
+					             </button>  
+			             
+                             <br/>
+                         </div>  
+                  </div> 
+
+
+		 	 <div class="row">
+				<div class="col-md-12 col-xs-12 col-sm-12 pull-left">
+
+				
+				    			<div id="panelblock" th:attr="data-likescount=${{videoDTO.likescount}},data-playscount=${{videoDTO.playscount}}, data-ratingssum=${{videoDTO.ratingssum}},data-uuid=${{videoDTO.UUID}}, data-title=${{videoDTO.title}}, data-description=${{videoDTO.description}}, data-id=${{videoDTO.id}},data-videourl=${{videoDTO.videourl}}" class="panel widget videopanel" style="background: none; width:100%; height:420;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-md-12 col-xs-12 col-md-12 col-sm-12">  
+                           				
+                           				
+		                           		<div  th:attr="id=${'vidaction-result_'+{videoDTO.id}}" class="vidaction-result full-hidden" style="position: absolute; top: 30%; left: 40%; z-index: 99;">
+					               				 <span class="fa fa-film fa-6x text-white"></span>
+										 </div>          
+                           				
+                           				<!-- <iframe th:attr="id=${'vidoverlay_play_iframe'+{videoDTO.id}}" th:src="${{videoDTO.videourl}+'?autoplay=1&rel=0&modestbranding=1&title=0&byline=0&portrait=0'}" width="100%"  height="420" frameborder="0" allowfullscreen></iframe> -->
+										<iframe class="box-border-info" th:attr="id=${'vidoverlay_play_iframe'+{videoDTO.id}}" th:src="${{videoDTO.videourl}+'?&rel=0&modestbranding=1&title=0&byline=0&portrait=0'}" width="100%"  height="420" frameborder="0" allowfullscreen></iframe> 
+
+										
+										
+										
+                          			 	</div>
+                        			</div>
+                     				</div>
+                     				
+     				
+			                     				
+			                        <div class="row" id="subpanelblockB">
+											<div class="col-md-12 col-xs-12 col-sm-12">
+													  <div class="pull-left bg-gray m-sm">	
+				                               			<span class="text-gray-more h4 text-bold m-lg"  title="duration" th:text="${videoDTO.durationtxt+' min'}"></span>
+						                              </div>
+													           
+													                           
+				                    		</div>
+<!-- 				                    		<div class="col-md-4 col-xs-12 col-sm-12">
+				                    		<div class="pull-left mt-sm">
+				                    		</div>
+				                    		</div> -->
+<!-- 				                    		<div class="col-md-12 col-xs-12 col-sm-12">
+													  	<div class="fb-page" data-href="https://www.facebook.com/Terrabis-1061662037215402/" data-width="1920" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Terrabis-1061662037215402/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Terrabis-1061662037215402/">Terrabis</a></blockquote></div>
+
+				                    		</div>		 -->		                    		
+				                    </div>	 	                    
+				              </div>    				
+				
+				
+				
+				
+				
+				</div>
+				 </div>
+
+
+
+							 <div class="row">
+		                       <div class="col-md-12 col-xs-12 col-sm-12">
+
+
+
+
+		                    <div class="row bg-gray">
+		                    
+	<!-- 	                     	 <div class="col-md-6 col-sm-6 col-xs-6">
+		                     	 						<div class="">	
+														from  <a th:href="@{'/user-'+${videoDTO.user.UUID}+'/'}"><span class="fullvideoplay_username text-inverse text-bold h4" th:text="${videoDTO.user.shortdesc}"></span> </a> |
+				                                  		<span class="text-bold fullvideoplay_date  h4" th:text="${videoDTO.shortAndSmart_DATECREATED}"></span> |
+				                                    	<a th:href="@{'/user-'+${videoDTO.user.UUID}+'/videos/filter:all'}"><span class="h4 text-bold text-inverse">see more +</span>
+				                                    	</div>	        		                               		
+						         </div>
+						         
+						          -->
+						         
+
+		                             <div class="col-md-6 col-sm-6 col-xs-6" th:if="${videoDTO.ownershipverified}">
+		                              <p class="text-sm-md text-gray-dark">
+										  Made by <a th:href="@{'/user-'+${videoDTO.user.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.user.shortdesc}"></span> </a> 
+		                              <img  th:src="@{/images/verified.png}">
+		                              </p>
+		                              <p class="text-sm-md text-gray-dark">
+										  initially uploaded from  <a th:href="@{'/user-'+${videoDTO.uploader.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.uploader.shortdesc}"></span> </a> <span class="time_badge">
+										  on <span class="text-bold fullvideoplay_date" th:text="${videoDTO.shortAndSmart_DATECREATED}"></span>  </span>
+										  |	<a th:href="@{'/user-'+${videoDTO.user.UUID}+'/videos/filter:all'}"><span class="h4 text-bold text-inverse">see more +</span></a>
+		                              </p>
+		                              
+		                           </div>
+	
+		                       
+		                    
+		                             <div class="col-md-6 col-sm-6 col-xs-6" th:if="${!videoDTO.ownershipverified}">
+		                              <p class="text-sm-md text-gray-dark">
+										  added <span class="text-bold fullvideoplay_date" th:text="${videoDTO.shortAndSmart_DATECREATED}"></span> 
+										  from  <a th:href="@{'/user-'+${videoDTO.user.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.user.shortdesc}"></span> </a> <span class="time_badge"> </span>
+										  |	<a th:href="@{'/user-'+${videoDTO.user.UUID}+'/videos/filter:all'}"><span class="h4 text-bold text-inverse">see more +</span></a>
+										  <br/>
+										  <span class="text-sm" th:if="${(!videoDTO.ownershipverified) and (!videoDTO.vimeo)}">(Are you the maker of the video?  <a th:href="@{'/claim/request/' + ${videoDTO.id}}"><span class="text-bold text-sm">Claim</span> ownership</a>)</span>
+										  
+		                              </p>
+		                           </div>
+							         
+						         
+						                              
+		                             <div class="col-md-6 col-sm-6 col-xs-6">
+		                              
+		                              <div class="pull-right">
+		                              <div  th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id!=videoDTO.user.id)}" th:replace="/fragments/video-grid-view ::follow-user-btns(user=${videoDTO.user},isFollowing=${ISFOLLOWINGUSER})"></div>
+		                              
+<!-- 	                     							<button  th:attr="data-userid=${{videoDTO.user.id}}" class="btn btn-fb usraction-follow cursor-pointer text-gray  pull-right m-sm" th:classappend="${ISFOLLOWINGUSER} ? 'full-hidden' : ' '">
+														<span class="fa fa-plus fa-2x"></span> 
+														<span class="text-gray-more text-sm">&nbsp;Follow</span>&nbsp;<span class="text-gray-more text-sm text-bold" th:text="${videoDTO.user.shortdesc}"></span>
+			                     
+									             </button> 								                     							                            		                               		
+												<button  th:attr="data-userid=${{videoDTO.user.id}}" class="btn btn-info-dark usraction-unfollow cursor-pointer text-gray  pull-right m-sm" th:classappend="${ISFOLLOWINGUSER} ? ' ' :  'full-hidden'">
+														<span class="fa fa-check text-inverse fa-2x"></span> 
+														<span class="text-inverse text-sm">&nbsp;Following</span>&nbsp;<span class="text-inverse text-sm text-bold" th:text="${videoDTO.user.shortdesc}"></span>
+			                     
+									             </button> 	
+									              -->
+									 </div>            
+									             		                             
+								<button  class="btn btn-fb vidaction_add cursor-pointer pull-right m-sm"><span class="text-gray fa fa-plus fa-2x text-bold"></span> 
+
+											                                 <span class="text-gray-more text-sm">&nbsp;Add to ...</span>
+                       
+					             </button> 	
+					             							                     
+								<button  class="btn btn-fb vidaction_share cursor-pointer pull-right m-sm"><span class="text-gray fa fa-paper-plane fa-2x text-bold"></span> 
+
+											                                 <span class="text-gray-more text-sm">&nbsp;Send...</span>
+                       
+					             </button>  
+  								</div>
+  								
+  								<div class="col-md-12 col-xs-12 col-sm-12 sharediv  full-hidden">	
+										<div class="social_buttons pull-left"></div>
+										
+			                        	<a class="text-info-dark vidaction-link cursor-pointer m-sm" title="embedd video">
+			                                <em class="fa fa-link fa-2x"></em>
+			                             </a>
+			                             <span class="videoplay_link_text text-info-dark text-bold text-sm"  onClick="this.select();" th:text="${'http://www.terrabis.com/video/'+{videoDTO.UUID}}"></span>
+			                             <div class="pull-right text-inverse m-sm h4 text-bold"></div>
+								</div>
+  								
+  								<div class="col-md-12 col-xs-12 col-sm-12 adddiv full-hidden">
+																<span class="vidaction-favorites cursor-pointer text-info-dark fa fa fa-heart fa-2x text-bold"></span> 
+											                    <span class="vidaction-favorites cursor-pointer text-info-dark text-sm-md">&nbsp;Add to 'Favorites'</span>
+                       					             			 <span class="ml-lg"></span>					
+					             								
+  								
+  																<span class="vidaction-watchlater cursor-pointer text-info-dark fa fa-film fa-2x text-bold"></span> 
+											                    <span class="vidaction-watchlater cursor-pointer text-info-dark text-sm-md">&nbsp;Add to 'Watch Later'</span>
+                       
+					             													             								
+ 									
+								</div>
+  								
+
+  								
+  			                    </div> 	
+  			                    
+  			                    
+  			                    					                             
+						                              		                    
+		                    
+<!-- 		                    <div class="row">
+		                    
+		                     	 <div class="col-md-1 col-sm-1 col-xs-1">	
+							 							<a th:href="@{'/user-' + ${videoDTO.user.UUID}}">
+							 							<span th:if="${videoDTO.user.avatar==null}" th:classappend="fa-2x" class="fa fa-smile-o fa-4x text-gray-dark"></span>
+							                            <img th:if="${videoDTO.user.avatar!=null}" th:src="*{'data:image/'+videoDTO.user.avatar.extension+';base64,'+videoDTO.user.avatar.imagebase64}" class="img-thumbnail img-circle thumb64" />
+							                            </a>	
+								 </div>
+								  <div class="col-md-11 col-sm-11 col-xs-11">		
+								  <div class="pull-left">
+	                     							<button  th:attr="data-userid=${{videoDTO.user.id}}" class="btn btn-fb usraction-follow cursor-pointer text-gray m-lg" th:classappend="${ISFOLLOWINGUSER} ? 'full-hidden' : ' '">
+														<span class="fa fa-plus fa-2x"></span> 
+														<span class="text-gray-more tetx-sm">&nbsp;Follow</span>
+			                     
+									             </button> 								                     							                            		                               		
+												<button  th:attr="data-userid=${{videoDTO.user.id}}" class="btn btn-info-dark usraction-unfollow cursor-pointer text-gray m-lg" th:classappend="${ISFOLLOWINGUSER} ? ' ' :  'full-hidden'">
+														<span class="fa fa-check fa-2x"></span> 
+														<span class="text-inverse text-sm">&nbsp;Following</span>
+			                     
+									             </button> 	
+	
+						         </div>
+						         </div>
+
+		                    </div>   -->	
+		                    
+		                    
+
+        <div class="row">
+
+		                    
+
+<!-- 		                         <div class="col-md-12 col-xs-12 col-sm-12  mt-sm">
+   											<div class="text-uppercase bg-info-dark h3 text-bold">MAP<span class="text-uppercase h4 text-bold pull-right"><a class="text-white" th:href="@{'/video/map/normal/_?videouuid=' + ${videoDTO.UUID}}">+more videos around this area</a></span></div>
+    							</div>
+         -->
+        <div class="col-md-12 col-xs-12 col-sm-12 mt-sm">
+      		<div id="googlemap"  style="width:100%; height:400px;"></div>
+      	</div>
+      	<div class="col-md-2 col-xs-12 col-sm-12"></div>
+      	
+      	
+      	</div>	
+		                    
+		                    
+		                    
+		                       
+				                     <div class="row bg-gray mt-sm">
+				                     
+										   <div class="col-md-12 col-xs-12 col-sm-12">
+										   <div class="row">
+
+						                      <div class="col-md-3 col-xs-4 col-sm-4 text-gray-more">
+						                        <span class="fa fa-comment-o fa-2x - " title="COMMENTS"></span>
+						                       <span th:attr="id=${'vidcommentstxt_'+{videoDTO.id}}" class="text-sm-md" th:text="${videoDTO.reviewscount >0 ? videoDTO.reviewscount : ' '}"></span>
+						                      </div>
+
+
+						                      <div class="col-md-3 col-xs-4 col-sm-4 text-gray-more">
+						                        <span class="fa fa-star fa-2x - " title="rating"></span>
+						                       <span th:attr="id=${'vidratingtxt_'+{videoDTO.id}}" class="text-sm-md" th:text="${videoDTO.ratingssum >0 ? videoDTO.ratingssum : ' '}"></span>
+						                      </div>
+								                      
+						                      <div class="col-md-3 col-xs-4 col-sm-4 text-gray-more">
+						                        <span class="fa fa-youtube-play fa-2x - " title="plays"></span>
+						                       <span th:attr="id=${'vidplaystxt_'+{videoDTO.id}}" class="text-sm-md" th:text="${videoDTO.playscount >0 ? videoDTO.playscount : ' '}"></span>
+						                      </div>
+
+
+						                      <div class="col-md-3 col-xs-4 col-sm-4 text-gray-more">
+						                        <span class="fa fa-thumbs-up fa-2x - " title="likes"></span>
+						                       <span th:attr="id=${'vidlikestxt_'+{videoDTO.id}}" class="text-sm-md" th:text="${videoDTO.likescount >0 ? videoDTO.likescount : ' '}"></span>
+						                      </div>
+
+
+								            </div>          
+								           </div>  				                     
+				                        <div class="col-md-12 col-xs-12 col-sm-12 text-left mt-lg">
+<!-- 				                          <span class="text-gray-dark h4">Description</span> -->
+				                           <span class="text-gray-dark justify  fullvideoplay_description text-sm-md more"  th:text="${videoDTO.description}">
+				                           </span>
+				                        </div>
+				                  </div>
+				                  
+
+
+
+
+
+									<div class="row videoratediv mt-sm">
+
+					 			        
+											<div class="col-md-12 col-xs-12 col-sm-12">
+											<span class="text-sm-md">What do you think of the video? <span class="text-bold">Give us your rating and comment below</span></span>
+											</div>
+								     </div> 
+
+
+				<!--   COMMENTS-->
+				
+                      <div class="row mt-sm bg-gray">
+                      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+											<div class="pull-left mb-sm mt-sm">
+					 														<select id="videoratingselect">
+																				<option value="1" class="text-sm">1 Hmmm..</option>
+																				<option value="2">2 Average</option>
+																				<option value="3" selected="selected">3 Good</option>
+																				<option value="4">4 Amazing</option>
+																				<option value="5">5 It Rocks!</option>
+																			</select>
+											</div>	                      
+                      <hr class="separator"/>
+					 			        
+                        <div class="panel widget" style="width: 100%">
+                           <div class="panel-heading">
+<!--                               <div class="pull-right label label-danger">5</div>
+                              <div class="pull-right label label-success">12</div> -->
+                              <div class="row form-group">
+                              <div class="col-md-12"><span class="h4 text-gray-dark">Comments &#8729;</span>&nbsp;<span class="text-info videoreviewcount h4" th:text="${videoDTO.reviews.size()}"></span></div>
+                              <div class="col-md-1">
+                              <img th:if="${#authorization.expression('isAuthenticated()') and userDTO.avatar!=null}" th:src="*{'data:image/'+{userDTO.avatar.extension}+';base64,'+{userDTO.avatar.imagebase64}}"  alt="Avatar" class="media-box-object thumb48 mr-sm">
+                              <span th:if="${#authorization.expression('isAuthenticated()') and userDTO.avatar==null}" class="fa fa-smile-o fa-2x text-gray-dark"></span>
+                              </div>
+                               <div class="col-md-11">
+                               <textarea class="form-control videoreviewtextarea" placeholder="Write your comment here.." rows="2" style="width:100%;"></textarea>
+                               </div>
+                              </div>
+	
+									 <div class="row form-group videoreviewbtnarea hidden">
+									   <div class="col-md-12">
+
+																                
+													           					<button  type="button" class="btn btn-fb videoreviewsendbtn pull-right ml-sm"> 
+																				<span class="h4 text-left text-white">send</span>
+																            </button>	
+																            
+																			   	<button  type="button" class="btn btn-default videoreviewcancelbtn pull-right mr-sm ml-sm"> 
+																				<span class="h4  text-left text-inverse">cancel</span>
+																            </button>	
+																            
+
+																            
+									   </div>
+									 
+									 </div>
+ 								                            
+
+
+                           <hr class="separator"/>
+                              
+                           </div>
+                           
+
+                              <!-- START list group item-->
+<!--                               <a href="#" class="list-group-item hidden  videocommentlistspinner">
+                                 <div class="media-box">
+                                    <div class="media-box-body clearfix">
+													<span class="fa fa-2x fa-refresh fa-spin text-info"></span>
+																					
+                                    </div>
+                                 </div>
+                              </a>  th:href="@{'/user-'+${review.user.UUID}+'/'}"       -->  
+                           
+                           <!-- START list group-->
+                           <div data-height="180" data-scrollable="" class="list-group videoreviewlist">
+                      
+                              
+                              <a class="list-group-item reviewitem -" th:attr="id=${'reviewitem_'+review.id},data-id=${{review.id}},data-userid=${{review.user.id}}" th:each="review, iterStat : ${videoDTO.reviews}">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                    	<span th:if="${review.user.avatar==null}" class="fa fa-smile-o fa-2x text-gray-dark"></span>
+                                         <img th:if="${review.user.avatar!=null}" th:src="*{'data:image/'+review.user.avatar.extension+';base64,'+review.user.avatar.imagebase64}"  alt="Avatar" class="media-box-object thumb32">
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <small class="pull-right" th:text="${review.smartTime}"></small>
+                                        <div class="text-center cursor-pointer hidden removereviewdiv" th:attr="id=${'removereviewdiv_'+review.id},data-id=${review.id}"  style="position:absolute; top:0px; right:5px; background-color: #555555;  width:30px; height:25px;">
+									    <span class="text-sm-md text-white removereviewbtn">x</span>
+									    </div>
+	                                       
+                                       <strong class="media-box-heading text-primary" th:text="${review.user.username}"></strong>
+                                       <p class="mb-sm">
+                                          <small th:text="${review.review}"></small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              
+                           <div class="hidden avatar">
+                           		<img th:if="${#authorization.expression('isAuthenticated()')  and userDTO.avatar!=null}" th:src="*{'data:image/'+{userDTO.avatar.extension}+';base64,'+{userDTO.avatar.imagebase64}}"  alt="Avatar" class="media-box-object thumb32">
+                           		<span th:if="${#authorization.expression('isAuthenticated()')  and userDTO.avatar==null}" class="fa fa-smile-o fa-2x text-gray-dark"></span>
+                           </div>                              
+                              
+                              <!-- END list group item-->
+                           </div>
+                           <!-- END list group-->
+                           <!-- START panel footer-->
+<!--                            <div class="panel-footer clearfix">
+                              <div class="input-group">
+                                 <input type="text" placeholder="Search message .." class="form-control input-sm">
+                                 <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i>
+                                    </button>
+                                 </span>
+                              </div>
+                           </div> -->
+                           <!-- END panel-footer-->
+                        </div>
+                     </div></div>
+
+
+
+
+
+
+		                    
+
+ 			
+				                  
+				                  
+				                  
+				                  
+                       		</div>
+                       		
+                       		 <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				 </div>
+			
+
+
+
+
+</div> 
+<!--  END LEFT-->
+
+
+
+		<!-- RIGHT   -->	
+		<div class="col-md-3 col-xs-12 col-sm-12 pull-right">
+		
+		<div class="row">
+
+			 <div class="col-md-12 col-xs-12 col-sm-12">
+           		<div th:replace="/fragments/adverts :: video-one-view"></div>            
+			</div>
+		</div>
+		
+		
+		      			   <div class="row mb-lg"><div class="col-md-12 col-xs-12 col-sm-12">
+      			   <div class="text-center">
+<div class="fb-page" data-href="https://www.facebook.com/Terrabis-1061662037215402/" data-width="260" data-height="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Terrabis-1061662037215402/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Terrabis-1061662037215402/">Terrabis</a></blockquote></div>
+			 </div>
+			 </div>
+			 </div>
+		
+
+
+               <div class="row row-table row-flush align-top bg-gray">
+                  <div class="col-xs-12">
+                     <div class="panel-body text-left text-gray-more">
+                        <span class="h4 text-bold" th:if="${relatedListType=='NEARBY'}" th:text="${'NEARBY VIDEOS'}"></span>
+                        <span class="h4 text-bold" th:if="${relatedListType=='TAGMATCHED'}" th:text="${'RELATED VIDEOS'}"></span>
+                        <span class="h4 text-bold" th:if="${relatedListType=='LATEST'}" th:text="${'LATEST VIDEOS'}"></span>
+                     </div>
+                  </div>
+               </div>
+				                           
+
+        <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: thumb-related(videoListDTO=${relatedVideoListDTO},related=${relatedListType})"></div>
+      	</div></div>	
+      	
+      	
+
+           
+      	
+
+		</div>
+
+</div>
+
+
+                  <div class="row mt-lg bg-info-dark" sec:authorize="isAnonymous()">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+                            <span class="h2 text-bold text-white text-left">JOIN US!</span><br/>
+                        </div>  
+                        
+                          <div class="col-md-2 col-xs-12 col-sm-12">
+                            <span class="fa fa-smile-o fa-10x text-bold text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h3 text-white text-left">Sign up to start upload links from Youtube, Vimeo or your own video files!</span>
+                        </div>  
+                        
+                        
+                        
+                 </div>	
+
+        
+   		
+   		
+   	</div>	
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/jquery-bar-rating/dist/jquery.barrating.min.js" th:src="@{/vendor/jquery-bar-rating/dist/jquery.barrating.min.js}"></script> 
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA2NdWUBq9Xd9KdnVKIczih3DalRqmwLlQ&libraries=places"></script>  
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>
+	<script src="../static/js/map-utilities.js" th:src="@{/js/map-utilities.js}"> </script>  
+	<script src="../static/js/video-one-view.js" th:src="@{/js/video-one-view.js}"> </script>  
+	<script src="../static/js/read-more.js" th:src="@{/js/read-more.js}"> </script>  
+	<script src="../static/js/follow.js" th:src="@{/js/follow.js}"> </script>  
+ <script src="../static/vendor/clock-js/clock.min.js" th:src="@{/vendor/clock-js/clock.min.js}"></script> 
+ 	<script src="../static/vendor/map-icons/dist/js/map-icons.js" th:src="@{/vendor/map-icons/dist/js/map-icons.js}"></script>   
+ 
+
+	
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+
+	
+
+	
+	
+			$(document).delegate('.vidaction_add', 'click', function() {
+				$(".sharediv").hide();
+				$(".adddiv").fadeIn("slow");
+				setTimeout(function(){
+					$(".adddiv").fadeOut("slow");
+				}, 5000);
+			});
+			
+			$(document).delegate('.vidaction_share', 'click', function() {
+				$(".adddiv").hide();
+				$(".sharediv").fadeIn("slow");
+				setTimeout(function(){
+					$(".sharediv").fadeOut("slow");
+				}, 5000);
+				
+			});
+			
+			
+			
+			
+			
+
+		//INIT SOCIAL BUTTONS AND CURRENT VIDEO
+		terrabisApp.currentVideo = [[${videoDTO}]];
+		$('.social_buttons').html(create_socialbuttons_html([[${videoDTO}]]));
+		terrabisApp.currentUserID = [[${userDTO!=null ? userDTO.id : "-1"}]];
+		terrabisApp.currentUserName = [[${userDTO!=null ? userDTO.username : ""}]];
+		terrabisApp.videoReviewsCount = [[${videoDTO.reviews!=null ? videoDTO.reviews.size() : 1}]];
+
+
+		
+		
+		
+		
+		
+		//CREATE MAP
+		terrabisApp.globalMap = createGoogleMap([[${videoDTOLocation.lat}]],[[${videoDTOLocation.lng}]],[[${PERS.googleMapType}]],"googlemap");
+		//ADD LISTENERS
+		google.maps.event.addListenerOnce(terrabisApp.globalMap, 'bounds_changed', function(){
+			var infoWindowContent = "<div class='googft-info-window'><b>"+terrabisApp.currentVideo.title+"</b><br><a href='http://www.terrabis.com/video/"+terrabisApp.currentVideo.UUID+"'><img width=\"280\" height=\"160\" src="+terrabisApp.currentVideo.sharethumburl+"><br></a></div>";
+			createDynamicGoogleMapMarkerWithInfoWindow(terrabisApp.globalMap.getCenter(),MAP_PIN,'#C082A0','map-icon-circle',infoWindowContent);
+
+			//CREATE MARKERS OF RELATED VIDEOS
+			var relatedVideoPointList = [[${relatedPointListDTO}]];
+	 		createCirlceAroundPoint( terrabisApp.globalMap,[[${videoDTOLocation.lat}]],[[${videoDTOLocation.lng}]],1000);	
+			
+			
+			
+			for(i=0; i<relatedVideoPointList.length; i++) {
+				infoWindowContent = "<div class='googft-info-window'><b>"+relatedVideoPointList[i].title+"</b><br><a href='http://www.terrabis.com/video/"+relatedVideoPointList[i].UUID+"'><img width=\"280\" height=\"160\" src="+relatedVideoPointList[i].sharethumburl+"><br></a></div>";
+				createDynamicGoogleMapMarkerWithInfoWindow(new google.maps.LatLng(relatedVideoPointList[i].latitude,relatedVideoPointList[i].longitude),MAP_PIN,'#9FDBFF','map-icon-circle',infoWindowContent);
+			}
+		
+		
+		});
+
+		
+
+		//PLAY
+		terrabisApp.countVideoPlayURI = [[@{'/rest/video/play/'}]];
+		countVideoPlay();
+		$("#vidoverlay_play_iframe"+terrabisApp.currentVideo.id).attr( "src", terrabisApp.currentVideo.videourl+"?autoplay=1&rel=0&modestbranding=1&title=0&byline=0&portrait=0");
+		
+		
+		/****************** INIT VIDEO RATING -------------------*/
+  	    $('#videoratingselect').barrating('show', {
+	         theme: 'fontawesome-stars', //' bars-movie fontawesome-stars'
+	         showValues: true,
+	         onSelect: function(value, text, event) {
+	             if (typeof(event) !== 'undefined') {
+	             	 videoRate(value);
+	             }
+	         }
+	         
+	     }); 
+
+
+			
+
+
+});	
+/*]]>*/
+</script>  
+
+
+
+
+
+
+
+
+
+
+
+
+      </section>
+
+
+
+  </body>
+</html>  	  

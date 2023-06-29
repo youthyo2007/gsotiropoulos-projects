@@ -1,0 +1,706 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html><head></head>
+<body>
+
+
+     <!-- FULL SCREEN OVERLAY UPLOAD  -->  
+    	 <div class="overlay overlay-scale overlay-upload overlay-content" th:fragment="fullscreenoverlay-upload">
+		 
+	
+                          <div class="row">
+                          <div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+                          <div class="text-center">
+                            <span class="h2 text-bold text-gray">UPLOAD</span><br/>
+                          </div>  
+                        </div>  
+                 </div>	
+               
+
+		 
+		 
+		 <button class="overlay-upload-close">Close video</button>
+    <!-- 	 <span class="overlay-upload-close fa fa-times text-info fa-6x cursor-pointer"></span> -->
+    <!-- 	 
+    <div class="bg-gray" style="width: 100%; position: relative; left: 0px; top:55px;">
+<br/><br/><br/>
+-->
+    	 
+<br/><br/>
+    	 <div class="content-wrapper bg-white fullscreen-overlay-upload">
+					<div th:replace="/fragments/upload-fragment :: upload"></div>
+			
+		</div>
+		</div>	
+		</div>
+
+
+
+     <!-- FULL SCREEN OVERLAY COLLECTION PLAY -->  
+    	 <div class="overlay overlay-scale overlay-videoplay overlay-content" th:fragment="fullscreenoverlay-collectionplay">
+		 <button type="button" class="overlay-close mt-xl">Close video</button>
+    	 <div class="container fullscreen-overlay-videoplay">
+		<div class="text-center bg-center" id="subpanelblockA">
+
+		 	 <div class="row">
+		 	 <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				<div class="col-md-7 col-xs-12 col-sm-12">
+							<div class="pull-left">
+								  <span class="text-gray h3 fullcollectionplay_title">George's Best Of NYC, Downtown Manhattan</span><br/>
+								  <span class="text-white text-sm fullcollectionplay_description">A collection of videos of New York, Downtown Manhattan, both on foot and aerial.</span><br/>
+		                   	<br/>
+							</div>
+			</div>	
+			<div class="col-md-3 col-xs-12 col-sm-12"></div>
+			</div>
+
+			
+		 	 <div class="row">
+		 	  <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				<div class="col-md-7 col-xs-12 col-sm-12">
+				<div class="pull-right">
+							<div id="fullcollplay_gallery"  class="royalSlider fullcollplay_gallery"></div>
+				</div>			
+				</div>
+				 <div class="col-md-3 col-xs-12 col-sm-12">
+				 </div>
+				 </div>
+			</div>
+
+			
+			
+			</div>
+		</div>	
+
+
+
+
+     <!-- FULL SCREEN OVERLAY VIDEO PLAY -->  
+    	 <div class="overlay overlay-scale overlay-videoplay overlay-content" th:fragment="fullscreenoverlay-videoplay">
+		 <button type="button" class="overlay-close mt-xl">Close video</button>
+    	 <div class="container fullscreen-overlay-videoplay">
+		<div class="text-center bg-center" id="subpanelblockA">
+
+		 	 <div class="row">
+		 	 <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				<div class="col-md-7 col-xs-12 col-sm-12">
+							<div class="pull-left">
+				
+	                              <a  class="text-gray vidaction-mapzoom cursor-pointer m-sm" title="map zoom">
+	                                 <em class="fa fa-map-marker fa-2x text-bold"></em>
+								</a>
+		                           
+
+		                              <a class="text-gray vidaction-favorites cursor-pointer m-sm" title="add to favorites">
+		                                 <em  class="fa fa-film fa-2x"></em>
+		                              </a>
+
+
+
+		                              <a class="text-gray vidaction-watchlater cursor-pointer m-sm" title="watch later">
+		                                 <em class="fa fa-heart fa-2x"></em>
+		                              </a>
+		                              
+		                              
+
+		     								                                                  
+   
+                           				<a class="text-white m-sm" title="watched"><em  class="text-gray fa-2x fa fa-youtube-play"></em></a>
+                           				<span   class="text-gray text-sm-sm fullvideoplay_playscount"></span>
+
+	                              		<a class="text-gray vidaction-like cursor-pointer m-sm" title="like"><em class="fa fa-thumbs-up fa-2x fullvideoplay"></em></a>
+				                         <span class="text-gray text-sm-sm fullvideoplay_likescount"></span>	
+
+			                        	<a class="text-gray vidaction-link cursor-pointer m-sm" title="embedd video">
+			                                <em class="fa fa-link fa-2x"></em>
+			                             </a>
+			                             
+                             
+                             
+                             
+                             <a  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" href="" class="fullvideoplay_edituri text-white m-sm" title="edit"><span  id="editvideo-icon_12" class="text-gray fa-2x fa fa-file-text-o"></span></a>
+                     
+                           	<br/>
+							</div>
+
+
+
+
+							
+							
+							<div class="pull-right social_buttons">
+					<!-- 
+							<img class="share-facebook cursor-pointer" th:attr="data-id=${{videoDTO.id}},data-image=${{videoDTO.thumburl}}, data-title=${{videoDTO.title}}" src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/facebook.png" border="0" alt="Facebook"/>
+							<img class="share-twitter cursor-pointer" th:attr="data-id=${{videoDTO.id}},data-image=${{videoDTO.thumburl}}, data-title=${{videoDTO.title}}, data-tags=${{videoDTO.tags}}" src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/twitter.png" border="0" alt="Twitter"/>
+							<img class="share-pinterest cursor-pointer" th:attr="data-id=${{videoDTO.id}},data-image=${{videoDTO.thumburl}}, data-title=${{videoDTO.title}}" src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/pinterest.png" border="0" alt="Pinterest"/>
+							<img class="share-facebook cursor-pointer" th:attr="data-id=${{videoDTO.id}},data-image=${{videoDTO.thumburl}}, data-title=${{videoDTO.title}}" src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/linkedin.png" border="0" alt="Linkedin"/>
+ -->
+							</div>							
+							
+
+			</div>	
+
+			<div class="col-md-3 col-xs-12 col-sm-12"></div>
+
+			</div>
+			
+			 <div class="row">
+
+			<div class="col-md-2 col-xs-12 col-sm-12"></div>						
+			
+			<div class="bg-gray col-md-7 col-xs-12 col-sm-12 fullvideoplay_link hidden">
+                         	<span class="fullvideoplay_link_text text-black text-sm-md"  onClick="this.select();"></span>
+			</div>
+			
+			<div class="col-md-4 col-xs-12 col-sm-12"></div>						
+		
+			</div>				
+			
+			
+			
+				
+		 	 <div class="row">
+		 	  <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				<div class="col-md-7 col-xs-12 col-sm-12">
+				<div class="pull-right">
+							<iframe width="900" height="520" class="fullvideoplay" src="" frameborder="0" allowfullscreen></iframe>
+				</div>	
+				
+				<div class="row mt-lg fullvideoplay_gmapdiv pull-right">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                             	<img  class="fullvideoplay_gmap"  width="900" height="250" src=""/>
+				                    </div> 
+		        </div>     
+						
+				</div>
+				 <div class="col-md-3 col-xs-12 col-sm-12">
+				 
+				 
+				 
+				 		 <div class="row mb-lg fullvideoplay_ownerdiv hidden">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <span class="h3 text-gray">
+										  owned by <a class="fullvideoplay_owneruri" href=""><span class="fullvideoplay_ownerusername"></span> </a>
+										  <img  th:src="@{/images/verified.png}">
+		                              </span>
+		                           </div>
+		                    </div> 
+				 
+				 </div>
+				 </div>
+			</div>
+			
+			
+							 <div class="row mt-lg">
+				 
+				  <div class="col-md-2 col-xs-12 col-sm-12"></div>
+				 
+		                       <div class="col-md-7">
+				                     <div class="row  mb-lg">
+				                         <div class="col-xs-12 text-left">
+				                           <span class="text-gray h1 fullvideoplay_title">
+																												                           
+				                           </span>
+				                        </div>
+				                        <div class="col-xs-12 text-left mt-lg">
+				                           <span class="text-gray-more fullvideoplay_description">
+				                           </span>
+				                        </div>
+				                  </div>
+ 				                  		                    
+		                    <div class="row mb-lg">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="h4 text-gray">
+										  uploaded from <a class="fullvideoplay_uploaderuri" href=""><span class="fullvideoplay_username"></span> </a> <span class="time_badge">
+										  added <span class="text-bold fullvideoplay_date"></span>  </span>
+		                              </p>
+		                           </div>
+		                    </div> 
+				                  
+				                  
+				                  
+				                  
+										<div class="row">
+								
+											<div class="col-md-12 col-xs-12 col-sm-12">
+																			
+
+                           <a class="text-white m-sm" title="rating"><span id="vidrateicon" class="fa fa-star fa-2x text-yellow-dark - " title="rating"></span></a>
+                           	<span  id="vidratestxt" class="text-gray h4 fullvideoplay_rating"></span>	
+                           					</div>
+					
+					 
+											<div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+											<div class="pull-left">
+					 														<select id="videoratingselect">
+																				<option value="1">1 Hmmm..</option>
+																				<option value="2">2 Average</option>
+																				<option value="3" selected="selected">3 Good</option>
+																				<option value="4">4 Amazing</option>
+																				<option value="5">5 It Rocks!</option>
+																			</select>
+											</div>								
+											</div>
+								     </div> 
+								     
+								     	<div class="row mt-lg mb-lg fullvideoplay_claimofownership">
+								
+											<div class="col-md-12 col-xs-12 col-sm-12"><br/><br/><a class="fullvideoplay_claimofownershipuri" href=""><span class="text-sm text-gray-more">Are you the owner of the video? Fill a claim of ownership form here<br/><br/></span></a></div>
+											
+											
+										</div>	
+																			
+								     					                  
+				                  
+				                  
+				                  
+                       		</div>
+                       		
+                       		 <div class="col-md-3 col-xs-12 col-sm-12"></div>
+				 </div>
+			
+			
+			
+			
+			</div>
+		</div>	
+		</div>			
+
+
+
+  
+   <!-- FULL SCREEN OVERLAY REJECT MODAL -->  
+    	 <div class="overlay overlay-scale overlay-reject" th:fragment="fullscreenoverlay-reject">
+		 <button type="button" class="overlay-close mt-xl">Close reject</button>
+    	 <div class="container fullscreen-overlay-action">
+    	 <div class="row mb-lg">
+			 			<div class="col-md-2 col-xs-12 col-sm-12"></div>
+		<div class="col-md-10 col-xs-12 col-sm-12">	 			
+					<div class="row">
+			 			<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+							<span id="overlayactiontitletext-reject" class="h2 text-uppercase text-bold text-white">ACTION TEXT</span>
+						</div>
+					</div>
+					<div class="row mt-lg">
+			 			<div class="col-md-12 col-xs-12 col-sm-12">
+			 			
+			 			   <div class="row">
+			 			   <div class="col-md-2 col-xs-12 col-sm-12 tex-center">
+			 			   </div>
+						             <div class="col-md-8 col-xs-12 col-sm-12 tex-center"><br/><br/>
+										 			<form role="form">
+																	<div class="form-group">
+											                           <span class="text-white h3 text-bold text-uppercase mb-lg">select a fixed rejection reason</span>
+											                              
+											                              <select id="rejectionreason-select" class="form-control m-b">
+											                              	 <option value="-1"> -----------------------------------------</option>
+											                                 <option th:each="item, indexItem : ${rejectReasonDTOList}"  th:text="${item.descr}" th:value="${item.id}">Rejection Reasons</option>
+											                              </select>
+											                              
+											                              
+											                              
+											                              <br/><br/><br/>
+											                        </div>	
+											                        	<div class="form-group">
+											                        		    <span class="text-white h3 text-bold text-uppercase mb-lg">or write a custom message</span>
+											                        		      <textarea id="rejectionreason-text"  rows="10" class="form-control note-editor-lg text-sm-md text-inverse text-bold" style="overflow:hidden"></textarea>
+											                        		    
+											                        	</div>
+											                        
+											                        
+											                        									 			
+										 			</form><br/><br/>
+				 			</div>
+			 			   <div class="col-md-2 col-xs-12 col-sm-12 tex-center">
+			 			   </div>
+				 			</div>
+ 						
+ 						       <div class="row">
+						             <div class="col-md-8 col-xs-12 col-sm-12 tex-center">
+						             
+						               <div class="form-group">
+						            				<button  type="button" form=" " class="btn btn-labeled btn-info-dark overlayactionbtn ml-lg">
+														<span class="btn-label"><i class="fa fa-check fa-2x"></i>
+										                    </span>   
+														<span id="overlayactionbtntext-reject" class="h3 mb-lg text-uppercase text-bold">BUTTON TEXT</span>
+										            </button>
+										   </div>  
+									</div>	
+									 <div class="col-md-4 col-xs-12 col-sm-12 text-center">								   						             
+						             <div class="form-group">
+					            				<button  type="button" class="btn btn-labeled btn-inverse overlay-close-second  pull-right mr-lg">
+													<span class="btn-label"><i class="fa fa-remove fa-2x"></i>
+									                    </span>   
+													<span class="h3 mb-lg text-uppercase text-bold">NO. I'VE CHANGED MY MIND</span>
+									            </button>
+									   </div>  
+						               </div>
+						             
+						               
+						       </div>  
+						</div>
+						</div>
+						</div>
+		</div>
+		</div>				
+		</div>	
+  
+  
+  <!-- FULL SCREEN OVERLAY MODAL -->  
+    	 <div class="overlay overlay-scale" th:fragment="fullscreenoverlay(hasimage)">
+		 <button type="button" class="overlay-close mt-xl">Close</button>
+    	 <div class="container fullscreen-overlay-action">
+    	 <div class="row mb-lg">
+			 			<div class="col-md-2 col-xs-12 col-sm-12"></div>
+		<div class="col-md-10 col-xs-12 col-sm-12">	 			
+					<div class="row">
+			 			<div th:if="${hasimage}" class="col-md-2 col-xs-12 col-sm-12">
+							<img id="overlayactionvidimage" class="w-SM h-SM" src="">
+						</div>	
+			 			<div class="col-md-10 col-xs-12 col-sm-12 text-center">
+							<span id="overlayactiontitletext" class="h2 text-uppercase text-bold text-white">ACTION TEXT</span>
+						</div>
+					</div>
+					<div class="row mt-lg">
+						<div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+					</div>
+					</div>
+					<div class="row mt-lg">
+			 			<div class="col-md-12 col-xs-12 col-sm-12">
+ 						       <div class="row">
+						             <div class="col-md-8 col-xs-12 col-sm-12 tex-center">
+						             
+						               <div class="form-group">
+						            				<button  type="button" form=" " class="btn btn-labeled btn-info-dark overlayactionbtn ml-lg">
+														<span class="btn-label"><i class="fa fa-check fa-2x"></i>
+										                    </span>   
+														<span id="overlayactionbtntext" class="h3 mb-lg text-uppercase text-bold">BUTTON TEXT</span>
+										            </button>
+										   </div>  
+									</div>	
+									 <div class="col-md-4 col-xs-12 col-sm-12 text-center">								   						             
+						             <div class="form-group">
+					            				<button  type="button" class="btn btn-labeled btn-inverse overlay-close-second  pull-right mr-lg">
+													<span class="btn-label"><i class="fa fa-remove fa-2x"></i>
+									                    </span>   
+													<span class="h3 mb-lg text-uppercase text-bold">NO. I'VE CHANGED MY MIND</span>
+									            </button>
+									   </div>  
+						               </div>
+						             
+						               
+						       </div>  
+						</div>
+						</div>
+						</div>
+		</div>
+		</div>				
+		</div>				
+
+
+
+<div th:fragment="rejectvideo" class="modal fade" id="rejectvideoModal" tabindex="-1" role="dialog" aria-labelledby="rejectvideoModal" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			            <h3 class="modal-title text-info-dark" id="myModalLabel">REJECT VIDEO</h3>
+			            </div>
+			            <div class="modal-body">
+						<!-- MODAL BODY  -->
+             					<form role="form" id="rejectvideoform" th:action="@{'/admin/video/reject'}" method="POST" th:object="${ADMINMANAGERFRM}">
+			                		       <input type="hidden" th:field="*{video.id}">
+	            		<div class="row">
+			    			<div class="col-md-12 col-xs-12 col-sm-12">
+								                      <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Video Title</label>
+ 										                              	<input type="text" th:field="*{video.title}" class="form-control">
+ 										                           </div>
+										                           <div class="form-group">
+										                              <label>Video Description</label>
+										                               <textarea class="form-control" th:field="*{video.description}" rows="5" id="comment"></textarea>
+										                           </div>	
+
+																	<div class="form-group">
+											                           <label>Rejection Reason</label>
+											                              <select th:field="*{video.rejectionid}" class="form-control m-b">
+											                                 <option th:each="item, indexItem : ${rejectReasonDTOList}"  th:text="${item.descr}" th:value="${item.id}">Rejection Reasons</option>
+											                              </select>
+											                        </div>
+								                       </div>
+								                       </div> 
+						
+						
+						
+						
+						   	</div> 
+						  	<div class="col-md-12 col-xs-12 col-sm-12">
+	   						  <button  type="submit" class="btn btn-labeled btn-info-dark start">
+								<span class="btn-label pull-left"><i class="fa fa-cancel"></i>
+				                    </span>   
+								<span  class="h3 mt0 text-uppercase text-left">reject</span>
+				            </button>				
+						   	</div>
+						   	</div>
+								</form>
+						<!-- MODAL BODY  -->
+			            </div>
+			            <div class="modal-footer">
+			             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			        </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+
+<div th:fragment="newplaylist" class="modal fade" id="newplaylistModal" tabindex="-1" role="dialog" aria-labelledby="newplaylistModal" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			            <h3 class="modal-title text-info-dark" id="myModalLabel">ADD NEW VIDEOPATH</h3>
+			            </div>
+			            <div class="modal-body">
+						<!-- MODAL BODY  -->
+             					<form role="form" id="newplaylistform" th:action="@{'/video-organizer/collections/playlist-new'}" method="POST" th:object="${VIDMANAGERFRM}">
+	            		<div class="row">
+			    			<div class="col-md-12 col-xs-12 col-sm-12">
+<!-- 			                		       <input type="hidden" th:field="*{newcollection.type}" th:value="${T( com.socialvideo.constant.CollectionTypes).PLAYLISTS}"> -->
+								                      <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Title</label>
+ 										                              	<input type="text" th:field="*{newcollection.title}" class="form-control">
+ 										                           </div>
+										                           <div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{newcollection.description}" rows="5" id="comment"></textarea>
+										                           </div>	
+
+																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{newcollection.privacy}" class="form-control m-b">
+											                                 <option value="2">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="0">Private: Only me can view this video</option>
+											                              </select>
+											                        </div>
+								                       </div>
+								                       </div> 
+						
+						
+						
+						
+						   	</div> 
+						  	<div class="col-md-12 col-xs-12 col-sm-12">
+	   						  <button  type="submit" class="btn btn-labeled btn-info-dark start">
+								<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+				                    </span>   
+								<span  class="h3 mt0 text-uppercase text-left">save</span>
+				            </button>				
+						   	</div>
+						   	</div>
+								</form>
+						<!-- MODAL BODY  -->
+			            </div>
+			            <div class="modal-footer">
+			             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			        </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+<div th:fragment="newalbum" class="modal fade" id="newalbumModal" tabindex="-1" role="dialog" aria-labelledby="newalbumModal" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			            <h3 class="modal-title text-info-dark" id="myModalLabel">ADD NEW ALBUM</h3>
+			            </div>
+			            <div class="modal-body">
+						<!-- MODAL BODY  -->
+             					<form role="form" id="newalbumform" th:action="@{'/video-organizer/collections/album-new'}" method="POST" th:object="${VIDMANAGERFRM}">
+	            		<div class="row">
+			    			<div class="col-md-12 col-xs-12 col-sm-12">
+<!-- 			                		       <input type="hidden" th:field="*{newcollection.type}" th:value="${T( com.socialvideo.constant.CollectionTypes).PLAYLISTS}"> -->
+								                      <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Title</label>
+ 										                              	<input type="text" th:field="*{newcollection.title}" class="form-control">
+ 										                           </div>
+										                           <div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{newcollection.description}" rows="5" id="comment"></textarea>
+										                           </div>	
+
+<!-- 																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{newcollection.privacy}" class="form-control m-b">
+											                                 <option value="2">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="0">Private: Only me can view this video</option>
+											                              </select>
+											                        </div> -->
+								                       </div>
+								                       </div> 
+						
+						
+						
+						
+						   	</div> 
+						  	<div class="col-md-12 col-xs-12 col-sm-12">
+	   						  <button  type="submit" class="btn btn-labeled btn-info-dark start">
+								<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+				                    </span>   
+								<span  class="h3 mt0 text-uppercase text-left">save</span>
+				            </button>				
+						   	</div>
+						   	</div>
+								</form>
+						<!-- MODAL BODY  -->
+			            </div>
+			            <div class="modal-footer">
+			             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			        </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+
+		<div th:fragment="editplaylist" class="modal fade" id="editplaylistModal" tabindex="-1" role="dialog" aria-labelledby="editplaylistModal" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			            <h3 class="modal-title text-info-dark" id="myModalLabel">EDIT VIDEO PATH</h3>
+			            </div>
+			            <div class="modal-body">
+						<!-- MODAL BODY  -->
+             					<form role="form" id="editplaylistform" th:action="@{'/video-organizer/collections/playlist-edit'}" method="POST" th:object="${VIDMANAGERFRM}">
+	            		<div class="row">
+			    			<div class="col-md-12 col-xs-12 col-sm-12">
+<!-- 			                		       <input type="hidden" th:field="*{newcollection.type}" th:value="${T( com.socialvideo.constant.CollectionTypes).PLAYLISTS}"> -->
+	                        		       <input type="hidden" th:field="*{newcollection.id}">
+								                      <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Title</label>
+ 										                              	<input type="text" th:field="*{newcollection.title}" class="form-control">
+ 										                           </div>
+										                           <div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{newcollection.description}" rows="5" id="comment"></textarea>
+										                           </div>	
+
+																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{newcollection.privacy}" class="form-control m-b">
+											                                 <option value="2">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="0">Private: Only me can view this video</option>
+											                              </select>
+											                        </div>
+								                       </div>
+								                       </div> 
+						
+						
+						
+						
+						   	</div> 
+						  	<div class="col-md-12 col-xs-12 col-sm-12">
+	   						  <button  type="submit" class="btn btn-labeled btn-info-dark start">
+								<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+				                    </span>   
+								<span  class="h3 mt0 text-uppercase text-left">UPDATE</span>
+				            </button>				
+						   	</div>
+						   	</div>
+								</form>
+						<!-- MODAL BODY  -->
+			            </div>
+			            <div class="modal-footer">
+			             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			        </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+		<div th:fragment="editalbum" class="modal fade" id="editalbumModal" tabindex="-1" role="dialog" aria-labelledby="editalbumModal" aria-hidden="true">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			            <h3 class="modal-title text-info-dark" id="myModalLabel">EDIT ALBUM</h3>
+			            </div>
+			            <div class="modal-body">
+						<!-- MODAL BODY  -->
+             					<form role="form" id="editalbumform" th:action="@{'/video-organizer/collections/album-edit'}" method="POST" th:object="${VIDMANAGERFRM}">
+	            		<div class="row">
+			    			<div class="col-md-12 col-xs-12 col-sm-12">
+<!-- 			                		       <input type="hidden" th:field="*{newcollection.type}" th:value="${T( com.socialvideo.constant.CollectionTypes).PLAYLISTS}"> -->
+	                        		       <input type="hidden" th:field="*{newcollection.id}">
+								                      <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Title</label>
+ 										                              	<input type="text" th:field="*{newcollection.title}" class="form-control">
+ 										                           </div>
+										                           <div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{newcollection.description}" rows="5" id="comment"></textarea>
+										                           </div>	
+
+																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{newcollection.privacy}" class="form-control m-b">
+											                                 <option value="2">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="0">Private: Only me can view this video</option>
+											                              </select>
+											                        </div>
+								                       </div>
+								                       </div> 
+						
+						
+						
+						
+						   	</div> 
+						  	<div class="col-md-12 col-xs-12 col-sm-12">
+	   						  <button  type="submit" class="btn btn-labeled btn-info-dark start">
+								<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+				                    </span>   
+								<span  class="h3 mt0 text-uppercase text-left">UPDATE</span>
+				            </button>				
+						   	</div>
+						   	</div>
+								</form>
+						<!-- MODAL BODY  -->
+			            </div>
+			            <div class="modal-footer">
+			             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE</button>
+			        </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-upload">
+  <head>
+    <title>Terrabis - Video Upload</title>
+    
+     <link href="../static/vendor/blueimp-file-upload/css/jquery.fileupload.css"
+          th:href="@{/vendor/blueimp-file-upload/css/jquery.fileupload.css}" rel="stylesheet"/>   
+          
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+         
+         
+         
+			<!--  HEADING -->	         
+            <div class="content-heading">
+                          <div class="row">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+                            <span class="h3 text-bold text-gray text-left">GREAT ANOTHER UPLOAD!</span><br/>
+                        </div>  
+                 </div>	
+               
+            </div>
+            <!-- HEADING -->         
+
+
+			    				<!-- FIRST ROW WITH WIDGETS -->
+			    				<form role="form" id="videofileuploadform" th:action="@{'/upload/video-submit/file'}" method="POST" th:object="${VIDEOUPLOADFRM}" enctype="multipart/form-data">
+	                        		       <input type="hidden" th:field="*{link}">
+									       <input type="hidden" th:field="*{latitude}">
+									       <input type="hidden" th:field="*{longitude}">
+									       <input type="hidden" th:field="*{tags}">
+									       <input type="hidden" id="weatherMap-sunny" th:field="*{weatherMap['sunny']}"/>
+										  <input type="hidden" id="weatherMap-cloudy" th:field="*{weatherMap['cloudy']}"/>	
+										  <input type="hidden" id="weatherMap-rain" th:field="*{weatherMap['rain']}"/>	
+										  <input type="hidden" id="weatherMap-snow" th:field="*{weatherMap['snow']}"/>	
+										  <input type="hidden" id="weatherMap-windy" th:field="*{weatherMap['windy']}"/>	
+										  <input type=hidden id="weatherMap-storm" th:field="*{weatherMap['storm']}"/>	
+										  <input type=hidden id="weatherMap-storm" th:field="*{weatherMap['storm']}"/>
+
+
+				
+							
+			<!-- MAIN ROW  -->					
+			  <div class="row">
+				<!--  LEFT COLUMN -->
+			   <div class="col-md-6 col-xs-12 col-sm-12">
+
+		 <!-- STEP 1  -->
+             <div class="row bg-gray-dark">
+                          <div class="col-md-1 col-xs-12 col-sm-12  mb-lg mt-lg">
+                            <span class="fa fa-map-marker fa-3x text-gray text-bold text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-11 col-xs-12 col-sm-12 pull-left"><br/>
+                          <div class="pull-left">
+                            <span class="h4 text-gray text-left"><strong>STEP 1</strong>: <span class="text-info-light">Click</span> the spot where you want you video to appear on the map. Fine tune the spot precisely by <span class="text-info-light">dragging</span> the marker to the exact location</span>
+                          </div>  
+                            
+              </div>  
+			</div>			 
+
+	     <div class="row mb-lg">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+												       <!-- =====================  LOCATION SEARCH INPUT ============================= -->
+												       <div class="row">
+												               <div class="col-md-12 col-xs-12 col-sm-12 mt-lg mb-sm">
+											                           <div class="form-group">
+											                               <div class="input-group">
+											                                 <input type="text" id="footageloctxt" class="form-control m-b" placeholder="Please enter an address and press 'enter'">
+											                                 <span class="input-group-btn">
+											                                    <button type="button" id="footagelocbutton" class="btn btn-info"><i class="fa fa-search"></i></button>
+											                                 </span>
+											                              </div>
+											
+											                           </div>												               
+												     			</div>
+												       </div>  
+
+												       <!-- ===================== GOOGLEMAP ============================= -->
+												       <div class="row">
+												               <div class="col-md-12 col-xs-12 col-sm-12">
+												               		<div id="googlemap" class="gmapmd"></div>
+												     			</div>
+												       </div>                            
+			              </div>  
+		</div><!--  STEP 1 -->			   
+			   
+			   
+			   
+		 <!-- STEP 3  -->	
+             <div class="row bg-gray-dark">
+                          <div class="col-md-1 col-xs-11 col-sm-11  mb-lg mt-lg">
+                            <span class="fa fa-file-text-o fa-3x text-gray text-bold text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-11 col-xs-11 col-sm-11"><br/>
+                            <span class="h4 text-gray text-left"><strong>STEP 3</strong>: Fill the necessary information such as <span class="text-info-light">title, a short description, weather conditions...</span></span>
+              </div>  
+			</div>			 
+		 
+		 
+
+								 
+								 
+		<!-- SECOND ROW WITH FORM DATA   -->
+       <div class="row mb-lg">
+                                 			 <!-- FORM TETX FIELDS -->	
+	                                         <div class="col-md-7 col-xs-12 col-sm-12  mt-lg">
+						                                 <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+										                           <div class="form-group">
+										                              <label>Title</label>
+ 										                              	<input type="text" th:field="*{title}" class="form-control">
+ 										                           </div>
+								                       </div>
+								                       </div> 
+								                       
+								                       
+								                        <div class="row mt-lg">
+								                        <div class="col-md-12 col-xs-12 col-sm-12">
+								                       	<div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{description}" rows="8" id="comment"></textarea>
+										                </div>
+										                </div>
+										                </div>								                       
+								                       
+								                        
+                           								 
+											</div>
+
+	                                        <!--  FORM RIGHT COLUMN-->
+	                                         <div class="col-md-5 col-xs-12 col-sm-12 pull-right mt-lg">
+						                                 <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+																		<div class="form-group">
+											                           <label>Category</label>
+											                              <select th:field="*{selectedCategory}" class="form-control m-b">
+											                               <option th:each="cat, indexStat : ${categoryDTOList}" th:value="${cat.id}" th:text="${cat.title}">Category Description</option>
+											                              </select>
+											                        </div>
+											                        										                           
+<!-- 																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{privacy}" class="form-control m-b">
+											                                 <option value="2">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="0">Private: Only me can view this video</option>
+											                              </select>
+											                        </div> -->
+								                       </div>
+								                       </div> 
+
+
+
+    												 <!-- FOOTAGE DATE  -->
+    				                                 <div class="row mt-lg">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+				                                         			
+										                           <div class="form-group">
+										                              <label>Footage date & time</label>
+												                              <div id="footagedate" class="input-group date">
+												                                 <input type="text"  th:field="*{footagedate}" class="form-control">
+												                                 <span class="input-group-addon">
+												                                    <span class="fa fa-calendar"></span>
+												                                 </span>
+												                              </div>
+										                           </div>
+										    			</div>
+								                       </div> 
+
+<!--                         								<div class="row mt-lg">
+                        								  <div class="col-md-12 col-xs-12 col-sm-12">
+                           									<label>Weather condition<br/></label>
+                           								  </div>
+                           								 </div> -->
+                           								 
+                           								<!-- WEHATER ICONS -->  
+<!--                         								<div class="row mt text-info">
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-sunny fa-2x"></span>sunny</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-cloudy fa-2x"></span>cloudy</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-rain-wind fa-2x"></span>rain</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-snow fa-2x"></span>snow</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-cloudy-windy fa-2x"></span>windy</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-thunderstorm fa-2x"></span>storm</label>
+                           								</div>  
+                           								</div> -->
+                        							
+                        							
+                        							<!-- WEATHER -->	
+<!-- 		            								<div class="row">
+		                       								  <div class="col-md-2 col-xs-2 col-sm-2" th:each="item, indexItem : ${VIDEOUPLOADFRM.weatherMap}" th:if="${item.key!='any'}">
+		                       								  <div class="form-group">
+							                      				<div class="checkbox c-checkbox weathercheckbox">
+							                                 	<label>
+							                                  	<input type="checkbox" th:value="${item.key}"/>  th:attr="id='advfilter-footagedate-'+${item.key}"
+							                                    <span class="wi wi-day-thunderstorm"></span></label>
+							                              		</div>
+						                           			</div>     
+		                       								</div>
+		                       						</div> -->
+												       
+											</div>
+								</div>	
+								<!-- END SECOND ROW  -->			   
+			   
+			   
+												     					       						<div class="row mt-lg">
+										               <div id="selectedtags" class="col-md-12 col-xs-12 col-sm-12">
+														</div>
+													</div>
+			   
+			   </div><!--  LEFT COLUMN -->
+                         
+			  
+				<!--  RIGHT COLUMN -->
+			   <div class="col-md-6 col-xs-12 col-sm-12">
+			   
+			   		<!--  STEP 2 -->
+		             <div class="row bg-gray-dark ml-sm">
+		                          <div class="col-md-1 col-xs-11 col-sm-11  mb-lg mt-lg">
+		                            <span class="fa fa-external-link fa-3x text-gray text-bold text-left"></span>
+		                        </div>  
+		                        
+		                          <div class="col-md-11 col-xs-11 col-sm-11"><br/>
+		                            <span class="h4 text-gray text-left"><strong>STEP 2</strong>: Enter a <span class="text-info-light">Youtube</span> or  <span class="text-info-light">Vimeo</span> url to upload a video link from each of these, or click  <span class="text-info-light">add file</span> to upload your own video file</span>
+		              </div>  
+					</div>				   
+			   
+								
+							<div class="row mt-lg">
+									<div class="col-md-10 col-xs-10 col-sm-10">
+								                           <div class="mt-lg">
+											                           <div class="form-group">
+											                                 <input th:field="*{linkedurl}"  placeholder="Enter Youtube or Vimeo URL" type="text" class="form-control linkvideotrigger">
+											                           </div>
+									                           </div>
+									     </div>
+
+ 										<div class="col-md-2 col-sm-2 col-xs-2"></div>
+	                                       <div class="col-md-3 col-sm-3 col-xs-3">
+	                                              <div class="panel widget bg-gray-dark">
+								                     <div class="row row-table">
+								                        <div class="col-xs-12">
+								                           <span class="fa fa-youtube fa-3x text-danger youtubeicon"></span>
+								                        </div>
+								                     </div>
+								                  </div> 
+								           </div> 
+
+				                            <div class="col-md-3 col-sm-3 col-xs-3">
+	                                              <div class="panel widget bg-gray-dark">
+								                     <div class="row row-table">
+								                        <div class="col-xs-12">
+								                           <span class="fa fa-vimeo-square fa-3x text-info vimeoicon"></span>
+								                        </div>
+								                     </div>
+								                  </div> 
+								           </div> 
+
+
+
+									 </div>    								
+                                <!--  END STEP 2 -->
+                                
+			   
+			   
+			   
+			     <div class="row ml-sm"><div class="col-md-12 col-xs-11 col-sm-11  mb-lg mt-lg"><span class="h1 text-info-light text-bold">OR</span></div></div>
+		                         
+					
+					
+								<div class="row  ml-sm">
+										<div class="col-md-4 col-xs-12 col-sm-12">
+									         <div class="mt-lg">
+					            				<button id="filevideobutton" type="button" class="btn btn-labeled btn-gray btn-block filevideotrigger">
+													<span id="filevideobuttontext" class="h2 mt0 text-uppercase text-left text-white dropzoneiputclass">add file</span>
+									            </button>						               
+									         </div>
+									 </div>        
+
+
+
+							          <!-- DROP ZONE AND FILE PREVIEW -->
+								          <div class="col-md-8 col-xs-12 col-sm-12">
+ 											        <blockquote class="box-placeholder mt0 - filevideotrigger" id="viddropzone">
+											               <p class="h3 mt0 text-uppercase text-center text-bold text-gray"><br/><br/>Drop your video here<br/></p>
+											            </blockquote>   
+											            
+
+								                  	<div id="vidpreviewpanel" class="panel widget bg-info-dark hidden">
+									                     <div class="row row-table"  id="vidpreviewpanelnode">
+									                        <div  id="vidpreview_thumb" class="col-xs-1 text-center  bg-info-dark pv-lg cursor-pointer">
+									                           <img class="uploadthumbnail" data-dz-thumbnail />
+										                       	<span id="vidpreview_name" class="label label-primary" data-dz-name></span>
+									                           <span id="vidpreview_size" class="label label-primary"><span class="dz-size" data-dz-size></span></span>
+									                        </div>
+									                        <div id="" class="col-xs-11 text-inverse align-bottom"><br/><br/><br/><br/><br/><br/><br/>
+											                     <span class="btn btn-labeled btn-info pull-right align-bottom remove">
+									             					<span id="vidpreview_remove" class="h3 mt0 text-uppercase text-left text-white align-bottom">remove</span>
+ 											                     </span>									                           
+									                        </div>
+									                     </div>
+									                  </div>											            
+											            
+											                 			          
+	
+										  </div>
+										  <!-- END DROP ZONE AND FILE PREVIEW -->	
+
+									</div>
+
+
+								<div class="row  ml-sm">
+ 							  <div class="col-md-12 col-xs-12 col-sm-12">
+								  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+								 </div>   
+ 							  </div>    	
+					
+					
+					
+			   
+			   
+			   
+			
+														 <div class="row">
+								  <div class="col-md-12 col-xs-12 col-sm-12">
+											<br/><br/>			 
+								 </div>                              
+                                </div> 
+								
+							  
+			   
+			   
+			   
+			  		 <!-- STEP 5  -->
+             <div class="row bg-gray-dark ml-sm">
+                          <div class="col-md-1 col-xs-11 col-sm-11  mb-lg mt-lg">
+                            <span class="fa fa-tag fa-3x text-gray text-bold text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-11 col-xs-11 col-sm-11"><br/>
+                            <span class="h4 text-gray text-left"><strong>STEP 4</strong>: Pick some <span class="text-info-light">tags</span>  that describe better the video. You may add a <span class="text-info-light">new tag</span> by pressing <span class="text-info-light">enter</span> within the input box</span>
+              </div>  
+			</div>		
+			  
+			 
+			 		
+			     <div class="row mb-lg">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+		
+														<div class="row">	
+												          <div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+                        								  	<div class="form-group">
+    	                       									<span class="h4 text-gray-more">add your own tags or search and pick some ones from below:</span>
+									                              <input id="tagsfilter" type="text" class="form-control  mt-sm" placeholder="Write something to search for tags. Press enter after writing to add your new tag">
+                           									</div>
+												       	</div> 
+												       	</div> 	
+																						
+												       <div class="row">
+												        <div class="col-md-12 col-xs-12 col-sm-12">
+												               		<div id="tagcloud" width="100%" class="h-LG"></div>
+												     	</div>
+												     	</div>
+												     	
+						</div></div>
+			 
+			  
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   </div><!--  RIGHT COLUMN -->
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  </div>				
+							
+		
+
+
+
+		 <!-- STEP 5  -->
+             <div class="row bg-gray-dark mt-lg">
+                          <div class="col-md-9 col-xs-12 col-sm-12"><br/>
+                           
+							            	<!--  ROW PROGRESSS -->   		
+								       <div id="progressbardiv" class="row mt-lg hidden">
+							               <div class="col-md-12 col-xs-12 col-sm-12 text-left">
+							               <span  class="font12 mt0 text-danger">* Don't close the browser window until finished uploading</span>
+							               </div>
+							
+							               <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+							    <span id="progressbartext" class="h3 mt0 text-info text-bold">0%</span>           
+								    <div class="progress" id="total-progress">
+											<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+											  </div>
+								</div>
+							               </div>
+							       </div>                 
+                           
+                           
+              				</div>
+              				
+              				                          <div class="col-md-3 col-xs-12 col-sm-12  mb-lg mt-lg">
+           				<button id="uploadbutton" type="button" class="btn btn-labeled btn-info-dark start btn-block">
+							<span class="btn-label pull-left"><i class="fa fa-upload fa-4x"></i>
+			                    </span>   
+							<span id="uploadbuttontext" class="h2  text-uppercase text-left">FINISH</span>
+			            </button>	
+                        </div> 
+              				  
+			</div>				
+			
+	
+							
+  
+	
+							
+	
+			</form>   		
+                  									
+   		</div> 
+          <!-- END CONTENT WRAPPER  --> 
+
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script src="../static/vendor/dropzone/dropzone.js" th:src="@{/vendor/dropzone/dropzone.js}"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+
+
+
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+           
+           
+           
+/** **************** FORM VALIDATION ************************************************************ **/
+
+$( document ).ready(function() {
+
+
+
+var regYoutube = "/^.*((youtu.be/)|(v/)|(/u/w/)|(embed/)|(watch?))??v?=?([^#&?]*).*/";
+var regVimeo = "/^.*(vimeo.com/)((channels/[A-z]+/)|(groups/[A-z]+/videos/))?([0-9]+)/";
+
+
+var formValidation = $('#videofileuploadform').formValidation({
+    framework: 'bootstrap',
+    icon: {
+        valid: 'fa  fa-check',
+        invalid: 'fa fa-check fa-remove',
+        validating: 'fa fa-refresh'
+    },
+    fields: {
+        title: {
+            validators: {
+                notEmpty: {
+                    message: 'Video title is required'
+                }
+            }
+        },
+        "footagedate": {
+            validators: {
+                notEmpty: {
+                    message: 'Footage date is required'
+                },
+	            date: {
+	                format: 'DD/MM/YYYY',
+	                message: 'The value is not a valid date'
+	            }
+	        }
+	                
+        },
+        "privacy": {
+            validators: {
+                notEmpty: {
+                    message: 'Video privacy is required'
+                }
+            }
+        },
+        "linkedurl": {
+            validators: {
+                notEmpty: {
+                    message: 'Video URL is required'
+                },
+	            regexp: {
+	                regexp: /((http(s)?:\/\/)?)(www\.)?((vimeo\.com\/)|(youtube\.com\/)|(youtu.be\/))[\S]+/,
+	                message: 'This is not a valid YouTube or Vimeo URL'
+	            },	            
+                remote: {
+	                        message: 'This video is already uploaded by another user',
+	                        data: function(validator, $field, value) {
+	                            return {
+	                            	videourl: validator.getFieldElements('linkedurl').val()
+	                            };
+	                        },
+	                        url: '/rest-validation/upload/duplicate/video-url',
+	                        type:  [[${_csrf.token}]]
+	                }  		            
+        
+            }
+        },
+        "description": {
+            validators: {
+                notEmpty: {
+                    message: 'Enter a short description'
+                }
+            }
+        },
+        "category.id": {
+            validators: {
+                notEmpty: {
+                    message: 'Category is required'
+                }
+            }
+        }
+    }
+	});	
+
+
+
+});	
+
+
+/*]]>*/
+</script>   
+
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+           
+           
+           
+           
+$( document ).ready(function() {
+	
+	
+	
+	//SET MARKER IMAGE
+	terrabisApp.googleMarkerCenterMapImgURL = [[@{'/images/map-marker-center.png'}]];
+	
+	
+	//INIT  TAG CLOUD
+	
+	tagwords = [[${tagDTOList}]];
+	
+	$('#tagcloud').jQCloud(tagwords, {
+  		shape: 'rectangular'
+	});
+	
+
+	//CREATE GOOGLE MAP
+	terrabisApp.globalMap = createMapBasedOnSearchResult([[${GMAPRESULT}]],[[${PERS.googleMapType}]]);
+	//CREATE MARKER
+	createMapCenterMarker(true,true);
+
+	
+	//SET LINK FLAG TO FALSE
+	$('#link').val("false");
+
+
+	//INI LAT AND LONG SEARCH LOCATION ON CLICK
+	$('#footageloctxt').val([[${GMAPRESULT.address}]]);
+	$('#footagelocbutton').click(function()	{	searchLocation();});
+
+	//ALSO LISTEN TO KEY PRESS EVENT AND IF ENTER ALSO SEARCH LOCATION
+	 $('#footageloctxt').keypress(function(event) {
+		 if ( event.which == 13 ) {
+		     event.preventDefault();
+		     searchLocation();
+		  };		 
+	 });
+
+
+	//ALSO LISTEN TO KEY PRESS EVENT AND IF ENTER ADD TAG
+	 $('#tagsfilter').keypress(function(event) {
+		 if ( event.which == 13 ) {
+			 var tagfilter = $('#tagsfilter').val();
+		     event.preventDefault();
+		     addTag(tagfilter);
+		     $('#tagsfilter').val(''); 
+		  };		 
+	 });
+
+	
+	
+	
+
+var searchLocationCallBack = function(data, status, xhr) {
+			
+			var GMAPRESULT = JSON.parse(data.responseText);
+			
+			var latitude = 0;
+			var longitude = 0;
+			
+			if(!GMAPRESULT.emptyStatus) {
+				latitude = GMAPRESULT.location.lat;
+				longitude = GMAPRESULT.location.lng;
+			}
+			else {
+				$('#latitude').val("0");
+				$('#longitude').val("0");
+			}
+			$('#latitude').val(latitude);
+			$('#longitude').val(longitude);
+			
+			
+			//CREATE MAP
+			terrabisApp.globalMap = createMapBasedOnSearchResult(GMAPRESULT,[[${PERS.googleMapType}]]);
+			
+			//CREATE MARKER
+			createMapCenterMarker(true,true);
+
+			//centerMap(latitude,longitude);
+			//moveMapCenterMarker(latitude,longitude);
+			//terrabisApp.globalMap.setZoom(GMAPRESULT.zoomlevel);
+			
+			
+
+};
+
+
+
+function searchLocation() {
+	
+	  var footageloctxt =  $('#footageloctxt').val();
+	  var _csrf_token = [[${_csrf.token}]];
+	  var _csrf_param_name = [[${_csrf.parameterName}]];
+
+	 //SEND BOUNDS OBJECT
+     var queryData = {
+    		 	 querytxt: footageloctxt
+      };  
+
+	  $.ajax({ 
+		    url:  [[@{'/rest/map-location/search/'}]], 
+		    type: 'POST', 
+		    dataType: 'json',
+		    contentType: "application/json; charset=utf-8",
+		    cache: false, // Force requested pages not to be cached by the browser
+		    processData: false, // Avoid making query string instead of JSON		        		    
+		    data: JSON.stringify(queryData),
+		    beforeSend: function (request)
+			{
+				request.setRequestHeader("X-CSRF-TOKEN", _csrf_token);
+			},
+		    complete: searchLocationCallBack,
+		    error: function (xhr, status, error) {
+		        console.log("footagelocbutton_Clicked:ERROR:"+JSON.stringify(xhr));
+		        console.log("footagelocbutton_Clicked:"+JSON.stringify(error));
+		    }
+		});	
+	
+}
+
+
+
+
+
+});	
+
+
+
+
+/*]]>*/
+</script>   
+
+
+
+
+
+
+
+
+<script th:src="@{/js/video-upload-index.js}" src="../static/js/video-upload-index.js"></script>  
+
+
+
+</section>      
+  </body>
+</html>  	  

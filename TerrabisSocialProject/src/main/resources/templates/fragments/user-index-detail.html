@@ -1,0 +1,302 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+			<!-- SMALL AVATAR -->
+			<div class="panel widget bg-gray w-XXXS h-XXXS" th:fragment="small-avatar(user,fasize)">
+			   <div class="panel-body text-center">
+						<a th:href="@{'/user-' + ${user.UUID}}">
+						<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o text-gray-dark"></span>
+						<img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb64" />
+			          </a>
+			      <h4 class="mt0 h4 text-bold"><span th:text="${user.username}"></span></h4>
+			   </div>
+			</div>
+
+
+
+                  <!-- EDIT AVATAR -->
+                  <div class="panel widget bg-info-dark" th:fragment="edit-avatar(user,fasize)">
+                     <div class="panel-body text-center">
+<!-- 
+                           <div class="text-center">
+                              <div class="radial-bar radial-bar-40 radial-bar radial-bar-danger m0">
+                                 <img th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png">
+                              </div>
+                              <p>
+                                 <strong>40%</strong>
+                                 <span>complete</span>
+                              </p>
+   							</div>
+   							</div>	
+ -->                              
+ 
+ 							<div sec:authorize="isAuthenticated()">
+ 							
+ 							<a th:if="${user.id==#authentication.principal.user.id}" th:href="@{'/user/settings/index?view=avatar&openuploadmodal=true'}">
+ 							<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o text-gray-dark"></span>
+ 							
+                              	
+<!--                              <img th:if="${avatarDTO.imagebase64==null}" th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png" class="thumb240" style="background:none;"/>
+ -->
+ 
+                              
+                            <img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb200" />
+                            </a>
+                            
+ 
+ 							<a th:if="${user.id!=#authentication.principal.user.id}">
+ 							<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o text-gray-dark"></span>
+ 							
+                              	
+<!--                              <img th:if="${avatarDTO.imagebase64==null}" th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png" class="thumb240" style="background:none;"/>
+ -->
+ 
+                              
+                            <img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb200" />
+                            </a>
+ 
+                            
+                            
+                            </div>
+                          
+							<div sec:authorize="isAnonymous()">
+ 							<a>
+ 							<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o text-gray-dark"></span>
+ 							
+                              	
+<!--                              <img th:if="${avatarDTO.imagebase64==null}" th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png" class="thumb240" style="background:none;"/>
+ -->
+ 
+                              
+                            <img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb200" />
+                            </a>
+                            </div>
+
+                            
+                            
+                        <h4 class="mt0 h1 text-uppercase text-gray"><span th:text="${user.username}"></span></h4>
+<!--                          <p class="m0 h4 text-inverse"> -->
+<!--                            <em class="fa fa-fw fa-map-marker"></em>San Francisco, California</p> -->
+                        <div class="clearfix">
+                              <a  th:href="@{'/user-' + ${user.UUID}+'/followers'}" th:if="${user.followerscount>0}"><span class="pull-left text-gray h4 text-uppercase"  th:text="${user.followerscount+' followers'}"></span></a>
+                           <a  th:href="@{'/user-' + ${user.UUID}+'/following'}" th:if="${user.followingcount>0}"><span class="pull-right text-gray h4 text-uppercase" th:text="${user.followingcount+' following'}"></span></a>
+                        </div> 
+                     </div>
+                  </div>
+
+
+
+
+                  <!-- AVATAR -->
+                  <div class="panel widget bg-info-dark" th:fragment="avatar(user,fasize)">
+                     <div class="panel-body text-center">
+<!-- 
+                           <div class="text-center">
+                              <div class="radial-bar radial-bar-40 radial-bar radial-bar-danger m0">
+                                 <img th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png">
+                              </div>
+                              <p>
+                                 <strong>40%</strong>
+                                 <span>complete</span>
+                              </p>
+   							</div>
+   							</div>	
+ -->                              
+ 							<a th:href="@{'/user-' + ${user.UUID}}">
+ 							<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o text-gray-dark"></span>
+ 							
+                              	
+<!--                              <img th:if="${avatarDTO.imagebase64==null}" th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png" class="thumb240" style="background:none;"/>
+ -->
+ 
+                              
+                            <img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb200" />
+                            </a>
+                          
+                            
+                            
+                        <h4 class="mt0 h1 text-uppercase text-gray"><span th:text="${user.username}"></span></h4>
+ <!--                         <p class="m0 h4 text-inverse"> -->
+<!--                            <em class="fa fa-fw fa-map-marker"></em>San Francisco, California</p> -->
+                        <div class="clearfix">
+<!--                               <a   th:if="${user.followerscount!=null}" th:href="@{'/user-' + ${user.UUID}+'/followers'}"><span class="pull-left text-gray h4 text-uppercase"  th:text="${user.followerscount+' followers'}"></span></a>
+                           <a  th:if="${user.followingcount!=null}" th:href="@{'/user-' + ${user.UUID}+'/following'}"><span class="pull-right text-gray h4 text-uppercase" th:text="${user.followingcount+' following'}"></span></a> -->
+                        </div> 
+
+<!--                         <p class="m0 h4 text-gray">
+                           <em class="fa fa-fw fa-map-marker"></em>San Francisco, California</p>
+                        <div class="clearfix">
+                           <div class="pull-left text-gray h4">15k Likes</div>
+                           <div class="pull-right text-gray h4">100 Videos</div>
+                        </div> -->
+                     </div>
+                  </div>
+
+
+
+			<!--  HEADING WITH AVATAR -->	         
+                    <div class="row" th:fragment="header-with-avatar(title,iconvar,fasize)">
+                             <div class="col-md-8 col-xs-8 col-sm-8">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/user-' + ${userDTO.UUID}}" class="text-info">#<span  th:text="${userDTO.shortdesc}"></span></a>/_<span  th:text="${title}"></span></span>
+                           </div>  
+                           <div class="col-md-4 col-xs-4 col-sm-4">
+								<div th:replace="/fragments/user-index-detail :: avatar(fasize=${fasize})"></div>	                       
+	                       </div>
+                           
+                    </div>
+            <!-- HEADING -->
+
+
+			<!--  HEADING WITH AVATAR AND MAP -->	         
+                    <div class="row" th:fragment="header-with-avatar-and-map(title,iconvar,fasize)">
+                             <div class="col-md-8 col-xs-8 col-sm-8">
+                              <div class="row">
+                              <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/user-' + ${userDTO.UUID}}" class="text-info">#<span  th:text="${userDTO.shortdesc}"></span></a>/_<span  th:text="${title}"></span></span>
+                           	 </div>
+                           	 </div>
+                              <div class="row mt-lg">
+                              <div class="col-md-12 col-xs-12 col-sm-12">
+								<!-- MAP -->
+								<div id="googlemap" class="w-XXXL h-MD"></div>
+			               	 </div>
+                           	 </div>
+                           </div>  
+                           <div class="col-md-4 col-xs-4 col-sm-4">
+								<div th:replace="/fragments/user-index-detail :: avatar(fasize=${fasize})"></div>	                       
+	                       </div>
+                           
+                    </div>
+            <!-- HEADING -->
+
+
+
+
+			<!--  HEADING -->	         
+                    <div class="row" th:fragment="header(title,iconvar)">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/user-' + ${userDTO.UUID}}" class="text-info">#<span  th:text="${userDTO.shortdesc}"></span></a>/_<span  th:text="${title}"></span></span>
+                           </div>  
+                    </div>
+            <!-- HEADING -->
+            
+    		
+    		<!--  USER INDEX HEADING -->	         
+                    <div class="row" th:fragment="header-user-index(title,iconvar)">
+                              <div class="col-md-4 col-xs-12 col-sm-12">
+   				  					<span class="text-gray text-bold h1" th:text="${{userDTO.shortdesc} + '&#146;s Profile'}">User</span>   <br/>
+   				  					                
+		                  <!--  FOLLOW BUTTONS -->
+		                  <div th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id!=userDTO.id)}" class="pull-left" th:replace="/fragments/video-grid-view ::follow-user-btns(user=${userDTO},isFollowing=${ISFOLLOWINGUSER})"></div>
+
+	     
+                           </div>
+                           
+
+                              <div class="col-md-8 col-xs-12 col-sm-12 text-right">
+                                      <div th:replace="/fragments/adverts :: user-index"></div>
+                                      
+                           		</div>
+                           
+                           <!-- FOLLOW  -->
+                             <div class="col-md-2 col-xs-12 col-sm-12">
+<!--                             <div class="form-group pull-right" th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id!=userDTO.id)}">
+			                          <a th:href="@{'/user-' + ${#authentication.principal.user.UUID} + '/follow'}" class="btn btn-labeled  btn-green">
+			                           <span class="btn-label pull-left"><i class="fa fa-smile-o  fa-2x"></i>
+			                           </span>
+			                               <span class="h4 mt-sm text-uppercase text-bold pull-left">Follow&nbsp;&nbsp;</span>
+			                           </a>
+			                </div>  -->
+			                <!-- SETTINGS  -->
+<!--                	   				<div class="form-group pull-right" th:if="${(#authorization.expression('isAuthenticated()')) and (#authentication.principal.user.id==userDTO.id)}">
+			                          <a th:href="@{'/user/settings/index?view=profile'}" class="btn btn-labeled  btn-inverse">
+			                           <span class="btn-label pull-left"><i class="fa fa-cog fa-2x"></i>
+			                           </span>
+			                               <span class="h3 mt-sm text-uppercase text-bold pull-left">Settings&nbsp;&nbsp;</span>
+			                           </a>
+			                   </div>      -->	                          
+			                
+			                
+			                </div>   
+                            
+                           
+                    </div>
+            <!-- HEADING -->
+            
+                    
+            
+            
+            
+ 
+  
+			<!--  HEADING -->	         
+                    <div class="row" th:fragment="user-settings-index(title,iconvar)">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/user-' + ${userDTO.UUID}}" class="text-info">#<span  th:text="${userDTO.shortdesc}"></span></a>/_<span  th:text="${title}"></span></span>
+                           </div>  
+                    </div>
+            <!-- HEADING -->
+
+
+
+			<!--  HEADING -->	         
+                    <div class="row" th:fragment="admin-video-settings-edit(title,iconvar)">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/admin/videos/view:'+${PERS.view}+'/filter:'+${PERS.filter}}" class="text-info">#<span>administration</span></a>/<span>_video settings</span>:<span  th:text="${title}"></span></span>
+                           </div>  
+                    </div>
+            <!-- HEADING -->  
+
+			<!--  HEADING -->	         
+                    <div class="row" th:fragment="video-settings-edit(title,iconvar)">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/video-organizer/view:'+${PERS.view}+'/filter:'+${PERS.filter}}" class="text-info">#<span>video organizer</span></a>/<span>_video settings</span>:<span  th:text="${title}"></span></span>
+                           </div>  
+                    </div>
+            <!-- HEADING -->  
+  
+			<!--  HEADING -->	         
+                    <div class="row" th:fragment="video-organizer-header(title,iconvar,selview)">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+	                              <span th:class="@{'fa '+ ${iconvar} + ' fa-d15x text-bold text-left text-info'}"></span>
+	                              <span class="h3 text-bold text-left"><a th:href="@{'/video-organizer/view:videos/filter:all'}" class="text-info">#<span>video organizer</span></a>/_<span  th:text="${title}"></span></span>
+                           </div>  
+                           
+<!-- 			              <div class="col-md-12 col-sm-12 col-xs-12" th:if="${selview=='videos'}">	
+			    						 <span class="h4 text-bold text-gray text-uppercase pull-left">YOUR OWN VIDEOS. YOU MAY EDIT YOUR VIDEOS, ADD THEM TO A PLAYLIST OR EVEN DELETE THEM.</span>
+			    
+				         </div>  
+
+			              <div class="col-md-12 col-sm-12 col-xs-12" th:if="${selview=='favoritesbucket'}">	
+			    						 <span class="h4 text-bold text-gray text-uppercase pull-left">YOUR LIST OF FAVORITES. YOU MAY ADD VIDEOS TO A PLAYLIST OR TO 'WATCHLATER' COLLECTION.</span>
+			    
+				         </div>  
+
+		              <div class="col-md-12 col-sm-12 col-xs-12" th:if="${selview=='watchlater'}">	
+			    						 <span class="h4  text-bold text-gray text-uppercase pull-left">A SPECIAL COLLECTION OF VIDEOS TO WATCH IN THE FUTURE.</span>
+			    
+				         </div>  
+		              <div class="col-md-12 col-sm-12 col-xs-12" th:if="${selview=='playlists'}">	
+			    						 <span class="h4 text-bold text-gray text-uppercase pull-left">YOUR PERSONAL VIDEO PATHS. MODIFY THEM, REMOVE THEM ENTIRELY OR REMOVE SOME ITS VIDEOS.</span>
+			    
+				         </div>                             
+ -->                    </div>
+            <!-- HEADING -->  
+  
+
+
+</body>
+</html>
+
+

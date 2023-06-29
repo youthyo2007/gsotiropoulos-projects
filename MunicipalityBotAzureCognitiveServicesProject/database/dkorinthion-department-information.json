@@ -1,0 +1,841 @@
+[
+    {
+      "DeptId": "1",
+      "Name": "Central Protocol of the Municipality of Corinthia",
+      "NameGr": "Κεντρικό Πρωτόκολλο Δήμου Κορινθίων",
+      "Type": "department",
+      "Tags": [ "protocol", "protocol department city hall","protocol department town hall","central protocol"],
+      "Address": {
+        "StreetAddress": "Κολιάτσου 32",
+        "City": "Κόρινθος",
+        "CityEn": "Corinth",
+        "PostalCode": "20100",
+        "Country": "GR"
+      },
+      "Contact": {
+        "phone1": "2741061000",
+        "phone2": "2741061001",
+        "email": "protocol@korinthos.gr"
+      },
+      "Location": {
+        "type": "Point",
+        "coordinates": [ -73.975403, 40.760586 ]
+      }
+    },
+
+
+
+  {
+    "DeptId": "2",
+    "Name": "Department of Revenue and Municipal Property of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Εσόδων και Δημοτικής Περιουσίας Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "revenue", "revenue department","Revenue and Municipal Property"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Παναγιώτα",
+      "surname": "Λέγγα",
+      "email": "p.legga@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361076",
+      "phone2": "2741361057",
+      "email": "revenue@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "3",
+    "Name": "Department of Technical Projects and Studies of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Τεχνικών Έργων και Μελετών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "technical projects", "technical projects and studies","technical works","technical constructions"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Νικόλαος",
+      "surname": "Κουίνης",
+      "email": "n.koyinis@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362831",
+      "phone2": "2741362832",
+      "email": "technicalworks@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "4",
+    "Name": "Department of Urban Planning of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Πολεοδομίας Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "urban planning", "urban planning department", "town planner", "town planning"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Τάκης",
+      "surname": "Δεληγιώργης",
+      "email": "p.deligiorgis@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362822",
+      "phone2": "2741362842",
+      "email": "poleodomia@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+
+  {
+    "DeptId": "5",
+    "Name": "Department of Legality Control  of Constructions And Arbitrary of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Ελέγχου Νομιμότητας Κατασκευών και Αυθαιρέτων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "legality control", "legality control of constructions and arbitrary department"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Σταυρούλα",
+      "surname": "Κούβελα",
+      "email": "s.kouvela@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362825",
+      "phone2": "2741362826",
+      "email": "poleodomia_legality@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "6",
+    "Name": "Department of Ιnformation and Communication of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Πληροφορικής και Επικοινωνιών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "information and communication", "information and communication department", "it"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Έυη",
+      "surname": "Παντελέων",
+      "email": "evi.panteleon@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361079",
+      "phone2": "2741361053",
+      "email": "it@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "7",
+    "Name": "Department of Supplies and Services of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Προμηθειών και Υπηρεσιών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "supplies and services", "supplies and services department", "procurement department"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Ελένη",
+      "surname": "Σαββανού",
+      "email": "e.savanou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361009",
+      "phone2": "2741361082",
+      "email": "supplies@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "8",
+    "Name": "Department of Works Maintenance of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Συντήρησης Έργων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "aftepistasia", "maintenance department", "works maintenance department", "self - employment", "self employment"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Νικόλαος",
+      "surname": "Κουίνης",
+      "email": "n.koyinis@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362831",
+      "phone2": "27413 62837",
+      "email": "aftepistasia@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "9",
+    "Name": "Department of Local Development of the Municipality of Corinthia",
+    "NameGr": "Διεύθυνση Τοπικής Ανάπτυξης Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "local development", "local development department", "tourist development"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Γαρυφαλιά",
+      "surname": "Χριστοπούλου",
+      "email": "g.christopoulou@korintos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362806",
+      "phone2": "2741362806",
+      "email": "localdevelopment@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "10",
+    "Name": "Department of Local Development of the Municipality of Corinthia",
+    "NameGr": "Διεύθυνση Τοπικής Ανάπτυξης Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "local development", "local development department", "touristy development"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Γαρυφαλιά",
+      "surname": "Χριστοπούλου",
+      "email": "g.christopoulou@korintos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362806",
+      "phone2": "2741362806",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "11",
+    "Name": "Department of Trade and Services of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Εμπορίου και Υπηρεσιών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "trade and services development", "commerce","trade and services", "public markets"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Στυλλιανή",
+      "surname": "Κόλλια",
+      "email": "s.kollia@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362846",
+      "phone2": "2741362846",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "12",
+    "Name": "Department of Recycling of the Municipality of Corinthia",
+    "NameGr": "Διεύθυνση Καθαριότητας και Ανακύκλωσης Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "recycling department", "recycling", "cleanliness","cleaning"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Ιωάννης",
+      "surname": "Τσολάκης",
+      "email": "i.tsolakis@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741027004",
+      "phone2": "2741074100",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "13",
+    "Name": "Department of Cleanliness of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Καθαριότητας Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "cleanliness department", "cleanliness", "garbage collection","rubbish","cleaning"],
+    "Address": {
+      "StreetAddress": "Αδειμάντου και Σισύφου",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": " Σωτήριος",
+      "surname": "Σακαρέλης",
+      "email": "s.sakarelis@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741027004",
+      "phone2": "2741074100",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "14",
+    "Name": "Department of Vehicles of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Οχημάτων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "vehicles department", "vehicles"],
+    "Address": {
+      "StreetAddress": "Αδειμάντου και Σισύφου",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": " Παναγιώτης",
+      "surname": "Μάρκου",
+      "email": "p.markou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741074444",
+      "phone2": "2741074100",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "15",
+    "Name": "Department of Environmment and Civil Protection of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Περιβάλλοντος Και Πολιτικής Προστασίας Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "environment and civil protection department", "environment","civil protection"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": " Ουρανία",
+      "surname": "Σούκουλη",
+      "email": "o.soukouli@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362843",
+      "phone2": "2741027544",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "16",
+    "Name": "Department of Green of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Πρασίνου Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "green department", "green","trees","environment"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": " Βασίλης",
+      "surname": "Δημόπουλος",
+      "email": "vp.dimopoulos@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362843",
+      "phone2": "2741027544",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "17",
+    "Name": "Department of Social Protection of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Κοινωνικής Προστασίας Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "social protection department", "welfare","social services","providence services", "allowance"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": " Αναστασία",
+      "surname": "Σπυροπούλου",
+      "email": "a.spiropoulou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362113",
+      "phone2": "2741362114",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "18",
+    "Name": "Department of Education and Lifelong Learning of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Παιδείας και Δια Βίου Μάθησης Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "education and lifelong learning department", "education","lifelong learning","school committees","school boards","school"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Ρούλα",
+      "surname": "Δελφίνη",
+      "email": "r.delfini@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741376353",
+      "phone2": "2741376353",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "19",
+    "Name": "Department of Culture and Sports of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Πολιτισμού και Αθλητισμού  Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "culture and sports department", "culture","sports"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Μαρία",
+      "surname": "Ρουσινού",
+      "email": "m.rousinou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361022",
+      "phone2": "2741361022",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "20",
+    "Name": "Mayors Office of the Municipality of Corinthia",
+    "NameGr": "Γραφείο Δημάρχου Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "mayor's office", "mayor","mayor's"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "-",
+      "surname": "-",
+      "email": "grafeiodimarxou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361001",
+      "phone2": "27413-61041",
+      "email": "grafeiodimarxou@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "21",
+    "Name": "Press Office of the Municipality of Corinthia",
+    "NameGr": "Γραφείο Τύπου Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "press office", "press"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "-",
+      "surname": "-",
+      "email": "grafeiotypou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361045",
+      "phone2": "2741361045",
+      "email": "grafeiotypou@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "22",
+    "Name": "Municipal Register & Status Department of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Αστικής και Δημοτικής Κατάστασης Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "municipal register", "municipal status","municipal register office"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Παρασκευή",
+      "surname": "Σουρτζίδη",
+      "email": "p.sourtzidi@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361029",
+      "phone2": "2741361035",
+      "email": "dimotologio@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "23",
+    "Name": "Register Department of the Municipality of Corinthia",
+    "NameGr": "Ληξιαρχείο Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "register department", "register","register office"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Αθανάσιος",
+      "surname": "Μανάρας",
+      "email": "a.manaras@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361037",
+      "phone2": "-",
+      "email": "lixiarxeio@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "24",
+    "Name": "Financial and Economic Services Department of the Municipality of Corinthia",
+    "NameGr": "Διεύθυνση Οικονομικών Υπηρεσιών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "financial and economic services department", "financial services","economic services"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Μαρία",
+      "surname": "Πίτσα",
+      "email": "m.pitsa@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361008",
+      "phone2": "-",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "25",
+    "Name": "Department of Expenses of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Εξόδων  Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "expenses department", "expenses"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Κωνσταντίνα",
+      "surname": "Μπόμπολα",
+      "email": "k.bobola@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361018",
+      "phone2": "2741361092",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "26",
+    "Name": "Treasury Services Department  of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Ταμειακών Υπηρεσιών Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "treasury services department", "treasury services","cash services"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Χριστίνα",
+      "surname": "Σταθοπούλου",
+      "email": "c.stathopoulou@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361010",
+      "phone2": "2741361014",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "27",
+    "Name": "Human Resources Department  of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Ανθρωπίνων Πόρων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "human resources management", "human resources","personnel"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Μαρία",
+      "surname": "Μπαρμπαρούση",
+      "email": "m.barbarousi@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361031",
+      "phone2": "2741361081",
+      "email": "humanresources@korinthos.gr"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "28",
+    "Name": "Department of Elected Bodies of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Αιρετών Οργάνων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "elected bodies department", "elected bodies"],
+    "Address": {
+      "StreetAddress": "Κολιάτσου 32",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Ευτυχία",
+      "surname": "Δελή",
+      "email": "e.deli@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741361003",
+      "phone2": "2741361068",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "DeptId": "29",
+    "Name": "Department of Εlectromechanical Works and Ιnstallations of the Municipality of Corinthia",
+    "NameGr": "Τμήμα Ηλεκτρομηχανολογικών Εγκαταστάσεων Δήμου Κορινθίων",
+    "Type": "department",
+    "Tags": [ "electromechanical department", "electromechanical"],
+    "Address": {
+      "StreetAddress": "Δημοκρατίας 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20131",
+      "Country": "GR"
+    },
+    "Head": {
+      "name": "Έλη",
+      "surname": "Καμτσιώρα",
+      "email": "e.kamtsiora@korinthos.gr"
+    },
+    "Contact": {
+      "phone1": "2741362838",
+      "phone2": "-",
+      "email": "-"
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  }
+
+]

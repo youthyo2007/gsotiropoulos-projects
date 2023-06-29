@@ -1,0 +1,190 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-statistics-video">
+  <head>
+    <title>Terrabis - Statistics:Video Traffic</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+
+         <div class="content-wrapper">
+                     <div class="content-heading">
+					<span class="text-gray h3">Statistics:Videos:Video Perfomance Dashboard</span>            
+            		</div>
+  
+  
+           	<div class="row" th:replace="/fragments/stats-grid-view :: filter(STATSQUERYFRM=${STATSQUERYFRM},actionLink=@{'/statistics/videos/dashboard-2/filter'})">              
+					</div>
+  
+
+          			<div class="row mt-lg">  
+ 										         		            
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Published</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;" th:text="${stDTO.videostatus.status_PUBLISHED}"></span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Rejected</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;" th:text="${stDTO.videostatus.status_REJECTED}"></span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Broken</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;" th:text="${stDTO.videostatus.health_BROKEN}"></span>
+								   </div>
+							</div>							
+							
+								
+            		</div>   
+   
+          			<div class="row">  
+ 						<div id="lineChartPublishedVsRejectedVideosPerDay"></div>
+            		</div>
+
+
+  
+         		       <div class="row mt-lg">  
+
+   						              <div class="col-md-6 col-sm-12">	
+					 <span class="text-gray" style="font-size: 48px;">Top 10 Played</span><br/><br/>        
+				    <table class="table table-striped">
+                              <!-- <thead>
+                                 <tr>
+                                    <th><span class="text-gray"></span></th>
+                                     <th><span class="text-gray">video</span></th>
+                                    <th><span class="text-gray">plays</span></th>
+                                 </tr>
+                              </thead>-->
+                              <tbody>
+                              	<tr style="background-color: #363e5b;"  th:each="vid, iterStat : ${stDTO.dash1DTO.topPlayedVideoList}">
+								  <td><span class="text-gray h1" th:text="${iterStat.index+1}"></span></td>
+		                           <td><a th:href="@{'/video/'+${vid.UUID}}"><span class="text-gray h4" th:text="${vid.title}"></span></a></td>
+								   <td><span class="text-gray h4"  th:text="${vid.total}"></span></td>
+								</tr>
+								</tbody>
+					</table>
+						                    </div>
+											
+   						              <div class="col-md-6 col-sm-12">
+									            <div id="pieChartVideosPerStatus"></div>
+									            
+          			<div class="row mt-lg">  <br/><br/><br/> <br/><br/>
+ 										         		            
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Plays</span><br/>    
+    		        						<span class="text-gray h3"  th:text="${stDTO.dash1DTO.videosPerformanceStats.playcount}"></span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Likes</span><br/>    
+    		        						<span class="text-gray h3" th:text="${stDTO.dash1DTO.videosPerformanceStats.likecount}"></span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Shares</span><br/>    
+    		        						<span class="text-gray h3" th:text="${stDTO.dash1DTO.videosPerformanceStats.sharecount}"></span>
+								   </div>
+							</div>							
+							
+								
+            		</div>   									            
+									            
+						                    </div>											
+
+		       			</div> 	
+		       									   
+				
+				<br/><br/><br/>
+				
+				
+				
+					<div class="row mt-lg">  
+         		            <div class="col-md-12 col-sm-12 text-center">
+				<span class="text-gray"  style="font-size: 48px;">Video Play Activity Chart</span><br/>    
+					   </div>											
+
+		       			</div> 	
+				
+				    <div class="row mt-lg">  
+ 						<div id="lineChartVideoPlaysPerDay"></div>
+            		</div>
+				
+				
+
+   				
+				
+		       		      
+      
+						  
+		   
+		       		       
+		       		       
+		       		       
+		       
+		       
+		       			            
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+	<script src="../static/js/knockout-min.js" th:src="@{/js/knockout-min.js}"> </script> 
+	 <script src="../static/js/globalize.min.js" th:src="@{/js/globalize.min.js}"> </script> 
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/dx-chart/dx.chartjs.js" th:src="@{/vendor/dx-chart/dx.chartjs.debug.js}"></script>     
+	<script src="../static/js/dx-chart-assistant.js" th:src="@{/js/dx-chart-assistant.js}"></script>     
+	<script src="../static/js/statistics-video-view.js" th:src="@{/js/statistics-video-view.js}"> </script> 
+	   <script src="../static/js/statistics-filter.js" th:src="@{/js/statistics-filter.js}"> </script>	
+	
+
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+
+		  
+		  
+
+		 
+		  var lineChartPublishedVsRejectedVideosPerDay = multiLineChartOptions(JSON.parse([[${stDTO.dash1DTO.lineChartPublishedVsRejectedVideos}]]),' Published Vs Rejected Line Graph',['Published','Rejected'],150);
+		  $("#lineChartPublishedVsRejectedVideosPerDay").dxChart(lineChartPublishedVsRejectedVideosPerDay);
+		  
+		  var lineChartVideoPlaysPerDay = lineChartOptions(JSON.parse([[${stDTO.dash1DTO.lineChartPlaysPerDay}]]),'Daily Line Graph','Video Plays',10000);
+		  $("#lineChartVideoPlaysPerDay").dxChart(lineChartVideoPlaysPerDay);	
+		  
+		  
+		  var pieChartVideosPerStatus = pieChartOptions(JSON.parse([[${stDTO.dash1DTO.pieChartVideosPerStatus}]]),'Videos Per Status');
+		  $("#pieChartVideosPerStatus").dxPieChart(pieChartVideosPerStatus);		  		  
+				  
+ 		
+	 
+			  
+		
+
+		});    	  
+  	  
+  	  
+	
+	/*]]>*/
+	</script> 
+
+    </section>
+
+
+
+</body>
+</html>  
+

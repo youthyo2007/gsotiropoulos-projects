@@ -1,0 +1,125 @@
+[
+  {
+    "TouristId": "1",
+    "Name": "Soul Kitchen",
+    "NameGr": "Soul Kitchen",
+    "Type": [ "restaurant", "cafe","wine bar"],
+    "Cuisine": [ "modern", "steak","burger","sushi"],
+    "Amenities": [ "garden", "air conditioning"],
+    "Address": {
+      "StreetAddress": "Κολοκοτρώνη 3",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20100",
+      "Country": "GR"
+    },
+    "Contact": {
+      "phone1": "2741020374",
+      "phone2": "",
+      "email": ""
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+  {
+    "TouristId": "2",
+    "Name": "Arhontiko",
+    "NameGr": "Αρχοντικό",
+    "Type": [ "restaurant"],
+    "Cuisine": [ "greek", "steak","traditional"],
+    "Amenities": [ "garden", "air conditioning","parking", "playground"],
+    "Address": {
+      "StreetAddress": "Ερυθραίας",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20100",
+      "Country": "GR"
+    },
+    "Contact": {
+      "phone1": "2741027968",
+      "phone2": "",
+      "email": ""
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+  {
+    "TouristId": "3",
+    "Name": "Number One - All Day Food",
+    "NameGr": "Number One - All Day Food",
+    "Type": [ "restaurant","fast food"],
+    "Cuisine": [ "greek", "gyros","souvlaki"],
+    "Amenities": [ "air conditioning","pets"],
+    "Address": {
+      "StreetAddress": "Εθνικής Αντιστάσεως 1",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20100",
+      "Country": "GR"
+    },
+    "Contact": {
+      "phone1": "2741085335",
+      "phone2": "",
+      "email": ""
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "TouristId": "4",
+    "Name": "Archaeological Museum of Ancient Corinth",
+    "NameGr": "Αρχαιολογικό Μουσείο Αρχαίας Κορίνθου",
+    "Type": [ "museum","ancient ruins","ancient"],
+    "Cuisine": [ "-"],
+    "Amenities": [ "air conditioning"],
+    "Address": {
+      "StreetAddress": "Αρχ. Κόρινθος 1",
+      "City": "Αρχαία Κόρινθος",
+      "CityEn": "Ancient Corinth",
+      "PostalCode": "20100",
+      "Country": "GR"
+    },
+    "Contact": {
+      "phone1": "2741031207",
+      "phone2": "",
+      "email": ""
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  },
+
+  {
+    "TouristId": "5",
+    "Name": "Municipal Public Art Gallery",
+    "NameGr": "Δημοτική Πινακοθήκη",
+    "Type": [ "gallery","art","public art","public gallery"],
+    "Cuisine": [ "-"],
+    "Amenities": ["air conditioning"],
+    "Address": {
+      "StreetAddress": "Κολοκοτρώνη 4",
+      "City": "Κόρινθος",
+      "CityEn": "Corinth",
+      "PostalCode": "20100",
+      "Country": "GR"
+    },
+    "Contact": {
+      "phone1": "2741020120",
+      "phone2": "",
+      "email": ""
+    },
+    "Location": {
+      "type": "Point",
+      "coordinates": [ -73.975403, 40.760586 ]
+    }
+  }
+
+]

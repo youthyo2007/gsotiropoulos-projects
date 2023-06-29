@@ -1,0 +1,500 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+  <head th:fragment="styles">
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
+
+	<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"></link>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+   
+      
+   
+     <link href="../static/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
+          th:href="@{/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/fullscreenoverlay/css/style5.css"
+          th:href="@{/vendor/fullscreenoverlay/css/style5.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap-social/bootstrap-social.css"
+          th:href="@{/vendor/bootstrap-social/bootstrap-social.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/royalslider/royalslider.css"
+          th:href="@{/vendor/royalslider/royalslider.css}" rel="stylesheet" />
+
+     <link href="../static/vendor/royalslider/rs-default.css"
+          th:href="@{/vendor/royalslider/rs-default.css}" rel="stylesheet" />
+          
+
+     <link href="../static/vendor/jqcloud/dist/jqcloud.min.css"
+          th:href="@{/vendor/jqcloud/dist/jqcloud.min.css}" rel="stylesheet" />
+          
+
+ <link href="../static/vendor/youtube-playlist-player/youtube-video-player.min.css"
+          th:href="@{/vendor/youtube-playlist-player/youtube-video-player.min.css}" rel="stylesheet" />
+	          
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet" />      
+           
+   </head>
+
+   
+   <div th:fragment="scripts">
+   
+
+   
+   
+   
+      <!-- MODERNIZR-->
+    <script src="../static/vendor/modernizr/modernizr.js"
+            th:src="@{/vendor/modernizr/modernizr.js}"></script>   
+            
+<!--     <script src="../static/vendor/jquery/dist/jquery.js"
+            th:src="@{/vendor/jquery/dist/jquery.js}"></script>   
+ -->
+ 
+ 
+    <script src="../static/vendor/jquery-ui-1_11_4/jquery-ui.min.js"
+            th:src="@{/vendor/jquery-ui-1_11_4/jquery-ui.min.js}"></script>   
+                        
+
+
+ 	<!-- FULLSCREEN OVERLAY -->
+    <script src="../static/vendor/fullscreenoverlay/js/classie.js"
+            th:src="@{/vendor/fullscreenoverlay/js/classie.js}"></script>   
+    
+    <!-- FULLSCREEN OVERLAY -->
+    <script src="../static/vendor/fullscreenoverlay/js/overlay.js"
+            th:src="@{/vendor/fullscreenoverlay/js/overlay.js}"></script>   
+    
+    
+
+    <script src="../static/vendor/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/vendor/bootstrap/dist/js/bootstrap.js}"></script>   
+
+    <script src="../static/vendor/parsleyjs/dist/parsley.min.js"
+            th:src="@{/vendor/parsleyjs/dist/parsley.min.js}"></script>   
+
+   
+  
+   
+    <!-- STORAGE API-->
+    <script src="../static/vendor/jQuery-Storage-API/jquery.storageapi.js"
+            th:src="@{/vendor/jQuery-Storage-API/jquery.storageapi.js}"></script>  
+
+    <script src="../static/vendor/jquery.easing/js/jquery.easing.js"
+            th:src="@{/vendor/jquery.easing/js/jquery.easing.js}"></script>   
+
+    <script src="../static/vendor/animo.js/animo.js"
+            th:src="@{/vendor/animo.js/animo.js}"></script>   
+
+    <script src="../static/vendor/slimScroll/jquery.slimscroll.min.js"
+            th:src="@{/vendor/slimScroll/jquery.slimscroll.min.js}"></script>   
+
+    <script src="../static/vendor/screenfull/dist/screenfull.js"
+            th:src="@{/vendor/screenfull/dist/screenfull.js}"></script>   
+<!-- 
+    <script src="../static/vendor/jquery-validation/dist/jquery.validate.js"
+            th:src="@{/vendor/jquery-validation/dist/jquery.validate.js}"></script>   
+
+    <script src="../static/vendor/jquery.steps/build/jquery.steps.js"
+            th:src="@{/vendor/jquery.steps/build/jquery.steps.js}"></script>   
+
+    <script src="../static/js/user-settings-index-wizard.js"
+            th:src="@{/js/user-settings-index-wizard.js}"></script>    -->
+
+
+   <!-- MOMENT JS-->
+    <script src="../static/vendor/moment/min/moment-with-locales.min.js"
+            th:src="@{/vendor/moment/min/moment-with-locales.min.js}"></script>
+
+
+   <!-- XEDITABLE-->
+    <script src="../static/vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"
+            th:src="@{/vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js}"></script>   
+
+    <script src="../static/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"
+            th:src="@{/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"></script>   
+      
+    <script src="../static/vendor/bootstrap-slider/dist/bootstrap-slider.min.js"
+            th:src="@{/vendor/bootstrap-slider/dist/bootstrap-slider.min.js}"></script>   
+
+    <script src="../static/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"
+            th:src="@{/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js}"></script>  
+
+    
+   <script th:src="@{/vendor/umbg-video-player/umbg/jquery.umbg.js}" src="../static/vendor/umbg-video-player/umbg/jquery.umbg.js"></script>
+
+    <script src="../static/vendor/formvalidation-io/dist/js/formValidation.js" th:src="@{/vendor/formvalidation-io/dist/js/formValidation.js}"></script>   
+    <script src="../static/vendor/formvalidation-io/dist/js/framework/bootstrap.js" th:src="@{/vendor/formvalidation-io/dist/js/framework/bootstrap.js}"></script>   
+
+    <script src="../static/vendor/animatedmodal/animatedModal.min.js" th:src="@{/vendor/animatedmodal/animatedModal.min.js}"></script>   
+	
+	<script src="../static/vendor/video-js/dist/video.js" th:src="@{/vendor/video-js/dist/video.js}"></script>
+	   
+	<script src="../static/vendor/jqcloud/dist/jqcloud.min.js" th:src="@{/vendor/jqcloud/dist/jqcloud.min.js}"></script> 
+	<script src="../static/vendor/jquery-bar-rating/dist/jquery.barrating.min.js" th:src="@{/vendor/jquery-bar-rating/dist/jquery.barrating.min.js}"></script> 
+
+	
+
+           
+           
+	<script src="../static/js/map.js" th:src="@{/js/map.js}"> </script> 
+	<script src="../static/js/app.js"  th:src="@{/js/app.js}"></script> 
+	<script src="../static/js/main.js" th:inline="javascript" th:src="@{/js/main.js}"></script>  
+	<script src="../static/js/social-share.js"  th:src="@{/js/social-share.js}"></script> 	
+	<script src="../static/js/rating-video.js"  th:src="@{/js/rating-video.js}"></script> 	
+	<script src="../static/vendor/sweetalert2/dist/sweetalert2.min.js" th:src="@{/vendor/sweetalert2/dist/sweetalert2.min.js}"></script>   
+	
+
+
+<!-- INITIALIZATION OF JAVASCRIPT GLOBAL ARIABLES -->	
+<script th:inline="javascript">
+			/*<![CDATA[*/
+			$(document).ready(function() {
+			
+
+				    //alert('request uri='+[[${#httpServletRequest.requestURI}]]+' end');
+				
+				
+					/**********************  GLOBAL VARIABLES ********************************/	 
+					
+					//DEVICE
+					terrabisApp.tablet = [[${device!=null ? device.tablet : false}]];
+					terrabisApp.normal = [[${device!=null ? device.normal : true}]];
+					terrabisApp.mobile = [[${device!=null ? device.mobile : false}]];
+					
+					
+					
+					
+					terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+					terrabisApp.pageView = [[${execInfo.templateName}]];
+
+					terrabisApp.contextPath = [[${CTXPATH}]];
+				    terrabisApp.csrf_token = [[${_csrf.token}]];
+				    terrabisApp.csrf_param_name = [[${_csrf.parameterName}]];
+				    csrf_token = [[${_csrf.token}]];
+				    csrf_param_name = [[${_csrf.parameterName}]];
+					terrabisApp.googleMapType = [[${PERS.googleMapType}]];
+
+				    
+				    terrabisApp.mapVideoZoomURI = [[@{'/video/map-video-zoom/'}]];
+				    
+
+				    
+				    //DEPRECATED SOON
+/* 				    terrabisApp.viewportChangeURI = [[@{'/rest/mapevent/on-viewportchange/'}]];
+				    terrabisApp.mapeventInitializeURI = [[@{'/rest/mapevent/on-initialize/'}]];
+				    terrabisApp.zoomChangeURI = [[@{'/rest/mapevent/on-zoomchange/'}]]; */
+				    terrabisApp.advSearchURI = [[@{'/rest/map-advanced/search/'}]];
+				    terrabisApp.adminUserURI = [[@{'/admin/user/'}]];
+				    terrabisApp.adminVideoURI = [[@{'/admin/video/'}]];
+				    terrabisApp.mapURI = [[@{'/video/map/normal/_'}]];
+				    terrabisApp.adminEditVideoURI = [[@{'/admin/video-settings/'}]];
+				    terrabisApp.mapLocationSearchURI = [[@{'/rest/map-location/search/'}]];
+				    terrabisApp.videoDataURI = [[@{'/rest/video/'}]];
+				    terrabisApp.fetchAutocompleteVideoTitleURI = [[@{'/rest-data-fetch/autocomplete/video/title/'}]];
+				    terrabisApp.fetchAutocompleteUserNameURI = [[@{'/rest-data-fetch/autocomplete/user/username/'}]];
+				    terrabisApp.videoCollectionDataURI = [[@{'/rest/collection'}]];
+				    terrabisApp.mapDataMarkersURI = [[@{'/rest/map/viewport-markers/'}]];
+				    terrabisApp.mapDataMarkersStrictURI = [[@{'/rest/map/viewport-markers/strict'}]];
+				    terrabisApp.mapDataGridURI = [[@{'/rest/map/viewport-datagrid/'}]];
+				    terrabisApp.videoClaimURI = [[@{'/video/claim/request/'}]];
+				    terrabisApp.userInfoURI = [[@{'/user-'}]];
+				    terrabisApp.videoCollectionDataURI = [[@{'/rest/collection'}]];
+				    terrabisApp.videoRelationsDataURI = [[@{'/rest/video-relations/'}]];				    
+
+				    
+				    
+				    
+				    
+				    
+				    
+				    terrabisApp.paginatorMapURI = [[@{'/rest/paginator/map/'}]];
+				    terrabisApp.paginatorVideoCatalogURI = [[@{'/rest/paginator/video-catalog/'}]];
+				    terrabisApp.paginatorMapListURI = [[@{'/rest/paginator/map-list/'}]];
+				    terrabisApp.paginatorUserVideoCatalogURI = [[@{'/rest/paginator/user/video-catalog/'}]];
+	
+				    terrabisApp.mapPageURI = [[@{'/video/map/normal/_'}]];
+				    terrabisApp.addToWatchLaterURI = [[@{'/rest/collections/watch-later/add/'}]];
+				    terrabisApp.addToFavoritesURI = [[@{'/rest/collections/favorites/add/'}]];
+				    terrabisApp.countVideoPlayURI = [[@{'/rest/video/play/'}]];
+				    terrabisApp.countVideoLikeURI = [[@{'/rest/video/like/'}]];
+				    terrabisApp.rateVideoURI = [[@{'/rest/video/rate/'}]];
+				    terrabisApp.shareVideoURI = [[@{'/rest/video/share/'}]];
+					terrabisApp.successRedirectURI = [[@{'/upload/upload-success'}]] 
+					terrabisApp.uploadFileURL = [[@{'/upload/video-submit/file'}]];
+					terrabisApp.uploadLinkURL = [[@{'/upload/video-submit/link'}]];
+					terrabisApp.uploadIndexURI = [[@{'/upload/video/'}]];
+					terrabisApp.googleMarkerImgSelectedURL = [[@{'/images/markers-list/map-marker-selected.png'}]];
+					terrabisApp.googleMarkerImgURL = [[@{'/images/markers-list/map-marker.png'}]];
+					terrabisApp.googleMarkerPlayImgURL = [[@{'/images/markers-list/map-marker-played.png'}]];
+					terrabisApp.googleMarkerCenterMapImgURL = [[@{'/images/markers-list/map-marker-center.png'}]];
+					terrabisApp.googleMarkerImgDynamicURL = [[@{'/images/markers-list/marker-'}]];
+					terrabisApp.googleMarkerPromoteURL = [[@{'/images/markers-list/marker-promote.png'}]];
+					
+					
+					
+					
+					
+					//terrabisApp.googleMarkerImgURL = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+					
+					
+					
+					//VALIDATION URI
+					terrabisApp.validateRateDuplicateURI = [[@{'/rest-validation/video/duplicate/rating'}]];
+				    
+				    
+					//PERSONALIZATION URI
+					terrabisApp.PERSGoogleMapTypeURI = [[@{'/rest-personalization/google-map/type'}]];
+					
+					
+					//PERSONALIZATION URI
+					terrabisApp.PERSAdvertShownURI = [[@{'/rest-personalization/advert/shown'}]];
+					
+					
+					
+					
+					
+					if(([[${(#authorization.expression('isAuthenticated()'))}]])) {
+					 		//initUploadDropzone();
+					 		//FOR QUICK UPLOAD MODAL
+							terrabisApp.successRedirectURI = [[@{'/upload/upload-success'}]]; 
+							terrabisApp.uploadFileURL = [[@{'/upload/video-submit/file'}]];
+							terrabisApp.uploadLinkURL = [[@{'/upload/video-submit/link'}]];
+							
+							
+					 };
+					
+			
+			
+			
+				/**********************************AUTHENTICATION*************************************/	 
+			    $("#loginbtn").click(ajaxlogin);
+			
+			    function ajaxlogin() {
+
+			        $.ajax({
+			            type: 'POST',
+			            url: '/login',
+			            data: $('#loginform').serialize(),
+			            cache: false,
+			            dataType: "json",
+			            crossDomain: false,
+			            success: function (data) {
+			            	window.location.href = [[@{'/video/map/normal/_'}]]; 
+			            }, 
+			            error: function (data) {
+			            	
+			            	$("#loginformerror").switchClass("hidden", "-", 0, "easeInOutQuad" );
+			            }
+			        });
+			    }
+			
+			});
+			/*]]>*/
+		</script>          
+
+
+
+<!-- GOOGLE ANALYTICS -->
+<script th:inline="javascript">
+/*<![CDATA[*/
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70448643-1', 'auto');
+  ga('send', 'pageview',[[${#httpServletRequest.requestURI}]]);
+  
+/*]]>*/
+</script>          
+ <!-- ga('send', 'pageview',[[${execInfo.templateName}]]); -->
+
+
+<!-- REGISTER FORM VALIDATION -->	
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+           
+           
+           
+           
+           
+      $(document).ready(function() {
+
+    	  var registerFormValidation = $('#registerform').formValidation({
+     	        framework: 'bootstrap',
+     	        icon: {
+     	            valid: 'fa  fa-check',
+     	            invalid: 'fa fa-check fa-remove',
+     	            validating: 'fa fa-refresh'
+     	        },
+     	        fields: {
+     	            username: {
+     	                validators: {
+     	                    notEmpty: {
+     	                        message: 'A nickname is required'
+     	                    },
+     	                    remote: {
+     	                        message: 'The nickname is not available',
+     	                        data: function(validator, $field, value) {
+     	                            return {
+     	                                username: validator.getFieldElements('username').val()
+     	                            };
+     	                        },
+     	                        url: '/rest-validation/registration/duplicate/username',
+     	                        type:  [[${_csrf.token}]]
+     	                    }
+     	                }
+     	            },
+     	           agreewithterms: {
+     	                validators: {
+     	                    notEmpty: {
+     	                        message: 'You have to agree with the terms'
+     	                    }
+     	                }
+     	            },
+     	            email: {
+     	                validators: {
+     	                    notEmpty: {
+     	                        message: 'An active email address is needed'
+     	                    },
+     	                    regexp: {
+     	                        message: 'The value is not a valid email address',
+     	                    	regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$'
+     	                    },
+     	                    remote: {
+     	                        message: 'This email is already registered',
+     	                        data: function(validator, $field, value) {
+     	                            return {
+     	                                username: validator.getFieldElements('email').val()
+     	                            };
+     	                        },
+     	                        url: '/rest-validation/registration/duplicate/email',
+     	                        type:  [[${_csrf.token}]]
+     	                    }     	                    
+     	                }
+     	            },
+     	            "password": {
+     	                validators: {
+     	                    notEmpty: {
+     	                        message: 'You must enter a password'
+     	                    },
+       	                  identical: {
+     	                      field: 'passwordConfirm',
+     	                      message: 'The password and its confirm are not the same'
+     	                  }     	                    
+     	                }
+     	            },
+     	            "passwordConfirm": {
+     	                validators: {
+     	                    notEmpty: {
+     	                        message: 'Please confirm the password '
+     	                    },
+       	                  identical: {
+     	                      field: 'password',
+     	                      message: 'The password and its confirm are not the same'
+     	                  }     	                    
+     	                }
+     	            }
+     	        }
+     	    });	
+     		
+
+    	  
+      });
+
+    	/*]]>*/
+</script> 
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+	
+/******************************************* REST AJAX **********************************************************/
+function restajax(variableURI,formData,functionCallBack) {
+	
+						$.ajax({ 
+		        		    url:  variableURI, 
+		        		    type: 'POST', 
+		        		    dataType: 'json',
+		        		    contentType: "application/json; charset=utf-8",
+		        		    cache: false, // Force requested pages not to be cached by the browser
+		        		    processData: false, // Avoid making query string instead of JSON		        		    
+		        		    data: JSON.stringify(formData),
+		        		    beforeSend: function (request)
+    						{
+        						request.setRequestHeader("X-CSRF-TOKEN", [[${_csrf.token}]]);
+    						},
+    						complete: functionCallBack,
+		        		    error: function (xhr, status, error) {
+		        		        console.log("restajax:ERROR:"+JSON.stringify(xhr));
+		        		        console.log("restajax:ERROR:"+JSON.stringify(error));
+		        		    }
+		        		}); 
+		        		
+		        		
+};
+
+
+
+
+    	/*]]>*/
+</script> 
+	
+
+	
+	
+	
+<script src="../static/js/form-validation.js" th:inline="javascript" th:src="@{/js/form-validation.js}"></script>  
+	
+	
+	           
+
+</div>
+   
+   
+ 
+

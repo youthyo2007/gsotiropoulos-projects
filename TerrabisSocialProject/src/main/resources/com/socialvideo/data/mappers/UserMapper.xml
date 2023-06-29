@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.UserMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.UserDTO" id="UserDTOMedium">
+        <id column="id" property="id"/>
+        <result property="UUID" column="UUID"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="firstname" column="firstname"/>
+        <result property="middlename" column="middlename"/>
+        <result property="email" column="email"/>
+        <result property="picture" column="picture"/>
+        <result property="active" column="active"/>
+        <result property="online" column="online"/>
+        <result property="videoscount" column="videoscount"/>
+        <result property="favoritescount" column="favoritescount"/>
+        <result property="watchlatercount" column="watchlatercount"/>
+        <result property="playlistscount" column="playlistscount"/>
+        <result property="uniqueplacescount" column="uniqueplacescount"/>
+        <result property="folowercount" column="folowercount"/>
+        <result property="ratingscount" column="ratingscount"/>        
+        <result property="folowingcount" column="folowingcount"/>
+        <result property="channelsfolowingcount" column="channelsfolowingcount"/>
+        <result property="communitiesfolowingcount" column="communitiesfolowingcount"/>
+        <result property="tweetscount" column="tweetscount"/>
+        <result property="likescount" column="likescount"/>
+        <result property="playscount" column="playscount"/>
+        <result property="datecreated" column="datecreated"/>
+        <result property="lastlogin" column="lastlogin"/>
+        <result property="datemodified" column="datemodified"/>
+        <result property="tstFlag" column="tstflag"/>
+   		<association property="avatar" column="{userid_fk=id}" javaType="com.socialvideo.data.dto.AvatarDTO" select="com.socialvideo.data.mappers.AvatarMapper.selectUserDTO_Avatar"/>
+    </resultMap> 
+
+
+   <resultMap type="com.socialvideo.data.dto.UserDTO" id="UserDTO" extends="UserDTOMedium">
+        <association property="videoscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserVideos"/>
+        <association property="pendingvideoscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserVideosPending"/>
+        <association property="rejectedvideoscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserVideosRejected"/>
+        <association property="albumscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserAlbums"/>
+        <association property="playlistscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserPlaylists"/>
+        <association property="tweetscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Shares"/>
+        <association property="likescount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Likes"/>
+        <association property="playscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Plays"/>
+        <association property="ratingscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Ratings"/>
+        <association property="favoritescount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserFavoriteVideos"/>
+        <association property="watchlatercount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserWatchLaterVideos"/>
+        <association property="followerscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Followers"/>
+        <association property="followingcount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Following"/>
+        
+     </resultMap> 
+
+
+   <resultMap type="com.socialvideo.data.dto.RoleDTO" id="RoleDTO">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+    </resultMap> 
+
+   <resultMap type="com.socialvideo.data.dto.UserDTOSmall" id="UserDTOSmall">
+        <id column="id" property="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="UUID" column="UUID"/>
+        <association property="avatar" column="{userid_fk=id}" javaType="com.socialvideo.data.dto.AvatarDTO" select="com.socialvideo.data.mappers.AvatarMapper.selectUserDTO_Avatar"/>
+    </resultMap> 
+
+
+
+  <resultMap type="com.socialvideo.data.dto.UserDTO" extends="UserDTO" id="UserDTO-admin">
+        <result property="datenumber" column="datenumber"/>
+        <result property="datestring" column="datestring"/>
+  </resultMap> 
+
+
+   <resultMap type="com.socialvideo.data.dto.UserDTO" id="UserDTO-login">
+        <id column="id" property="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="UUID" column="UUID"/>
+        <collection property="roles" column="{userid_fk=id}" javaType="ArrayList" ofType="RoleDTO" select="selectUserRolesList"/>
+        
+    </resultMap> 
+
+
+	   <resultMap type="com.socialvideo.data.dto.UserDTOSmall" extends="UserDTOSmall" id="UserDTOSmallWithAvatar">
+	       <association property="avatar" column="{userid_fk=id}" javaType="com.socialvideo.data.dto.AvatarDTO" select="com.socialvideo.data.mappers.AvatarMapper.selectUserDTO_Avatar"/>
+	  </resultMap> 
+
+
+
+
+
+
+    <insert id="assignRoleToUser" parameterType="map">
+	    INSERT INTO rolesusers (userid_fk,roleid_fk) VALUES (#{userid},#{roleid})
+    </insert>
+
+
+
+    <select id="selectNotificationDTO_User" parameterType="map" resultMap="UserDTOMedium">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+
+
+    <select id="selectVideoReviewDTO_User" parameterType="map" resultMap="UserDTOMedium">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+
+
+    <select id="selectFollowers" parameterType="map" resultMap="UserDTOSmall">
+        SELECT b.* FROM socialvideo.followers a, users b where a.userfollowedid_fk = #{userid} and a.userid_fk=b.id;
+    </select>
+
+    
+    <select id="selectFollowing" parameterType="map" resultMap="UserDTOSmall">
+        SELECT b.* FROM socialvideo.followers a, users b where a.userid_fk = #{userid} and a.userfollowedid_fk=b.id;
+    </select>
+
+
+    
+
+    <select id="selectVideoDTO_User" parameterType="map" resultMap="UserDTOSmall">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+
+    <select id="selectVideoClaimDTO_User" parameterType="map" resultMap="UserDTOMedium">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+
+
+
+	 <update id="updateLastLoginToNow" parameterType="map">
+	  	UPDATE users a set a.lastlogin = NOW() WHERE a.id = #{userid}   
+	 </update>
+
+
+	 <select id="findUserNames" parameterType="map" resultType="java.lang.String">
+	  	SELECT a.username FROM users a  WHERE 1 = 1 AND a.username LIKE #{username} ORDER BY a.username DESC limit 10   
+	 </select>
+
+    <select id="fetchUserUponAuthentication" parameterType="map" resultMap="UserDTO-login">
+        SELECT a.* FROM users a WHERE a.email = #{email}
+    </select>
+
+
+    <select id="selectUserRolesList" parameterType="map" resultMap="RoleDTO">
+        SELECT a.* FROM roles a, rolesusers b WHERE a.id=b.roleid_fk and b.userid_fk = #{userid_fk}
+    </select>
+
+	<select id="selectCount_UserVideos" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM videos a WHERE a.userid_fk = #{userid_fk} and status = 1  
+	</select>
+	
+	
+	<select id="selectCount_UserVideosPending" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM videos a WHERE a.userid_fk = #{userid_fk} and status = -1
+	</select>
+	
+	
+	<select id="selectCount_UserVideosRejected" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM videos a WHERE a.userid_fk = #{userid_fk} and status = 5
+	</select>
+
+	<select id="selectCount_Likes" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM likesvideos a WHERE a.userid_fk = #{userid_fk}
+	</select>
+	
+
+	<select id="selectCount_Shares" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM shares a WHERE a.userid_fk = #{userid_fk}
+	</select>	
+	
+	
+	<select id="selectCount_Plays" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM playsvideos a WHERE a.userid_fk = #{userid_fk}
+	</select>	
+	
+	<select id="selectCount_Ratings" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM ratings a WHERE a.userid_fk = #{userid_fk}
+	</select>
+	
+		
+	
+
+	<select id="selectCount_UserPlaylists"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collections a WHERE a.userid_fk = #{userid_fk} AND a.type=1
+	</select>
+	
+	<select id="selectCount_UserAlbums"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collections a WHERE a.userid_fk = #{userid_fk} AND a.type=4
+	</select>
+		
+	<select id="selectCount_UserFavoriteVideos" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collectionsvideos a, collections b WHERE b.userid_fk = #{userid_fk} and b.type=3 and a.collectionid_fk=b.id  
+	</select>
+	
+	<select id="selectCount_UserWatchLaterVideos"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collectionsvideos a, collections b WHERE b.userid_fk = #{userid_fk} and b.type=2 and a.collectionid_fk=b.id
+	</select>
+	
+     <select id="selectCount_Followers" parameterType="map" resultType="java.lang.Integer">
+        SELECT count(*) FROM socialvideo.followers a where a.userfollowedid_fk = #{userid_fk};
+    </select>
+
+    <select id="selectCount_Following" parameterType="map" resultType="java.lang.Integer">
+        SELECT count(*) FROM socialvideo.followers a where a.userid_fk = #{userid_fk};
+    </select>
+        
+    
+    
+    <select id="selectCollectionDTO_CollectionUser" parameterType="map" resultMap="UserDTOSmallWithAvatar">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+    
+    
+   <select id="selectUsers" parameterType="map" resultMap="UserDTOSmall">
+       SELECT a.* FROM users a where 1 = 1 
+         <if test="QUERY.dateid != null and QUERY.dateid != ''.toString()">
+       		and CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0'))=#{QUERY.dateid};
+       	  </if>	 
+   </select>  
+
+    <select id="selectUser" parameterType="map" resultMap="UserDTO">
+        SELECT a.* FROM users a WHERE a.id = #{userid}
+    </select>
+
+    <select id="selectUserWithAvatar" parameterType="map" resultMap="UserDTOMedium">
+        SELECT a.* FROM users a WHERE a.id = #{userid}
+    </select>
+
+    <select id="selectUserByUUID" parameterType="map" resultMap="UserDTO">
+        SELECT a.* FROM users a WHERE a.UUID = #{uuidparam}
+    </select>
+
+
+    <select id="selectCountAdminCatalogUsers" parameterType="map" resultType="java.lang.Integer">
+      	 SELECT COUNT(*) AS total FROM users a WHERE 1 = 1 and a.tstflag = 0
+    </select>
+
+    <select id="selectAdminCatalogUsers" parameterType="map" resultMap="UserDTO-admin">
+       SELECT  a.*, CONCAT(YEAR(a.datecreated),LPAD(MONTH(a.datecreated),2,'0'),LPAD(DAY(a.datecreated),2,'0')) as datenumber, DATE_FORMAT(a.datecreated,'%Y-%c-%d') as datestring  from users a WHERE 1 = 1 and a.tstflag = 0
+       ORDER BY datenumber DESC
+       LIMIT #{offset}, #{limit};  
+       
+    </select>
+
+
+</mapper>
+
+
+
+

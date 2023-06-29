@@ -1,0 +1,529 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+                           <!-- START ALERT GROUPED PANEL PANEL -->
+                           <div  class="list-group" th:fragment="alert">
+                              <!-- list item-->
+                              <a th:href="@{'/notifications/index'}" class="list-group-item"  th:each="notif, iterStat : ${notificationGroupedListDTO}">
+                                 <div class="media-box" th:if="${notif.activity.equals('VIDEOREVIEW')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-comment-o fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Comments</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video comments</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video comment</small>                                       
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <div class="media-box" th:if="${notif.activity.equals('VIDEOLIKE')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-thumbs-up fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Likes</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video likes</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video like</small>                                       
+                                       </p>
+                                    </div>
+                                 </div> 
+                                <div class="media-box" th:if="${notif.activity.equals('VIDEOSHARE')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-facebook-official fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Shares</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video shares</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video share</small>                                       
+                                       </p>
+                                    </div>
+                                 </div>   
+                                <div class="media-box" th:if="${notif.activity.equals('VIDEORATE')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-star fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Rates</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video rates</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new video rate</small>                                       
+                                       </p>
+                                    </div>
+                                 </div>                                    
+                            <div class="media-box" th:if="${notif.activity.equals('NEWFOLLOWER')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-twitter fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Followers</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new followers</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span> new follower</small>                                       
+                                       </p>
+                                    </div>
+                                 </div> 
+                                 
+                                   
+                                 <div class="media-box" th:if="${notif.activity.equals('COLLECTIONADDED')}">
+                                    <div class="pull-left">
+                                       <em class="fa fa-th-list fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-info">Collections</p>
+                                       <p class="m0 text-inverse">
+                                          <small th:if="${notif.total>1}"><span class="text-danger text-bold" th:text="${notif.total}"></span>  videos on collections</small>
+                                          <small th:if="${notif.total==1}"><span class="text-danger text-bold" th:text="${notif.total}"></span>  video on collection</small>
+                                       </p>
+                                    </div>
+                                 </div>                                 
+                                 
+                                 
+                              </a>
+                              
+                              
+
+                              
+                              <!-- list item-->
+                              <a th:href="@{'/notifications/index'}" th:if="${notificationUnreadedCount==0}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-envelope fa-2x text-muted"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0  text-info">Messages</p>
+                                       <p class="m0 text-muted">
+                                          <small>You have no new messages</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              
+                              
+                              
+                              
+                              
+                              
+                              <!-- list item-->
+<!--                               <a href="#" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-cloud-upload fa-2x text-danger"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">Pending Upload</p>
+                                       <p class="m0 text-muted">
+                                          <small>1 pending upload</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a> -->
+                              <!-- last list item -->
+                              <a th:href="@{'/notifications/index'}" class="list-group-item" th:if="${notificationUnreadedCount>0}">
+                                 <small>view new notifications</small>
+                                 <span class="label label-info pull-right" th:text="${'+'+{notificationUnreadedCount}}"></span>
+                              </a>
+                              <a th:href="@{'/notifications/index'}" class="list-group-item" th:if="${notificationUnreadedCount==0}">
+                                 <small>notifications history</small>
+                                 <span class="label label-info pull-right" th:text="${notificationAllCount}"></span>
+                              </a>
+                              <a  th:href="@{'/user/settings/index?view=notifications'}" class="list-group-item">
+                                 <small>view settings</small>
+                                 <span class="fa fa-cogs text-info pull-right"></span>
+                              </a>
+                                                            
+                                                            
+                           </div>
+                           <!-- END ALERT GROUPED PANEL -->
+
+
+					  <!-- REGISTER PANEL  -->	
+				      <div  class="block-left mt-xl wd-xl" th:fragment="signup">
+				         <!-- START panel-->
+				         <div class="panel panel-round text-inverse ml-lg">
+				
+				         
+				            <div sec:authorize="isAnonymous()" class="panel-body">
+				               <p class="text-center text-bold pv">SIGNUP TO GET INSTANT ACCESS</p>
+				               <form id="registerform" role="form" th:action="@{/user-registration/submit}" th:object="${REGISTERFRM}" method="post"  class="mb-lg">
+				                                    <input type="hidden" th:field="*{active}" value="false">
+<!-- 				 		               <ul>
+						                <li th:if="${iterStat.index <= 1 }" th:each="e,iterStat : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
+						                    <span  th:text="${e.global}? '*' : ${e.fieldName}">The field name</span> |
+						                    <span  th:text="${e.message}">The error message</span>
+						                </li>
+						            	</ul> -->
+				               
+				 	<!-- 	            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+									    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+									</div> -->
+				 		            
+				 		            
+				 		                <p>
+				                 <a th:href="@{/auth/facebook?scope=email}" class="btn btn-block btn-social btn-facebook">
+    										<span class="fa fa-facebook"></span>Sign up with Facebook
+  								   </a><br/>
+				                  </p>
+				 		            
+				 		            
+				 		            
+				                  <div class="form-group has-feedback">
+				                     <label class="text-gray text-uppercase">Nickname</label>
+				                     <input type="text" placeholder="Enter a nickname" autocomplete="off" class="form-control"   th:field="*{username}">
+				                  </div>
+
+				                  <div class="form-group has-feedback">
+				                     <label class="text-gray text-uppercase">Email address</label>
+				                     <input type="email" placeholder="Enter your email" autocomplete="off" class="form-control"   th:field="*{email}">
+				                  </div>
+				                  <div class="form-group has-feedback">
+				                     <label class="text-gray text-uppercase">Password</label>
+				                     <input type="password" placeholder="Enter a password" autocomplete="off" class="form-control" th:field="*{password}">
+				                  </div>
+				                  <div class="form-group has-feedback">
+				                     <label class="text-gray text-uppercase">Password confirm</label>
+				                     <input type="password" placeholder="Retype the password" autocomplete="off" th:field="*{passwordConfirm}" class="form-control">
+				                  </div>
+				                  
+<!-- 				                  <div class="clearfix">
+				                     <div class="checkbox c-checkbox pull-left mt0">
+				                         <label class="text-gray text-uppercase">Agree with Terms</label>
+				                           <input type="checkbox" value=""  name="agreewithterms"/>
+				                           <span class="fa fa-check"></span>I agree with the <a href="#" class="text-inverse">terms</a>
+
+				                     </div>
+				                  </div> -->				                  
+				                  
+ 				                  <div class="form-group has-feedback pull-left">
+				                     <label class="text-gray text-uppercase">Agree with Terms</label>
+				                      <input type="checkbox" value=""  name="agreewithterms" class="form-control">
+				                  </div>				                  
+ 
+				                  <button id="registerbtn" type="submit" class="btn btn-block btn-info-dark mt-lg">Create account</button>
+				               </form>
+				               <!-- <p class="pt-lg text-center">Have an account already?</p><a id="loginlink" href="#" class="btn btn-block btn-default">Sign in</a> -->
+				            </div>
+				         </div>
+				       </div>  
+		
+						                  
+				                  
+
+		
+		
+			           <!-- LOGIN PANEL -->
+				      <div class="block-left mt-xl wd-xl" th:fragment="signin">
+				 
+				           <div id="loginformerror" role="alert" class="alert alert-warning hidden">
+                           <strong>Account not found or not active.</strong> Try submitting again with different credentials.</div>
+				           
+				           <div id="loginformsuccess" role="success" class="alert alert-success hidden">
+                           <strong>Well done!</strong> Welcome back <strong>George</strong></div>
+				      
+				      
+				         <!-- START panel-->
+				         <div class="panel panel-round text-inverse ml-lg">
+				            <div class="panel-body">
+				               <p class="text-center text-bold pv">SIGN IN TO CONTINUE.</p>
+   							  <form id="loginform" role="form" th:action="@{/login}" class="mb-lg" method="post">
+    							   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				                  <input type="hidden" id="springcsrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				                  
+				                  <p>
+				                 <a th:href="@{/auth/facebook?scope=email}" class="btn btn-block btn-social btn-facebook">
+    										<span class="fa fa-facebook"></span>Sign in with Facebook
+  								   </a><br/>
+				                  </p>
+
+				         
+				         
+				         
+				                  <div class="form-group has-feedback">
+				                   	<label class="text-gray text-uppercase">Email</label>
+				                     <input  id="email" name="email" type="text" placeholder="Enter your email" autocomplete="off"  class="form-control">
+				                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
+				                  </div>
+				                  
+				                  <div class="form-group has-feedback">
+				                  	  <label class="text-gray text-uppercase">Password</label>
+				                     <input type="password" id="password" name="password" placeholder="Enter your password"  class="form-control">
+				                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+				                  </div>
+				                  <div class="clearfix">
+	 			                     <div class="checkbox c-checkbox pull-left mt0">
+				                        <label>
+				                           <input type="checkbox" value="" id="remember-me" name="remember-me">
+				                           <span class="fa fa-check"></span>Remember Me</label>
+				                     </div>
+				                     <!-- <div class="pull-right"><a href="#" class="text-muted">Forgot your password?</a> -->
+				                     </div>
+
+
+				                  <button id="loginbtn" type="button" class="btn btn-block btn-info-dark mt-lg">Sign in</button>
+				               </form>
+
+ 								<a th:href="@{'/support/reset-password-token/request'}">forgot your password?</a> <br/><br/>
+ 								
+ 								<span class="text-sm text-gray-more">If you've lost your activation email  <a th:href="@{'/support/reset-activation-token/request'}">click here</a></span>
+
+
+
+				                  </div>
+				                  
+				                  
+				                  
+				              
+				            </div>
+				         </div>
+				         <!-- END panel-->
+				      </div>
+	
+
+                           <!-- START PROFILE PANEL -->
+                           <div class="list-group" th:fragment="profile">
+                              <!-- list item-->
+                              <a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-smile-o fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold" th:text="${#authentication.principal.user.shortdesc}"></p>
+                                        <p class="m0 text-muted">
+                                          <small>Profile</small>
+                                       </p>
+                                     </div>
+                                 </div>
+                              </a>
+                              
+                              
+                   			  <a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/videos/filter:all'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-youtube-play fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Videos</p>
+                                        <p class="m0 text-muted">
+                                          <small>see all your videos</small>
+                                       </p>
+                                     </div>
+                                 </div>                   			  
+                              </a>                              
+                                 
+                   			  <a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/following'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-user fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">People</p>
+                                        <p class="m0 text-muted">
+                                          <small>see who you following</small>
+                                       </p>
+                                     </div>
+                                 </div>                   			  
+                              </a>                                        
+                                 
+
+                   			  <a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/favorites/filter:all'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-heart fa-2x text-maroon"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Favorites</p>
+                                        <p class="m0 text-muted">
+                                          <small>see all your favorite vids</small>
+                                       </p>
+                                     </div>
+                                 </div>                   			  
+                              </a>                                     
+                                 
+           			  		<a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/watchlater/filter:all'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-film fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Watch Later</p>
+                                        <p class="m0 text-muted">
+                                          <small>see all your watch later vids</small>
+                                       </p>
+                                     </div>
+                                 </div>                   			  
+                              </a>                                        
+                                 
+                                 
+<!--                                <a th:href="@{'/user-'+${#authentication.principal.user.UUID}+'/playlists/filter:all'}" class="list-group-item">    
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-list fa-2x text-info"></em>
+                                    </div>    
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Collections</p>
+                                        <p class="m0 text-muted">
+                    	                      <small>albums, watch later and favorites in one place</small>
+                                       </p>
+                                      </div>                                                                       
+                                   </div>                   			  
+          						</a> -->
+                            
+                    
+
+                   			  <a th:href="@{'/video/map/normal/_?useruuid=' + ${#authentication.principal.user.UUID}}" class="list-group-item">
+                                  <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-map-marker fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Locations</p>
+                                        <p class="m0 text-muted">
+                                          <small>see all  your vids on map</small>
+                                       </p>
+                                     </div>
+                                 </div>                   			  
+ 
+                              </a>                  
+                   			  <a  th:href="@{'/video-organizer/view:videos/filter:all'}" class="list-group-item">
+                                  <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-th-large  fa-2x text-maroon"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Video Manager</p>
+                                        <p class="m0 text-muted">
+                                          <small>organize your videos and collections</small>
+                                       </p>
+                                     </div>
+                                 </div>  
+                              </a>  
+                              
+                              <!-- list item-->
+                              <a th:href="@{'/user/settings/index?view=profile'}" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-cog fa-2x text-inverse"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">Settings</p>
+                                       <p class="m0 text-muted">
+                                          <small>manage your account</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>                              
+
+                              <form role="form" th:action="@{/logout}" class="mb-lg" method="post">
+				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                 <button type="submit" class="btn btn-block btn-info-dark mt-lg">Sign out</button>
+                              </form>                              
+                              
+                           </div>
+                           <!-- END ALERT PANEL -->
+
+
+
+                           <!-- START ADMIN ALERT PANEL -->
+                           <div class="list-group" th:fragment="admin">
+                   			  <a  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" th:href="@{'/admin/videos/view:published/filter:all?recalc=1'}" class="list-group-item">
+                                  <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-cog  fa-2x text-maroon"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Administration</p>
+                                        <p class="m0 text-muted">
+                                          <small>administer terrabis</small>
+                                       </p>
+                                     </div>
+                                 </div>  
+                              </a>                                 
+
+                   			  <a  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" th:href="@{/statistics/videos/dashboard-1?reset=true}" class="list-group-item">
+                                  <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-line-chart  fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Statistics</p>
+                                        <p class="m0 text-muted">
+                                          <small>statistics</small>
+                                       </p>
+                                     </div>
+                                 </div>  
+                              </a>    
+                                       
+                   			  <a  th:if="${#authorization.expression('hasRole(''ROLEYOUTUBEIMPORTTOOL'')')}" th:href="@{/tool/youtube/index}" class="list-group-item">
+                                  <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-youtube  fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0 text-bold">Youtube Geo Search Tool</p>
+                                        <p class="m0 text-muted">
+                                          <small>Geo Search</small>
+                                       </p>
+                                     </div>
+                                 </div>  
+                              </a>                                                             
+                              
+                           </div>
+                           <!-- END ALERT PANEL -->
+
+
+					
+					
+					
+					
+					      <!-- START list group-->
+					      <div  class="list-group" th:fragment="signupsigninlinks">
+					         <!-- list item-->
+					         <a href="#" class="list-group-item">
+					            <div class="media-box">
+					               <div class="pull-left">
+					                <i class="fa fa-caret-square-o-right fa-3x text-gray"></i>
+					               </div>
+					               <div class="media-box-body clearfix">
+					                  <p class="">Login</p>
+					               </div>
+					            </div>
+					         </a>
+					         
+					
+					         
+					         <!-- list item-->
+					         <a href="#" class="list-group-item">
+					            <div class="media-box">
+					               <div class="pull-left">
+					                  <em class="fa fa-pencil-square fa-3x text-gray"></em>
+					               </div>
+					               <div class="media-box-body clearfix">
+					                  <p class="">Register</p>
+					               </div>
+					            </div>
+					         </a>
+					
+					         <!-- last list item -->
+					         <a href="#" class="list-group-item">
+					            <small>forgot password?</small>
+					         </a>
+					      </div>
+					      <!-- END list group-->
+					
+					
+
+
+
+
+</body>
+</html>
+
+

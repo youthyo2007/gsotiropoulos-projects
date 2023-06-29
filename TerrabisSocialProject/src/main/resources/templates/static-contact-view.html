@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis -Contact</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+         <div class="content-wrapper"  style="height:1000px;">
+
+                                <div class="content-heading visible-lg visible-md">
+   				   <span class="text-gray fa fa-envelope-o fa-2x">&nbsp;</span><span class="text-gray text-bold h1">Contact Us</span>           
+            </div>
+
+
+              <div class="row mb-lg mt-lg">
+
+                        
+				               <div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+				               <form ID="contactusform" role="form" th:action="@{'/static/contact/submit'}" th:object="${CONTACTUSFRM}" method="post">
+		               		                   <div class="form-group">
+					                              <div class="panel">
+					                                 <div class="panel-body">
+														<span class="h4 text-gray-more text-left">Write your message</span><br/>					                                 
+					                                    <textarea rows="10" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{message}"></textarea>
+					                                 </div>
+					                              </div>
+					                           </div>
+
+				                               <div class="form-group m-lg">
+							                          <button type="submit" class="btn btn-labeled btn-info-dark">
+							                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+							                           </span>
+							                               <span class="h4  mt text-bold pull-left">SEND</span>
+							                           </button>
+							                   </div>  
+				 
+				 				</form>
+				               </div>
+                        
+                        
+                 </div>	
+
+		</div>
+   		
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+
+      </section>
+
+
+
+  </body>
+</html>  	  

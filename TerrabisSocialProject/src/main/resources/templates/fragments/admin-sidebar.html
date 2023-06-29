@@ -1,0 +1,264 @@
+<!-- sidebar-->
+      <aside class="aside" th:fragment="dynamic-sidebar(page,view)">
+
+         <!-- ADMIN VIDEOS MENU-->
+         <div id="adminmenu_videos" class="aside-inner">
+            <nav data-sidebar-anyclick-close="" class="sidebar">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+               
+<!--                   <li class="adminmenu_select_root cursor-pointer mt-lg ml-lg mb-sm">
+                   	 <em class="text-gray-dark fa fa-chevron-left"></em>
+                   	  <span class="text-gray-dark text-sm-md text-bold">BACK TO MENU</span>
+                  </li> -->
+
+
+ 
+
+                  <li class="mt-lg">
+                     <a th:href="@{/admin/videos/view:published/filter:all?recalc=1}" th:classappend="${page=='admin-video-view'} ? bg-info-dark : bg-white" class="adminmenu_select_video" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-archive fa-2x adminmenu_select_video -"></em>
+                        <span  th:classappend="${page=='admin-video-view'} ? text-white : text-inverse" class="adminmenu_select_video - text-bold text-uppercase" data-localize="sidebar.nav.admin">Admin Videos</span>
+                     </a>
+                  </li>                
+
+
+                  <li class="" th:if="${page=='admin-video-view'}">
+                     <a href="#actions" class="bg-white" title="Actions" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="text-info fa fa-pencil-square fa-2x mngmenu_actions -"></em>
+                        <span class="mngmenu_actions - text-bold text-info-dark text-uppercase" data-localize="sidebar.nav.actions">Actions</span>
+                     </a>
+                     <ul id="actions" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-info-dark mngmenu_actions">Actions</span></li>
+         
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">videos</span></li> -->
+                        <li class="ml-lg">
+		                        <div class="text-left mt-sm">
+		                            <div class="form-groug">
+			                          <a id="adminbtn-approvevids" class="btn btn-labeled btn-green disabled  massaction massbtn-approve">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-white pull-left">APPROVE</span>
+			                           </a>
+					                   </div>  
+								</div>	
+
+								
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a  class="btn btn-labeled btn-danger disabled massaction massbtn-reject">
+			                           <span class="btn-label pull-left"><i class="fa fa-ban fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-inverse pull-left">REJECT</span>
+			                           </a>
+			                   </div> 		
+			                   </div>									
+								
+								
+	 							<hr/>								
+								
+								
+
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a id="adminbtn-publishvids" class="btn btn-labeled btn-info-dark disabled  massaction massbtn-publish">
+			                           <span class="btn-label pull-left"><i class="fa fa-arrow-up fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-white pull-left">PUBLISH&nbsp;&nbsp;</span>
+			                           </a>
+			                   </div> 		
+			                   </div>
+
+
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a class="btn btn-labeled btn-danger disabled massaction massbtn-unpublish">
+			                           <span class="btn-label pull-left"><i class="fa fa-arrow-down fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold text-inverse pull-left">UNPUBLISH</span>
+			                           </a>
+			                   </div> 		
+			                   </div>	
+	 							
+	 							<hr/>
+
+			                   
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a class="btn btn-labeled btn-inverse disabled massaction massbtn-delete">
+			                           <span class="btn-label pull-left"><i class="fa fa-trash-o fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-white text-bold pull-left">DELETE</span>
+			                           </a>
+			                   </div> 		
+			                   </div>				                   
+			                   
+			                   
+                        </li>
+                     </ul>
+                  </li> 
+                  
+                  <li class="" th:if="${page=='admin-video-view'}">
+                     <a href="#promote" class="bg-white" title="Promote" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa text-info fa-product-hunt fa-2x mngmenu_promote -"></em>
+                        <span class="mngmenu_promote - text-bold text-info-dark text-uppercase" data-localize="sidebar.nav.promote">Promote</span>
+                     </a>
+                     <ul id="promote" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-info-dark mngmenu_promote">Promote</span></li>
+         
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">videos</span></li> -->
+                        <li class="ml-lg">
+
+								<span class="text-gray text-sm">Video Promotions on Video Catalog, Map or Index Page</span>
+		                        <div class="text-left mt-sm">
+		                            <div class="form-groug">
+                   										  <a id="adminbtn-promotevids" class="btn btn-labeled btn-info-dark disabled  massaction massbtn-promotesiteindex">
+                     											<span class="btn-label pull-left"><i class="fa fa-italic fa-2x"></i></span>
+                         										<span id="massbtntxt" class="h4 mt text-bold text-white pull-left">SITE INDEX</span>
+                     											</a>
+					                   </div>  
+								</div>	
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a id="adminbtn-promotevids" class="btn btn-labeled btn-info-dark disabled  massaction massbtn-promotemap">
+			                           <span class="btn-label pull-left"><i class="fa fa-globe fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-white pull-left">VC & MAP</span>
+			                           </a>
+			                   </div> 		
+			                   </div>	
+	 							
+	 							<hr/>
+								<span class="text-gray text-sm">Unpromote Videos from Video Catalog, Map or Index Page</span>
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a id="adminbtn-unpromotevids" class="btn btn-labeled btn-danger disabled  massaction massbtn-unpromotesiteindex">
+			                           <span class="btn-label pull-left"><i class="fa fa-italic fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-inverse pull-left">SITE INDEX</span>
+			                           </a>
+			                   </div> 		
+			                   </div>				                   
+			                   
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a id="adminbtn-unpromotevids" class="btn btn-labeled btn-danger disabled  massaction massbtn-unpromotemap">
+			                           <span class="btn-label pull-left"><i class="fa fa-globe fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-inverse pull-left">VC & MAP</span>
+			                           </a>
+			                   </div> 		
+			                   </div>				                   
+			                   														
+																	
+																	
+	
+                        </li>
+                     </ul>
+                  </li>                  
+
+
+                 <li class="">
+                     <a  th:classappend="${page=='admin-claim-view'} ? bg-info : bg-white" th:href="@{/admin/claims/view:all/filter:all?recalc=1}" class="adminmenu_select_claims" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-file fa-2x adminmenu_select_claims -"></em>
+                        <span  th:classappend="${page=='admin-claim-view'} ? text-white : text-inverse" class="adminmenu_select_claims - text-bold  text-uppercase" data-localize="sidebar.nav.admin">Admin Claims</span>
+                     </a>
+                  </li> 
+                          
+                 <li class="">
+                     <a th:classappend="${page=='admin-user-view'} ? bg-info : bg-white" th:href="@{/admin/users/view:all/filter:all?recalc=1}" class="adminmenu_select_user" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-smile-o fa-2x adminmenu_select_user -"></em>
+                        <span th:classappend="${page=='admin-user-view'} ? text-white : text-inverse" class="adminmenu_select_user - text-bold text-uppercase" data-localize="sidebar.nav.admin">Admin Users</span>
+                     </a>
+                  </li> 
+                  
+                  
+                   <li th:if="${page=='admin-user-view'}" class="">
+                     <a href="#actions" class="bg-white" title="Actions" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="text-info fa fa-pencil-square fa-2x mngmenu_actions -"></em>
+                        <span class="mngmenu_actions - text-bold text-info-dark text-uppercase" data-localize="sidebar.nav.actions">Actions</span>
+                     </a>
+                     <ul id="actions" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-info-dark mngmenu_actions">Actions</span></li>
+         
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">videos</span></li> -->
+                        <li class="ml-lg">
+		                        <div class="text-left mt-sm">
+		                            <div class="form-groug">
+			                          <a id="adminbtn-enableusers" class="btn btn-labeled btn-info-dark disabled  massaction massbtn-enable">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-white pull-left">ENABLE</span>
+			                           </a>
+					                   </div>  
+								</div>	
+
+								
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a  id="adminbtn-disableusers" class="btn btn-labeled btn-danger disabled massaction massbtn-disable">
+			                           <span class="btn-label pull-left"><i class="fa fa-ban fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4 mt text-bold text-inverse pull-left">DISABLE</span>
+			                           </a>
+			                   </div> 		
+			                   </div>									
+								
+								
+	 							<hr/>								
+								
+			                   
+								<div class="text-left mt-sm">
+                            	<div class="form-group">
+			                          <a id="adminbtn-deleteusers" class="btn btn-labeled btn-inverse disabled massaction massbtn-delete">
+			                           <span class="btn-label pull-left"><i class="fa fa-trash-o fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-white text-bold pull-left">DELETE</span>
+			                           </a>
+			                   </div> 		
+			                   </div>				                   
+			                   
+			                   
+                        </li>
+                     </ul>
+                  </li>
+                  
+
+                  <li class="">
+                     <a  th:href="@{/statistics/videos/dashboard-1?reset=true}" class="bg-white adminmenu_select_statistics" title="statistics">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-line-chart fa-2x dminmenu_select_statistics -"></em>
+                        <span class="adminmenu_select_statistics - text-bold text-inverse text-uppercase" data-localize="sidebar.nav.statistics">Statistics</span>
+                     </a>
+                  </li> 
+                
+                 <li class="">
+                     <a th:classappend="${page=='admin-systemproperties-view'} ? bg-info : bg-white" th:href="@{/admin/system/properties}" class="adminmenu_select_system" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-cogs fa-2x adminmenu_select_system -"></em>
+                        <span th:classappend="${page=='admin-systemproperties-view'} ? text-white : text-inverse" class="adminmenu_select_system - text-bold text-uppercase" data-localize="sidebar.nav.system">System</span>
+                     </a>
+                  </li>                 
+                
+                  
+                </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+
+
+
+
+
+
+
+
+

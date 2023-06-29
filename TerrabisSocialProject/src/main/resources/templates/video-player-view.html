@@ -1,0 +1,139 @@
+<html>
+<title></title>
+<head>
+
+
+
+<link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+
+<style>
+.videoWrapper {
+	position: relative;
+	/* padding-bottom: 41%; video dimensions - height/width */
+	padding-bottom: 71%;
+	padding-top: 0px;
+	height: 0;
+	z-index: 1000;
+}
+ 
+video {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: auto !important;
+  z-index: 1;
+}    
+ 
+video.video-js {
+  z-index: 1000;
+}               
+ 
+.video-js .vjs-controls {
+  z-index: 1002;
+}
+ 
+.video-js .vjs-big-play-button {
+  z-index: 1002;
+}
+ 
+.videoWrapper .video-js {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	z-index: 1;
+	background: #000000;
+}         
+ 
+.videoWrapper object,
+.videoWrapper embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100% !important;
+  z-index: 1;
+}        
+ 
+.vjs-spinner {
+  display: none !important;
+}
+ 
+.video-js img.vjs-poster {
+  height: 100% !important;
+  width: 100% !important;
+  z-index: 1;
+  max-width: 100%;
+}
+
+/***** display: none !important; ********/
+      
+.video-js .vjs-big-play-button {
+      background-color: #1797be;
+      opacity: 0.5;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      margin: auto;
+      border: 1px solid #ccc; opacity: 0.8;
+	  border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px;
+     
+}
+
+</style>
+
+
+
+</head>
+
+ 
+
+<body bgcolor="#000000">
+
+
+<div class="vjs-paused video-js-box vjs-paused videoWrapper">
+   <video id="video-tb" class="video-js vjs-default-skin vjs-paused" data-setup="{}"  preload="auto" controls>
+		<source type="video/mp4" th:attr="src=${videoURI}">
+	</video> 
+</div> 
+
+
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script>   
+<script src="../static/vendor/video-js/dist/video.js" th:src="@{/vendor/video-js/dist/video.js}"></script>   
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+           
+    $( document ).ready(function() {
+    	var myPlayer = videojs("video-tb");
+    	var style = [[${style}]];
+    	var start = [[${start}]];
+    	
+    	if(start=='true')
+    		myPlayer.play();
+    	else
+    		myPlayer.pause();
+    	
+    });
+
+/*]]>*/
+</script>   
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+

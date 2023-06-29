@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.PublicVideoMapper">
+
+
+  
+  
+       <resultMap type="com.socialvideo.data.dto.PublicVideoDTO" id="PublicVideoDTOSmall">
+        <id column="id" property="id"/>
+        <result property="UUID" column="UUID"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>  
+        <result property="durationtxt" column="durationtxt"/>
+        <result property="tags" column="tags"/>  
+        <result property="link" column="link"/>
+        <result property="shootingtypeid" column="shootingtypeid"/>         
+        <result property="videotypeids" column="videotypeids"/>         
+        <result property="markerimgid" column="markerimgid"/> 
+        <result property="ownershipverified" column="ownershipverified"/> 
+        <result property="ratingssum" column="ratingssum"/>
+        <result property="ratingscount" column="ratingscount"/>
+        <result property="playscount" column="playscount"/>
+        <result property="likescount" column="likescount"/>
+        <result property="reviewscount" column="reviewscount"/>
+        <result property="datecreated" column="datecreated"/>
+        <result property="videourl" column="videourl"/>
+        <result property="thumburl" column="thumburl"/>
+        <result property="promotemap" column="promotemap"/>
+    </resultMap> 
+  
+  
+
+     <resultMap type="com.socialvideo.data.dto.PublicVideoDTO" id="PublicVideoDTO" extends="PublicVideoDTOSmall">
+        <association property="user" column="{userid_fk=userid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectVideoDTO_User"/>
+        <association property="uploader" column="{userid_fk=uploaderid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectVideoDTO_User"/>
+    </resultMap> 
+
+
+
+
+
+     <resultMap type="com.socialvideo.data.dto.PublicVideoPointDTO" id="PublicVideoPointDTO">
+        <result property="UUID" column="UUID"/>
+        <result property="title" column="title"/>
+        <result property="markerimgid" column="markerimgid"/>  
+        <result property="latitude" column="latitude"/>  
+        <result property="longitude" column="longitude"/>     
+    </resultMap> 
+
+
+    <resultMap type="com.socialvideo.data.dto.PublicVideoDTO" id="PublicVideoDTOWithCollectionPath" extends="PublicVideoDTO">
+        <result property="pathsort" column="pathsort"/>   
+   </resultMap>
+   
+ 
+	   <resultMap type="com.socialvideo.data.dto.PublicVideoDTO"  extends="PublicVideoDTO" id="PublicVideoDTOWithDistance">
+	        <result property="distance" column="distance"/> 
+	  </resultMap> 
+
+
+     <resultMap type="com.socialvideo.data.dto.PublicVideoDTO" extends="PublicVideoDTO" id="PublicVideoDTOWithReviews">
+        <association property="reviews" column="{videoid_fk=id}" javaType="java.util.List" select="com.socialvideo.data.mappers.VideoReviewMapper.selectPublicVideoDTO_Reviews"/> 
+     </resultMap>
+
+
+
+
+
+	<select id="selectCountTotalVideos" parameterType="map" resultType="java.lang.Integer">
+	 	 SELECT COUNT(*) AS total FROM videos a WHERE 1 = 1 and a.status=1 and a.healthstatus=1
+   </select>
+
+
+	<select id="selectCountTotalVideoMinutes" parameterType="map" resultType="java.lang.Integer">
+	 	select round(sum(duration)/60) from videos a WHERE 1 = 1 and a.status=1 and a.healthstatus=1
+   </select>
+
+
+  <select id="findPublicVideoById" parameterType="map" resultMap="PublicVideoDTO">
+         SELECT * FROM videos a WHERE a.id=#{id} 
+  </select>
+  
+  <select id="findPublicVideoWithReviewsById" parameterType="map" resultMap="PublicVideoDTOWithReviews">
+         SELECT * FROM videos a WHERE a.id=#{id} 
+  </select>
+  
+  
+  
+  
+  
+  
+  <select id="selectNotificationDTO_Video" parameterType="map" resultMap="PublicVideoDTOSmall">
+         SELECT * FROM videos a WHERE a.id=#{videoid_fk} 
+  </select>
+      
+  
+
+  <select id="findPublicVideoByUUID" parameterType="map" resultMap="PublicVideoDTO">
+         SELECT * FROM videos a WHERE a.UUID=#{uuid} 
+  </select>
+    
+   <select id="findLatestUploadedVideoOfUser" parameterType="map" resultMap="PublicVideoDTO">
+       SELECT * FROM videos a WHERE 1 = 1 AND a.userid_fk = #{userid}  
+       ORDER BY a.datecreated DESC limit 1
+    </select>
+  
+
+  <select id="findVideoPointsOfVideoList" parameterType="map" resultMap="PublicVideoPointDTO">
+         SELECT * FROM videos a WHERE a.id IN 
+         <foreach item="item" index="index" collection="videoidslist"
+      		open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
+  </select>
+
+
+
+    <select id="selectCatalogVideoPointsOfViewport" parameterType="map" resultMap="PublicVideoPointDTO">
+       SELECT * FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+        
+    	 AND (
+		(
+		(#{GMAPRESULT.viewport.southwest.latnumber} &lt;= #{GMAPRESULT.viewport.northeast.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.southwest.latnumber} AND #{GMAPRESULT.viewport.northeast.latnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.latnumber} &lt;= #{GMAPRESULT.viewport.southwest.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.northeast.latnumber} AND #{GMAPRESULT.viewport.southwest.latnumber})
+		)
+		AND 
+		(
+		(#{GMAPRESULT.viewport.southwest.lngnumber} &lt;= #{GMAPRESULT.viewport.northeast.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.southwest.lngnumber} AND #{GMAPRESULT.viewport.northeast.lngnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.lngnumber} &lt;= #{GMAPRESULT.viewport.southwest.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.northeast.lngnumber} AND #{GMAPRESULT.viewport.southwest.lngnumber})
+		)
+		)
+
+     	 <if test="QUERY.advfilter.userid != null and QUERY.advfilter.userid != ''.toString()">
+             AND a.userid_fk = #{QUERY.advfilter.userid}
+      	</if>
+
+
+		<if test="QUERY.advfilter.shootingtypeid != null and QUERY.advfilter.shootingtypeid != 0 ">
+			AND a.shootingtypeid = #{QUERY.advfilter.shootingtypeid}
+		</if>
+
+		<if test="QUERY.advfilter.videotypeid != null and QUERY.advfilter.videotypeid != 0 ">
+			AND a.markerimgid LIKE #{QUERY.advfilter.videotypeid} 
+		</if>
+
+
+   		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>		
+		
+	  <if test="QUERY.advfilter.tags != null and QUERY.advfilter.tags != ''.toString()">
+             AND match(a.tags) against (#{QUERY.advfilter.tags} in natural language mode) 
+      </if>
+   
+      ORDER BY 
+      
+      <if test="QUERY.filter == null or QUERY.filter == ''.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+      
+      
+      <if test="QUERY.filter != null and QUERY.filter == 'all'.toString()">
+       		a.datecreated DESC 
+       </if>
+       
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+       
+       <if test="QUERY.filter != null and QUERY.filter == 'latest'.toString()">
+       	a.datecreated DESC 
+       </if>
+
+      <if test="QUERY.filter != null and QUERY.filter == 'likes'.toString()">
+            a.likescount DESC, 	a.datecreated DESC
+      </if>  
+   
+      <if test="QUERY.filter != null and QUERY.filter == 'toprated'.toString()">
+            a.ratingssum DESC, a.datecreated DESC
+      </if> 
+      
+      <if test="QUERY.filter != null and QUERY.filter == 'mostplayed'.toString()">
+            a.playscount DESC, a.datecreated DESC
+      </if> 
+
+      LIMIT #{offset}, #{limit}; 
+    </select>  
+
+
+
+
+
+    <select id="selectCatalogVideosViewPort" parameterType="map" resultMap="PublicVideoDTO">
+       SELECT * FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+        
+        <if test="GMAPRESULT != null and GMAPRESULT.emptyStatus!=true  and QUERY.querytype == 'MAP'.toString()">
+ 		 AND (
+		(
+		(#{GMAPRESULT.viewport.southwest.latnumber} &lt;= #{GMAPRESULT.viewport.northeast.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.southwest.latnumber} AND #{GMAPRESULT.viewport.northeast.latnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.latnumber} &lt;= #{GMAPRESULT.viewport.southwest.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.northeast.latnumber} AND #{GMAPRESULT.viewport.southwest.latnumber})
+		)
+		AND 
+		(
+		(#{GMAPRESULT.viewport.southwest.lngnumber} &lt;= #{GMAPRESULT.viewport.northeast.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.southwest.lngnumber} AND #{GMAPRESULT.viewport.northeast.lngnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.lngnumber} &lt;= #{GMAPRESULT.viewport.southwest.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.northeast.lngnumber} AND #{GMAPRESULT.viewport.southwest.lngnumber})
+		)
+		)
+ 		</if>
+ 		
+ 		
+     
+     	 <if test="QUERY.advfilter.userid != null and QUERY.advfilter.userid != ''.toString()">
+             AND a.userid_fk = #{QUERY.advfilter.userid}
+      	</if>
+
+     	 <if test="QUERY.querytype == 'titledescription'.toString()">
+             AND ( a.title LIKE #{QUERY.querytxtlike} OR a.description LIKE #{QUERY.querytxtlike}) 
+      	</if>
+
+     	 <if test="QUERY.querytype == 'tags'.toString()">
+             AND (a.tags LIKE #{QUERY.querytxtlike}) 
+      	</if>
+
+		<if test="QUERY.advfilter.collectionvideos != null and QUERY.advfilter.collectionvideos != ''.toString()">
+             AND a.id IN 
+				<foreach item="item" index="index" collection="QUERY.advfilter.collectionvideoslist"
+				      open="(" separator="," close=")">
+				        #{item}
+				  </foreach>             
+      	</if>
+
+		<if test="QUERY.advfilter.shootingtypeid != null and QUERY.advfilter.shootingtypeid != 0 ">
+			AND a.shootingtypeid = #{QUERY.advfilter.shootingtypeid}
+		</if>
+
+		<if test="QUERY.advfilter.videotypeid != null and QUERY.advfilter.videotypeid != 0 ">
+			AND a.markerimgid LIKE #{QUERY.advfilter.videotypeid} 
+		</if>
+
+
+   		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>		
+		
+	  <if test="QUERY.advfilter.tags != null and QUERY.advfilter.tags != ''.toString()">
+             AND match(a.tags) against (#{QUERY.advfilter.tags} in natural language mode) 
+      </if>
+      
+      <if test="QUERY.advfilter.weathertxt != null and QUERY.advfilter.weathertxt != ''.toString()">
+             AND match(a.weather) against (#{QUERY.advfilter.weathertxt} in natural language mode) 
+      </if>
+      
+      ORDER BY 
+      
+      <if test="QUERY.filter == null or QUERY.filter == ''.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+      
+      
+      <if test="QUERY.filter != null and QUERY.filter == 'all'.toString()">
+       		a.datecreated DESC 
+       </if>
+       
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+       
+       <if test="QUERY.filter != null and QUERY.filter == 'latest'.toString()">
+       	a.datecreated DESC 
+       </if>
+
+      <if test="QUERY.filter != null and QUERY.filter == 'likes'.toString()">
+            a.likescount DESC, 	a.datecreated DESC
+      </if>  
+   
+      <if test="QUERY.filter != null and QUERY.filter == 'toprated'.toString()">
+            a.ratingssum DESC, a.datecreated DESC
+      </if> 
+      
+      <if test="QUERY.filter != null and QUERY.filter == 'mostplayed'.toString()">
+            a.playscount DESC, a.datecreated DESC
+      </if> 
+   
+      LIMIT #{offset}, #{limit}; 
+    </select>  
+
+
+
+    <select id="selectCountCatalogVideosViewPort" parameterType="map"  resultType="java.lang.Integer">
+       SELECT count(*) FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+        
+        <if test="GMAPRESULT != null and GMAPRESULT.emptyStatus!=true  and QUERY.querytype == 'MAP'.toString()">
+ 		 AND (
+		(
+		(#{GMAPRESULT.viewport.southwest.latnumber} &lt;= #{GMAPRESULT.viewport.northeast.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.southwest.latnumber} AND #{GMAPRESULT.viewport.northeast.latnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.latnumber} &lt;= #{GMAPRESULT.viewport.southwest.latnumber} AND a.latitude BETWEEN #{GMAPRESULT.viewport.northeast.latnumber} AND #{GMAPRESULT.viewport.southwest.latnumber})
+		)
+		AND 
+		(
+		(#{GMAPRESULT.viewport.southwest.lngnumber} &lt;= #{GMAPRESULT.viewport.northeast.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.southwest.lngnumber} AND #{GMAPRESULT.viewport.northeast.lngnumber}) 
+		OR 
+		(#{GMAPRESULT.viewport.northeast.lngnumber} &lt;= #{GMAPRESULT.viewport.southwest.lngnumber} AND a.longitude BETWEEN #{GMAPRESULT.viewport.northeast.lngnumber} AND #{GMAPRESULT.viewport.southwest.lngnumber})
+		)
+		)
+ 		</if>
+ 		
+ 		
+     
+     	 <if test="QUERY.advfilter.userid != null and QUERY.advfilter.userid != ''.toString()">
+             AND a.userid_fk = #{QUERY.advfilter.userid}
+      	</if>
+
+     	 <if test="QUERY.querytype == 'titledescription'.toString()">
+             AND ( a.title LIKE #{QUERY.querytxtlike} OR a.description LIKE #{QUERY.querytxtlike}) 
+      	</if>
+
+     	 <if test="QUERY.querytype == 'tags'.toString()">
+             AND (a.tags LIKE #{QUERY.querytxtlike}) 
+      	</if>
+
+		<if test="QUERY.advfilter.collectionvideos != null and QUERY.advfilter.collectionvideos != ''.toString()">
+             AND a.id IN 
+				<foreach item="item" index="index" collection="QUERY.advfilter.collectionvideoslist"
+				      open="(" separator="," close=")">
+				        #{item}
+				  </foreach>             
+      	</if>
+
+		<if test="QUERY.advfilter.shootingtypeid != null and QUERY.advfilter.shootingtypeid != 0 ">
+			AND a.shootingtypeid = #{QUERY.advfilter.shootingtypeid}
+		</if>
+
+		<if test="QUERY.advfilter.videotypeid != null and QUERY.advfilter.videotypeid != 0 ">
+			AND a.markerimgid LIKE #{QUERY.advfilter.videotypeid} 
+		</if>
+
+
+   		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.advfilter.uploaddatetxt != null and QUERY.advfilter.uploaddatetxt == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>		
+		
+	  <if test="QUERY.advfilter.tags != null and QUERY.advfilter.tags != ''.toString()">
+             AND match(a.tags) against (#{QUERY.advfilter.tags} in natural language mode) 
+      </if>
+      
+      <if test="QUERY.advfilter.weathertxt != null and QUERY.advfilter.weathertxt != ''.toString()">
+             AND match(a.weather) against (#{QUERY.advfilter.weathertxt} in natural language mode) 
+      </if>
+    </select>  
+
+
+
+    <select id="selectUserPendingCatalogVideos" parameterType="map" resultMap="PublicVideoDTO">
+       SELECT * FROM videos a WHERE 1 = 1 AND a.healthstatus = 1 AND a.userid_fk = #{QUERY.userid} AND (a.status=-1 OR a.status=7) ORDER BY a.datecreated DESC LIMIT #{offset}, #{limit};     
+    </select>	
+
+
+    <select id="selectCountUserPendingCatalogVideos" parameterType="map" resultType="java.lang.Integer">
+       SELECT COUNT(*) AS total FROM videos a WHERE 1 = 1 AND a.healthstatus = 1 AND a.userid_fk = #{QUERY.userid} AND (a.status=-1 OR a.status=7); 
+    </select>	
+      	 
+
+
+   <select id="selectCountTrendingCatalogVideos" parameterType="map" resultType="java.lang.Integer">
+		SELECT  COUNT(*) AS total  from playsvideos a, videos b where a.videoid_fk=b.id AND b.status = 1 AND b.healthstatus = 1   
+		   
+		   <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+           	and b.userid_fk=#{QUERY.userid}   
+           </if>
+           
+   		<if test="QUERY.datefilter != null and QUERY.datefilter == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>	
+
+
+	</select>
+
+
+   <select id="selectTrendingCatalogVideos" parameterType="map" resultMap="PublicVideoDTO">
+		SELECT DISTINCT(b.id), b.* from playsvideos a, videos b where a.videoid_fk=b.id AND b.status = 1 AND b.healthstatus = 1   
+		   
+		   <if test="QUERY.userid != null and QUERY.userid != ''.toString()">
+           	and b.userid_fk=#{QUERY.userid}   
+           </if>
+           
+   		<if test="QUERY.datefilter != null and QUERY.datefilter == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>	
+
+    	ORDER BY b.playscount DESC LIMIT #{offset}, #{limit};  
+	</select>
+
+
+	    <select id="selectCountCatalogVideos" parameterType="map" resultType="java.lang.Integer">
+	       SELECT COUNT(*) AS total FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1   
+	       <if test="QUERY.userid != null and QUERY.userid != ' '">
+	       	AND a.userid_fk = #{QUERY.userid} 
+	     	</if>
+	     	
+      		
+	     	<if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+	       		AND a.promotemap!=0 
+	       </if>
+	
+	     	<if test="QUERY.status != null">
+	       		AND a.status = #{QUERY.status} 
+	       </if>
+	       
+	       <if test="QUERY.status == null">
+	       		 AND a.status = 1 
+	       </if>
+	       
+   		<if test="QUERY.datefilter != null and QUERY.datefilter == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>		       
+	       
+	
+	   </select>
+
+
+	    <select id="selectCountCollectionVideos" parameterType="map" resultType="java.lang.Integer">
+	       SELECT COUNT(*) AS total FROM videos a, collectionsvideos b WHERE a.id = b.videoid_fk AND b.collectionid_fk = #{QUERY.collectionid} AND a.status = 1 AND a.healthstatus = 1     
+	       <if test="QUERY.userid != null and QUERY.userid != ' '">
+	       	AND a.userid_fk = #{QUERY.userid} 
+	     	</if>
+
+	     	<if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+	       		AND a.promotemap!=0 
+	       </if>
+	
+	     	<if test="QUERY.status != null">
+	       		AND a.status = #{QUERY.status} 
+	       </if>
+	       
+	       <if test="QUERY.status == null">
+	       		 AND a.status = 1 
+	       </if>
+	
+	   </select>
+	   
+	   
+	       <select id="selectCatalogVideos" parameterType="map" resultMap="PublicVideoDTO">
+       SELECT * FROM videos a WHERE a.status = 1 AND a.healthstatus = 1
+        <if test="QUERY.userid != null and QUERY.userid != ' '">
+        	AND a.userid_fk = #{QUERY.userid} 
+      	</if>
+  
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		AND a.promotemap!=0 
+       </if>
+       
+       
+       <if test="QUERY.status != null">
+       		AND a.status = #{QUERY.status} 
+       </if>
+       
+       <if test="QUERY.status == null">
+       		 AND a.status = 1 
+       </if>
+       
+   		<if test="QUERY.datefilter != null and QUERY.datefilter == 'today'.toString()">
+			AND a.datecreated BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'yesterday'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE()
+		</if>
+		<if test="QUERY.datefilter != null and QUERY.datefilter == '10 days'.toString()">
+			AND a.datecreated BETWEEN DATE_ADD(CURDATE(), INTERVAL -10 day) AND CURDATE()
+		</if>
+			
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY) AND LAST_DAY(NOW())
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last month'.toString()">
+			AND a.datecreated BETWEEN DATE_SUB(DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())-1) DAY), INTERVAL 1 MONTH) AND DATE_SUB(CURDATE(),INTERVAL (DAY(CURDATE())) DAY)
+		</if>
+
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'this year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE()),1) AND LAST_DAY(NOW())
+		</if>
+	
+	
+		<if test="QUERY.datefilter != null and QUERY.datefilter == 'last year'.toString()">
+			AND a.datecreated BETWEEN MAKEDATE(YEAR(CURDATE())-1,1) AND STR_TO_DATE(CONCAT(12,31,YEAR(CURDATE())-1), '%m%d%Y')
+		</if>	       
+
+       ORDER BY
+
+		<if test="QUERY.filter != null and QUERY.filter == 'all'.toString()">
+       		a.datecreated DESC 
+       </if>
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+       <if test="QUERY.filter != null and QUERY.filter == 'latest'.toString()">
+       	a.datecreated DESC 
+       </if>
+
+      <if test="QUERY.filter != null and QUERY.filter == 'likes'.toString()">
+            a.likescount DESC, 	a.datecreated DESC
+      </if>  
+   
+      <if test="QUERY.filter != null and QUERY.filter == 'toprated'.toString()">
+            a.ratingssum DESC, a.datecreated DESC
+      </if> 
+      <if test="QUERY.filter != null and QUERY.filter == 'mostplayed'.toString()">
+            a.playscount DESC, a.datecreated DESC
+      </if> 
+       LIMIT #{offset}, #{limit};  
+    </select>
+	   
+
+    <select id="selectCollectionVideos" parameterType="map" resultMap="PublicVideoDTO">
+       SELECT * FROM videos a, collectionsvideos b WHERE a.id = b.videoid_fk  AND b.collectionid_fk = #{QUERY.collectionid}  AND a.status = 1 AND a.healthstatus = 1
+        <if test="QUERY.userid != null and QUERY.userid != ' '">
+        	AND a.userid_fk = #{QUERY.userid} 
+      	</if>
+  
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		AND a.promotemap!=0 
+       </if>
+       
+       
+       <if test="QUERY.status != null">
+       		AND a.status = #{QUERY.status} 
+       </if>
+       
+       <if test="QUERY.status == null">
+       		 AND a.status = 1 
+       </if>
+
+       ORDER BY
+
+		<if test="QUERY.filter != null and QUERY.filter == 'all'.toString()">
+       		a.datecreated DESC 
+       </if>
+       <if test="QUERY.filter != null and QUERY.filter == 'bestof'.toString()">
+       		a.promotemap DESC, a.datecreated DESC 
+       </if>
+       <if test="QUERY.filter != null and QUERY.filter == 'latest'.toString()">
+       	a.datecreated DESC 
+       </if>
+
+      <if test="QUERY.filter != null and QUERY.filter == 'likes'.toString()">
+            a.likescount DESC, 	a.datecreated DESC
+      </if>  
+   
+      <if test="QUERY.filter != null and QUERY.filter == 'toprated'.toString()">
+            a.ratingssum DESC, a.datecreated DESC
+      </if> 
+      <if test="QUERY.filter != null and QUERY.filter == 'mostplayed'.toString()">
+            a.playscount DESC, a.datecreated DESC
+      </if> 
+       LIMIT #{offset}, #{limit};  
+    </select>
+
+
+
+   <select id="selectNearyByVideos"  parameterType="map" resultMap="PublicVideoDTOWithDistance">
+ 		SELECT *,  ROUND(((ACOS(SIN(#{latitude} * PI() / 180) * SIN(latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(latitude * PI() / 180) * COS((#{longitude} - longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515),1) as distance 
+ 		FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+        <if test="videoid != null and videoid != ' '">
+        	AND a.id != #{videoid} 
+      	</if> 		
+		HAVING distance &lt;= #{range}
+		ORDER BY distance ASC LIMIT #{offset}, #{limit}; 
+	</select>
+
+
+   <select id="selectNearyByVideoPoints"  parameterType="map" resultMap="PublicVideoPointDTO">
+ 		SELECT *,  ROUND(((ACOS(SIN(#{latitude} * PI() / 180) * SIN(latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(latitude * PI() / 180) * COS((#{longitude} - longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515),1) as distance 
+ 		FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+        <if test="videoid != null and videoid != ' '">
+        	AND a.id != #{videoid} 
+      	</if> 		
+		HAVING distance &lt;= #{range}
+		ORDER BY distance ASC LIMIT #{offset}, #{limit}; 
+	</select>
+
+
+   <select id="selectRelatedTagVideos"  parameterType="map" resultMap="PublicVideoDTOWithDistance">
+ 		SELECT * FROM videos a WHERE 1 = 1 AND a.status = 1 AND a.healthstatus = 1
+ 		AND match(a.tags) against (#{tags} in natural language mode)
+ 		ORDER BY a.promotemap DESC, a.datecreated DESC LIMIT #{offset}, #{limit}; 
+   </select>
+
+
+
+
+
+    <select id="selectCollectionDTO_VideoList" parameterType="map" resultMap="PublicVideoDTOWithCollectionPath">
+       SELECT a.*, b.pathsort FROM videos a, collectionsvideos b WHERE a.id=b.videoid_fk and b.collectionid_fk=#{collectionid_fk} 
+    </select>
+    
+
+    
+    <select id="selectVideosOfCollection" parameterType="map" resultMap="PublicVideoDTOWithCollectionPath">
+       SELECT a.*, b.pathsort FROM videos a, collectionsvideos b, collections c WHERE a.id = b.videoid_fk and b.collectionid_fk=c.id AND a.status = 1 
+        
+        <if test="userid != null and userid != ' '">
+        	AND c.userid_fk = #{userid} 
+      	</if>
+  
+        <if test="collectionid != null and collectionid != ' '">
+        	AND b.collectionid_fk = #{collectionid} 
+      	</if>
+
+      <if test="type != null and type != ' '">
+             AND c.type=#{type} 
+      </if>
+        
+      <if test="privacy != null and privacy != ' '">
+             AND a.privacy=#{privacy} 
+      </if>
+       ORDER BY b.pathsort ASC 
+    </select>
+
+
+</mapper>
+
+
+
+

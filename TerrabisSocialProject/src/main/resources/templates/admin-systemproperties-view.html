@@ -1,0 +1,115 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-admin">
+  <head>
+    <title>Terrabis - Administration</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+	      <!-- FULLSCREENOVERLAY  -->    
+	   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=true)"></div>
+	   <div th:replace="/fragments/modal :: fullscreenoverlay-reject"></div>
+
+
+         <div class="content-wrapper">
+    
+         	     <form role="form" id="systempropertiesform" th:action="@{'/admin/system/properties/submit'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selecteditem}">
+	         		  		       <input type="hidden" th:field="*{selecteditemvalue}">
+    						
+
+
+       
+       
+                   <div class="content-heading">
+					<span class="text-gray-more h3">Admin:System Properties</span>            
+            		</div>     
+       
+       
+
+
+       		<!-- STANDARD VIEW  -->
+               <div class="row">
+                  <div class="col-lg-12">
+                              <table class="table table-striped table-bordered table-hover">
+                              <thead>
+                                 <tr class="bg-white">
+                                    <th class="text-gray"><span class="text-gray-more">id</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">description</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">value</span></th>
+                                    <th><span class="text-gray"></span></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                              	<tr ID="ITERPOINT_ROW" class="bg-white" th:each="prop, propStat : ${propertiesListDTO}">
+
+		                           
+		                            <td><span class="mt0 text-inverse h4" th:text="${prop.id}"></span></td>
+                                    <td><span class="mt0 text-inverse h4" th:text="${prop.descr}"></span></td>
+                                    <td>
+                                     <textarea th:attr="id=${{prop.id}}" rows="2" class="form-control" cols="100" th:text="${prop.value}"></textarea>
+                                    </td>
+                                    
+                                    
+                                    <td>
+				                        <div class="text-left mt-sm">
+				                            <div class="form-groug">
+					                          <a  th:attr="data-syspropsid=${{prop.id}}" class="btn btn-labeled btn-info-dark syspropertiesaction-save">
+					                           <span class="btn-label pull-left"><i class="fa fa-floppy-o fa-2x"></i>
+					                           </span>
+					                               <span class="h4 mt text-bold text-white pull-left">SAVE</span>
+					                           </a>
+							                   </div>  
+										</div>	
+		                           </td> 
+                                    
+                                    
+                                 </tr>                              
+                              </tbody>
+                             </table>
+                  </div>
+               </div> 
+               
+               </form>              
+       
+       </div>
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+    <script src="../static/vendor/autocomplete-jquery/jquery.autocomplete.js" th:src="@{/vendor/autocomplete-jquery/jquery.autocomplete.js}"></script> 
+    <!-- DATATABLES-->
+   <script src="../static/vendor/datatables/media/js/jquery.dataTables.min.js" th:src="@{/vendor/datatables/media/js/jquery.dataTables.min.js}"></script> 
+   <script src="../static/vendor/datatables-colvis/js/dataTables.colVis.js" th:src="@{/vendor/datatables-colvis/js/dataTables.colVis.js}"></script> 
+   <script src="../static/vendor/datatable-bootstrap/js/dataTables.bootstrap.js" th:src="@{/vendor/datatable-bootstrap/js/dataTables.bootstrap.js}"></script> 
+   <script src="../static/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js" th:src="@{/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js}"></script> 
+  	<script src="../static/js/admin-user-view.js" th:src="@{/js/admin-system-view.js}"> </script>     
+  	<script src="../static/js/paginator.js" th:src="@{/js/paginator.js}"> </script>     
+  
+
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    	  
+    	  
+    	  
+    	  
+    	
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

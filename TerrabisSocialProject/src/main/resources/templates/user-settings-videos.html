@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - User Settings Videos</title>
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+      <section>
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+         
+          <div th:replace="/fragments/user-settings :: user-settings-heading(settingsselected='videos')"></div>
+          <div th:replace="/fragments/user-settings :: user-settings-navigation(settingsselected='videos')"></div>
+         
+
+            
+          </div>  
+          <!-- END CONTENT WRAPPER  --> 
+
+      </section>
+
+
+
+      </section>
+  </body>
+</html>  	  

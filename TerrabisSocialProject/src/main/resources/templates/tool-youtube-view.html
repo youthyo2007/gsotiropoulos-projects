@@ -1,0 +1,469 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-tool">
+  <head>
+    <title>Terrabis - Youtube GEO Search Tool</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+                     <div class="row">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+                           <span class="h4 text-bold text-gray-more text-left">A tool to perform YouTube API v3 searches for videos tagged with geo-coordinates.</span><br/>
+                           </div>  
+                    </div>	
+            </div>
+
+
+
+
+ 			<div class="row mt-lg mb-lg">
+               <div class="col-md-12 col-xs-12 col-sm-12">
+            
+            		            <div id="criteriaPanel" class="panel panel-inverse">
+                        <div class="panel-heading">
+                        <span class="h3 text-gray-more hide_admin_filter_txt text-bold">Search</span>
+                           <a href="#" class="pull-right">
+                              <em class="fa fa-minus hide_admin_filter"></em>
+                           </a>
+                        </div>
+                        <div class="panel-wrapper collapse in">
+                           <div class="panel-body">
+				            <form id="toolsearchform" method="POST" action=""> 
+						      <input type="hidden" id="latitude">
+			   		          <input type="hidden" id="longitude">
+   		          				            
+                    <div class="row">
+                    
+                                    <div class="col-md-6 col-xs-12 col-sm-12">
+					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Location</span>
+						                              	 <input class="typeahead form-control" id="searchLocation" type="text" placeholder="e.g. City, Intersection, Address">
+						                           </div>
+			                      </div>
+
+								                       
+                                    <div class="col-md-6 col-xs-12 col-sm-12">
+					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Keywords</span>
+						                              	 <input type="text" class="typeahead form-control" id="query"  placeholder="drone,cathedral,beach...etc">
+						                           </div>
+
+						                           
+			                      </div>
+			                      
+
+			                       <div class="col-md-4 col-xs-12 col-sm-12">
+					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Time Frame</span>
+						                              	               <select id="timeWindow" class="form-control">
+															                <option value="any" selected="selected">Any Time</option>
+															                <option value="hour">Past Hour</option>
+															                <option value="3hours">Past 3 Hours</option>
+															                <option value="6hours">Past 6 Hours</option>
+															                <option value="9hours">Past 9 Hours</option>
+															                <option value="12hours">Past 12 Hours</option>
+															                <option value="24hours">Past 24 Hours</option>
+															                <option value="week">Past Week</option>
+															                <option value="30days">Past 30 days</option>
+															                <option value="year">Past Year</option>
+															                <option value='custom_range'>Custom Range</option>
+															              </select>
+						                           </div>
+			                      </div>
+			                      
+			                      
+			                      
+			                      <div class="col-md-2 col-xs-12 col-sm-12">
+					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Radious</span>
+											              <select id='locRadius' class="form-control" title='Enter the location radius to search on'>
+											                <option value="">None</option>
+											                <option value="1km">1km</option>
+											                <option value="10km" selected="selected">10km</option>
+											                <option value="50km">50km</option>
+											                <option value="100km">100km</option>
+											                <option value="500km">500km</option>
+											                <option value="1000km">1000km</option>
+											              </select>
+						                           </div>
+			                      </div>
+			         
+			                      <div class="col-md-6 col-xs-12 col-sm-12">
+					 					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Channel List</span>
+						                              	 <input type="text" class="typeahead form-control" id="channelList"  placeholder="Enter comma separated list of channels to search exclusively on">
+						                           </div>
+					 			  </div>	             
+			                      
+
+					 			 
+					 			   <div class="col-md-4 col-xs-12 col-sm-12">
+					 			  <div class="checkbox">
+											  <label><input type="checkbox" id="creativeCommonsOnly" value="true">Creative Commons Only</label>
+									</div>
+									</div>
+  									<div class="col-md-4 col-xs-12 col-sm-12">											
+											<div class="checkbox">
+											  <label><input type="checkbox" id="embedOnly" value="true">Embeddable Only Results</label>
+											</div>
+									</div>		
+								  <div class="col-md-4 col-xs-12 col-sm-12">			
+											<div class="checkbox">
+											  <label><input type="checkbox" id="liveOnly" value="true">Live Only Results</label>
+											</div>
+					 			  </div>
+					 			  
+					 			  
+
+					 			  
+                     
+                     
+			                      
+			                      
+			        </div>
+			        <div class="row">              
+			                <div class="col-md-6 col-xs-12 col-sm-12">    
+			               <div class="text-center pull-left">
+                            <div class="form-group  m-lg">
+			                          <a  class="btn btn-labeled btn-info-dark tool-search">
+			                           <span class="btn-label pull-left"><i class="fa fa-search fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold text-inverse pull-left">SEARCH</span>
+			                           </a>
+			                   </div>  
+							</div>
+							
+							<div class="text-center pull-left">
+                            <div class="form-group  m-lg">
+			                          <a  class="btn btn-labeled btn-inverse tool-clear">
+			                           <span class="btn-label pull-left"><i class="fa fa-minus fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold text-white pull-left">CLEAR</span>
+			                           </a>
+			                   </div>  
+							</div>
+							</div>
+
+
+
+		            </div>                             
+                             </form>
+                           </div>
+                        </div>
+                        
+                     </div>	
+            
+               
+               
+               </div>
+  			</div>             
+  
+  
+  
+ 				<div class="row">
+			   	<div class="col-md-12 col-xs-12 col-sm-12">  
+			   	 	<div id=searchResultCount></div>
+			   	</div>
+			   	</div>
+
+
+
+   		
+   	    <div id="googlemap"  style="position:fixed; top:2%; right:-13%; z-index:10000000000;" class="gmapmd"></div>
+   			
+
+		<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+                              <table class="table table-striped table-bordered table-hover">
+                              <thead>
+                                 <tr class="bg-white">
+                                     <th><span class="text-gray-more">id</span></th>
+                                     <th><span class="text-gray-more">video</span></th>
+                                    <th><span class="text-gray-more">title</span></th>
+                                    <th><span class="text-gray-more">description</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">channel</span></th>
+                                  </tr>
+                              </thead>
+                              <tbody id="resultDiv">
+                              </tbody>
+                              </table>
+
+   		</div>
+   		</div>
+   		
+   		
+   		
+
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script> -->
+   <script src="../static/vendor/youtube-geosearch-tool/search.js" th:src="@{/vendor/youtube-geosearch-tool/search.js}"></script>   
+	<script th:src="@{/js/map-utilities.js}" src="../static/js/map-utilities.js"></script> 
+	<script th:src="@{/js/tool-youtube-view.js}" src="../static/js/tool-youtube-view.js"></script> 
+	
+	
+	
+	
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+
+	
+	
+
+	
+	var selectedVideoType = new Array();
+	
+	if (!Array.prototype.remove) {
+		  Array.prototype.remove = function(val) {
+		    var i = this.indexOf(val);
+		         return i>-1 ? this.splice(i, 1) : [];
+		  };
+	}
+
+
+
+
+	function isVideoTypeSelected(videoTypeId) {
+
+		var isSelected = false;
+		var selectedIndex = -1;
+		for(i=0; i<selectedVideoType.length; i++) {
+			if(selectedVideoType[i]==videoTypeId) {
+				isSelected = true;
+				selectedIndex = i;
+			}
+		}
+		return isSelected;
+	};
+	
+	
+	
+	
+	var s = $("#googlemap");
+    var pos = s.position();                    
+    $(window).scroll(function() {
+        var windowpos = $(window).scrollTop();
+        var topPosition =windowpos-80; 
+        if(windowpos>80)
+        	$('#googlemap').animate({top:topPosition},100,"linear");
+    });
+	
+    
+    
+ 	// DATETIMEPICKER
+	$('#footagedate').datetimepicker({
+		format: 'DD/MM/YYYY',
+		icons: {
+	      time: 'fa fa-clock-o',
+	      date: 'fa fa-calendar',
+	      up: 'fa fa-chevron-up',
+	      down: 'fa fa-chevron-down',
+	      previous: 'fa fa-chevron-left',
+	      next: 'fa fa-chevron-right',
+	      today: 'fa fa-crosshairs',
+	      clear: 'fa fa-trash'
+	    }
+	});
+    
+	
+	
+	$(document).delegate('.videopanel', 'mouseover', function() {
+		
+		if(terrabisApp.currentVideo!=null)
+			markersArray[terrabisApp.currentVideo.id-1].setAnimation(null);
+		
+		terrabisApp.currentVideo = this.dataset;
+		latitude = parseFloat(terrabisApp.currentVideo.lat);
+		longitude = parseFloat(terrabisApp.currentVideo.lng);
+		markersArray[terrabisApp.currentVideo.id-1].setAnimation(google.maps.Animation.BOUNCE);
+		terrabisApp.globalMap.setCenter(markersArray[terrabisApp.currentVideo.id-1].getPosition());
+		terrabisApp.globalMap.setZoom(15);
+		
+		
+		checkIfDuplicateYoutubeID();
+		
+		
+ 		//terrabisApp.globalMap.setCenter(new google.maps.LatLng(latitude,longitude));
+		//terrabisApp.mapCenterMarker.setPosition(new google.maps.LatLng(parseFloat(terrabisApp.currentVideo.lat),parseFloat(terrabisApp.currentVideo.lng))); 
+		
+		
+	});
+	
+	$(document).delegate('.videopanel', 'mouseout', function() {
+		markersArray[terrabisApp.currentVideo.id].setAnimation(null);
+		
+	});
+	
+	
+	/********************** PLAY VIDEO BUTTON ON BOOTSTRAP MODAL *************************************************************/
+	$(document).delegate('.vidoverlay_playvidbtn', 'click', function() {
+		
+			
+		
+			$("#videomodal").modal();
+			$("#videomodal_iframe").attr( "src", terrabisApp.currentVideo.videourl+"?autoplay=1&rel=0&modestbranding=1");
+			$("#videomodal_title").html(terrabisApp.currentVideo.id);
+
+			 //FORM SET VALUES
+			 $("#tooluploadform input[name='latitude']").val(terrabisApp.currentVideo.lat);
+			 $("#tooluploadform input[name='longitude']").val(terrabisApp.currentVideo.lng);
+			 $("#tooluploadform input[name='linkedurl']").val(terrabisApp.currentVideo.videourl);
+			 $("#tooluploadform input[name='title']").val(terrabisApp.currentVideo.title);
+			 $("#tooluploadform textarea[name='description']").val(terrabisApp.currentVideo.description);
+	});
+
+
+	/**********************  CLOSE VIDEO  ************************************************************************/
+	$(document).delegate('.videomodalclose', 'click', function() {
+		$("#videomodal_iframe").attr( "src", " ");
+		$("#videomodal_title").html("");
+	    $(".videomodal_message").switchClass("-", "hidden", 0, "easeInOutQuad" );
+	    $(".videomodal_message").html("");
+	});
+	
+
+	
+	
+	/**********************  SAVE VIDEO  ************************************************************************/
+	$(document).delegate('.videomodalsubmit', 'click', function() {
+		   var videodata = {
+				    latitude: $("#tooluploadform input[name='latitude']").val(),
+				    longitude: $("#tooluploadform input[name='longitude']").val(),
+				    title: $("#tooluploadform input[name='title']").val(),
+				    linkedurl: $("#tooluploadform input[name='linkedurl']").val(),
+				    description: $("#tooluploadform textarea[name='description']").val(),
+				    selectedvideotypelist: $("#tooluploadform input[name='selectedvideotypelist']").val(),
+				    shootingtypeid: $("#tooluploadform input[name='shootingtypeid']").val(),
+				    footagedate: $("#tooluploadform input[name='*{footagedate}']").val()
+		   }	
+		   
+		   
+		   
+		   $("#videomodal_message").switchClass( "hidden", "-", 0, "easeInOutQuad" );
+		 	$("#videomodal_message").html("Please wait........");
+			
+		   
+		  //POST DATA 
+     	  $.ajax({ 
+  		    url:  '/tool/youtube/submit/', 
+  		    type: 'POST', 
+  		    dataType: 'json',
+  		    contentType: "application/json; charset=utf-8",
+  		    cache: false, // Force requested pages not to be cached by the browser
+  		    processData: false, // Avoid making query string instead of JSON		        		    
+  		    data: JSON.stringify(videodata),
+  		    beforeSend: function (request)
+				{
+
+					request.setRequestHeader("X-CSRF-TOKEN", terrabisApp.csrf_token);
+				},
+  		    success: function(data) { 
+  		    	$("#videomodal_message").html("Successfull video upload.Please close the modal");
+				
+  		    },
+  		    error: function (xhr, status, error) {  
+  		        $("#videomodal_message").switchClass( "text-info-dark", "text-danger", 0, "easeInOutQuad" );
+  		    	$("#videomodal_message").html("Error uploading:"+JSON.stringify(error));
+  		    }
+  		}); 
+		   
+		   
+		   
+		   
+		
+		
+	});
+	
+	
+
+	
+	
+	/****************************EVENTS FOR VIDEO SHOOTING AND VIDEO TYPE ****************************************************/	
+	$(".videoshootingtyperadiobox input").click(function() {
+		$("#tooluploadform input[name='shootingtypeid']").val(this.value);
+	});
+		
+		
+
+	$(".videotypecheckbox input").click(function() {
+		if($(this).is(':checked')) {
+			if(!isVideoTypeSelected(this.value))
+				selectedVideoType.push(this.value);
+			//ADD VIDEO TYPE
+		} else {
+			selectedVideoType.remove(this.value);
+			//REMOVE VIDEO TYPE
+		}
+		
+		//UPDATE FORM
+		$("#tooluploadform input[name='selectedvideotypelist']").val(selectedVideoType.toString());
+
+	});
+	/****************************EVENTS FOR VIDEO SHOOTING AND VIDEO TYPE ****************************************************/	
+	
+	
+
+	
+	
+	/********************** MOUSE OVER MOUSE OUT *************************************************************/
+	$(document).delegate('.tool-search', 'click', function() {
+		clickedSearchButton();
+	});
+	
+
+	//var input =  document.getElementById('searchLocation');
+	//var autocomplete = new google.maps.places.Autocomplete(input);
+	 
+
+	//ALSO LISTEN TO KEY PRESS EVENT AND IF ENTER ALSO SEARCH LOCATION
+ 	 $('#searchLocation').keypress(function(event) {
+		 if ( event.which == 13 ) {
+		     event.preventDefault();
+		     clickedSearchButton();
+		  };		 
+	 });
+ 
+	
+
+	
+
+	
+	
+	
+
+});	
+/*]]>*/
+</script>  
+
+
+	
+	
+	
+	
+	
+	
+	
+
+
+
+      </section>
+
+
+
+  </body>
+</html>  	  

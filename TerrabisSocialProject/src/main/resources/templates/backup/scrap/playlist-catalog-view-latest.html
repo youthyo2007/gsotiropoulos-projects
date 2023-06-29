@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Video Paths</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+           <div class="content-heading">
+   				  <span class="text-gray text-bold h1">Video Paths</span>           
+            </div>
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+     
+           	<!-- PLAYLIST VIEW -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+					<div th:replace="/fragments/video-grid-view :: playlist-catalog(collListDTO=${collectionListDTO}, colstyle=4,showavatar='true')"></div>
+      		</div>
+
+      		
+      		
+      		
+      		
+      	</div>	
+      	<!-- PLAYLIST VIEW -->  
+     
+     </div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    		//PAGE SPECIFIC GRID VIEW STYLE
+    		//terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

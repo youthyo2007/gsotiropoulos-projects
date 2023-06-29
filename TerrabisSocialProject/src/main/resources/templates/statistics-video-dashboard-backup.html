@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
+
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+   
+   
+   
+     <link href="../static/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
+          th:href="@{/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/fullscreenoverlay/css/style5.css"
+          th:href="@{/vendor/fullscreenoverlay/css/style5.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/royalslider/royalslider.css"
+          th:href="@{/vendor/royalslider/royalslider.css}" rel="stylesheet" />
+
+     <link href="../static/vendor/royalslider/rs-default.css"
+          th:href="@{/vendor/royalslider/rs-default.css}" rel="stylesheet" />
+          
+       <link href="../static/vendor/jqcloud/dist/jqcloud.min.css"
+          th:href="@{/vendor/jqcloud/dist/jqcloud.min.css}" rel="stylesheet" />
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+ 
+ 
+ 
+   <style>
+   
+   	.layout {
+   		background-color: #363e5b;
+  	}
+   
+   	.content-wrapper  {
+   		background-color: #363e5b;
+  	}
+   
+   
+  	.content-wrapper .content-heading {
+   		background-color: #363e5b;
+  	}
+  
+  
+  
+   
+   </style>
+  
+  </head>
+ 
+ 
+ 
+ 
+   <body class="layout">
+	    
+
+   
+  <div class="wrapper">
+
+
+
+
+        <!-- Main section-->
+      <section>
+
+
+
+         <div class="content-wrapper">
+                     <div class="content-heading">
+					<span class="text-gray h3">Statistics:Videos:Video Status Dashboard</span>            
+            		</div>
+  
+  
+
+ <!--  
+         		       <div class="row">  
+	              <div class="col-md-12 col-sm-12">
+			             <div id="barChartContainer" class="min-height-lg">
+                    </div>
+			          
+	              </div>    
+		       </div> 	
+   -->
+
+          			<div class="row mt-lg">  
+ 										         		            
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Published</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;">26</span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Rejected</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;">23</span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;">Broken</span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;">2</span>
+								   </div>
+							</div>							
+							
+								
+            		</div>   
+   
+          			<div class="row">  
+ 						<div id="lineChartPublishedVsRejectedVideosPerDay"></div>
+            		</div>
+
+
+  
+         		       <div class="row mt-lg">  
+
+   						              <div class="col-md-6 col-sm-12">	
+					 <span class="text-gray" style="font-size: 48px;">Top 10 Played</span><br/><br/>        
+				    <table class="table table-striped">
+                              <!-- <thead>
+                                 <tr>
+                                    <th><span class="text-gray"></span></th>
+                                     <th><span class="text-gray">video</span></th>
+                                    <th><span class="text-gray">plays</span></th>
+                                 </tr>
+                              </thead>-->
+                              <tbody>
+                              	<tr style="background-color: #363e5b;">
+								  <td><span class="text-gray h1">1</span></td>
+		                           <td><span class="text-gray h3">amazing greece</span></td>
+								   <td><span class="text-gray h3">125</span></td>
+								</tr>
+                              	<tr style="background-color: #363e5b;">
+								  <td><span class="text-gray h1">2</span></td>
+		                           <td><span class="text-gray h3">amazing greece</span></td>
+								   <td><span class="text-gray h3">125</span></td>
+								</tr>
+
+								</tbody>
+					</table>
+						                    </div>
+											
+   						              <div class="col-md-6 col-sm-12">
+									            <div id="donutChartVideosPerStatus"></div>
+						                    </div>											
+
+		       			</div> 	
+		       									   
+				
+				<br/><br/><br/>
+				
+				
+				
+					<div class="row mt-lg">  
+         		            <div class="col-md-12 col-sm-12 text-center">
+				<span class="text-gray"  style="font-size: 48px;">Video Play Activity Chart</span><br/>    
+					   </div>											
+
+		       			</div> 	
+				
+				    <div class="row mt-lg">  
+ 						<div id="lineChartActivityPerDay"></div>
+            		</div>
+				
+				
+          			<div class="row mt-lg">  
+ 										         		            
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Plays</span><br/>    
+    		        						<span class="text-gray h3">26</span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Likes</span><br/>    
+    		        						<span class="text-gray h3">23</span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray h1">Total Shares</span><br/>    
+    		        						<span class="text-gray h3">2</span>
+								   </div>
+							</div>							
+							
+								
+            		</div>   
+   				
+				
+		       		      
+      
+						  
+		   
+		       		       
+		       		       
+		       		       
+		       
+		       
+		       			            
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+	<script src="../static/js/knockout-min.js" th:src="@{/js/knockout-min.js}"> </script> 
+	 <script src="../static/js/globalize.min.js" th:src="@{/js/globalize.min.js}"> </script> 
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/dx-chart/dx.chartjs.js" th:src="@{/vendor/dx-chart/dx.chartjs.debug.js}"></script>     
+	<script src="../static/js/dx-chart-assistant.js" th:src="@{/js/dx-chart-assistant.js}"></script>     
+	<script src="../static/js/statistics-video-view.js" th:src="@{/js/statistics-video-view.js}"> </script> 
+
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+  var lineChartData = [{
+		    		    xcolumn: "Monday",
+		    		    value1: 3,
+						value2: 1
+		    		}, {
+						xcolumn: "Tuesday",
+		    		    value1: 13,
+						value2: 1
+		    		}, {
+		    			xcolumn: "Wednesday",
+		    		    value1: 3,
+						value2: 7
+		    		}, {
+		    			xcolumn: "Thursday",
+		    		    value1: 3,
+						value2: 1
+		    		}, {
+		    			xcolumn: "Friday",
+		    		    value1: 7,
+						value2: 20
+		    		}, {
+		    			xcolumn: "Saturday",
+		    		    value1: 15,
+						value2: 8
+		    		}, {
+		    			xcolumn: "Sunday",
+		    		    value1: 3,
+						value2: 1
+		    		}];
+
+		  
+		  
+		    var donutChartData = [{
+		    		    column1: "Published",
+		    		    columnvalue: 30
+		    		}, {
+						column1: "Rejected",
+		    		    columnvalue: 10
+		    		}, {
+						column1: "Other",
+		    			columnvalue: 5
+		    		}
+		    		];
+		  
+		  
+
+		  
+		  
+		  	var singlelineChartData = [{
+		    		    column1: "Monday",
+		    		    columnvalue: 30
+		    		}, {
+						column2: "Tuesday",
+		    		    columnvalue: 10
+		    		}, {
+						column1: "Wensday",
+		    			columnvalue: 5
+		    		}
+		    		];
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  //CREATE GAUGES
+ 	   	  //var gaugeIsPIvideosUploadedInOneDayOptions = percentageGaugeOptions([[${stDTO.dash1DTO.KPIvideosUploadedInOneDay.current}]],10, [[${stDTO.dash1DTO.KPIvideosUploadedInOneDay.current}]]+' Avg Daily Uploads',100);  	  
+ 	      //$("#gaugeIsPIvideosUploadedInOneDay").dxCircularGauge(gaugeIsPIvideosUploadedInOneDayOptions);
+		
+ 	   	  //var gaugeIsPIvideosUploadedInOneMonthOptions = percentageGaugeOptions([[${stDTO.dash1DTO.KPIvideosUploadedInOneMonth.current}]],25, [[${stDTO.dash1DTO.KPIvideosUploadedInOneMonth.current}]] + ' Avg Monthly Uploads',300);  	  
+ 	      //$("#gaugeIsPIvideosUploadedInOneMonth").dxCircularGauge(gaugeIsPIvideosUploadedInOneMonthOptions);
+
+    	  
+    	  
+  		  //CREATE BAR CHART	
+ 	   	  //var barChartVideosPerMonthData = JSON.parse([[${stDTO.dash1DTO.barChartVideosPerMonth}]]);
+		  //var barChartOptionsVideosPerMonth = barChartOptions(barChartVideosPerMonthData,'Uploads Per Month','Month Bar',[[${stDTO.dash1DTO.maxVideosPerMonth}+100]]);
+		  //$("#barChartVideosPerMonth").dxChart(barChartOptionsVideosPerMonth);
+ 	      
+
+		  
+		  //var pieChartVideosPerSourceData = JSON.parse([[${stDTO.dash1DTO.pieChartVideosPerSource}]]);
+		  //var pieChartOptionsVideosPerSource = pieChartOptions(pieChartVideosPerSourceData,'Videos Per Source');
+		  //$("#pieChartVideosPerSource").dxPieChart(pieChartOptionsVideosPerSource);
+
+		 
+		  var lineChartOpt = multiLineChartOptions(lineChartData,' Published Vs Rejected Line Graph',['Published','Rejected'],20);
+		  $("#lineChartPublishedVsRejectedVideosPerDay").dxChart(lineChartOpt);
+		  
+		  var singlelineChartOpt = lineChartOptions(singlelineChartData,'Daily Line Graph','Video Plays',100);
+		  $("#lineChartActivityPerDay").dxChart(singlelineChartOpt);	
+		  
+		  
+		  var pieChartOpt = pieChartOptions(donutChartData,'Videos Per Status');
+		  $("#donutChartVideosPerStatus").dxPieChart(pieChartOpt);		  		  
+				  
+ 		
+	 
+			  
+				  
+				  
+			
+		  /* 
+		  		  var dataSource = [{
+		    		    column1: "Monday",
+		    		    columnvalue: 3
+		    		}, {
+		    			column1: "Tuesday",
+		    		    columnvalue: 2
+		    		}, {
+		    			column1: "Wednesday",
+		    		    columnvalue: 3
+		    		}, {
+		    			column1: "Thursday",
+		    		    columnvalue: 4
+		    		}, {
+		    			column1: "Friday",
+		    		    columnvalue: 6
+		    		}, {
+		    			column1: "Saturday",
+		    		    columnvalue: 11
+		    		}, {
+		    			column1: "Sunday",
+		    		    columnvalue: 4
+		    		}]; */
+		  		  
+		  
+    	  
+    	  
+
+/*     	  var dataSource = [{
+    		    column1: "Monday",
+    		    columnvalue: 3
+    		}, {
+    			column1: "Tuesday",
+    		    columnvalue: 2
+    		}, {
+    			column1: "Wednesday",
+    		    columnvalue: 3
+    		}, {
+    			column1: "Thursday",
+    		    columnvalue: 4
+    		}, {
+    			column1: "Friday",
+    		    columnvalue: 6
+    		}, {
+    			column1: "Saturday",
+    		    columnvalue: 11
+    		}, {
+    			column1: "Sunday",
+    		    columnvalue: 4
+    		}];
+    	  
+    	  
+
+    	  
+    	  
+    		var barChartContainerOptions = createBarChartOptions(dataSource,'My Oranges');
+			$("#barChartContainer").dxChart(barChartContainerOptions);
+			
+    	  
+    	  */
+    	  
+    	  
+		 	   	
+				
+				 
+				//var pieChartOptionsVideosPerSource = createPieChartOptions([[${stDTO.dash1DTO.pieChartVideosPerSource}]]); 
+				//$("#pieChartVideosPerSource").dxPieChart(pieChartOptionsVideosPerSource); 
+
+
+
+		});    	  
+    	  
+    	  
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+	  </div>
+
+  </body>
+</html>  
+
+
+
+
+
+
+
+
+    	  /*   
+    		
+    	  
+    	   $(function() {
+var viewModel = {
+gaugeticketNumberCountOptions: gaugeticketNumberCountOptions,
+ticketsResolvedPercentageOptions: ticketsResolvedPercentageOptions,
+ticketsResolvedInOneDayPercentageOptions: ticketsResolvedInOneDayPercentageOptions,
+ticketsResolvedInOneWeekPercentageOptions: ticketsResolvedInOneWeekPercentageOptions,
+ticketNumberCount: ${ticketCount},
+ticketOpenedCount: ${ticketOpenedCount},
+ticketClosedCount: ${ticketClosedCount},
+ticketsResolvedPercentage: ${ticketsResolvedPercentage}+'%',
+ticketsResolvedInOneDayPercentage: ${ticketsResolvedInOneDayPercentage}+'%',
+ticketsResolvedInOneWeekPercentage: ${ticketsResolvedInOneWeekPercentage}+'%'
+
+};
+
+ko.applyBindings(viewModel); 
+
+    	  
+    	  
+    	  terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+    		terrabisApp.pageView = [[${execInfo.templateName}]];
+    		terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+    		terrabisApp.contextPath = [[${CTXPATH}]];    	  
+    		terrabisApp.data = [[${videoListDTO}]]; 
+    		var PARTITIONS =  [[${videoListDTO}]];
+    		
+    		if(PARTITIONS.length>0) 
+				createHtml_Paginator([[${ADMINPAGINATOR}]]);
+			else
+				createHtml_EmptyPaginator();
+			
+    		
+    		//CHANGE GRID VIEW STYLE
+    		$(".gridviewstyle-control").click(function() {
+    			initializeGridViewControls(this.id);
+    			terrabisApp.gridViewStyle = this.id;
+    			createHtml_GridResultView(terrabisApp.data,false);
+    			
+    			//UPDATE SESSION WITH THE NEW STYLE
+    			//gridview_StyleChange(this.id);
+    			
+    		});
+    		
+    		
+    		 */
+
+
+
+	  
+    	/*    var gaugeOptionsVideosCount = createGaugeOptions([[${stDTO.countVideos}]],10,
+                   [{
+                       startValue: 0,
+                       endValue: 48,
+                       color: gaugesPalette[0]
+                   }, {
+                       startValue: 52,
+                       endValue: 98,
+                       color: gaugesPalette[1]
+                   }, {
+                       startValue: 102,
+                       endValue: 148,
+                       color: gaugesPalette[2]
+                   }, {
+                       startValue: 152,
+                       endValue: 200,
+                       color: gaugesPalette[3]
+                   }],
+                   colors);
+
+var gaugeOptionsVideosUploaded = createGaugeOptions([[${stDTO.percentageVideosUploaded}]],
+                       25,
+                       [{
+                           startValue: 0,
+                           endValue: 24,
+                           color: gaugesPalette[3]
+                       }, {
+                           startValue: 26,
+                           endValue: 49,
+                           color: gaugesPalette[1]
+                       }, {
+                           startValue: 51,
+                           endValue: 74,
+                           color: gaugesPalette[0]
+                       }, {
+                           startValue: 76,
+                           endValue: 100,
+                           color: gaugesPalette[0]
+                       }],
+                                   colors); 
+                                   
+var videoUploadedInOneDayPercentageOptions = createGaugeOptions([[${stDTO.videosUploadedInOneDayPercentage}]],
+                       25,
+                       [{
+                           startValue: 0,
+                           endValue: 24,
+                           color: gaugesPalette[3]
+                       }, {
+                           startValue: 26,
+                           endValue: 49,
+                           color: gaugesPalette[0]
+                       }, {
+                           startValue: 51,
+                           endValue: 74,
+                           color: gaugesPalette[0]
+                       }, {
+                           startValue: 76,
+                           endValue: 100,
+                           color: gaugesPalette[0]
+                       }],
+                                   colors); 
+                                   
+
+var videosUploadedInOneWeekPercentageOptions = createGaugeOptions([[${stDTO.videosUploadedInOneWeekPercentage}]],
+                       25,
+                       [{
+                           startValue: 0,
+                           endValue: 24,
+                           color: gaugesPalette[3]
+                       }, {
+                           startValue: 26,
+                           endValue: 49,
+                           color: gaugesPalette[0]
+                       }, {
+                           startValue: 51,
+                           endValue: 74,
+                           color: gaugesPalette[0]
+                       }, {
+                           startValue: 76,
+                           endValue: 100,
+                           color: gaugesPalette[0]
+                       }],
+                                   colors); 
+                                   
+                                   
+                                   
+
+ */	  

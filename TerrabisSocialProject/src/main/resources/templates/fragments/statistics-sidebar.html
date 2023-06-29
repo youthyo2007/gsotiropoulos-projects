@@ -1,0 +1,137 @@
+<!-- sidebar-->
+      <aside class="aside" th:fragment="sidebar-video">
+      
+         <!-- STATISTICS VIDEOS MENU-->
+         <div id="statisticsmenu_videos" class="aside-inner">
+            <form id="statisticsmenu_videos_filterform" method="POST" th:action="@{'/admin/videos/advanced-filter'}"  th:object="${STATSQUERYFRM}"> <nav data-sidebar-anyclick-close="" class="sidebar">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+
+
+                  <li class="mt-lg">
+                     <a th:href="@{/admin/videos/view:published/filter:all?recalc=1}" class="bg-white adminmenu_select_video" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-archive fa-2x adminmenu_select_video -"></em>
+                        <span class="adminmenu_select_video - text-bold text-inverse text-uppercase" data-localize="sidebar.nav.admin">Admin Videos</span>
+                     </a>
+                  </li>   
+
+
+                 <li class="">
+                     <a  th:classappend="${page=='admin-claim-view'} ? bg-info : bg-white" th:href="@{/admin/claims/view:all/filter:all?recalc=1}" class="adminmenu_select_claims" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-file fa-2x adminmenu_select_claims -"></em>
+                        <span  th:classappend="${page=='admin-claim-view'} ? text-white : text-inverse" class="adminmenu_select_claims - text-bold  text-uppercase" data-localize="sidebar.nav.admin">Admin Claims</span>
+                     </a>
+                  </li>
+
+                 <li class="">
+                     <a th:href="@{/admin/users/view:all/filter:all?recalc=1}" class="bg-white adminmenu_select_user" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-smile-o fa-2x adminmenu_select_user -"></em>
+                        <span class="adminmenu_select_user - text-bold text-inverse text-uppercase" data-localize="sidebar.nav.admin">Admin Users</span>
+                     </a>
+                  </li> 
+                  
+                  
+                  
+                  <li class="">
+                     <a href="#" class="bg-info adminmenu_select_statistics" title="statistics">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-line-chart fa-2x dminmenu_select_statistics -"></em>
+                        <span class="adminmenu_select_statistics - text-bold text-white text-uppercase" data-localize="sidebar.nav.statistics">Statistics</span>
+                     </a>
+                  </li> 
+                  
+
+                  <li class="">
+                     <a href="#activity" class="bg-white" title="activity statistics" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-th-list fa-2x advmenu_activity text-info -"></em>
+                        <span class="advmenu_activity - text-info text-bold text-uppercase" data-localize="sidebar.nav.activity">Activity</span>
+                     </a>
+                     <ul id="activity" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more advmenu_activity">activity</span></li>
+         
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">videos</span></li> -->
+                        <li class="">
+            								<div class="row ml-sm mt-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12">
+                       								  <a class="text-black text-sm" th:href="@{/statistics/activity/dashboard-1/data?reset=true}">
+															 <span class="text-uppercase">- Daily Activity</span>
+													  </a>	 
+					                           		</div>    
+                       						</div>
+                        </li>
+                        
+                         <li class="">
+            								<div class="row ml-sm mt-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12">
+                       								  <a class="text-black text-sm" th:href="@{/statistics/activity/dashboard-2/data?reset=true}">
+															 <span class="text-uppercase">- Most Played Liked Shared Activity</span>
+													  </a>	 
+					                           		</div>    
+                       						</div>
+                        </li>
+                     </ul>
+                  </li>
+                  
+
+                  <li class="">
+                     <a href="#graphs" class="bg-white" title="graph statistics" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-line-chart text-info fa-2x advmenu_charts -"></em>
+                        <span class="advmenu_charts - text-info text-bold text-uppercase" data-localize="sidebar.nav.videos">Charts & Graphs</span>
+                     </a>
+                     <ul id="graphs" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more advmenu_graphs">Charts & Graphs</span></li>
+         
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">videos</span></li> -->
+                        <li class="">
+            								<div class="row ml-sm mt-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12">
+                       								  <a class="text-black text-sm" th:href="@{/statistics/videos/dashboard-1?reset=true}">
+															 <span class="text-uppercase"> - Video Traffic Upload Dashboard</span>
+													  </a>	 
+					                           		</div>    
+                       						</div>
+                        </li>
+                        <li class="">
+            								<div class="row ml-sm mt-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12">
+                       								  <a class="text-black text-sm" th:href="@{/statistics/videos/dashboard-2?reset=true}">
+															  <span  class="bg-info-dark text-white text-bold text-sm"> NEW! </span> <span class="text-uppercase"> - Performance Dashboard </span>
+													  </a>	 
+					                           		</div>    
+                       						</div>
+                        </li>                        
+                      <li class="">
+            								<div class="row ml-sm mt-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12">
+                       								  <a class="text-black text-sm" th:href="@{/statistics/users/dashboard-1?reset=true}">
+															 <span class="text-uppercase"> - User Registrations Dashboard</span>
+													  </a>	 
+					                           		</div>    
+                       						</div>
+                        </li>                        
+                     </ul>
+                  </li>
+
+
+              
+                   <li class="">
+                     <a th:href="@{/admin/system/properties}" class="bg-white adminmenu_select_system" title="administration">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-cogs fa-2x adminmenu_select_system -"></em>
+                        <span class="adminmenu_select_system - text-bold text-inverse text-uppercase" data-localize="sidebar.nav.system">System</span>
+                     </a>
+                  </li>  
+                  
+                </ul>
+               <!-- END sidebar nav-->
+            </nav></form>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+
+

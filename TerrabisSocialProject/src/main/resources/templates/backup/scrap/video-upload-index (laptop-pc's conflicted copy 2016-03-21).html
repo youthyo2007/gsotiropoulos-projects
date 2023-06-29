@@ -1,0 +1,213 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-upload">
+  <head>
+    <title>Terrabis - Video Upload</title>
+    
+     <link href="../static/vendor/blueimp-file-upload/css/jquery.fileupload.css"
+          th:href="@{/vendor/blueimp-file-upload/css/jquery.fileupload.css}" rel="stylesheet"/>   
+          
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+         
+         
+         
+			<!--  HEADING -->	         
+            <div class="content-heading">
+                          <div class="row">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+                            <span class="h3 text-bold text-gray text-left">GREAT ANOTHER UPLOAD!</span><br/>
+                        </div>  
+                 </div>	
+               
+            </div>
+            <!-- HEADING -->         
+
+						<div th:replace="/fragments/upload-fragment :: upload"></div>
+
+
+
+   		</div> 
+          <!-- END CONTENT WRAPPER  --> 
+
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+<script src="../static/vendor/dropzone/dropzone.js" th:src="@{/vendor/dropzone/dropzone.js}"></script> 
+<script th:src="@{/js/video-upload-index.js}" src="../static/js/video-upload-index.js"></script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+     
+$( document ).ready(function() {
+	
+	
+		/************************************* UPLOAD CODE *********************************/
+		//INIT MARKER IMAGE
+		terrabisApp.googleMarkerCenterMapImgURL = [[@{'/images/markers-list/map-marker-center.png'}]];
+					
+		//INIT LOCATION FOR UPLOAD
+		terrabisApp.uploadLatitude = [[${GMAPRESULT.location.lat}]];
+		terrabisApp.uploadLongitude = [[${GMAPRESULT.location.lng}]];
+		
+		//INITIALIZE UPLOAD VIEW	
+		initializeUploadView([[${tagDTOList}]]);
+	
+	
+		
+		
+		/************************************* VALIDATE FORM  *********************************/
+		var regYoutube = "/^.*((youtu.be/)|(v/)|(/u/w/)|(embed/)|(watch?))??v?=?([^#&?]*).*/";
+		var regVimeo = "/^.*(vimeo.com/)((channels/[A-z]+/)|(groups/[A-z]+/videos/))?([0-9]+)/";
+
+		
+		
+		 var urlLinkValidator = {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video URL is required'
+		                },
+			            regexp: {
+			                regexp: /((http(s)?:\/\/)?)(www\.)?((vimeo\.com\/)|(youtube\.com\/)|(youtu.be\/))[\S]+/,
+			                message: 'This is not a valid YouTube or Vimeo URL'
+			            },	            
+		                remote: {
+			                        message: 'This video is already uploaded by another user',
+			                        data: function(validator, $field, value) {
+			                            return {
+			                            	videourl: validator.getFieldElements('linkedurl').val()
+			                            };
+			                        },
+			                        url: '/rest-validation/upload/duplicate/video-url',
+			                        type:  [[${_csrf.token}]]
+			                }  		            
+		        
+		            }
+		        };
+		
+
+		var formValidation = $('#videofileuploadform').formValidation({
+		    framework: 'bootstrap',
+		    icon: {
+		        valid: 'fa  fa-check',
+		        invalid: 'fa fa-check fa-remove',
+		        validating: 'fa fa-refresh'
+		    },
+		    fields: {
+		        title: {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video title is required'
+		                }
+		            }
+		        },
+		        "footagedate": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Footage date is required'
+		                },
+			            date: {
+			                format: 'DD/MM/YYYY',
+			                message: 'The value is not a valid date'
+			            }
+			        }
+			                
+		        },
+		        "privacy": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video privacy is required'
+		                }
+		            }
+		        },
+		        "videoshootingtype": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video Shooting type is required'
+		                }
+		            }
+		        },
+		        "videotype": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video Type is required'
+		                }
+		            }
+		        },
+		        "linkedurl": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video URL is required'
+		                },
+			            regexp: {
+			                regexp: /((http(s)?:\/\/)?)(www\.)?((vimeo\.com\/)|(youtube\.com\/)|(terrabis\.com\/)|(youtu.be\/))[\S]+/,
+			                message: 'This is not a valid YouTube or Vimeo URL'
+			            },	            
+		                remote: {
+			                        message: 'This video is already uploaded by another user',
+			                        data: function(validator, $field, value) {
+			                            return {
+			                            	videourl: validator.getFieldElements('linkedurl').val()
+			                            };
+			                        },
+			                        url: '/rest-validation/upload/duplicate/video-url',
+			                        type:  [[${_csrf.token}]]
+			                }  		            
+		        
+		            }
+		        }, 
+		        "description": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Enter a short description'
+		                }
+		            }
+		        },
+		        "category.id": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Category is required'
+		                }
+		            }
+		        }
+		    }
+			});	
+
+		
+		/************************************* UPLOAD CODE *********************************/
+
+
+});	
+
+
+/*]]>*/
+</script>   
+
+
+
+
+ 
+</section>      
+  </body>
+</html>  	  

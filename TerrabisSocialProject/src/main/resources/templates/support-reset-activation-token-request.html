@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Support - Account Activation</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+                     <div class="row">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+                           <span class="h2 text-bold text-gray-more text-left">ACTIVATE YOUR ACCOUNT</span><br/>
+                           </div>  
+                    </div>	
+            </div>
+
+
+	       <div class="row mt-lg mb-lg">
+               <div class="col-md-4 col-xs-12 col-sm-12"><br/><br/>
+               <form ID="reseendactivationform" role="form" th:action="@{'/support/reset-activation-token/request/submit'}" th:object="${REGISTERFRM}" method="post">
+               
+
+	                              <span class="h4 text-bold text-gray-more">Please enter your email</span><br/><br/>
+                                          <div class="form-group">
+			                                    <input class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{email}"></input>
+			                              </div>	
+               
+               
+                               <div class="form-group mt-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">SEND</span>
+			                           </button>
+			                   </div>  
+ 
+ 				</form>
+               </div>
+       		</div>  
+
+  
+
+
+ <div class="row mt-lg mb-lg">
+               <div class="col-md-5 col-xs-12 col-sm-12">
+               </div>
+  </div>             
+  
+     
+
+   		</div>
+   		
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+      </section>
+
+
+
+  </body>
+</html>  	  

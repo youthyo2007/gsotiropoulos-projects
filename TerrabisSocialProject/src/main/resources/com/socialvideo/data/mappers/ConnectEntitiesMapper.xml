@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.ConnectEntitiesMapper">
+
+    <insert  id="videoAddCollection" parameterType="map">
+ 		INSERT INTO collectionsvideos (videoid_fk, collectionid_fk) VALUES (#{videoid}, #{collectionid})
+    </insert>
+
+	<delete  id="videoRemoveCollection" parameterType="map">
+ 		DELETE FROM collectionsvideos WHERE videoid_fk=#{videoid} AND collectionid_fk= #{collectionid}
+    </delete>
+
+
+	<delete  id="removeCollectionVideos" parameterType="map">
+ 		DELETE FROM collectionsvideos WHERE  collectionid_fk= #{collectionid}
+    </delete>
+
+	<delete  id="videoRemoveFromAllCollections" parameterType="map">
+ 		DELETE FROM collectionsvideos WHERE videoid_fk=#{videoid}
+    </delete>
+
+	<select  id="videoExistsCollection" parameterType="map" resultType="java.lang.Long">
+ 		SELECT collectionid_fk FROM collectionsvideos WHERE videoid_fk=#{videoid}
+ 		<if test="collectionid != null and collectionid != ' '"> 
+ 		AND collectionid_fk= #{collectionid} 
+ 		</if>
+ 		limit 1
+    </select>
+
+
+    <insert  id="videoPlay" parameterType="map">
+ 		INSERT INTO playsvideos (videoid_fk, userid_fk) VALUES (#{videoid}, #{userid})
+    </insert>
+
+    <insert  id="collectionPlay" parameterType="map">
+ 		INSERT INTO playscollections (collectionid_fk, userid_fk) VALUES (#{collectionid}, #{userid})
+    </insert>
+
+
+
+    <insert  id="videoRate" parameterType="map">
+ 		INSERT INTO ratings (videoid_fk, userid_fk,rating) VALUES (#{videoid}, #{userid},#{rating})
+    </insert>
+    
+    
+    <update id="updateVideoRate" parameterType="map">
+ 		UPDATE ratings SET rating=#{rating} WHERE userid_fk=#{userid} AND videoid_fk=#{videoid}
+    </update>
+    
+
+    <insert  id="userFollowUser" parameterType="map">
+ 		INSERT INTO followers (userid_fk, userfollowedid_fk) VALUES (#{userid}, #{userfollowedid})
+    </insert>
+
+    <delete  id="userUnFollowUser" parameterType="map">
+ 		DELETE FROM followers WHERE userid_fk=#{userid} AND userfollowedid_fk=#{userfollowedid}
+    </delete>
+    
+    	<select id="isUserFollowingUser" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM followers WHERE userid_fk=#{userid} AND userfollowedid_fk=#{userfollowedid}
+	</select>
+        
+
+    <insert  id="videoLike" parameterType="map">
+ 		INSERT INTO likesvideos (videoid_fk, userid_fk) VALUES (#{videoid}, #{userid})
+    </insert>
+
+    <insert  id="videoShare" parameterType="map">
+ 		INSERT INTO shares (videoid_fk, userid_fk,socialnet_fk) VALUES (#{videoid}, #{userid}, #{socialnetworkid})
+    </insert>
+    
+	<select id="isUserLikesVideo" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM likesvideos a WHERE a.userid_fk = #{userid} and a.videoid_fk = #{videoid} 
+	</select>
+
+	<select id="isUserRatedVideo" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM ratings a WHERE a.userid_fk = #{userid} and a.videoid_fk = #{videoid} 
+	</select>	
+
+</mapper>
+
+
+
+

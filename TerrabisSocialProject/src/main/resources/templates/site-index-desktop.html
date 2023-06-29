@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <title>Terrabis - Our planet re-discovered</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+   <meta property="og:url"           content="http://www.terrabis.com" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="Terrabis" />
+   <meta property="og:description"   content="Terrabis - Our planet re-discovered" />
+   <meta name="twitter:card"  content="summary_large_image">
+   <meta name="twitter:site" content="@terrabisusr">
+   <meta name="twitter:title" content="Terrabis">
+   <meta name="twitter:description"  content="Terrabis - Our planet re-discovered">
+   <meta name="description" content="Terrabis is a Greek location-based drone-oriented video-sharing website headquartered in Athens, Greece. The site allows users to upload, view, rate, share, add to favorites, report and comment on videos, subscribe to other users, and it makes use of youtube API and Vimeo API technology to display a wide variety of user-generated and corporate media videos. Available content includes videos from multiple locations, routes or just area overview recorded by drones on air or by users on foot or even underwater. Most of the content on Terrabis has been uploaded by individuals Unregistered users can only watch videos on the site, while registered users are permitted to upload an unlimited number of videos and add comments to videos."> 
+   <meta name="keywords" lang="en" content="drone,videos,youtube,vimeo,location with video,video from location,location-based video,professional video,aerial videos,video footage,underwater videos,route videos">
+
+
+
+
+<!--     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ -->
+  
+  	<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"></link>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+    
+     <link href="../static/vendor/bootstrap-social/bootstrap-social.css"
+          th:href="@{/vendor/bootstrap-social/bootstrap-social.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+
+
+  <link href="../static/css/site-index.css"
+          th:href="@{/css/site-index.css}" rel="stylesheet"/>   
+    
+      <link href="../static/css/social-sidebar.css"
+          th:href="@{/css/social-sidebar.css}" rel="stylesheet"/>   
+          
+    
+   <link href="../static/vendor/umbg-video-player/umbg/css/umbg.min.css"
+          th:href="@{/vendor/umbg-video-player/umbg/css/umbg.min.css}" rel="stylesheet"/>  
+             
+             
+   <script th:replace="/fragments/google-analytics :: analytics"></script>
+  
+
+
+</head>
+
+<body id="page-top"   th:attr="style=${'background: #000000 url(/images/wallpapers/'+{randomWallPaperNo}+'.jpg) no-repeat center top;'}">
+<!-- <body id="page-top"   th:attr="style=${'background: #FFFFFF'}"> -->
+
+ <div th:replace="/fragments/header :: header(isindex='true')"></div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=562153623902705";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+ 
+
+
+
+
+  
+
+
+    <section class="umbgplayer" id="start" style="height:70%;">
+        <div class="container">
+        
+        <aside id="sticky-social">
+		<ul>
+			<li><a  class="entypo-facebook share-facebook-bar cursor-pointer" target="_blank"><span>Facebook</span></a></li>
+			<li><a  class="entypo-twitter share-twitter-bar cursor-pointer" target="_blank"><span>Twitter</span></a></li>
+			<li><a  class="entypo-linkedin share-linkedin-bar cursor-pointer" target="_blank"><span>LinkedIn</span></a></li>
+			<li><a  class="entypo-pinterest share-pinterest-bar cursor-pointer" target="_blank"><span>Pinterest</span></a></li>
+<!-- 			<li><a href="#" class="entypo-flickr" target="_blank"><span>Flickr</span></a></li>
+			<li><a href="#" class="entypo-tumblr" target="_blank"><span>Tumblr</span></a></li>
+			<li><a href="#" class="entypo-gplus" target="_blank"><span>Google+</span></a></li>
+			<li><a href="#" class="entypo-instagrem" taget="_blank"><span>Instagram</span></a></li>
+			<li><a href="#" class="entypo-stumbleupon" target="_blank"><span>StumbleUpon</span></a></li>
+ -->
+		</ul>
+	</aside>
+        
+        
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                   <p class="font-welcome-large text-center text-white">TE<span class="text-aqua">RR</span>ABIS: Our planet re-discovered
+                   <!-- <span class="font-welcome text-center text-white" th:text="${syspropsDTO[__${'TOTAL_VIDEO_MINUTES'}__]}"></span> -->
+                   
+                   </p>
+                   <p class="h4 text-white text-bold text-center">Unique Videos, Specific Locations.  View - Share - Upload on Map!</p>
+                  
+                </div>
+                <div class="col-md-12 text-center mt-lg col-sm-12 col-xs-12">
+                
+                <div class="row">
+				<div class="col-md-4 text-left col-md-offset-2 col-sm-12 col-xs-12">
+                        <form role="form" id="go" th:action="@{'/video/search'}" method="GET" th:object="${VIDEOQUERYFRM}">
+                           <div class="form-group">
+                              
+                               <div class="input-group">
+                                 <input id="querytxt" placeholder="Find videos" type="text" th:field="*{querytxt}" class="form-control input-lg m-b text-white" style="background-color: rgba(255, 255, 255, 0);">
+                                 <span class="input-group-btn" id="go">
+                                    <button type="submit" class="btn btn-gray input-lg"><span class="h4 text-bold">SEARCH</span></button>
+                                 </span>
+                              </div>
+                    		<label class="radio-inline text-white"><input type="radio" name="querytype" value="MAP" th:checked="${VIDEOQUERYFRM.querytype=='MAP'}">map</label>
+							<label class="radio-inline text-white"><input type="radio" name="querytype" value="titledescription" th:checked="${VIDEOQUERYFRM.querytype=='titledescription'}">title or description</label>
+							<label class="radio-inline text-white"><input type="radio" name="querytype" value="tags" th:checked="${VIDEOQUERYFRM.querytype=='tags'}">tags</label>
+                              
+                              
+                              
+
+                           </div>
+   					    </form>
+				</div>
+                <div class="col-md-6 text-left col-sm-12 col-xs-12">
+					<a th:href="@{'/video/map/normal/_'}" style="border; border-color: white; border-width: 1px;" class="btn btn-info-dark"><span class="h3  text-white">Go To Map</span></a>   
+					  	 <a th:if="${#authorization.expression('isAnonymous()')}" th:href="@{/auth/facebook?scope=email}" style="border; border-color: white; border-width: 1px;" class="btn btn-social  btn-facebook m-sm">
+    										<span class="fa fa-facebook"></span><span class="h3  text-white">Sign in with Facebook</span>
+			                           </a>
+		                       
+                
+                </div>
+
+                
+                </div>
+
+                
+                  
+                  <br/><br/>
+                  
+                  
+                               
+                  <div class="row mt-lg mt-lg" style="opacity:0.9;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="text-center bg-inverse">
+                   <p class="h1 text-center text-white">
+                     <span class="text-white" th:text="${'1'+totalVideos}"></span>  videos,  <span class="text-white count" th:text="${totalVideoHours}"></span>  hours of total playback!
+                   	<!-- <span class="text-white count" th:text="${syspropsDTO[__${'TOTAL_VIDEO_MINUTES'}__]}"></span>  minutes of footage! --> 
+                   	<!-- <span class="text-white count" th:text="${syspropsDTO[__${'TOTAL_KILOMETERS_BETWEEN_POINTS'}__]}"></span> kilometers covered! -->  
+                   <!-- <span class="font-welcome text-center text-white" th:text="${syspropsDTO[__${'TOTAL_VIDEO_MINUTES'}__]}"></span> -->
+                   
+                   </p>
+                  
+                </div>
+                </div>
+                </div>
+                
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="no-padding" id="nav-to-videopicks"  style="height:30%; position:relative; bottom: 0;">
+        <div class="container">
+        
+                    <div class="row mt-lg">
+             <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+             		<div class="pull-left">
+                	<a href="#" class="explore"><span class="h4 text-bold text-white">Explore Our World! <span class="text-info text-bold"> more...</span></span></a><br/>
+                	</div>
+                	<div class="pull-right">
+                	<a href="#" class="upload"><span class="h4 text-bold text-white">Upload Our World! <span class="text-info text-bold"> more...</span></span></a><br/>
+                	</div>
+			 </div>
+			 
+			 <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+             		<div class="pull-left" id="exploretxt" class="hidden">
+                 	<span class="text-sm text-left text-bold text-white">Discover great aerial, ground or underwater videos ! See every place of the world without "being" there (yet!). Experience exactly what it looks like!</span>
+                	</div>
+                	<div class="pull-right"  id="uploadtxt" class="hidden">
+                 	<span class="text-sm text-left text-bold text-white">Whether amateur or professional video maker, upload your great videos of places you 've been or love, and promote your talent, specific location or community!  </span>
+                	</div>
+                	
+			 </div>
+
+			 <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+			        <hr class="separator"/>
+                    <span class="h4 text-bold text-white text-center">scroll down</span>
+                    
+                </div>
+                <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+                <a href="#videopicks" class="page-scroll"><span class="fa  fa-caret-down fa-4x text-info-dark"></span></a>
+            </div>
+          </div>
+
+
+
+			  <div style="position: absolute; bottom: 100px; right:0px; z-index: 98;">
+<div class="fb-page" data-href="https://www.facebook.com/Terrabis-1061662037215402/" data-width="200" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Terrabis-1061662037215402/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Terrabis-1061662037215402/">Terrabis</a></blockquote></div>
+			 </div>
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <section class="no-padding" id="videopicks">
+            <div class="container">
+            <div class="row mt-lg">
+            
+                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    <span class="h2 text-center text-bold text-white text-uppercase">LATEST VIDEOS</span>
+                  
+                </div>
+            </div>
+        </div>
+    
+        <div class="container-fluid ml-lg mr-lg">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-sm" th:each="vid, iterStat : ${promoteVideoDTOList}">
+                    <a th:href="@{'/video/' + ${vid.UUID}}" class="portfolio-box">
+                        <img th:src="${{vid.thumburl}}"  width="95%" height="300" alt="" style="opacity:0.7;">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="text-md text-white" th:text="${vid.title}">
+                                    Video Title
+                                </div>
+                                <div class="text-sm-md text-inverse text-bold" th:text="${'from '+{vid.user.username}}">
+                                    Username
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+
+            
+        </div>
+    </section>
+    
+<!--       <section class="no-padding bg-black" style="height:20%; position: relative; bottom: 0px;">
+      <div class="row">
+      
+      			 <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+			        <hr class="separator"/>
+                    <span class="h4 text-bold text-white text-center">scroll down</span>
+                    
+                </div>
+                <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+                <a href="#contact" class="page-scroll"><span class="fa  fa-caret-down fa-4x text-info-dark"></span></a>
+            </div>
+          </div>
+      
+
+      
+      </section> -->
+
+
+
+
+<!-- 
+    <section class="no-padding bg-inverse" id="contact" style="height:90%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mt-lg mb-lg">
+                    <span class="h2 text-center text-bold text-white text-uppercase">LET'S GET IN TOUCH</span>
+                    <br/><br/><br/><br/><br/><br/><br/><br/>
+                </div>
+            </div>
+              
+              
+              <div class="row">
+                <div class="col-md-3 text-center">
+                    <a href="#" class="text-white"><span class="text-sm-md">about us</span></a>
+                </div>
+                
+                 <div class="col-md-3 text-center">
+                    <a href="#" class="text-white"><span class="text-sm-md">terms of use</span></a>
+                </div>
+                
+                 <div class="col-md-3 text-center">
+                    <a href="#" class="text-white"><span class="text-sm-md">privacy policy</span></a>
+                </div>
+                
+                
+                 <div class="col-md-3 text-center">
+                    <a href="#" class="text-white"><span class="text-sm-md">contact us</span></a>
+                </div>
+               </div> 
+                
+            </div>
+    </section> -->
+
+
+
+    <div th:replace="/fragments/footer :: footer"></div>
+
+
+      
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script src="../static/index/js/jquery.easing.min.js" th:src="@{/index/js/jquery.easing.min.js}"></script> 
+<script src="../static/index/js/wow.min.js" th:src="@{/index/js/wow.min.js}"></script>
+<script src="../static/index/js/creative.js" th:src="@{/index/js/creative.js}"></script>
+
+
+<div th:replace="/fragments/layout-fragments :: scripts"></div>
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+   
+     
+    <!-- =============== FULL SCREEN VIDEO PLAY ===============-->
+   <script th:src="@{/vendor/umbg-video-player/umbg/jquery.umbg.js}" src="../static/vendor/umbg-video-player/umbg/jquery.umbg.js"></script> 
+
+   
+   
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+
+	function videoShareBar(socialnetworkvar) {
+
+			var callback = function(data, status, xhr) {
+			};
+	
+			var formData = { videoid: 1, socialnetworkid:socialnetworkvar};
+			
+			restajax(terrabisApp.shareVideoURI,formData,callback);		
+	
+};
+
+	
+           
+      $(document).ready(function() {
+    	  
+
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  	var serverURI = 'http://www.terrabis.com';
+
+    		
+    		/******************PIN IT -------------------*/
+    		$(document).delegate('.share-pinterest-bar', 'click', function() {
+
+    	        var urlstring = serverURI;
+    	        var url = encodeURIComponent(urlstring);
+    			var desc = "Terrabis - Our planet re-discovered";
+    	        window.open("//www.pinterest.com/pin/create/button/"+
+    	        "?url="+url+
+    	/*        "&media="+media+*/
+    	        "&description="+desc,"_blank","top=0,right=0,width=750,height=320");
+    	        return false; 
+    	    });
+
+    		
+    		
+    		
+    		$(document).delegate('.share-facebook-bar', 'click', function() {
+
+    			videoShareBar(1);
+    			
+    			var desc = "Terrabis - Our planet re-discovered";
+    	        var urlstring = serverURI;
+    	        var url = urlstring;
+    	        window.open("https://www.facebook.com/sharer/sharer.php"+
+    	        "?u="+url
+    	         ,"_blank","top=0,right=0,width=750,height=320");
+    	        return false; 
+    	    });
+    		
+    		$(document).delegate('.share-twitter-bar', 'click', function() {
+    			videoShareBar(2);
+    			
+    			var desc = "Terrabis - Our planet re-discovered";
+    	        var urlstring = serverURI;
+    	        var url = urlstring;
+    	        window.open("http://twitter.com/share"+
+    	        "?url="+url+
+    	         "&text="+desc
+    	         ,"_blank","top=0,right=0,width=750,height=320");
+    	        return false; 
+    	    });	
+    	    
+    	    
+    		$(document).delegate('.share-linkedin-bar', 'click', function() {
+    			videoShareBar(3);
+    			
+
+    	    	var desc = "Terrabis - Our planet re-discovered";
+    			var urlstring = serverURI;
+    	        var url = encodeURIComponent(urlstring);
+    	        window.open("https://www.linkedin.com/shareArticle?mini=true"+
+    	        "&url="+url
+    	         ,"_blank","top=0,right=0,width=750,height=320");
+    	        return false; 
+    	    });	
+    		
+    	  
+    	  
+          
+  		$('.count').each(function () {
+  		    $(this).prop('Counter',0).animate({
+  		        Counter: $(this).text()
+  		    }, {
+  		        duration: 4000,
+  		        easing: 'swing',
+  		        step: function (now) {
+  		            $(this).text(Math.ceil(now));
+  		        }
+  		    });
+  		});
+    	  
+    	  
+    	  $(document).delegate('.explore', 'mouseover', function() {
+    		  $("#uploadtxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		  $("#exploretxt").switchClass( "hidden", "-", 0, "easeInOutQuad" );
+    		});
+    		
+
+    	  $(document).delegate('.explore', 'mouseout', function() {
+    		  $("#uploadtxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		  $("#exploretxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		});
+    		
+    	  $(document).delegate('.upload', 'mouseout', function() {
+    		  $("#uploadtxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		  $("#exploretxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		});
+
+    	  
+    	  $(document).delegate('.upload', 'mouseover', function() {
+    		  $("#exploretxt").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+    		  $("#uploadtxt").switchClass("hidden", "-", 0, "easeInOutQuad" );
+    		  
+    		});
+    	  
+    	  
+    	  
+    	  
+    		/**********************  AUTOCOMPLETE  ********************************/
+    		var input =  document.getElementById('querytxt');
+    		var autocomplete = new google.maps.places.Autocomplete(input);
+    	  
+    			google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    		    	var place = autocomplete.getPlace();
+    		    	$("#go").submit();
+    		    	//if (!place.geometry) {
+    		      		//return;
+    		    });
+    		
+    		
+    		
+    	     var randomstart = Math.floor((Math.random() * 285) + 1);
+    	     var randomend =  randomstart+200;
+    	     
+    				
+    		
+    	     //GET SYSTEM PROPERTIES
+    	     var bgVideoSystemProperty = [[${syspropsDTO[__${'INDEX_PAGE_BACKGROUND_VIDEOURI'}__]}]]
+
+    	     //alert(bgVideoSystemProperty.substring(bgVideoSystemProperty.indexOf(':')+1,bgVideoSystemProperty.length));
+    	     
+    		setTimeout(function(){
+        		  $('.umbgplayer').umbg({
+    	    	    	'mediaPlayerType': bgVideoSystemProperty.substring(0, bgVideoSystemProperty.indexOf(':')), 
+    	    	        'mediaId':bgVideoSystemProperty.substring(bgVideoSystemProperty.indexOf(':')+1,bgVideoSystemProperty.length), 
+    	    			'mediaPoster': 'images/wallpapers/1.jpg',
+    	    			'mediaOverlayCss': 'umbg-overlay-transparent',
+    	    		    'startAt': randomstart,
+    	    	        'endAt':randomend,
+    	    	        'displayControls': 0,
+    	    	        'volumeLevel':0,
+    	    	        'loop':1
+    	    	    });    		    
+    		}, 5000);
+    		
+    		
+    	  
+
+
+    		
+    		
+
+    	  
+      });
+
+    	/*]]>*/
+    	</script> 
+
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <title>Terrabis - Explore The World</title>
+
+	<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"></link>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+
+    
+   <link href="../static/vendor/umbg-video-player/umbg/css/umbg.min.css"
+          th:href="@{/vendor/umbg-video-player/umbg/css/umbg.min.css}" rel="stylesheet"/>  
+             
+  
+      <link rel="stylesheet" href="/index/css/creative.css" type="text/css">
+      
+  </head>
+  <body>
+  
+
+<div class="wrapper">
+    <div th:replace="/fragments/header :: header"></div>
+
+   <div class="row"><br/><br/><br/><br/><br/>
+  <div class="col-lg-12 col-md-12 col-xs-12  col-sm-12">
+   <p class="font45 text-center text-bold text-white">WELCOME TO TE<span class="text-info-light">RR</span>ABIS</p>
+ </div>
+ </div>	
+
+
+   <div class="row">
+  <div class="col-md-3 align-middle col-xs-12 col-sm-12">
+</div>
+
+  <div class="col-md-6 align-middle col-xs-12 col-sm-12">
+  
+                           <form role="form" id="go" th:action="@{'/video/map-location/search'}" method="GET" th:object="${VIDEOQUERYFRM}">
+                           <div class="form-group">
+                              <p class="font16 text-white text-bold text-center">EXPLORE THE WORLD THROUGH THE EYES OF OTHER PEOPLE</p>
+                               <div class="input-group">
+                                 <input id="querytxt" placeholder="Enter a location and any keyword e.g (New York # aerial drone night)" type="text" th:field="*{querytxt}" class="form-control input-lg m-b">
+                                 <span class="input-group-btn" id="go">
+                                    <button type="submit" class="btn bg-info-dark input-lg"><span class="h4 text-bold">SEARCH</span></button>
+                                 </span>
+                              </div>
+
+                           </div>
+   					    </form>
+   </div>
+   
+     <div class="col-md-3 align-middle col-xs-12 col-sm-12">
+    </div>
+   </div>
+   
+   
+   
+ </div>     
+
+ 
+ <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+ <div th:replace="/fragments/layout-fragments :: scripts"></div>
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+   
+     
+    <!-- =============== FULL SCREEN VIDEO PLAY ===============-->
+   <script th:src="@{/vendor/umbg-video-player/umbg/jquery.umbg.js}" src="../static/vendor/umbg-video-player/umbg/jquery.umbg.js"></script> 
+   
+   
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+           
+           
+      $(document).ready(function() {
+    	  
+
+    		/**********************  AUTOCOMPLETE  ********************************/
+    		var input =  document.getElementById('querytxt');
+    		var autocomplete = new google.maps.places.Autocomplete(input);
+    	  
+    	  
+    	  
+    		/**********************  VIDEO BACKGROUND  ********************************/
+     	  $('body').umbg({
+    	    	'mediaPlayerType': 'Vimeo', // YouTube, Vimeo, Dailymotion, Wistia, HTML5, Image, or Color.
+    	        'mediaId':'132600696', //'122693619', // Use the video id . For HTML5 use the location and video filename.
+    			'mediaPoster': '/images/bg/bg1.jpg',
+    			'mediaOverlayCss': 'umbg-overlay-transparent',
+    		    'startAt': 120,
+    	        'endAt':285,
+    	        'displayControls': 0,
+    	        'volumeLevel':0,
+    	        'loop':1
+    	    });
+
+    	  
+      });
+
+    	/*]]>*/
+    	</script> 
+            
+  </body>
+</html>  	  

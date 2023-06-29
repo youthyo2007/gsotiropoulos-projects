@@ -1,0 +1,96 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Security</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+                     <div class="row">
+                             <div class="col-md-12 col-xs-12 col-sm-12">
+                           <span class="h2 text-bold text-gray-more text-left">Terrabis Security</span><br/>
+                           </div>  
+                    </div>	
+            </div>
+
+
+			
+
+
+          <div class="row">
+      			<div class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h3 text-gray-more text-left">Please fill in the word found on video image, and click send.</span>
+                </div>  
+        	 </div>
+
+
+	       <div class="row mb-lg mt-lg">
+               <div class="col-md-6 col-xs-12 col-sm-12">
+               <img alt="Captcha" width="420" height="280" th:src="${'data:image/png;base64,'+{image}}" /><br/>
+               
+                 <div class="form-group mt-lg">
+               			               <a  th:href="@{'/robot-check/index?uuid='+${uuid}}" class="btn btn-labeled btn-inverse massbtn-video-filter-update">
+			                           <span class="btn-label pull-left"><i class="fa fa-refresh fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold text-white pull-left">GENERATE NEW CAPTCHA</span>
+			                           </a>
+			      </div>                     
+               
+               </div>
+                 <div class="col-md-6 col-xs-12 col-sm-12">
+                 <form  role="form" th:action="@{'/robot-check/submit'}" th:object="${captchaFormDTO}" method="POST">
+
+					                           <div class="form-group">
+					                              <span class="h4 text-gray text-bold">Captcha</span>
+						                              	 <input type="text" class="form-control" th:field="*{captchatoken}" placeholder="Please fill in the word found on image">
+						                           </div>
+
+ 							  <span th:if="${error!=null && error=='invalidtoken'}" class="text-sm-md text-md text-danger text-left">incorrect, please try again</span>
+ 							  <span th:if="${error!=null && error=='expired'}" class="text-sm-md text-md text-danger text-left">waited too long, please try again</span>
+ 
+
+                               <div class="form-group m-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">SEND</span>
+			                           </button>
+			                           
+
+			                           
+			                           
+			                   </div>  
+ 
+ 				</form>                 
+                 </div>
+       </div>    
+
+
+ <div class="row mt-lg mb-lg">
+               <div class="col-md-5 col-xs-12 col-sm-12">
+               </div>
+  </div>             
+  
+     
+
+   		</div>
+   		
+   		
+   		
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

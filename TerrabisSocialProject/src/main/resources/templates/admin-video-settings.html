@@ -1,0 +1,550 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-videosettings">
+  <head>
+    <title>Terrabis - Video Settings</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+  		<div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=false)"></div>
+
+         <div class="content-wrapper">
+             <div class="content-heading">
+             <div class="row">
+              <div class="col-md-8 col-xs-12 col-sm-12">
+                  <span class="text-gray-more text-bold h2" th:text="${VIDEOSETTINGSFRM.title}"></span>
+               </div>   
+              <div class="col-md-4 col-xs-12 col-sm-12">
+                   <a th:href="@{'/admin/videos/filter/get?videoid='+${VIDEOSETTINGSFRM.id}}"><span class="text-info-dark text-bold h2" th:text="'ID:'+${VIDEOSETTINGSFRM.id}"></span></a><br/>
+                   <span class="text-sm-md text-gray-more">*click above to load video in admin console</span>
+                   
+               </div>   
+         		</div>       
+<!-- 		          <div th:replace="/fragments/user-index-detail :: admin-video-settings-edit(title=${VIDEOSETTINGSFRM.title},iconvar='fa-cog')"></div>
+ -->            </div>
+	
+      	
+      	<!-- EDIT VIEW -->
+      	<form role="form" id="videosettingsform"  th:action="@{'/admin/video-settings/'+${VIDEOSETTINGSFRM.id}+'/edit-submit' + ${#httpServletRequest.getParameter('redirect') != null ? '?redirect='+#httpServletRequest.getParameter('redirect') : ''}}" method="POST" th:object="${VIDEOSETTINGSFRM}">
+      	
+      	          <input type="hidden" th:field="*{saveandapprove}">
+	              <input type="hidden" th:field="*{id}">
+	               <input type="hidden" th:field="*{tags}">
+			      <input type="hidden" th:field="*{latitude}">
+   		          <input type="hidden" th:field="*{longitude}">
+			       <input type="hidden" th:field="*{selectedvideotypelist}">
+                   <input type="hidden" th:field="*{shootingtypeid}">	   		          
+				  <input type="hidden" id="weatherMap-sunny" th:field="*{weatherMap['sunny']}"/>
+				  <input type="hidden" id="weatherMap-cloudy" th:field="*{weatherMap['cloudy']}"/>	
+				  <input type="hidden" id="weatherMap-rain" th:field="*{weatherMap['rain']}"/>	
+				  <input type="hidden" id="weatherMap-snow" th:field="*{weatherMap['snow']}"/>	
+				  <input type="hidden" id="weatherMap-windy" th:field="*{weatherMap['windy']}"/>	
+				  <input type=hidden id="weatherMap-storm" th:field="*{weatherMap['storm']}"/>	
+				  <input type=hidden id="weatherMap-storm" th:field="*{weatherMap['storm']}"/>	
+
+
+                             
+		                           
+		<!-- 							<div class="row mt-lg">
+									
+  									<div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+		                              <span class="h3 m0 text-bold text-gray">URL</span>
+		                           </div>
+		                           									
+							            <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+							           <span class="h4 m0 text-bold text-gray-more"  th:text="${VIDEOSETTINGSFRM.linkedurl}"></span><br/><br/>
+							        </div>
+							        </div> -->
+							        
+	               		    			<div class="row mt-lg">
+							 				    <div class="col-md-12 col-xs-12 col-sm-12">
+					                              <span class="h3 m0 text-bold text-gray">RELOCATE PIN ON MAP</span>
+					                           </div>
+		              					  </div>
+	               
+
+									       <!-- =====================  LOCATION SEARCH INPUT ============================= -->
+									       <div class="row">
+									               <div class="col-md-6 col-xs-12 col-sm-12">
+								                           <div class="form-group">
+								                               <div class="input-group">
+								                                 <input type="text" id="footageloctxt" class="form-control m-b" placeholder="Please enter the address and click the find button">
+								                                 <span class="input-group-btn">
+								                                    <button type="button" id="footagelocbutton" class="btn btn-info-dark"><i class="fa fa-search"></i></button>
+								                                 </span>
+								                              </div>
+								
+								                           </div>												               
+									     			</div>
+									       </div>  
+
+									       <!-- ===================== GOOGLEMAP ============================= -->
+									       <div class="row">
+									               <div class="col-md-12 col-xs-12 col-sm-12">
+									               		<div id="googlemap" class="gmapmd"></div>
+									     			</div>
+									       </div>  
+
+
+
+
+
+					<div class="row mt-lg">
+									<div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+									
+									
+		                         
+							        </div>
+					</div>
+							        
+							        
+      	 <div class="row ml-sm">
+      	  <div class="col-md-12 col-xs-12 col-sm-12">
+      	  
+      	  
+      	  
+      	  	
+      	  </div>
+
+      	 <div class="col-md-12 col-xs-12 col-sm-12">	 
+		<div  class="row bg-white">
+				    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 mb-lg mt-lg">
+				    			<div id="panelblock" class="panel widget w-XXXL" style="background: none;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+                           					<textarea rows="1" class="form-control note-editor-lg text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{linkedurl}"></textarea>
+                           					<span class="text-sm text-bold text-gray-more pull-left"  th:text="${VIDEOSETTINGSFRM.linkedurl}"></span><br/><br/>
+                           				
+		   								    <iframe th:if="${VIDEOSETTINGSFRM.link}" class="w-XXXL h-XXL" th:attr="src=${VIDEOSETTINGSFRM.videourl+'?autoplay=1&modestbranding=1&showinfo=0&rel=0&title=0&byline=0&portrait=0'}" scrolling="no" frameborder="0" allowfullscreen></iframe>										
+		 								    <iframe th:if="${VIDEOSETTINGSFRM.link==null or (!VIDEOSETTINGSFRM.link)}" class="w-XL h-MD"  th:attr="src=@{'/video/play?uri='+${VIDEOSETTINGSFRM.videourl}+'&style=\'detail\''}" scrolling="no" frameborder="0" allowfullscreen></iframe>										
+                            			 </div>
+                        		</div>
+                     		</div>
+  
+  
+  	                  <div class="row" id="subpanelblockB">
+		                      <div class="col-md-3 col-xs-4 col-sm-4 pull-left">
+		                        <span class="bg-info-dark text-white text-bold h4" title="duration" th:text="${VIDEOSETTINGSFRM.durationtxt}">15:45</span>
+		                      </div>
+<!-- 		                      <div class="col-md-3 col-xs-4 col-sm-4 pull-right">
+		                        <a class="text-white pull-right" title="commented"><em  class="text-info fa fa-comments fa-2x"></em></a><span class="text-muted text-sm" th:if="${VIDEOSETTINGSFRM.reviewscount>0}" th:text="${VIDEOSETTINGSFRM.reviewscount}">15000</span>
+		                      </div> -->
+		                       
+		                      <div class="col-md-3 col-xs-4 col-sm-4">
+		                           <a  title="watched"><em  class="text-gray fa fa-youtube-play fa-2x mr-sm"></em></a><span  class="text-muted text-sm" th:if="${VIDEOSETTINGSFRM.playscount>0}" th:text="${VIDEOSETTINGSFRM.playscount}">15000</span>
+		                      </div>
+		
+		                      
+		                      <div class="col-md-3 col-xs-12 col-sm-12">
+		                      <a  title="like"><em class="fa fa-thumbs-up fa-2x text-gray vidaction-like cursor-pointer mr-sm" title="like"></em></a>
+		                       <span id="vidlikestxt" class="text-muted text-sm" th:if="${VIDEOSETTINGSFRM.likescount>0}" th:text="${VIDEOSETTINGSFRM.likescount}">15000</span>
+		                      </div>  	                        
+		               </div>	 	
+  
+		                    
+		                     <div class="row">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="h4 text-inverse pull-left text-bold">added
+										   <span th:text="${VIDEOSETTINGSFRM.datecreated}">1 week ago</span>
+		                              </p>
+		                           </div>
+		                    </div>   	                    
+		                    
+		                    
+	                  </div>
+
+	                  
+	                  
+	                   						<!-- VIDEO TYPE  -->
+ 						<div class="row mt-lg">
+								<div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+	                              <span class="h3 text-bold text-gray">VIDEO TYPE</span>
+	                           </div>
+	                           
+	                           <div class="col-md-12 col-xs-12 col-sm-12 mt-lg ml-lg">
+ 
+ 		            								<div class="row">
+		                       								  <div class="col-md-2 col-xs-2 col-sm-2" th:each="item, indexItem : ${videoTypeList}">
+		                       								  	<span class="text-gray-more" th:text="${item.descr}"></span>
+		                       								  </div>
+		 											 </div>
+		            								<div class="row">
+		                       								  <div class="col-md-2 col-xs-2 col-sm-2" th:each="item, indexItem : ${videoTypeList}">
+		                       								  <div class="form-group">
+		                       								  <div class="checkbox c-checkbox videotypecheckbox">
+                                 									<label>
+                                    									<input type="checkbox"  name="videotype" th:value="${item.id}">
+                                    										<span class="fa fa-check"></span>
+                                    								</label>
+                              									</div>
+						                           			</div>     
+		                       								</div>
+		                       						</div>
+		                       	</div>
+		                </div> 
+	                  
+	                  
+	                 
+                	               		    			<div class="row mt-lg">
+		 				    <div class="col-md-12 col-xs-12 col-sm-12">
+                              <span class="h3 m0 text-bold text-gray">PICK SOME TAGS</span>
+                           </div>
+		                </div>
+												
+												       
+												  <!-- ===================== TAG CLOUD ============================= -->      
+											     <div class="row mb-lg">
+								                          <div class="col-md-12 col-xs-12 col-sm-12">
+										
+										
+														<div class="row mt-lg">	
+												          <div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+                        								  	<div class="form-group">
+    	                       									<span class="h4 text-gray-more">add your own tags or search and pick some ones from below:</span>
+									                              <input id="tagsfilter" type="text" class="form-control  mt-sm" placeholder="Press Enter to Add your new Tag">
+                           									</div>
+												       	</div> 
+												       	</div> 	
+										
+																				       <div class="row mt-lg">
+																				        <div class="col-md-12 col-xs-12 col-sm-12">
+																				               		<div id="tagcloud" class="h-LG w-XL mt-sm"></div>
+																				     	</div>  				
+																				     	</div>
+
+
+														       						<div class="row mt-lg">
+																		               <div id="selectedtags" class="col-md-12 col-xs-12 col-sm-12">
+																						</div>
+																					</div>
+																														
+
+																				     	
+														</div></div>													       
+												       
+	                 
+	                  
+        	 </div>  
+        	 <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12 mb-lg mt-lg">
+        	 		<div class="row">
+    
+    
+
+		                             <div class="col-md-12 col-xs-12 col-sm-12 ml-lg mt-lg ">
+		                              <span class="h3 m0 text-bold text-gray">CLICK TO MODIFY THE TITLE</span>
+		                           </div>
+		                                                       <div class="col-md-12 col-xs-12 col-sm-12">
+		                                            <div class="form-group">
+							                              <div class="panel">
+							                                 <div class="panel-body">
+							                                    <textarea rows="3" class="form-control note-editor-lg text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{title}"></textarea>
+							                                 </div>
+							                              </div>
+							                           </div>
+		
+		                           </div>
+		                    </div>
+		 
+		                    
+     	 				<div class="row mt-sm">
+                             <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+                              <span class="h3 m0 text-bold text-gray">ENTER A SHORT DESCRIPTION</span>
+                           </div>
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                                            <div class="form-group">
+							                              <div class="panel">
+							                                 <div class="panel-body">
+							                                    <textarea rows="10" class="form-control note-editor-lg text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{description}"></textarea>
+							                                 </div>
+							                              </div>
+							                           </div>
+		                           </div>
+		                    </div>	
+		                    
+		                    
+<!-- 		    			<div class="row">
+		 				    <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+                              <span class="h3 m0 text-bold text-gray">PRIVACY SETTINGS</span>
+                           </div>
+
+						<div class="col-md-12 col-xs-12 col-sm-12 mt-lg ml-lg">
+						<div class="form-group">
+						
+                             <select th:field="*{privacy}" class="form-control m-b">
+                                 <option value="2">Public:Everyone can view this video</option>
+                                 <option value="1">Followers:Only my followers can view this video</option>
+                                 <option value="0">Private: Only me can view this video</option>
+                              </select>
+                        </div><br/>
+                        
+                        </div>
+
+		                </div>	 -->	                    
+		                    
+		                    	                    
+		                    		                    
+<!-- 		 				<div class="row mt-lg">
+		 				    <div class="col-md-12 col-xs-12 col-sm-12  ml-lg">
+                              <span class="h3 m0 text-bold text-gray">WEATHER CONDITIONS</span>
+                           </div>
+                        </div>    -->
+                           
+                           
+                   			<!-- WEATHER ICONS -->  
+<!-- 						<div class="row ml-sm text-info mt-lg">
+						  <div class="col-md-2 col-xs-2 col-sm-2">
+ 									<span class="mt-sm"><span class="wi wi-day-sunny fa-2x"></span>sunny</span>
+ 								</div>                        								
+						  <div class="col-md-2 col-xs-3 col-sm-2"><span class="mt-sm"><span class="wi wi-day-cloudy fa-2x"></span>cloud</span></div>                        								
+						  <div class="col-md-2 col-xs-2 col-sm-2">
+ 									<span class="mt-sm"><span class="wi wi-day-rain-wind fa-2x"></span>rain</span>
+ 								</div>                        								
+						  <div class="col-md-2 col-xs-2 col-sm-2">
+ 									<span class="mt-sm"><span class="wi wi-day-snow fa-2x"></span>snow</span>
+ 								</div>                        								
+						  <div class="col-md-2 col-xs-2 col-sm-2">
+ 									<span class="mt-sm"><span class="wi wi-day-cloudy-windy fa-2x"></span>windy</span>
+ 								</div>                        								
+						  <div class="col-md-2 col-xs-2 col-sm-2">
+ 									<span class="mt-sm"><span class="wi wi-day-thunderstorm fa-2x"></span>storm</span>
+ 								</div>  
+ 								</div> -->
+                        							
+                        							
+            					<!-- WEATHER -->	
+<!--   								<div class="row  ml-sm">
+              					<div class="col-md-2 col-xs-2 col-sm-2" th:each="item, indexItem : ${VIDEOSETTINGSFRM.weatherMap}" th:if="${item.key!='any'}">
+               					 <div class="form-group">
+                   				<div class="checkbox c-checkbox weathercheckbox">
+                              	<label>
+                               	<input type="checkbox" th:value="${item.key}" th:checked="${item.value}"/>
+                                 <span class="wi wi-day-thunderstorm"></span></label>
+                           		</div>
+                       			</div>     
+              					</div>
+             					</div>  -->
+                           
+
+		    
+		    
+<!-- 		    			<div class="row mt-lg"> -->
+<!-- 		 				    <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+                              <span class="h3 m0 text-bold text-gray">CATEGORY</span>
+                           </div> -->
+                               
+                                <!-- OLD MANUAL TAGS  -->
+                     			<!-- <div class="col-md-12 col-xs-12 col-sm-12 mt-lg ml-lg"> -->
+ <!--                     				<div class="form-group">
+ 	                       			<label>Tags that describes better your video<br/></label>
+ 	                       			<span class="text-sm text-muted">Type and press Enter</span>
+								     <input type="text" data-role="tagsinput"  th:field="*{tags}" class="form-control">
+                        			</div> -->
+
+
+ 
+ 
+ 						<!-- SHOOTING TYPE  -->
+						<div class="row mt-lg">
+								<div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+	                              <span class="h3 text-bold text-gray">SHOOTING TYPE</span>
+	                           </div>
+	                           
+	                           <div class="col-md-12 col-xs-12 col-sm-12 mt-lg ml-lg">
+	                           
+	                						<div class="row">
+                      								  <div class="col-md-4 col-xs-4 col-sm-4" th:each="item, indexItem : ${videoShootingTypeList}">
+                      								  	<span class="text-gray-more" th:text="${item.descr}"></span>
+                      								  </div>
+											 </div> 
+											 
+          								<div class="row">
+                    								  <div class="col-md-4 col-xs-4 col-sm-4" th:each="item, indexItem : ${videoShootingTypeList}">
+                    								  <div class="form-group">
+												<div class="radio c-radio videoshootingtyperadiobox">
+				                                 <label th:if="${VIDEOSETTINGSFRM.shootingtypeid==item.id.toString()}">
+				                                    <input  type="radio" name="videoshootingtype" th:value="${item.id}" checked="checked">
+				                                    <span class="fa fa-circle"></span>
+				                                 </label>
+				                                 <label th:if="${VIDEOSETTINGSFRM.shootingtypeid!=item.id.toString()}">
+				                                    <input  type="radio" name="videoshootingtype" th:value="${item.id}">
+				                                    <span class="fa fa-circle"></span>
+				                                 </label>
+				                                    
+				                              </div>		                       								  
+
+	                           			</div>     
+                    								</div>
+                    					</div>												 
+											                      
+	                           
+	                           </div>
+
+						</div>
+ 
+ 
+						<div class="row mt-lg">
+		 				    <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+                              <span class="h3 m0 text-bold text-gray">FOOTAGE DATE</span>
+                           </div>
+                               
+                     			<div class="col-md-12 col-xs-12 col-sm-12 mt-lg ml-lg">
+			                           <div class="form-group">
+					                              <div id="footagedate" class="input-group date">
+					                                 <input type="text"  th:field="*{footagedate}" class="form-control">
+					                                 <span class="input-group-addon">
+					                                    <span class="fa fa-calendar"></span>
+					                                 </span>
+					                              </div>
+			                           </div>
+                        		</div>
+		                </div>
+
+		                    </div> <!-- END RIGHT COLUMN  -->	
+
+							 <!-- THIRD ROW SUBMIT -->   		
+ 						<div class="col-md-12 col-xs-12 col-sm-12">
+ 						       <div class="row mt-lg">
+ 						       			 <div class="col-md-4 col-xs-4 col-sm-4">
+ 						       			 
+						               <div class="form-group pull-left">
+	
+									            
+				            				<button id="savechangesapprovebtn" type="button" class="btn btn-labeled btn-fb btn-block">
+													<span class="btn-label"><i class="fa fa-check fa-2x"></i>
+									                    </span>   
+													<span class="h3 mb-lg text-uppercase text-left text-bold">SAVE & APPROVE</span>
+									            </button>	
+									            
+									   </div>  						       			 
+ 						       			 
+ 						       			 </div>
+ 						       			 
+						               <div class="col-md-8 col-xs-8 col-sm-8">
+						               
+						               <div class="form-group pull-right ml-sm">
+					            				<button  onclick="window.history.go(-1);" id="cancelbtn" type="button" class="btn btn-labeled btn-inverse btn-block">
+													<span class="btn-label"><i class="fa fa-check fa-2x"></i>
+									                    </span>   
+													<span class="h3 mb-lg text-uppercase text-left text-bold">CANCEL</span>
+									            </button>
+									            
+									   </div> 
+						               
+						               
+									   
+									   <div class="form-group pull-right ml-sm">
+					            				<button   id="savechangesbtn" type="button" class="btn btn-labeled btn-fb btn-block">
+													<span class="btn-label"><i class="fa fa-check fa-2x"></i>
+									                    </span>   
+													<span class="h3 mb-lg text-uppercase text-left text-bold">SAVE</span>
+									            </button>
+									            
+									   </div>     
+									   
+									           						               
+	
+						               </div>
+						          
+						       </div>  
+						</div>
+
+        	 </div>
+        	 
+        	 
+
+          	 
+        	 
+        	  
+		</div>
+		</div>
+		</form>
+		<!-- EDIT VIEW -->
+
+
+	</div>
+
+
+      <!-- FULLSCREENOVERLAY  -->    
+	 <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=false)"></div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script th:src="@{/js/map-utilities.js}" src="../static/js/map-utilities.js"></script> 
+	<script src="../static/js/video-settings.js" th:src="@{/js/video-settings.js}"> </script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+	<script src="../static/vendor/map-icons/dist/js/map-icons.js" th:src="@{/vendor/map-icons/dist/js/map-icons.js}"></script>   
+ 
+
+	
+
+  	
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+
+	
+		//SET CURRENT VIDEO
+		terrabisApp.currentVideo = [[${VIDEOSETTINGSFRM}]];
+	
+		//SET VIDEO TYPES
+		var videoTypeList =  [[${VIDEOSETTINGSFRM.videoTypeList}]];
+		initVideoTypesOnLoad(videoTypeList);	
+
+	//INIT  TAG CLOUD
+	tagwords = [[${tagDTOList}]];
+	
+	$('#tagcloud').jQCloud(tagwords, {
+  		shape: 'rectangular'
+	});
+	
+	//CREATE TAG BUTTONS
+	preloadSelectedTagList([[${VIDEOSETTINGSFRM.tagslist}]]);
+	
+	
+  	terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+  	terrabisApp.pageView = [[${execInfo.templateName}]];
+    			
+	
+	// DATETIMEPICKER
+	$('#footagedate').datetimepicker({
+		format: 'DD/MM/YYYY',
+		icons: {
+	      time: 'fa fa-clock-o',
+	      date: 'fa fa-calendar',
+	      up: 'fa fa-chevron-up',
+	      down: 'fa fa-chevron-down',
+	      previous: 'fa fa-chevron-left',
+	      next: 'fa fa-chevron-right',
+	      today: 'fa fa-crosshairs',
+	      clear: 'fa fa-trash'
+	    }
+	});
+	
+		
+	
+	/******************** TOOL FOR GEOPLACE SEARCH***********************************************************************************/
+	initGeoSearchTool([[${VIDEOSETTINGSFRM.latitude}]],[[${VIDEOSETTINGSFRM.longitude}]],[[${PERS.googleMapType}]],"googlemap",[[@{'/images/markers-list/map-marker-selected-medium.png'}]]);
+	//CREATE MARKERS OF RELATED VIDEO POINTS
+	var relatedVideoPointList = [[${relatedPointListDTO}]];
+	for(i=0; i<relatedVideoPointList.length; i++) {
+		var infoWindowContent = "<div class='googft-info-window'><b>"+relatedVideoPointList[i].title+"</b><br><a href='http://www.terrabis.com/video/"+relatedVideoPointList[i].UUID+"'><img width=\"200\" height=\"60\" src="+relatedVideoPointList[i].sharethumburl+"><br></a></div>";
+		createDynamicGoogleMapMarkerWithInfoWindow(new google.maps.LatLng(relatedVideoPointList[i].latitude,relatedVideoPointList[i].longitude),MAP_PIN,'#51c6ea','map-icon-circle',infoWindowContent);
+		//createGoogleMapMarkerWithInfoWindow(new google.maps.LatLng(relatedVideoPointList[i].latitude,relatedVideoPointList[i].longitude),terrabisApp.globalMap,[[@{'/images/markers-list/map-marker-selected-normal.png'}]],infoWindowContent);
+	}
+	
+
+});	
+
+/*]]>*/
+</script>    
+
+</section>
+
+
+
+  </body>
+</html>  	  

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.VideoClaimMapper">
+
+
+    <resultMap type="com.socialvideo.data.dto.VideoClaimDTO" id="VideoClaimDTO">
+        <id column="id" property="id"/>
+        <result column="status" property="status"/>
+        <result column="datecreated" property="datecreated"/>           
+        <association property="user" column="{userid_fk=userid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectVideoClaimDTO_User"/>
+        <association property="claimer" column="{userid_fk=claimerid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectVideoClaimDTO_User"/>
+        <association property="video" column="{videoid_fk=videoid_fk}" javaType="com.socialvideo.data.dto.VideoDTO" select="com.socialvideo.data.mappers.VideoMapper.selectVideoClaimDTO_Video"/>
+    </resultMap> 
+     
+
+    <update id="verifyOwnership" parameterType="map">
+       UPDATE videos SET userid_fk=#{ownerid}, uploaderid_fk=#{originaluploaderid}, ownershipverified=1, ownershipverificationdate = NOW() WHERE id = #{videoid}
+    </update>
+
+
+
+
+
+
+ 	<select id="selectCountAdminClaims" parameterType="map" resultType="java.lang.Integer">
+      	 SELECT COUNT(DISTINCT(a.id)) AS total FROM videoclaims a
+     	
+	     <if test="QUERY.advfilter.username != null and QUERY.advfilter.username != ''.toString()">
+        	inner join users b on b.id = a.claimerid_fk 
+      	</if>
+
+	     <if test="QUERY.advfilter.videotitle != null and QUERY.advfilter.videotitle != ''.toString()">
+        	inner join videos c on c.id = a.videoid_fk 
+      	</if>
+      	      	
+      	WHERE 1 = 1
+     	
+     	<if test="QUERY.advfilter.username != null and QUERY.advfilter.username != ''.toString()">
+        	  AND b.username LIKE #{QUERY.advfilter.username} 
+      	</if>
+      	
+      	<if test="QUERY.advfilter.videotitle != null and QUERY.advfilter.videotitle != ''.toString()">
+        	AND c.title LIKE #{QUERY.advfilter.videotitle} 
+      	</if>
+    
+      	<if test="QUERY.advfilter.videoid != null and QUERY.advfilter.videoid != ''.toString()">
+        	AND a.videoid_fk = #{QUERY.advfilter.videoid} 
+      	</if>      
+    </select>
+
+
+    <select id="selectAdminClaims" parameterType="map" resultMap="VideoClaimDTO">
+	 SELECT a.* FROM videoclaims a
+	 
+	     <if test="QUERY.advfilter.username != null and QUERY.advfilter.username != ''.toString()">
+        	inner join users b on b.id = a.claimerid_fk 
+      	</if>
+
+	     <if test="QUERY.advfilter.videotitle != null and QUERY.advfilter.videotitle != ''.toString()">
+        	inner join videos c on c.id = a.videoid_fk 
+      	</if>
+      	      	
+      	WHERE 1 = 1
+     	
+     	<if test="QUERY.advfilter.username != null and QUERY.advfilter.username != ''.toString()">
+        	  AND b.username LIKE #{QUERY.advfilter.username} 
+      	</if>
+      	
+      	<if test="QUERY.advfilter.videotitle != null and QUERY.advfilter.videotitle != ''.toString()">
+        	AND c.title LIKE #{QUERY.advfilter.videotitle} 
+      	</if>
+    
+      	<if test="QUERY.advfilter.videoid != null and QUERY.advfilter.videoid != ''.toString()">
+        	AND a.videoid_fk = #{QUERY.advfilter.videoid} 
+      	</if>      
+
+		ORDER BY 
+	
+	   <if test="QUERY.filter != null and QUERY.filter == 'all'.toString()">
+       		a.datecreated DESC 
+       </if>
+
+      <if test="QUERY.filter != null and QUERY.filter == 'latest'.toString()">
+            a.datecreated DESC
+      </if>  
+
+
+       LIMIT #{offset}, #{limit};  
+
+    </select>
+
+</mapper>    
+    
+    
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+      	<!-- BOX VIEW -->
+       	<div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid" th:fragment="box(userListDTO)">
+					<div class="row mt-lg">		
+					<div ID="ITERATION" th:each="user, iterStat : ${userListDTO}">
+				    <div class="col-lg-4 col-md-6 col-xs-12 col-sm-6">
+ 	                   			<div  class="panel widget userpanel h-LG" style="background: none; width: 100%">
+ 	     							<div class="text-center bg-center bg-info-dark" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">    
+                           				
+                           				
+                           				
+											<div th:attr="data-id=${{user.id}}" class="mt-lg">
+											<a th:href="@{'/user-' + ${user.UUID}}">
+												<span th:if="${user.avatar==null}" th:classappend="${fasize}" class="fa fa-smile-o fa-9x text-gray-dark"></span>
+												<img th:if="${user.avatar!=null}" th:src="*{'data:image/'+user.avatar.extension+';base64,'+user.avatar.imagebase64}" class="img-thumbnail img-circle thumb128" />
+											</a>	
+											</div>
+                           				
+                           				
+                           							<div>
+			
+												             	
+			</div>
+                           				
+                           				
+                           				
+                           				
+                           				
+<!--                            				
+                           				
+                         				<div th:attr="id=${'user-overlay-loadinguser_'+{user.id}}" class="useroverlay_loadinguser hidden">
+										<div class="row row-table" th:replace="/fragments/user-grid-view :: user-overlay-loadinguser(user=${})"></div>
+										</div> 
+						
+										<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action bg-info-fade hidden">
+										<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-action(video=${vid})"></div>
+										</div> -->
+										
+<!-- 										<div th:attr="data-id=${{vid.id}}" class="videoimage">
+										 	<img th:if="${(vid.link!=null) and (vid.youtube)}" width="100%"  height="300" class="box-border-info" class="box-border-info"  th:src="${vid.thumburl}"/> 
+									     	<img th:if="${(vid.link!=null) and (vid.vimeo)}" width="100%"  height="300" class="box-border-info" class="box-border-info"  th:attr="src=${vid.thumburl}"/>
+										</div>			 -->							
+                          			 </div>
+                        		</div>
+
+                             <div class="row mt-sm" id="subpanelblockB">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                              <div class="h2 m0 text-bold text-gray text-center mb-lg" th:text="${user.shortdesc}"></div>
+		                              <br/>
+		                              
+		             						 		<button  th:attr="data-userid=${{user.id}}" class="btn btn-gray usraction-follow cursor-pointer text-gray full-hidden">
+														<span class="fa fa-plus fa-2x"></span> 
+														<span class="text-gray text-sm">&nbsp;Follow</span>&nbsp;<span class="text-gray text-sm text-bold"></span>
+			               							</button> 						                     							                            		                               		
+													<button  th:attr="data-userid=${{user.id}}" class="btn btn-info-dark usraction-unfollow cursor-pointer text-inverse">
+														<span class="fa fa-minus text-inverse fa-2x"></span> 
+														<span class="text-inverse text-sm">&nbsp;Unfollow</span>&nbsp;<span class="text-inverse text-sm text-bold"></span>
+			        			             		</button> 	
+			        			             				                              
+		                           </div>
+		                    </div>                        		
+                        		
+
+                        		
+                     			</div>
+
+
+
+		                    		                    
+<!-- 
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 font14">
+            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn(video=${vid},showlike='true')">
+                     		                           </div>
+                           								</div>
+		                           </div>		 -->                    
+		              </div>
+        	 </div> 
+        	 <div class="visible-sm visible-md clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%2==0}"></div>
+			 <div class="visible-lg clearfix" th:if="${iterStat.index>=0 && (iterStat.index+1)%3==0}"></div>
+        	 
+			 </div>     	 
+		</div>
+		</div></div>
+      	<!-- BOX VIEW -->

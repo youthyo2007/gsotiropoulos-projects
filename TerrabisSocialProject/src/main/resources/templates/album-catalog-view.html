@@ -1,0 +1,287 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis -Albums</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+         
+         
+                    <div class="content-heading visible-lg visible-md">
+   				   <span class="text-gray fa fa fa-list fa-2x">&nbsp;</span><span class="text-gray text-bold h1">Albums</span>           
+            </div>
+
+           <div class="content-heading visible-sm visible-xs">
+   				   <span class="text-gray fa fa fa-list">&nbsp;</span><span class="text-gray text-bold h3">Albums</span>           
+            </div>
+            
+
+
+
+
+
+<!-- 
+
+
+
+ALBUM VIEW FOR DESKTOPS
+<div class="row" th:if="${device.normal}"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">	 
+<div ID="ITERPOINT_ROW" class="row" th:each="coll, iterStat : ${collectionListDTO}">
+
+			<div class="col-md-11 col-sm-11 col-xs-11">
+				<span class="h4  mt text-bold text-gray-dark" th:text="${coll.title}"></span><br/>
+				 <span class="text-gray-dark text-sm" th:text="${coll.description}"></span>
+			</div>
+			
+			<div class="col-md-1 col-sm-1 col-xs-1 mb-lg">
+	            <div class="row bg-gray">
+	               <div class="col-xs-12">
+	                  <div class="panel-body text-center">
+							<a th:href="@{'/video/map-collection-zoom?collection=' + ${coll.id}}">
+				                     <span class="h4 text-bold text-inverse">MAP</span>
+				              </a>   
+	                  </div>
+	               </div>
+	                    </div>
+			</div>
+
+			
+			<div class="col-md-2 col-sm-2 col-xs-2">
+						<div th:replace="/fragments/user-index-detail :: small-avatar(user=${coll.user},fasize='fa-2x')"></div>
+			</div>     
+
+			 
+			    <div class="col-md-10 col-xs-10 col-sm-10">
+		    <div class="row">
+				    <div ID="ITERPOINT_COLUMN" class="col-md-3 col-xs-3 col-sm-3" th:each="vid, iterStat : ${coll.videos}">
+	       	                			<div th:attr="data-likescount=${{vid.likescount}},data-playscount=${{vid.playscount}}, data-ratingssum=${{vid.ratingssum}},data-title=${{vid.title}},data-description=${{vid.description}}, data-id=${{vid.id}},data-collectionid=${{coll.id}}, data-videourl=${{vid.videourl}}" class="videopanel" style="background: none;">
+										<div class="" id="subpanelblockA">
+			                        			<div class="row">
+			                           				<div class="col-xs-12 col-md-12 col-sm-12">  
+			                           				
+					                           <div th:attr="id=${'video-overlay-loadingvideo_'+{vid.id}}" class="vidoverlay_loadingvideo hidden">
+													<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-loadingvideo-collection(video=${vid})"></div>
+												</div>                               				
+												
+												
+												<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action hidden">
+													<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-action-collection(video=${vid},collection=${coll})"></div>
+												</div>                          				
+	                           					<div th:attr="data-id=${{vid.id}}" class="videoimage">   
+												<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XXS h-XXS box-border-info" th:src="${vid.thumburl}"/> 
+											    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XXS h-XXS box-border-info"  th:attr="src=${vid.thumburl}"/>
+											    </div>
+	                          			 </div>
+	                        		</div>
+	                     		</div>
+ 	
+	                             <div class="row mt-sm">
+			                             <div class="col-md-12 col-xs-12 col-sm-12">
+			                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+			                           </div>
+			                    </div>
+
+			                    
+			                    
+			                    
+			                    </div>	
+	                    
+			                    
+			                    
+			                    
+		                  </div>
+		                   <div ID="LAST_COLUMN" class="col-md-3 col-xs-3 col-sm-3 w-XXS h-XXS"></div>				    
+		    
+
+	 </div>  
+	 </div> 		 
+		
+		
+		
+		    	 <div class="col-md-12 col-sm-12 col-xs-12 mb-sm">	
+         	 	<hr class="separator"/>	
+	         </div>  	 
+			 
+			 
+			          					     
+   
+	 </div>  ITER POINT ROW
+	 
+	  
+</div>
+</div>
+ALBUM VIEW FOR DESKTOPS VIEW -->
+
+
+
+
+<!--ALBUM VIEW FOR DESKTOPS -->
+<div class="row" th:if="${device.normal}"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">	 
+<div ID="ITERPOINT_ROW" class="row" th:each="coll, iterStat : ${collectionListDTO}">
+
+
+		<div class="col-md-12 col-sm-12 col-xs-12  bg-muted"><div class="row">
+			
+<!-- 			<div class="col-md-2 col-sm-2 col-xs-2 mt-sm">
+						<div th:replace="/fragments/user-index-detail :: small-avatar(user=${coll.user},fasize='fa-2x')"></div>
+			</div>      -->
+
+
+			<div class="col-md-10 col-sm-10 col-xs-10 mt-sm">
+				<span class="h2  mt text-bold text-gray-dark visible-md visible-lg" th:text="${coll.title}"></span><br/>
+				<span class="h3  mt text-bold text-gray-dark visible-sm visible-xs" th:text="${coll.title}"></span><br/>
+			</div>
+			</div></div>
+
+
+   <div class="row">
+        	<div class="col-md-9 col-xs-12 col-sm-12">
+				<!-- BOX VIEW -->
+		        <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+		      		<div th:replace="/fragments/video-grid-view :: box(videoListDTO=${coll.videos})"></div>
+		      	</div></div>	
+		      	<!-- BOX VIEW -->        	
+        	</div>
+        	
+        	
+
+		<div class="col-md-3 col-xs-12 col-sm-12">
+		<div class="row">
+         <div class="col-md-12 col-xs-12 col-sm-12" th:replace="/fragments/video-grid-view :: small-user-info-column(user=${coll.user},avatarsize='fa-2x',videos='true',favorites='true',playlists='true',watchlater='true')">
+	      </div>
+	      </div></div>
+</div>	      	
+
+
+
+
+
+
+			
+
+      	
+      	
+      	
+      	
+      	
+      	
+
+			 		
+		    	 <div class="col-md-12 col-sm-12 col-xs-12 mb-sm">	
+         	 	<hr class="separator"/>	
+	         </div>  	 
+
+	 </div> <!--  ITER POINT ROW-->
+	 
+	  
+</div>
+</div>
+<!--ALBUM VIEW FOR DESKTOPS  -->
+
+
+
+
+
+
+
+<!--ALBUM VIEW FOR SMARTPHONES AND TABLETS -->
+<div class="row" th:if="${device.mobile or device.tablet}"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">	 
+<div ID="ITERPOINT_ROW" class="row" th:each="coll, iterStat : ${collectionListDTO}">
+
+
+
+			
+			<div class="col-md-12 col-sm-12 col-xs-12">
+						<div th:replace="/fragments/user-index-detail :: small-avatar(user=${coll.user},fasize='fa-2x')"></div>
+			</div>     
+
+
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<span class="h2  mt text-bold text-gray-dark" th:text="${coll.title}"></span><br/>
+				 <span class="text-gray-dark text-sm-md" th:text="${coll.description}"></span>
+			</div>
+			
+			
+		<!-- BOX VIEW -->
+        <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: box(videoListDTO=${coll.videos})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+			 		
+		    	 <div class="col-md-12 col-sm-12 col-xs-12 mb-sm">	
+         	 	<hr class="separator"/>	
+	         </div>  	 
+
+	 </div> <!--  ITER POINT ROW-->
+	 
+	  
+</div>
+</div>
+<!--ALBUM VIEW FOR SMARTPHONES AND TABLETS -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+   <script src="../static/vendor/royalslider/royalslider.min.js" th:src="@{/vendor/royalslider/royalslider.min.js}"></script> 
+
+
+<!--     <script src="../static/vendor/youtube-playlist-player/youtube-video-player.jquery.js" th:src="@{/vendor/youtube-playlist-player/youtube-video-player.jquery.js}"></script> 
+    <script src="../static/vendor/youtube-playlist-player/perfect-scrollbar.js" th:src="@{/vendor/youtube-playlist-player/perfect-scrollbar.js}"></script> 
+ -->
+ 
+ 
+ 
+ 
+ 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    		//PAGE SPECIFIC GRID VIEW STYLE
+    		//terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+  </body>
+</html>  	  

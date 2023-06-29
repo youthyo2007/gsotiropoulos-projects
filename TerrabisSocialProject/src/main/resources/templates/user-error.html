@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>terrabis:user-error</title>
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+      <section>
+      
+
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="content-heading">
+                    <div class="row">
+                             <div class="col-xs-6">
+                              <span class="fa fa-exclamation-circle fa-2x text-bold text-left"></span>
+                              <span class="h2 text-bold text-left "><span class="text-inverse-light">#Something went wrong</span>/_</span>
+                           </div>  
+                    </div>	                 
+            </div>
+            
+       
+                    <div class="row">
+		               <div class="col-md-12 col-xs-12 col-sm-12">
+					 <p class="mt0 text-danger h1" th:text="${message}">Error Message</p>
+ 		                </div>
+		                
+		           </div>         
+            
+            
+            
+            </div>
+            
+            
+            
+  
+          <!-- END CONTENT WRAPPER  --> 
+
+      </section>
+
+
+
+      </section>
+  </body>
+</html>  	  

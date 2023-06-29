@@ -1,0 +1,566 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+<div th:fragment="user-settings">
+
+			<!--  HEADING -->	         
+            <div class="content-heading" th:fragment="user-settings-heading">
+                    <div class="row">
+                             <div class="col-xs-12 col-md-12 col-lg-12 col-sm-12">
+                              <span class="fa fa-cog fa-2x text-bold text-left text-inverse"></span>
+                              <span class="h2 text-bold text-left"><a th:href="@{'/user-' + ${userDTO.UUID}}" class="text-inverse">#<span  th:text="${userDTO.shortdesc}"></span></a>/_Settings</span>
+                           </div>  
+                    </div>	                 
+            </div>
+            <!-- HEADING -->
+            
+            
+            
+            <!-- SETTINGS NAVIGATION  -->            
+              <div th:class="${colclass}" th:fragment="user-settings-index">
+		         <div class="row">
+		              <div class="col-md-12 col-sm-12">	
+						<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+						    <div class="container-fluid">
+						        <div class="collapse navbar-collapse navbar-menubuilder">
+						            <ul class="nav navbar-nav navbar-left">
+					                <li th:class="${view=='profile'} ? 'active' : '_'"><a th:href="@{'/user/settings/index?view=profile'}">Profile</a></li>
+					                <li th:class="${view=='security'} ? 'active' : '_'"><a th:href="@{'/user/settings/index?view=security'}">Security</a></li>
+					                <li th:class="${view=='avatar'} ? 'active' : '_'"><a th:href="@{'/user/settings/index?view=avatar'}">Avatar</a></li>
+					                <li th:class="${view=='privacy'} ? 'active' : '_'"><!-- <a th:href="@{'/user/settings/index?view=privacy'}">Privacy</a> --></li>
+					                <li th:class="${view=='notifications'} ? 'active' : '_'"><a th:href="@{'/user/settings/index?view=notifications'}">Notifications</a></li>
+					                
+						            </ul>
+						        </div>
+						    </div>
+						</div>         
+		              </div>
+		         </div>     
+   	        </div> 
+   	        
+   	        
+   	        
+   	         <div class="row"  th:fragment="settings-notifications">
+		              <div class="col-md-12 col-sm-12">	    
+              <form ID="notificationsform" role="form" th:action="@{'/user/settings/notification-submit'}" th:object="${SETTINGSFRM}" method="post">
+    
+				    
+         	  <div class="col-md-8 col-xs-12 col-sm-12">
+		                              <span class="text-sm-md text-gray-dark">Someone leaves a comment on my video, or replies to my comment</span>
+		                            
+		       </div>
+		       
+		      
+		       
+		        <div class="col-md-4 col-xs-12 col-sm-12 tex-sm-md text-bold text-gray-dark">
+                              <label class="radio-inline c-radio">
+                                 <input type="radio"  name="notification.videoreview" th:value="-1"th:checked="${SETTINGSFRM.notification.videoreview==-1}">
+                                 <span class="fa fa-bell-slash-o"></span>none</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.videoreview" th:value="1" th:checked="${SETTINGSFRM.notification.videoreview==1}">
+                                 <span class="fa fa-bell-o"></span>site only</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.videoreview" th:value="2" th:checked="${SETTINGSFRM.notification.videoreview==2}">
+                                 <span class="fa fa-envelope"></span>site & email</label>		                        
+		       </div>
+		       
+		       
+		             <div class="col-md-12 col-xs-12 col-sm-12">
+		         <hr class="separator"/>
+		       </div>
+		       
+		       
+		       	  <div class="col-md-8 col-xs-12 col-sm-12">
+		                              <span class="text-sm-md text-gray-dark">Someone likes one of my videos</span>
+		                            
+		       </div>
+		       
+		      
+		       
+		        <div class="col-md-4 col-xs-12 col-sm-12 tex-sm-md text-bold text-gray-dark">
+                              <label class="radio-inline c-radio">
+                                 <input type="radio"  name="notification.videolike" th:value="-1"th:checked="${SETTINGSFRM.notification.videolike==-1}">
+                                 <span class="fa fa-bell-slash-o"></span>none</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.videolike" th:value="1" th:checked="${SETTINGSFRM.notification.videolike==1}">
+                                 <span class="fa fa-bell-o"></span>site only</label>
+                              <label class="radio-inline c-radio">
+                                 <input  type="radio" name="notification.videolike" th:value="2" th:checked="${SETTINGSFRM.notification.videolike==2}">
+                                 <span class="fa fa-envelope"></span>site & email</label>		                        
+		       </div>
+		       
+		       
+		       
+		             <div class="col-md-12 col-xs-12 col-sm-12">
+		         <hr class="separator"/>
+		         </div>
+		         
+		         
+		           <div class="col-md-8 col-xs-12 col-sm-12">
+		                              <span class="text-sm-md text-gray-dark">Someone adds one  of my videos to an album  or to his personal collection</span>
+		                            
+		       </div>
+		       
+		      
+		       
+		        <div class="col-md-4 col-xs-12 col-sm-12 tex-sm-md text-bold text-gray-dark">
+                              <label class="radio-inline c-radio">
+                                 <input type="radio"  name="notification.videocollectionadded" th:value="-1"th:checked="${SETTINGSFRM.notification.videocollectionadded==-1}">
+                                 <span class="fa fa-bell-slash-o"></span>none</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.videocollectionadded" th:value="1" th:checked="${SETTINGSFRM.notification.videocollectionadded==1}">
+                                 <span class="fa fa-bell-o"></span>site only</label>
+                              <label class="radio-inline c-radio">
+                                 <input  type="radio" name="notification.videocollectionadded" th:value="2" th:checked="${SETTINGSFRM.notification.videocollectionadded==2}">
+                                 <span class="fa fa-envelope"></span>site & email</label>		                        
+		       </div>
+		       
+		       
+		       
+		       		             <div class="col-md-12 col-xs-12 col-sm-12">
+		         <hr class="separator"/>
+		         </div>
+		         
+		         
+		           <div class="col-md-8 col-xs-12 col-sm-12">
+		                              <span class="text-sm-md text-gray-dark">Someone follows me</span>
+		                            
+		       </div>
+		       
+		      
+		       
+		        <div class="col-md-4 col-xs-12 col-sm-12 tex-sm-md text-bold text-gray-dark">
+                              <label class="radio-inline c-radio">
+                                 <input type="radio"  name="notification.newfollower" th:value="-1"th:checked="${SETTINGSFRM.notification.newfollower=-1}">
+                                 <span class="fa fa-bell-slash-o"></span>none</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.newfollower" th:value="1" th:checked="${SETTINGSFRM.notification.newfollower==1}">
+                                 <span class="fa fa-bell-o"></span>site only</label>
+                              <label class="radio-inline c-radio">
+                                 <input  type="radio" name="notification.newfollower" th:value="2" th:checked="${SETTINGSFRM.notification.newfollower==2}">
+                                 <span class="fa fa-envelope"></span>site & email</label>		                        
+		       </div>
+		       
+		       
+		       
+		             <div class="col-md-12 col-xs-12 col-sm-12">
+		         <hr class="separator"/>
+		         </div>
+		       
+
+		       
+		       
+		       		           <div class="col-md-8 col-xs-12 col-sm-12">
+		                              <span class="text-sm-md text-gray-dark">Someone shares my video to a social network</span>
+		                            
+		       </div>
+		       
+		      
+		       
+		        <div class="col-md-4 col-xs-12 col-sm-12 tex-sm-md text-bold text-gray-dark">
+                              <label class="radio-inline c-radio">
+                                 <input type="radio"  name="notification.videoshare" th:value="-1"th:checked="${SETTINGSFRM.notification.videoshare==-1}">
+                                 <span class="fa fa-bell-slash-o"></span>none</label>
+                              <label class="radio-inline c-radio">
+                                 <input type="radio" name="notification.videoshare" th:value="1" th:checked="${SETTINGSFRM.notification.videoshare==1}">
+                                 <span class="fa fa-bell-o"></span>site only</label>
+                              <label class="radio-inline c-radio">
+                                 <input  type="radio" name="notification.videoshare" th:value="2" th:checked="${SETTINGSFRM.notification.videoshare==2}">
+                                 <span class="fa fa-envelope"></span>site & email</label>		                        
+		       </div>
+		       
+		       
+		         <div class="col-md-12 col-xs-12 col-sm-12"><br/><br/><br/>
+                               <div class="form-group m-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">UPDATE SETTINGS</span>
+			                           </button>
+			                   </div>  
+		       
+
+
+		         </div>
+		       
+		       
+		       
+<!--      	 
+    
+         	 <div class="form-group">
+     	 
+
+     	 
+     	 
+     	 
+     	 
+     	 
+     	 
+     	 
+     	 On-site activity
+Yes	No
+My new video is posted	
+
+	
+
+Someone mentions me in a comment	
+
+Someone likes one of my videos	
+
+Someone follows me	
+
+Someone sends me a private message	
+
+Someone shares a video with me	
+
+Someone adds me to the credits of a video	
+
+Someone adds my video to an album, channel, or group	
+
+A moderator or video owner removes a video from a group or channel I created	
+
+     	 
+     	 
+     	 
+     	 
+     	 
+     	 
+                      
+                           <div class="col-sm-10">
+                              <label class="radio-inline c-radio">
+                                 <input id="inlineradio10" type="radio" name="i-radio" value="option1" checked="">
+                                 <span class="fa fa-check"></span>a</label>
+                              <label class="radio-inline c-radio">
+                                 <input id="inlineradio20" type="radio" name="i-radio" value="option2" checked="">
+                                 <span class="fa fa-user"></span>b</label>
+                              <label class="radio-inline c-radio">
+                                 <input id="inlineradio30" type="radio" name="i-radio" value="option3" checked="">
+                                 <span class="fa fa-tint"></span>c</label>
+                              <br>
+                              <label class="checkbox-inline c-checkbox">
+                                 <input id="inlinecheckbox10" type="checkbox" value="option1" checked="">
+                                 <span class="fa fa-star"></span>a</label>
+                              <label class="checkbox-inline c-checkbox">
+                                 <input id="inlinecheckbox20" type="checkbox" value="option2" checked="">
+                                 <span class="fa fa-heart"></span>b</label>
+                              <label class="checkbox-inline c-checkbox">
+                                 <input id="inlinecheckbox30" type="checkbox" value="option3" checked="">
+                                 <span class="fa fa-bell"></span>c</label>
+                           </div>
+                        </div>
+ -->
+                           
+
+                 </form>
+                 </div>
+                 </div>
+   	        
+   	        
+   	        
+   	        
+   	        
+   	        
+   	        
+   	        
+   	      <div class="row"  th:fragment="settings-profile">
+		              <div class="col-md-12 col-sm-12">	    
+              <form ID="profileform" role="form" th:action="@{'/user/settings/profile-submit'}" th:object="${SETTINGSFRM}" method="post">
+							<div class="row">
+             			         <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+		                              <span class="h3 m0 text-bold text-gray">EMAIL</span>
+		                           </div>
+     	 
+     	 	                                    <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+						           <span class="h4 m0 text-bold text-gray-more"  th:text="${SETTINGSFRM.user.email}"></span><br/><br/>
+						        </div>
+						        
+						        
+						         <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+						        
+						        
+						        
+						        							<div class="row">
+                                          <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-lg">USERNAME</span>
+                                          <div class="form-group">
+			                                    <input type="text" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.username}"/>
+			                           </div>
+
+                        					</div>	
+                        	</div>
+						        
+						     
+						     
+						     						        							<div class="row">
+                                          <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-lg">FIRST NAME</span>
+                                          <div class="form-group">
+			                                    <input type="text" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.firstname}"/>
+			                           </div>
+
+                        					</div>	
+                        	</div>
+						        
+						        
+			                           					
+						     						        							<div class="row">
+                                          <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-lg">LAST NAME</span>
+                                          <div class="form-group">
+			                                    <input type="text" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.lastname}"/>
+			                           </div>
+
+                        					</div>	
+                        	</div>
+				
+						        
+						        
+						    </div>   
+						    </div>
+
+                           <hr class="separator"/>
+                               <div class="form-group m-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">UPDATE PROFILE</span>
+			                           </button>
+			                   </div>  
+                           
+                           
+
+                 </form>
+                 </div>
+                 </div>
+   	        
+   	        
+   	        
+   	      
+   	         	      <div class="row"  th:fragment="settings-security">
+		              <div class="col-md-12 col-sm-12">	    
+              <form id="securityform" role="form" th:action="@{'/user/settings/security-submit'}" th:object="${SETTINGSFRM}" method="post">
+              
+              <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 ml-lg">
+              
+              
+							<div class="row">
+                                  <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-sm">OLD PASSWORD</span>
+                                          <div class="form-group">
+			                                    <input type="password" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.oldPassword}"/>
+			                           </div>
+
+                        					</div>	
+                        		</div>			
+							<div class="row">
+                                          <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-lg">NEW PASSWORD</span>
+                                          <div class="form-group">
+			                                    <input type="password" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.newPassword}"/>
+			                           </div>
+
+                        					</div>	
+                        	</div>
+                        												<div class="row">
+                        					
+     
+                                          <div class="col-md-8 col-xs-12 col-sm-12">
+                                            <span class="h3 text-bold text-gray mb-lg">PASSWORD CONFIRM</span>
+                                          <div class="form-group">
+			                                    <input type="password" class="form-control text-sm-md text-inverse text-bold" style="overflow:hidden" th:field="*{user.passwordConfirm}"/>
+			                           </div>
+
+                        					</div>	
+     
+           				                           					
+                        					
+            			    </div>   
+
+
+					</div></div>
+					
+                           <hr class="separator"/>
+                               <div class="form-group m-lg">
+			                          <button type="submit" class="btn btn-labeled btn-info-dark">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">CHANGE PASSWORD</span>
+			                           </button>
+			                   </div>  
+
+                 </form>
+                 </div>
+                 </div>
+   	      
+   	      
+   	    
+   	    
+   	       	      <div class="row"  th:fragment="settings-avatar">
+   	       	      <form role="form" id="fileuploadform" th:action="@{'/user/settings/avatar-submit'}" method="POST" th:object="${SETTINGSFRM}" enctype="multipart/form-data">
+		              <div class="col-md-12 col-sm-12">	   
+			                  <div class="row bg-gray-dark mt-sm">
+			                   <div class="col-md-12 col-sm-12">	  
+			                           <div class="text-left text-bold text-uppercase text-gray h4">Click 'add new image' button to pick an image file from your PC as your new avatar</div>
+			                    </div>   
+<!-- 			                      <div class="col-md-3 col-sm-12">
+			                        <div><span  th:if="${SETTINGSFRM.avatar.imagebase64==null}" class="fa fa-smile-o text-gray fa-12x"></span></div>
+			                        <img th:if="${SETTINGSFRM.avatar.imagebase64!=null}" th:src="${'data:image/'+{SETTINGSFRM.avatar.extension}+';base64,'+{SETTINGSFRM.avatar.imagebase64}}" class="img-thumbnail img-circle thumb240" />
+			                      </div>      -->
+			                  </div>
+
+		            </div>  
+		            
+		            <div class="col-md-12 col-sm-12">	
+		            <div class="row mt-sm">
+										<div class="col-md-4 col-xs-12 col-sm-12">
+									         <div class="mt-lg">
+					            				<button id="filebutton" type="button" class="btn btn-labeled btn-info-dark btn-block filevideotrigger">
+													<span id="filebuttontext" class="h2 mt0 text-uppercase text-left text-white dropzoneiputclass">ADD NEW IMAGE</span>
+									            </button>						               
+									         </div>
+									 </div>        
+
+
+
+							          <!-- DROP ZONE AND FILE PREVIEW -->
+								          <div class="col-md-8 col-xs-12 col-sm-12 mt-lg">
+ 											           <blockquote class="box-placeholder mt0 - filevideotrigger" id="dropzone">
+											               <p class="h3 mt0 text-uppercase text-center text-bold text-gray-dark"><br/><br/>Or Drop your image here<br/><br/><br/></p>
+											            </blockquote>  
+	
+										  </div>
+										  <!-- END DROP ZONE AND FILE PREVIEW -->	
+										  
+
+						
+										
+										
+								<!-- FILE NAME PREVIEW  -->
+								<div id="previewpanel" class="col-md-12 col-xs-12 col-sm-12"><br/><br/>
+								                 <div class="row row-table"  id="preview-template">
+     												<div class="dz-details">
+										                       	 <div class="dz-filename"><span id="preview_name" class="h4 text-bold text-info-dark" data-dz-name></span></div>
+									                             <div class="dz-size"><span id="preview_size" class="h4 text-bold text-info-dark" data-dz-size></span></div>
+									                 </div>           
+
+ 											                     <span class="btn btn-labeled btn-info pull-right align-bottom remove hidden preview_remove">
+									             					<span id="preview_remove" class="h3 mt0 text-uppercase text-left text-white align-bottom">REMOVE IMAGE</span>
+ 											                     </span>     
+ 											       </div>              	
+								</div>
+								
+
+										  
+										  
+
+					</div>
+					</div>
+		             <div class="col-md-12 col-xs-12 col-sm-12">
+		            <div class="row mt-lg">
+                          <div class="col-md-12 col-xs-12 col-sm-12"><br/>
+                           
+							            	<!--  ROW PROGRESSS -->   		
+								       <div id="progressbardiv" class="row mt-lg hidden">
+							               <div class="col-md-12 col-xs-12 col-sm-12 text-left">
+							               <span  class="h3 text-danger">* Don't close the browser window until uploading is finished</span>
+							               </div>
+							
+							               <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+							    <span id="progressbartext" class="h3 mt0 text-white text-bold">0%</span>           
+								    <div class="progress" id="total-progress">
+											<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+											  </div>
+								</div>
+							               </div>
+							       </div>                 
+                           
+                           
+              				</div>
+              				
+<!--               			<div class="col-md-12 col-xs-12 col-sm-12  mb-lg mt-lg">
+           				<button id="uploadbutton" type="button" class="btn btn-labeled btn-info-dark start pull-left">
+							<span class="btn-label pull-left"><i class="fa fa-upload fa-2x"></i>
+			                    </span>   
+							<span id="uploadbuttontext" class="h2  text-uppercase text-left">UPLOAD AVATAR</span>
+			            </button>	
+                        </div> -->
+              				  
+					</div>	
+					</div>
+		            
+		            
+		            
+		            
+		            </form>
+		          </div>  
+		            
+
+   	    
+   	        
+   	        
+   	        
+   	        
+   	        
+            <!-- SETTINGS NAVIGATION  -->
+            
+<!--             
+            
+            
+            SETTINGS NAVIGATION 
+   			<div class="row" th:fragment="user-settings-navigation">
+                LEFT PANEL NAVIGATION BAR
+               <div class="col-md-9 col-xs-12 col-sm-12">
+				         <div class="row">
+				              <div class="col-md-12 col-sm-12">	
+								<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+								    <div class="container-fluid">
+								        <div class="collapse navbar-collapse navbar-menubuilder">
+								            <ul class="nav navbar-nav navbar-left">
+							                <li th:class="${settingsselected=='account'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/settings/'}">Account</a></li>
+							                <li th:class="${settingsselected=='privacy'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/settings/privacy'}">Privacy</a></li>
+							                <li th:class="${settingsselected=='pins'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/settings/map'}">Map</a></li>
+							                <li th:class="${settingsselected=='videos'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/settings/videos'}">Videos</a></li>
+							                <li th:class="${settingsselected=='collections'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/collections/'}">Collections</a></li>
+							                <li th:class="${settingsselected=='channels'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/settings/channels'}">Channels</a></li>
+							                <li th:class="${settingsselected=='friends'} ? 'active' : '_'"><a th:href="@{'/user-' + ${userDTO.UUID}+'/friends/'}">Friends</a></li>
+								            </ul>
+								        </div>
+								    </div>
+								</div>         
+				              </div>
+				         </div>     
+     	        </div>  
+		          END LEFT PANEL NAVIGATION BAR               
+              
+                RIGHT  PANEL
+               <div class="col-md-3 col-xs-12 col-sm-12 pull-right">
+                  START PROFILE WIDGET
+                  <div class="panel widget bg-info-dark">
+                     <div class="panel-body text-center">
+                        <div class="clearfix">
+                           <div class="text-center text-bold text-uppercase text-gray h4" th:text="${settingsselected}"></div>
+                        </div>
+                              
+                              
+                              
+                              
+                              	
+                             <img th:src="@{/images/smile-happy.png}" src="../static/images/smile-happy.png" class="thumb240" style="background:none;"/>
+                            <img th:if="${avatarDTO.imagebase64!=null}" th:src="*{'data:image/'+avatarDTO.extension+';base64,'+avatarDTO.imagebase64}" class="img-thumbnail img-circle thumb240" />
+                            
+                     </div>
+                  </div>
+                  END PROFILE WIDGET                  
+               </div>
+                END RIGHT  PANEL
+            </div>          END SETTINGS NAVIGATION     -->
+</div>
+
+</body>
+</html>
+
+

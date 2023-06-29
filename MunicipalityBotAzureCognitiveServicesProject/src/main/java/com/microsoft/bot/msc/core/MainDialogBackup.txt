@@ -1,0 +1,198 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+package com.microsoft.bot.msc.core;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.microsoft.bot.builder.MessageFactory;
+import com.microsoft.bot.dialogs.*;
+import com.microsoft.bot.dialogs.prompts.PromptOptions;
+import com.microsoft.bot.dialogs.prompts.TextPrompt;
+import com.microsoft.bot.msc.data.model.CorinthPOIObject;
+import com.microsoft.bot.msc.data.model.NERExtractionObject;
+import com.microsoft.bot.msc.data.services.DatabaseService;
+import com.microsoft.bot.msc.data.services.HuggingFaceService;
+import com.microsoft.bot.msc.data.services.LuisNLPRecognizerService;
+import com.microsoft.bot.msc.data.services.TranslatorService;
+import com.microsoft.bot.schema.Activity;
+import com.microsoft.bot.schema.InputHints;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+
+/**
+ * The class containing the main dialog for the sample.
+ */
+public class MainDialogBackup extends ComponentDialog {
+
+    private final LuisNLPRecognizerService luisRecognizer;
+    private DatabaseService databaseService;
+    private TranslatorService translatorService;
+
+    private HuggingFaceService huggingFaceService;
+
+    private final Integer plusDayValue = 7;
+
+
+
+
+
+    public MainDialogBackup(LuisNLPRecognizerService withLuisRecognizer, DatabaseService databaseService, TranslatorService translatorService, HuggingFaceService huggingFaceService) {
+        super("MainDialog");
+
+        this.luisRecognizer = withLuisRecognizer;
+        this.databaseService = databaseService;
+        this.translatorService = translatorService;
+        this.huggingFaceService = huggingFaceService;
+
+
+        addDialog(new TextPrompt("TextPrompt"));
+        WaterfallStep[] waterfallSteps = {
+            this::introStep,
+            this::nLPMainProcessingStep,
+            this::finalStep
+        };
+        addDialog(new WaterfallDialog("WaterfallDialog", Arrays.asList(waterfallSteps)));
+
+        // The initial child Dialog to run.
+        setInitialDialogId("WaterfallDialog");
+    }
+
+    /**
+     * First step in the waterfall dialog. Prompts the user for a command. Currently, this expects a
+     * request, like "find the telephone number of revenue department" 
+     *
+     * @param stepContext A {@link WaterfallStepContext}
+     * @return A {@link DialogTurnResult}
+     */
+    private CompletableFuture<DialogTurnResult> introStep(WaterfallStepContext stepContext) {
+        if (!luisRecognizer.isConfigured()) {
+            Activity text = MessageFactory.text("NOTE: LUIS is not configured. "
+                + "To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' "
+                + "to the appsettings.json file.", null, InputHints.IGNORING_INPUT);
+            return stepContext.getContext().sendActivity(text)
+                .thenCompose(sendResult -> stepContext.next(null));
+        }
+
+        // Use the text provided in FinalStepAsync or the default if it is the first time.
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+        //String weekLaterDate = LocalDateTime.now().plusDays(plusDayValue).format(formatter);
+        String messageText = stepContext.getOptions() != null
+            ? stepContext.getOptions().toString()
+            : String.format("What can I help you with today?\n"
+                + "Say something like \"find the telephone number of revenue department");
+        Activity promptMessage = MessageFactory
+            .text(messageText, messageText, InputHints.EXPECTING_INPUT);
+        PromptOptions promptOptions = new PromptOptions();
+        promptOptions.setPrompt(promptMessage);
+        return stepContext.prompt("TextPrompt", promptOptions);
+    }
+
+    /**
+     * Second step in the waterfall.  This will use LUIS to attempt to extract place name and place type,
+     * Then, it hands off to the bookingDialog child dialog to collect
+     * any remaining details depending on the place_type
+     *
+     * @param stepContext A {@link WaterfallStepContext}
+     * @return A {@link DialogTurnResult}
+     */
+    private CompletableFuture<DialogTurnResult> nLPMainProcessingStep(WaterfallStepContext stepContext) {
+
+
+        String input = stepContext.getResult().toString();
+        boolean done = StringUtils.equals(stepContext.getResult().toString(), Constants.QUIT_OPTION);
+        if (done)
+            return stepContext.replaceDialog("TopLevelDialog");
+
+
+
+        // Call LUIS and gather any potential booking details. (Note the TurnContext has the response to the prompt.)
+        return luisRecognizer.recognize(stepContext.getContext()).thenCompose(luisResult -> {
+
+            NERExtractionObject nerObject = null;
+            CorinthPOIObject object = new CorinthPOIObject("id", "DeptName");
+            Activity activityMsg  =null;
+
+            switch (luisResult.getTopScoringIntent().intent) {
+
+
+                case "CorinthMunicipality_FindContactNumber":
+                    // Extract the values for the composite entities from the LUIS result.
+                    nerObject = luisRecognizer.extractEntities(luisResult);
+
+                    try {
+                        object = databaseService.getItemByNameTypeLocation(nerObject.getName(), nerObject.getType(), nerObject.getLocation());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    String getPhoneNumberMessageText = "Sorry, I didn't get that. Please try asking in a different way";
+
+                    //IF TELEPHONE NUMBER OF THE DEPARTMENT IS FOUND THEN
+                    if (object!=null)
+                        getPhoneNumberMessageText = "The telephone number of "+object.getName()+" is "+object.getContact().getPhone1()+","+object.getContact().getPhone2();
+                    activityMsg = MessageFactory
+                            .text(
+                                    getPhoneNumberMessageText, getPhoneNumberMessageText,
+                                    InputHints.IGNORING_INPUT
+                            );
+                    return stepContext.getContext().sendActivity(activityMsg).thenCompose(resourceResponse -> stepContext.next(null));
+
+                case "CorinthMunicipality_FindAddress":
+                    // Extract the values for the composite entities from the LUIS result.
+                    nerObject = luisRecognizer.extractEntities(luisResult);
+
+                    try {
+                        object = databaseService.getItemByNameTypeLocation(nerObject.getName(), nerObject.getType(), nerObject.getLocation());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    String getAddressMessageText = "Sorry, I didn't get that. Please try asking in a different way";
+
+                    //IF ADDRESS OF THE DEPARTMENT IS FOUND THEN
+                    if (object!=null)
+                        getAddressMessageText = "The address  of "+object.getName()+" is "+object.getContact().getAddress();
+                    activityMsg = MessageFactory
+                            .text(
+                                    getAddressMessageText, getAddressMessageText,
+                                    InputHints.IGNORING_INPUT
+                            );
+                    return stepContext.getContext().sendActivity(activityMsg).thenCompose(resourceResponse -> stepContext.next(null));
+
+
+
+                default:
+                    // Catch all for unhandled intents
+                    String didntUnderstandMessageText = String.format(
+                            "Sorry, I didn't get that. Please try asking in a different way (intent was %s)",
+                            luisResult.getTopScoringIntent().intent
+                    );
+                    Activity didntUnderstandMessage = MessageFactory
+                            .text(
+                                    didntUnderstandMessageText, didntUnderstandMessageText,
+                                    InputHints.IGNORING_INPUT
+                            );
+                    return stepContext.getContext().sendActivity(didntUnderstandMessage)
+                            .thenCompose(resourceResponse -> stepContext.next(null));
+            }
+        });
+    }
+
+
+    /**
+     * This is the final step in the main waterfall dialog. It wraps up the sample "book a flight"
+     * interaction with a simple confirmation.
+     *
+     * @param stepContext A {@link WaterfallStepContext}
+     * @return A {@link DialogTurnResult}
+     */
+    private CompletableFuture<DialogTurnResult> finalStep(WaterfallStepContext stepContext) {
+        CompletableFuture<Void> stepResult = CompletableFuture.completedFuture(null);
+
+
+        // Restart the main dialog with a different message the second time around
+        String promptMessage = "What else can I do for you?";
+        return stepResult
+            .thenCompose(result -> stepContext.replaceDialog(getInitialDialogId(), promptMessage));
+    }
+}

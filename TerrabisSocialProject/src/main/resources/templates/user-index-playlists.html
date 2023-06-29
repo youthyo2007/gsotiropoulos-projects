@@ -1,0 +1,161 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - User Video Paths</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+					 <span class="text-gray fa fa-road fa-2x">&nbsp;</span><span class="text-gray text-bold h1" th:text="${{userDTO.shortdesc} + '&#146;s Video Paths'}">User</span>            
+            </div>
+	
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+     
+           	<!-- PLAYLIST VIEW -->
+        <div class="row">
+        	<div class="col-md-9 col-xs-12 col-sm-12">
+		
+<!-- PLAYLIST CATALOG VIEW -->
+	 <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">	 
+<div ID="ITERPOINT_ROW" class="row" th:each="coll, iterStat : ${collectionListDTO}">
+
+			<div class="col-md-10 col-sm-10 col-xs-10">
+				<span class="h4  mt text-bold text-gray-dark" th:text="${coll.title}"></span><br/>
+				 <span class="text-gray-dark text-sm" th:text="${coll.description}"></span>
+			</div>
+			
+			<div class="col-md-2 col-sm-2 col-xs-2 mb-lg">
+	            <div class="row bg-gray">
+	               <div class="col-xs-12">
+	                  <div class="panel-body text-center">
+							<a th:href="@{'/video/map-collection-zoom?collection=' + ${coll.id}}">
+				                     <span class="h4 text-bold text-inverse">MAP</span>
+				              </a>   
+	                  </div>
+	               </div>
+	                    </div>
+			</div>
+
+			    <div class="col-md-12 col-xs-12 col-sm-12">
+		    <div class="row">
+				    <div ID="ITERPOINT_COLUMN" class="col-md-3 col-xs-3 col-sm-3" th:each="vid, iterStat : ${coll.videos}">
+	       	                			<div th:attr="data-likescount=${{vid.likescount}},data-playscount=${{vid.playscount}}, data-ratingssum=${{vid.ratingssum}},data-title=${{vid.title}},data-description=${{vid.description}}, data-id=${{vid.id}},data-collectionid=${{coll.id}}, data-videourl=${{vid.videourl}}" class="videopanel" style="background: none;">
+										<div class="" id="subpanelblockA">
+			                        			<div class="row">
+			                           				<div class="col-xs-12 col-md-12 col-sm-12">                         				
+													<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action hidden">
+													<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-action-collection(video=${vid},collection=${coll})"></div>
+													</div>                          				
+	                           				
+												<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-XXS h-XXS box-border-info" th:src="${vid.thumburl}"/> 
+											    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-XXS h-XXS box-border-info"  th:attr="src=${vid.thumburl}"/>
+	                          			 </div>
+	                        		</div>
+	                     		</div>
+ 	
+	                             <div class="row mt-sm">
+			                             <div class="col-md-12 col-xs-12 col-sm-12">
+			                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+			                           </div>
+<!-- 										<div class="col-md-2 col-xs-12 col-sm-12">
+			                             <div class="pull-right">
+			                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+										</div>				                           
+			                    </div> -->
+			                    </div>
+			                 
+			                 
+			                 
+			                  <!--  
+			                    <div class="row">
+			                             <div class="col-md-12 col-sm-12 col-xs-12">
+			                              <p class="m0 text-sm">
+											  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+											  added <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+			                              </p>
+			                           </div>
+			                    </div>  
+			                    
+			                    
+			 					<div class="row" id="subpanelblockD">
+			                             <div class="col-md-12 col-xs-12 col-sm-12 text-sm>
+	            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn-thumb(video=${vid},showlike='true')">
+	                     		                           </div>
+	                           	</div> -->
+			                    
+			                    
+			                    
+			                    
+			                    </div>	
+	                    
+			                    
+			                    
+			                    
+		                  </div>
+		                   <div ID="LAST_COLUMN" class="col-md-3 col-xs-3 col-sm-3 w-XXS h-XXS"></div>				    
+		    
+
+	 </div>  
+	 </div> 		 
+		
+		
+		
+		    	 <div class="col-md-12 col-sm-12 col-xs-12 mb-sm">	
+         	 	<hr class="separator"/>	
+	         </div>  	 
+			 
+			 
+			          					     
+   
+	 </div> <!--  ITER POINT ROW-->
+	 
+	  
+</div>
+</div>
+<!-- PLAYLIST VIEW -->		
+		
+		
+			</div>
+
+
+		<div class="col-md-3 col-xs-12 col-sm-12">
+		<div class="row">
+         <div class="col-md-12 col-xs-12 col-sm-12" th:replace="/fragments/video-grid-view :: user-info-column(user=${userDTO},avatarsize='fa-6x',videos='true',favorites='false',playlists='false',watchlater='false')">
+	      </div>
+	      </div></div>	
+
+      		
+      		
+      		
+      	</div>	
+      	<!-- PLAYLIST VIEW -->  
+     
+</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

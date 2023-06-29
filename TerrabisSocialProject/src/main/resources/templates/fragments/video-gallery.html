@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+      	<!-- VIDEO GALLERY  -->
+      	 <div class="row">
+      	 <div class="col-md-12 col-xs-12 col-sm-12" id="galleryGrid" th:fragment="playlist(collectionsListDTO)">	 
+		<div ID="ITERPOINT_ROW" class="row mt-lg bg-white" th:each="coll, iterStat : ${collectionsListDTO}">
+				    <div class="col-lg-5 col-md-8 col-xs-12 col-sm-12">
+
+						<div class="royalSlider">
+						    <!-- simple image with Vimeo video -->
+						    <img class="rsImg" src="image.jpg" data-rsVideo="https://vimeo.com/44878206" />
+						
+						    <!-- lazy loaded image with YouTube video -->
+						    <a class="rsImg" href="image.jpg" data-rsVideo="http://www.youtube.com/watch?v=Eip7JrQ6IdE">This is caption <b>HTML</b> text</a>
+						
+						    <!-- slide with any content -->
+						    <div>
+						        <img class="rsImg" src="image.jpg" data-rsVideo="https://vimeo.com/44878206" />
+						        <p>Some content after...</p>
+						    </div>
+						</div>
+		
+			 		</div>  
+        	 <div class="col-lg-7 col-md-4 col-xs-12 col-sm-12">
+        	 		<div class="row">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                              <div class="h2 m0 text-bold text-inverse" th:text="${coll.title}"></div>
+		                           </div>
+		                    </div>
+
+     	 				<div class="row mt-sm">
+		                             <div class="col-md-12 col-xs-12 col-sm-12">
+		                              <div class="font14" th:text="${coll.description}"></div>
+		                           </div>
+		                    </div>		                    
+		                    		                    
+		 				<div class="row mt-sm">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 font14">
+												<!--  MAP -->
+		                           </div>
+		                    </div> <!-- END RIGHT COLUMN  -->	
+		                    
+        	 </div>
+        	 
+        	  
+		</div>
+		</div>
+		<!-- DETAIL VIEW -->
+
+
+
+
+
+</body>
+</html>
+
+

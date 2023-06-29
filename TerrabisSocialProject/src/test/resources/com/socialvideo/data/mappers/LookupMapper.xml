@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.LookupMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.IDDescrDTO" id="IDDescrDTO">
+        <id column="id" property="id"/>
+        <result property="descr" column="descr"/>
+    </resultMap> 
+
+
+
+
+    <select id="lookupVideoTypeListOfVideo" resultMap="IDDescrDTO" parameterType="map">
+       SELECT a.lookupid_fk as id FROM videotypelkp a WHERE videoid_fk=#{videoid} ORDER BY a.id DESC
+    </select>
+
+    <select id="lookupSocialNetwork" resultMap="IDDescrDTO" parameterType="map">
+       SELECT a.* FROM lookupsocialnetworks a WHERE a.id=#{id} ORDER BY a.id DESC
+    </select>
+
+    <select id="lookupRating" resultMap="IDDescrDTO" parameterType="map">
+       SELECT a.* FROM lookuprating a WHERE a.id=#{id} ORDER BY a.id DESC
+    </select>
+
+
+    <select id="selectVideoDTO_VideoTypeList" resultMap="IDDescrDTO" parameterType="map">
+       SELECT a.lookupid_fk as id FROM videotypelkp a WHERE videoid_fk=#{videoid_fk} ORDER BY a.id DESC
+    </select>
+
+
+
+    <select id="selectVideoTypeList" resultMap="IDDescrDTO">
+       SELECT * FROM lookupvideotype a ORDER BY a.id DESC
+    </select>
+    
+    
+    <select id="selectVideoShootingTypeList" resultMap="IDDescrDTO">
+       SELECT * FROM lookupvideoshootingtype a ORDER BY a.id DESC
+    </select>
+     
+
+</mapper>
+
+
+
+

@@ -1,0 +1,172 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-statistics-video">
+  <head>
+    <title>Terrabis - Statistics:Video Traffic</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+
+         <div class="content-wrapper">
+                     <div class="content-heading">
+					<span class="text-gray h3">Statistics:Videos:Video Traffic Dashboard</span>            
+            		</div>
+  
+  
+           	<div class="row" th:replace="/fragments/stats-grid-view :: filter(STATSQUERYFRM=${STATSQUERYFRM},actionLink=@{'/statistics/videos/dashboard-1/filter'})">              
+					</div>
+  
+ <!--  
+         		       <div class="row">  
+	              <div class="col-md-12 col-sm-12">
+			             <div id="barChartContainer" class="min-height-lg">
+                    </div>
+			          
+	              </div>    
+		       </div> 	
+   -->
+
+          			<div class="row mt-lg">  
+ 										         		            
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;" th:text="${'Total Uploads'}"></span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;" th:text="${stDTO.videostatus.total}"></span>
+								   </div>
+							</div>
+         		            <div class="col-md-4 col-sm-12">
+         		            <div class="text-left">
+             							<span class="text-gray"  style="font-size: 48px;" th:text="${'Published'}"></span><br/>    
+    		        						<span class="text-white" style="font-size: 32px;" th:text="${stDTO.videostatus.status_PUBLISHED}"></span>
+								   </div>
+							</div>
+							
+							
+								
+            		</div>   
+   
+          			<div class="row">  
+ 						<div id="lineChartVideosPerDay"></div>
+            		</div>
+   
+             			<div class="row mt-lg">  
+                    					 <div class="col-md-6 col-sm-12">
+         		                          		<div class="row">
+         		                          		  <div class="col-md-12 col-sm-12">
+	                     							 <div id="gaugeIsPIvideosUploadedInOneDay"></div>
+    												</div>
+    											</div>	
+         		                          		<div class="row">
+         		                          		  <div class="col-md-12 col-sm-12">
+    			             							<span class="text-white" th:text="${{stDTO.dash1DTO.KPIvideosUploadedInOneDay.avg}+'%'+' - '+{stDTO.dash1DTO.KPIvideosUploadedInOneDay.current}+' Videos Per Day'}">Percent</span>    
+		         		        						<span class="text-sm-sm text-muted mt-lg"><br/>Percentange of videosPerDayAvg / videosPerDayAllTimeAvg - No of Videos Per Day</span>
+    											  </div>		
+                     							 </div>
+                    					</div>
+
+         		                        <div class="col-md-6 col-sm-12">
+         		                          		<div class="row">
+         		                          		  <div class="col-md-12 col-sm-12">
+	                     							 <div id="gaugeIsPIvideosUploadedInOneMonth"></div>
+                     							 </div>
+                     							 </div>
+         		                          		<div class="row">
+         		                          		  <div class="col-md-12 col-sm-12">
+    			             							<span class="text-white text-sm-md" th:text="${{stDTO.dash1DTO.KPIvideosUploadedInOneMonth.avg}+'%'+' - '+{stDTO.dash1DTO.KPIvideosUploadedInOneMonth.current}+' Videos Per Month'}">Percent</span>    
+		         		        						<span class="text-sm-sm text-muted mt-lg"><br/>Percentange of videosPerMonthAvg / videosPerMonthAllTimeAvg - No of Videos Per Month</span>
+    											  </div>		
+                     							 </div>
+                    					</div>  
+                    					</div>
+
+   
+   
+   	   					<div class="row mt-lg">  
+                    					 <div class="col-md-12 col-sm-12">
+												 <div id="barChartVideosPerMonth">
+                    					</div>
+       									</div>
+       				   </div>							
+       			
+  
+         		       <div class="row mt-lg">  
+   						              <div class="col-md-6 col-sm-12">
+									            <div id="pieChartVideosPerSource"></div>
+						                    </div>
+
+		       			</div> 	
+		       	
+		       		       
+		   
+		       		       
+		       		       
+		       		       
+		       
+		       
+		       			            
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/dx-chart/dx.chartjs.js" th:src="@{/vendor/dx-chart/dx.chartjs.debug.js}"></script>     
+	<script src="../static/js/dx-chart-assistant.js" th:src="@{/js/dx-chart-assistant.js}"></script>     
+	<script src="../static/js/statistics-video-view.js" th:src="@{/js/statistics-video-view.js}"> </script> 
+   <script src="../static/js/statistics-filter.js" th:src="@{/js/statistics-filter.js}"> </script>	
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+
+
+		  //CREATE GAUGES
+ 	   	  var gaugeIsPIvideosUploadedInOneDayOptions = percentageGaugeOptions([[${stDTO.dash1DTO.KPIvideosUploadedInOneDay.current}]],10, [[${stDTO.dash1DTO.KPIvideosUploadedInOneDay.current}]]+' Avg Daily Uploads',100);  	  
+ 	      $("#gaugeIsPIvideosUploadedInOneDay").dxCircularGauge(gaugeIsPIvideosUploadedInOneDayOptions);
+		
+ 	   	  var gaugeIsPIvideosUploadedInOneMonthOptions = percentageGaugeOptions([[${stDTO.dash1DTO.KPIvideosUploadedInOneMonth.current}]],25, [[${stDTO.dash1DTO.KPIvideosUploadedInOneMonth.current}]] + ' Avg Monthly Uploads',300);  	  
+ 	      $("#gaugeIsPIvideosUploadedInOneMonth").dxCircularGauge(gaugeIsPIvideosUploadedInOneMonthOptions);
+
+    	  
+    	  
+  		  //CREATE BAR CHART	
+ 	   	  var barChartVideosPerMonthData = JSON.parse([[${stDTO.dash1DTO.barChartVideosPerMonth}]]);
+		  var barChartOptionsVideosPerMonth = barChartOptions(barChartVideosPerMonthData,'Uploads Per Month','Month Bar',[[${stDTO.dash1DTO.maxVideosPerMonth}+100]]);
+		  $("#barChartVideosPerMonth").dxChart(barChartOptionsVideosPerMonth);
+ 	      
+
+		  
+		  var pieChartVideosPerSourceData = JSON.parse([[${stDTO.dash1DTO.pieChartVideosPerSource}]]);
+		  var pieChartOptionsVideosPerSource = pieChartOptions(pieChartVideosPerSourceData,'Videos Per Source');
+		  $("#pieChartVideosPerSource").dxPieChart(pieChartOptionsVideosPerSource);
+
+		  
+		  var lineChartVideosPerDayData = JSON.parse([[${stDTO.dash1DTO.lineChartVideosPerDay}]]);
+		  var lineChartOptionsVideosPerDay = lineChartOptions(lineChartVideosPerDayData,' Uploads Per Day Line Graph','Calendar',[[${stDTO.dash1DTO.maxVideosPerDay}+10]]);
+		  $("#lineChartVideosPerDay").dxChart(lineChartOptionsVideosPerDay);
+		  
+		  		  
+
+
+
+		});    	  
+    	  
+    	  
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  

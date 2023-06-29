@@ -1,0 +1,157 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <title>Terrabis - Work Test</title>
+
+<!--     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ -->
+  
+  	<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"></link>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+    
+     <link href="../static/vendor/bootstrap-social/bootstrap-social.css"
+          th:href="@{/vendor/bootstrap-social/bootstrap-social.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+
+
+  <link href="../static/css/site-index.css"
+          th:href="@{/css/site-index.css}" rel="stylesheet"/>   
+    
+   <link href="../static/vendor/umbg-video-player/umbg/css/umbg.min.css"
+          th:href="@{/vendor/umbg-video-player/umbg/css/umbg.min.css}" rel="stylesheet"/>  
+             
+             
+
+  
+ <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        min-height: 600px;
+      }
+    </style>
+
+	
+
+</head>
+
+<body id="page-top">
+
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                 Fusion Table Test
+                </div>
+			</div>
+			
+			   <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<div>
+				  <label>Enter an address:</label>
+				  <input type="text" id="address" value="Mountain View, CA">
+				  <input type="button" id="search" value="Search!">
+				  <input type="button" id="reset" value="Reset">
+				</div>
+                <div id="map"></div>
+                </div>
+			</div>
+		</div>	
+  
+
+      
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA2NdWUBq9Xd9KdnVKIczih3DalRqmwLlQ"></script>
+<script src="../static/js/terrabismap.js"  th:src="@{/js/terrabismap.js}"></script> 	
+<script src="../static/js/main.js"  th:src="@{/js/main.js}"></script> 	   
+
+<!--
+   https://www.google.com/fusiontables/DataSource?docid=1SZx-TgNmiJgJtcrbAQdd1F-N7QZqJhvJZzkjqRML
+    
+	https://www.google.com/fusiontables/DataSource?docid=1SZx-TgNmiJgJtcrbAQdd1F-N7QZqJhvJZzkjqRML
+	
+	
+	1064645099386-lbpueb38vds4351g8sg6j0tum1jqkh3r.apps.googleusercontent.com 
+	 S8nrR2WSAfLw_3tabMinltDO 
+	 -->
+	 
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+	           
+      $(document).ready(function() {
+ 	  
+  			var defaultCenter = new google.maps.LatLng(0, 0);
+        	var defaultZoom = 2;
+        
+        	terrabisApp.globalMap = new google.maps.Map(document.getElementById('map'), {
+	              center: defaultCenter,
+	              zoom: defaultZoom,
+	              mapTypeId: google.maps.MapTypeId.ROADMAP
+	         });  
+	    		    
+    		initDataMarkers([[${crd.accessToken}]]);
+
+    
+	
+		});
+
+  	
+    	/*]]>*/
+    	</script> 
+    	
+
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <title>Terrabis - Work Test</title>
+
+<!--     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ -->
+  
+  	<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"></link>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+    
+     <link href="../static/vendor/bootstrap-social/bootstrap-social.css"
+          th:href="@{/vendor/bootstrap-social/bootstrap-social.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+
+
+  <link href="../static/css/site-index.css"
+          th:href="@{/css/site-index.css}" rel="stylesheet"/>   
+    
+   <link href="../static/vendor/umbg-video-player/umbg/css/umbg.min.css"
+          th:href="@{/vendor/umbg-video-player/umbg/css/umbg.min.css}" rel="stylesheet"/>  
+             
+             
+
+  
+ <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        min-height: 600px;
+      }
+    </style>
+
+	
+
+</head>
+
+<body id="page-top">
+
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                 Fusion Table Test
+                </div>
+			</div>
+			
+			   <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<div>
+				  <label>Enter an address:</label>
+				  <input type="text" id="address" value="Mountain View, CA">
+				  <input type="button" id="search" value="Search!">
+				  <input type="button" id="reset" value="Reset">
+				</div>
+                <div id="map"></div>
+                </div>
+			</div>
+		</div>	
+  
+
+      
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+   
+
+   
+   https://www.google.com/fusiontables/DataSource?docid=1SZx-TgNmiJgJtcrbAQdd1F-N7QZqJhvJZzkjqRML
+    
+	
+	
+	1064645099386-lbpueb38vds4351g8sg6j0tum1jqkh3r.apps.googleusercontent.com 
+	 S8nrR2WSAfLw_3tabMinltDO 
+
+<script>
+
+           
+      $(document).ready(function() {
+    	  
+		var defaultCenter = new google.maps.LatLng(10, 10);
+        var defaultZoom = 2;		  
+		var tableId = '1SZx-TgNmiJgJtcrbAQdd1F-N7QZqJhvJZzkjqRML';
+        var locationColumn = 'latitude';
+		var geocoder = new google.maps.Geocoder();
+
+		  
+		var zoomToAddress = function() {
+          var address = document.getElementById('address').value;
+          geocoder.geocode({
+            address: address
+          }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              map.setZoom(10);
+
+              // OPTIONAL: run spatial query to find results within bounds.
+		
+              var sw = map.getBounds().getSouthWest();
+              var ne = map.getBounds().getNorthEast();
+              var where = 'ST_INTERSECTS(' + locationColumn +
+                  ', RECTANGLE(LATLNG' + sw + ', LATLNG' + ne + '))';
+              layer.setOptions({
+                query: {
+                  select: locationColumn,
+                  from: tableId,
+                  where: where
+                }
+              });
+		
+            } else {
+              window.alert('Address could not be geocoded: ' + status);
+            }
+          });
+        };		  
+		  
+		  
+		  
+		google.maps.event.addDomListener(document.getElementById('search'),
+            'click', zoomToAddress);
+        google.maps.event.addDomListener(window, 'keypress', function(e) {
+          if (e.keyCode == 13) {
+            zoomToAddress();
+          }
+        });
+		
+		
+       google.maps.event.addDomListener(document.getElementById('reset'),
+            'click', function() {
+              map.setCenter(defaultCenter);
+              map.setZoom(defaultZoom);
+              layer.setOptions({
+                query: {
+                  select: locationColumn,
+                  from: tableId
+                }
+              });
+            });
+    
+   
+  
+   
+  
+		var map = new google.maps.Map(document.getElementById('map'), {
+          center: defaultCenter,
+          zoom: defaultZoom
+        });
+
+		
+		
+        var layer = new google.maps.FusionTablesLayer({
+          query: {
+                  select: locationColumn,
+                  from: tableId
+          },
+		   options: {
+				styleId: 2,
+				templateId: 2
+			}
+        });
+        layer.setMap(map);
+
+
+	
+});
+
+</script> 
+
+</body>
+
+</html>

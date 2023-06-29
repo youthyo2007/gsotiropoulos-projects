@@ -1,0 +1,546 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>terrabis:video-upload-index</title>
+    
+     <link href="../static/vendor/blueimp-file-upload/css/jquery.fileupload.css"
+          th:href="@{/vendor/blueimp-file-upload/css/jquery.fileupload.css}" rel="stylesheet"/>   
+          
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+			<!--  HEADING -->	         
+            <div class="content-heading" th:fragment="user-settings-heading">
+                    <div class="row">
+                             <div class="col-xs-6">
+                              <span class="fa fa-upload fa-2x text-bold text-left"></span>
+                              <span class="h2 text-bold text-left">Video Upload/_</span>
+                           </div>  
+                    </div>	                 
+            </div>
+            <!-- HEADING -->         
+
+          
+
+            
+            
+            <div class="row">
+			    <div class="col-md-12 col-xs-12 col-sm-12">
+			    
+			    
+			    				<!-- FIRST ROW WITH WIDGETS -->
+			    				<form role="form" id="fileupload" th:action="@{'/upload/user-2946946/video-submit'}" method="POST" th:object="${videouploadFrm}" enctype="multipart/form-data">
+	                                        <input type="hidden" th:field="*{userid}">
+									       <input type="hidden" th:field="*{latitude}" value="37.983917">
+									       <input type="hidden" th:field="*{longitude}" value="23.729360">
+
+	                             
+	                             <div class="row">
+	                                         <div class="col-md-4 col-xs-12 col-sm-12">
+									                  <div id="filevideopanel" class="panel widget bg-gray-dark">
+									                     <div class="row row-table">
+									                        <div id="filevideopanelicon" class="col-xs-4 text-center bg-info-dark pv-lg cursor-pointer">
+									                           <em class="fa fa-upload fa-3x"></em>
+									                        </div>
+									                        <div id="filevideopaneltext" class="col-xs-8 pv-xl text-white">
+									                           <div class="h3 m0 text-bold">UPLOAD VIDEO FILE</div>
+									                           <div class="text-uppercase">pick a file from your pc to upload&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									                           <div class="mt-lg">
+											                     <span class="btn btn-labeled btn-info fileinput-button pull-right">
+									             					<span id="filevideobutton" class="h3 mt0 text-uppercase text-left text-white">add file</span>
+											                         <input type="file" name="files[]">
+											                         
+											                     </span>									                           
+									                           </div>
+									                        </div>
+									                     </div>
+									                  </div><br/>
+									           </div>
+								  
+								          <!-- DROP ZONE AND FILE PREVIEW -->
+								          <div class="col-md-4 col-xs-12 col-sm-12">
+ 											        <blockquote class="box-placeholder mt0 -" id="viddropzone">
+											               <p class="h3 mt0 text-uppercase text-center text-bold text-gray" style="height: 100%"><br/><br/>Drop your video here<br/><br/><br/></p>
+											            </blockquote>        			          
+
+  								                  	<div id="vidpreviewpanel" class="panel widget bg-inverse hidden">
+									                     <div class="row">
+									                        <div class="col-md-4 col-xs-4 text-center mt-sm" style="width:240px">
+									                          <span id="vidpreview_thumb"></span>
+									                        </div>
+									                        <div class="col-md-8 col-xs-8 mt-sm text-white" style="width:240px">
+									                           <div class="h3 m0 text-bold pull-right" id="vidpreview_name">UPLOAD VIDEO FILE</div>
+									                           <div class="mt-lg"><br/><br/><br/><br/>
+											                     <span class="btn btn-labeled btn-info pull-right">
+<!-- 											                     	<span id="vidpreview_size" class="label label-primary"></span>
+ -->									             					<span id="vidpreview_remove" class="h3 mt0 text-uppercase text-left text-white">remove</span>
+	
+											                     </span>									                           
+									                           </div>
+									                        </div>
+									                     </div>
+									                  </div><br/>
+	
+										  </div>
+										  <!-- END DROP ZONE AND FILE PREVIEW -->	
+
+                                         <div class="col-md-4 col-xs-12 col-sm-12">
+								                  <div id="linkvideopanel" class="panel widget bg-gray-dark">
+								                     <div class="row row-table">
+								                        <div id="linkvideopanelicon" class="col-xs-4 text-center bg-gray pv-lg cursor-pointer">
+								                           <em class="icon-share fa-3x"></em>
+								                        </div>
+								                        <div id="linkvideopaneltext" class="col-xs-8 pv-xl text-muted">
+								                           <div class="h3 m0 text-bold">OR LINK VIDEO</div>
+								                           <div class="text-uppercase">link from Youtube or Vimeo</div>
+									                           <div class="mt-lg">
+											                           <div class="form-group">
+											                               <div class="input-group">
+											                                 <input id="linkvideotxt" disabled="disabled" placeholder="Enter url" type="text" class="form-control input-md">
+											                                 <span class="input-group-btn" id="go">
+											                                    <button id="linkvideobutton" disabled="disabled" type="button" class="btn btn-info"><i class="fa fa-search"></i></button>
+											                                 </span>
+											                              </div>
+											                           </div>
+									                           </div>
+								                        </div>
+								                     </div>
+								                  </div>
+								           </div> 
+								           
+           
+								           
+								            
+								 </div>  
+								 <!-- END FIRST ROW WIDGETS -->
+			 
+
+			    				<!-- SECOND ROW WITH FORM DATA AND GOOGLEMAP  -->
+                                 <div class="row">
+                                 			 <!-- FORM TETX FIELDS -->	
+	                                         <div class="col-md-4 col-xs-12 col-sm-12">
+						                                 <div class="row">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+				                                         			
+										                           <div class="form-group">
+										                              <label>Title</label>
+										                              <input type="text" th:field="*{title}" class="form-control">
+										                           </div>
+										                           <div class="form-group">
+										                              <label>Description</label>
+										                               <textarea class="form-control" th:field="*{description}" rows="5" id="comment"></textarea>
+										                           </div>	
+										                           
+																	<div class="form-group">
+											                           <label>Privacy</label>
+											                              <select th:field="*{privacy}" class="form-control m-b">
+											                                 <option value="0">Public:Everyone can view this video</option>
+											                                 <option value="1">Followers:Only my followers can view this video</option>
+											                                 <option value="2">Private: Only me can view this video</option>
+											                              </select>
+											                        </div>
+								                       </div>
+								                       </div> 
+								                        
+    
+    
+    												 <!-- FOOTAGE DATE  -->
+    				                                 <div class="row mt-lg">
+				                                         <div class="col-md-12 col-xs-12 col-sm-12">
+				                                         			
+										                           <div class="form-group">
+										                              <label>Footage date & time</label>
+												                              <div id="datetimepicker1" class="input-group date">
+												                                 <input type="text" class="form-control">
+												                                 <span class="input-group-addon">
+												                                    <span class="fa fa-calendar"></span>
+												                                 </span>
+												                              </div>
+										                           </div>
+										    								                       </div>
+								                       </div> 
+                        								
+
+                        								<div class="row mt-lg">
+                        								  <div class="col-md-12 col-xs-12 col-sm-12">
+                           									<label>Weather condition<br/></label>
+                           								  </div>
+                           								 </div>
+                           								 
+                           								<!-- WEHATER ICONS -->  
+                        								<div class="row mt">
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-sunny fa-2x"></span>sunny</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-cloudy fa-2x"></span>cloudy</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-rain-wind fa-2x"></span>rain</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-snow fa-2x"></span>snow</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-cloudy-windy fa-2x"></span>wind</label>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+                           									<label class="mt-sm"><span class="wi wi-day-thunderstorm fa-2x"></span>storm</label>
+                           								</div>  
+                           								</div>
+                        								
+                        								<!-- CHECK BOXES -->
+                        								<div class="row">
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox" checked="" value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox"  value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox" value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox" value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox" value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>                        								
+                        								  <div class="col-md-2 col-xs-2 col-sm-2">
+								                              <div class="checkbox c-checkbox">
+								                                 <label>
+								                                    <input type="checkbox" value="">
+								                                    <span class="fa fa-check"></span></label>
+								                              </div>
+                           								</div>  
+                           								</div>     
+                           								
+                           								
+                           								<!-- TAGS  -->
+                           								<div class="row mt-lg">
+                        								  <div class="col-md-12 col-xs-12 col-sm-12">
+                        								  	<div class="form-group">
+    	                       									<label>Tags that describes better your video. <br/></label>
+    	                       									<span class="text-sm text-muted">Type and press Enter</span>
+									                              <input type="text" data-role="tagsinput" class="form-control text-lg">
+                           									</div>
+                           								  </div>
+                           								 </div>
+                           								 
+											</div>
+
+	                                        
+	                                         <div class="col-md-8 col-xs-12 col-sm-12 pull-right">
+
+												       <!-- =====================  LOCATION SEARCH INPUT ============================= -->
+												       <div class="row">
+												               <div class="col-md-12 col-xs-12 col-sm-12">
+											                           <div class="form-group">
+											                           		<label>Footage location</label>
+											                               <div class="input-group">
+											                                 <input type="text" class="form-control m-b" placeholder="Please enter the address and click the find button">
+											                                 <span class="input-group-btn">
+											                                    <button type="button" class="btn btn-info"><i class="fa fa-search"></i></button>
+											                                 </span>
+											                              </div>
+											
+											                           </div>												               
+												     			</div>
+												       </div>  
+
+												       <!-- ===================== GOOGLEMAP ============================= -->
+												       <div class="row">
+												               <div class="col-md-12 col-xs-12 col-sm-12">
+												               		<div id="googlemap" class="gmap"></div>
+												     			</div>
+												       </div>  
+											</div>
+								</div>	
+								<!-- END SECOND ROW  -->
+							
+								<!--  THIRD ROW SUBMIT -->   		
+ 						       <div class="row mt-lg">
+						               <div class="col-md-4 col-xs-12 col-sm-12 text-right">
+					            				<button id="uploadbutton" class="btn btn-labeled btn-danger start" disabled>
+													<span class="btn-label pull-left"><i class="fa fa-upload"></i>
+									                    </span>   
+													<span id="uploadbuttontext" class="h3 mt0 text-uppercase text-left">upload</span>
+									            </button>						               
+						               </div>
+						       </div>    
+							
+							
+							
+								</form>
+								
+								
+							
+								
+								
+
+                  									
+   		</div> 
+   		</div>
+   		   		
+   		
+   		</div>
+
+          <!-- END CONTENT WRAPPER  --> 
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script th:src="@{/js/video-upload-index.js}" src="../static/js/video-upload-index.js"></script>  
+
+
+
+<script>
+/*jslint unparam: true, regexp: true */
+/*global window, $ */
+$(function () {
+	
+	
+	$( "#vidpreview_remove" ).click(function() {
+	 	$( "#viddropzone" ).switchClass( "hidden", "-", 500, "easeInOutQuad" );
+		$( "#vidpreviewpanel" ).switchClass("-", "hidden", 500, "easeInOutQuad" );	
+	});
+	
+	
+	
+	
+	
+	
+    //'use strict';
+    // Change this to the location of your server-side upload handler:
+/*     var url = window.location.hostname === 'blueimp.github.io' ?
+                '//jquery-file-upload.appspot.com/' : 'server/php/',
+                
+*/
+
+        //uploadButton = $('#uploadbutton').prop('disabled', true);
+    
+    
+    /* 
+        uploadButton.on( "click", function() {
+            var $this = $(this), 
+            data = $this.data();
+            alert(data);
+            
+            $this.off( "click", function() {
+            	 $("#uploadbuttontext").text('Abort');
+            	 $this.on('click', function () {
+                     $this.remove();
+                     data.abort();
+                 }); 
+            });
+ */
+           /*  data.submit().always(function () {
+                $this.remove();
+            });
+            
+ */
+        //});               
+    
+          /*   .text('Processing...')
+            .on('click', function () {
+                $this
+                    .off('click')
+                    .text('Abort')
+                    .on('click', function () {
+                        $this.remove();
+                        data.abort();
+                    });
+                data.submit().always(function () {
+                    $this.remove();
+                });
+            }); 
+     */
+    
+    $('#fileupload').fileupload({
+/*         url: url,
+        dataType: 'json', */
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(mp4|gif|jpe?g|png)$/i,
+        maxFileSize: 999000000,
+        // Enable image resizing, except for Android and Opera,
+        // which actually support image resizing, but fail to
+        // send Blob objects via XHR requests:
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator.userAgent),
+        previewMaxWidth:  200,
+        previewMaxHeight: 150,
+        previewCrop: true
+    }).on('fileuploadadd', function (e, data) {
+    	$.each(data.files, function (index, file) {
+        	$("#vidpreview_name").text(file.name);
+        	$("#vidpreview_size").text((file.size/1000000)+'MB');
+    	 	$( "#viddropzone" ).switchClass( "-", "hidden", 500, "easeInOutQuad" );
+			$( "#vidpreviewpanel" ).switchClass( "hidden", "-", 500, "easeInOutQuad" );
+			
+        }); 
+
+    	$('#uploadbutton').click(function () {
+    		 data.submit();
+         }); 
+   
+    	
+    	
+    	
+/*     	
+    	
+ 
+    	data.context = $('<button/>').text('Upload new')
+        .appendTo(document.body)
+        .click(function () {
+            data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+            data.submit();
+        }); 
+        
+    	
+    	 */
+    	
+    	//data.context = $('<div/>').appendTo('#files');
+
+    }).on('fileuploadprocessalways', function (e, data) {
+            var index = data.index,
+            node = $(data.context.children()[index]);
+           var file = data.files[index];
+           if (file.preview) {
+        	$("#vidpreview_thumb").html(" ");
+        	$("#vidpreview_thumb").append(file.preview);
+        }
+        if (file.error) {
+        	$("#vidpreview_name").text(file.error);
+        }
+        if (index + 1 === data.files.length) {
+            $("#uploadbutton").prop('disabled', !!data.files.error);
+            $("#uploadbuttontext").text('Upload');
+        }
+    }).on('fileuploadprogressall', function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+    }).on('fileuploaddone', function (e, data) {
+        $.each(data.result.files, function (index, file) {
+            if (file.url) {
+                var link = $('<a>')
+                    .attr('target', '_blank')
+                    .prop('href', file.url);
+                $(data.context.children()[index])
+                    .wrap(link);
+            } else if (file.error) {
+                var error = $('<span class="text-danger"/>').text(file.error);
+                $(data.context.children()[index])
+                    .append('<br>')
+                    .append(error);
+            }
+        });
+    }).on('fileuploadfail', function (e, data) {
+        $.each(data.files, function (index) {
+            var error = $('<span class="text-danger"/>').text('File upload failed.');
+            $(data.context.children()[index])
+                .append('<br>')
+                .append(error);
+        });
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+
+
+var gmaplocations;
+
+
+if(![[${gmapresult.emptyStatus}]]) {
+	
+gmaplocations = [
+             {
+                 lat: [[${gmapresult.location.latitude}]],
+                 lon: [[${gmapresult.location.longitude}]],
+                 title: [[${gmapresult.address}]],
+                 html: [
+                     '<h3>'+[[${gmapresult.address}]]+'</h3>',
+                     '<p>'+[[${gmapresult.address}]]+'</p>'
+                 ].join(''),
+                 zoom: 8
+              }
+         ];
+} else {
+
+gmaplocations = [
+             {
+                 lat: 0,
+                 lon: 0,
+                 title: 'Nothing is found...',
+                 html: [
+                     '<h3><i class="fa fa-frown-o fa-2x"></i> Nothing is found...</h3>',
+                     '<p>You might as well try another search</p>'
+                 ].join(''),
+                 zoom: 8
+              }
+         ];
+
+}
+
+
+	//new Maplace object
+	var maplace = new Maplace();
+
+
+	maplace.Load({
+	    locations: gmaplocations,
+	    map_div: '#googlemap',
+	    map_options:{
+	    	styles: mapStyleArrayBue,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+	        zoom: 16
+	    },
+	    controls_on_map: true,
+/*	    controls_type: 'checks',*/
+	    controls_title: 'Choose a location:'
+	});
+
+	
+});	
+	
+/*]]>*/
+</script>   
+
+
+</section>      
+  </body>
+</html>  	  

@@ -1,0 +1,340 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-admin">
+  <head>
+    <title>Terrabis - Administration</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+	      <!-- FULLSCREENOVERLAY  -->    
+	   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=true)"></div>
+	   <div th:replace="/fragments/modal :: fullscreenoverlay-reject"></div>
+
+
+         <div class="content-wrapper">
+
+<!--                      <div class="content-heading">
+					<span class="text-gray-more h3">Admin:Videos</span>            
+            		</div>        -->  
+         
+         
+         
+         
+                  
+         	<div class="row" th:replace="/fragments/admin-grid-view :: filter(ADMINQUERYFRM=${ADMINQUERYFRM},actionLink=@{'/admin/videos/filter'})">              
+					</div>
+		       
+
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="h4 text-info pull-right"><span th:text="${{ADMINPAGINATOR.recordsCount} + ' results in '}"></span><span th:text="${{PERFORMANCETIME} + ' ms '}"></span>
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+		            
+         <!-- CONTENT CONTROL BAR  -->   
+         <div class="row">
+         	  <div th:replace="/fragments/video-grid-control :: admin-video-view(colclass='col-md-12 col-sm-12',selview=${view},selfilter=${filter})"></div> 
+         </div>     
+         <!-- CONTENT CONTROL BAR  -->    
+
+ 	         		  		<form role="form" id="deletevideosform" th:action="@{'/admin/video/delete'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+
+	         		  		<form role="form" id="promotesiteindexvideosform" th:action="@{'/admin/video/promote:promote/type:siteindex'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="unpromotesiteindexvideosform" th:action="@{'/admin/video/promote:unpromote/type:siteindex'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="unpromotemapvideosform" th:action="@{'/admin/video/promote:unpromote/type:map'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+ 
+	         		  		<form role="form" id="promotemapvideosform" th:action="@{'/admin/video/promote:promote/type:map'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="approvevideosform" th:action="@{'/admin/video/approve'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+	         		  		<form role="form" id="rejectvideosform" th:action="@{'/admin/video/reject'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{rejectionreason}">
+	         		  		       <input type="hidden" th:field="*{rejectionreasontxt}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="publishvideosform" th:action="@{'/admin/video/publish'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+	         		  		<form role="form" id="upublishvideosform" th:action="@{'/admin/video/unpublish'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>  
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+
+
+        <!-- ANALYTIC VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'ANALYTIC'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: analytic(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- ANALYTIC VIEW -->
+
+     
+        <!-- DETAIL VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+    
+    
+        <!-- THUMB VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- THUMB VIEW -->  
+      	
+      	
+    	 		       <div class="row">
+             <div class="col-md-12 col-sm-12">
+				         <div class="pull-right paginator">
+				         </div>           
+             </div>    
+       </div> 
+      	   
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+ <script src="../static/js/admin-video-view.js" th:src="@{/js/admin-video-view.js}"> </script>  
+  <script src="../static/vendor/autocomplete/jquery.autocomplete.js" th:src="@{/vendor/autocomplete/jquery.autocomplete.js}"></script> 
+ <script src="../static/js/admin-filter.js" th:src="@{/js/admin-filter.js}"> </script> 
+	
+	
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    	  
+		    terrabisApp.fetchAutocompleteVideoTitleURI = [[@{'/rest-data-fetch/autocomplete/video/title/'}]];
+		    terrabisApp.fetchAutocompleteUserNameURI = [[@{'/rest-data-fetch/autocomplete/user/username/'}]];
+    	  
+		    
+    		//IF FILTER ENABLED
+    	    turnOnFilter([[${ADMINQUERYFRM.filteron}]]);
+
+		    
+
+    	  
+    	  
+/*     	  //AUTOCOMPLETE USERNAMES
+    	  var usernames = new Bloodhound({
+    		    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    		    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    		    remote: {
+    		        url: terrabisApp.fetchAutocompleteUserNameURI+'?searchTerm=%QUERY',
+    		        wildcard: '%QUERY'
+    		    }     
+    		});
+    	  
+    	  
+    	  //Initialize the Bloodhound suggestion engine
+    	  usernames.initialize(); 
+    	
+    	  
+    	  $('#advfilterusername').typeahead({
+    		    hint: true,
+    		    highlight: true,
+    		    minLength: 1
+    		},
+    		{
+    		    name: 'user-names',
+    		    display: 'value',
+    		    source: usernames
+    		}); */
+    	  
+    	  
+    	
+    	  
+    	/*   	//KEY PRESS EVENT ON TAGS AND FILTER TAG CLOUD
+    		 $('#advfilterusername').bind('input',function(event) {
+    			 
+    			 	var txtfilter = $('#advfilterusername').val();
+
+    				 //SEARCH FOR USERNAME
+    			 	var callback = function(data, status, xhr) {
+    			 		var result =JSON.parse(data.responseText);
+    			 		$("#advfilterusername-suggestion").show();
+    					$("#advfilterusername-suggestion").html(result);
+    					$("#advfilterusername").css("background","#FFF");
+    			 	};
+    			 	
+    			 	var formData = { autocompletetext: txtfilter};
+    				restajax(terrabisApp.fetchAutocompleteUserNameURI,formData,callback);
+    				
+    		}); */
+    		
+    	  
+    /* 	 
+    	  
+    	//USERNAME
+    	  $('#advfilterusername').autocomplete({
+    	      serviceUrl: '/rest-data-fetch/autocomplete/user/username',
+    	      onSelect: function (suggestion) {
+    	          alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+    	      }
+    	  });
+
+
+
+    	  //VIDEO TITLE
+    	  $('#advfiltervideotitle').autocomplete({
+    	    serviceUrl: '/rest-data-fetch/autocomplete/video/title',
+    	    onSelect: function (suggestion) {
+    	        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+    	    }
+    	  });
+
+    	  
+    	  
+    	   */
+    	  
+    	  
+    		terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+    		terrabisApp.pageView = [[${execInfo.templateName}]];
+    		terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+    		terrabisApp.contextPath = [[${CTXPATH}]];    	
+    		createHtml_Paginator([[${ADMINPAGINATOR}]]);
+    		
+    		/*
+    		terrabisApp.data = [[${videoListDTO}]]; 
+    		var PARTITIONS =  [[${videoListDTO}]];
+    		
+    		if(PARTITIONS.length>0)  {
+				createHtml_Paginator([[${ADMINPAGINATOR}]]);
+    		}
+			else {
+				createHtml_EmptyPaginator();
+			}
+    		*/
+			
+    		
+    		//CHANGE GRID VIEW STYLE
+    		$(".gridviewstyle-control").click(function() {
+    			initializeAdminGridViewControls(this.id);
+    			terrabisApp.gridViewStyle = this.id;
+    			//createHtml_GridResultView(terrabisApp.data,false);
+    			
+    			//UPDATE SESSION WITH THE NEW STYLE
+    			//gridview_StyleChange(this.id);
+    			
+    		});
+    		
+
+    		
+    		
+    		
+    		//AUTOCOMPLETE
+/*      		$('#advfilterusername').autocomplete({
+    		    serviceUrl:terrabisApp.autocompleteUserNameURI
+    		});
+    		
+
+    		$('#advfiltervideotitle').autocomplete({
+    		    serviceUrl:terrabisApp.autocompleteVideoTitleURI
+    		}); 
+    		
+    		 */
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

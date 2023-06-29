@@ -1,0 +1,107 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+
+<head>
+    <title>terrabis:fragments:header</title>
+ 
+  </head>
+  
+  <body>
+          <!-- top navbar-->
+<header th:fragment="header">
+<nav id="custom-bootstrap-menu" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><i class="fa fa-youtube-play text-gray-dark" style="font-size: 34px;"></i></a>
+    </div>
+
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav">
+        <li><a href="#">Map <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Videos</a></li>
+        <li><a href="#">Channels</a></li>         
+      </ul>
+      
+      
+     <ul class="nav navbar-nav navbar-right">
+     
+           <li>
+      <form class="navbar-form" role="search">
+        <div class="form-group">
+          <div class="input-group">
+          <input type="text" class="form-control input-md" style="width:300px;" placeholder="Search Here">
+           <span class="input-group-btn">
+        	<button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+        	</span>
+        </div>
+        </div>
+        
+
+        					
+                          <button type="button" class="btn btn-labeled bg-warning-light" th:if="${viewname != 'user-index' or viewname == null}">
+                           <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>
+                           <span class="h4">Upload</span></button>
+      </form>
+      
+      </li>
+        <!-- START NOT LOGGEDIN menu-->
+        <li>
+           <a href="#" id="dropdowncog" data-toggle="dropdown">
+              <i class="fa fa-2x fa-cog text-gray-dark"></i>
+           </a>
+           <!-- START Dropdown menu-->
+             
+             <ul class="dropdown-menu  animated fadeIn">
+                <li>
+              		<!-- <div th:replace="/fragments/panels :: panelregister"></div> -->
+                </li>
+	 </ul>
+	</li> 
+	</ul>
+      
+
+      
+
+
+                  
+
+
+    
+<!--     
+     <form class="navbar-form navbar-right">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group" style="width:400px;">
+            <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+            <button type="button" class="input-group-addon btn btn-labeled btn-info">
+                           <span class="btn-label"><i class="fa fa-search"></i>
+                           </span>Go</button>
+		<a  class="input-group-addon" href="#"><span><span class="fa fa-search text-info"></span></span></a>
+          </div>
+        </div>
+      </form> -->
+    
+    <!-- 
+     <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="search videos">
+        </div>
+        <button type="submit" class="btn btn-primary">upload</button>
+      </form>      --> 
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>	
+      </header>
+  </body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-video-one-mobile">
+  <head>
+    <title th:text="@{'Terrabis - '+${videoDTO.title}}">Terrabis - Video</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+         
+
+         
+         
+            <div class="content-heading">            
+                             <span class="h3 text-bold text-gray-dark text-left"  th:text="${videoDTO.title}">VIDEO TITLE</span>
+            </div> 
+
+
+
+                  
+
+
+		 	 <div class="row mb-sm">
+		 	 
+				<div class="col-md-6 col-xs-6 col-sm-6">
+							<div class="pull-left">
+                            		 <a  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" th:href="@{'/admin/video-settings/'+${videoDTO.id}+'?redirect=/video/'+${videoDTO.id}}" class="text-white m-sm" title="edit"><span  id="editvideo-icon_12" class="text-gray fa-2x fa fa-file-text-o"></span></a>
+
+
+                      <a  class="vidaction-like cursor-pointer" title="like"><em class="fa fa-thumbs-up fa-3x  text-info-light - " title="like"></em></a>
+                       <span th:attr="id=${'vidlikestxt_'+{videoDTO.id}}" class="text-info-light h3" th:if="${videoDTO.likescount>0}" th:text="${videoDTO.likescount}">15000</span>
+                       <span th:attr="id=${'vidlikestxt_'+{videoDTO.id}}" class="text-info-light h3" th:if="${videoDTO.likescount==0}"></span>
+						<a class="text-white m-sm" title="rating"><span class="fa fa-star fa-2x text-yellow-dark" title="rating"><span  class="text-yellow-dark h3" th:text="${videoDTO.ratingssum}"></span></span></a>
+                           	
+
+                            
+                            
+                            
+                            	
+                            												
+								
+							</div>
+							
+							
+
+						
+	
+			</div>			 	 
+		 	 
+			<div class="col-md-6 col-xs-6 col-sm-6">	
+						<div class="social_buttons pull-right"></div>
+			</div>
+			
+							<div class="col-md-10 col-xs-12 col-sm-12 videoplay_link hidden">
+				                         	<span class="videoplay_link_text text-gray-more text-bold text-sm"  onClick="this.select();" th:text="${'http://www.terrabis.com/video/'+{videoDTO.UUID}}"></span>
+							</div>
+			
+			</div>	
+			
+
+                  
+           <!--  VIDEO FRAME -->
+          <div class="row">
+				<div class="col-md-12 col-xs-12 col-sm-12 pull-left">
+<!-- 				<div class="pull-right">
+							<iframe width="850" height="470" class="fullvideoplay"  th:src="${videoDTO.videourl}" frameborder="0" allowfullscreen></iframe>
+				</div>		 -->	
+				
+				    			<div id="panelblock" th:attr="data-likescount=${{videoDTO.likescount}},data-playscount=${{videoDTO.playscount}}, data-ratingssum=${{videoDTO.ratingssum}},data-uuid=${{videoDTO.UUID}}, data-title=${{videoDTO.title}}, data-description=${{videoDTO.description}}, data-id=${{videoDTO.id}},data-videourl=${{videoDTO.videourl}}" class="panel widget videopanel" style="background: none; width:100%; height:420;">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-md-12 col-xs-12 col-md-12 col-sm-12">  
+                           				
+                           				
+                           				<iframe  th:attr="id=${'vidoverlay_play_iframe'+{videoDTO.id}}" th:src="${{videoDTO.videourl}+'?autoplay=1&rel=0&modestbranding=1&title=0&byline=0&portrait=0'}" width="100%"  height="300" frameborder="0" allowfullscreen></iframe>
+                        	
+                        	   		  	<!-- PREVIOUS CODE 09/11/2016                          				
+       									<div th:attr="id=${'vidoverlay_play_'+{videoDTO.id}}" class="vidoverlay_play -">
+	                   						<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-play-one-view(video=${videoDTO})"></div>
+	 									</div>	                             				
+                           				
+                           				                       				
+										<div th:attr="id=${'vidoverlay_action_'+{videoDTO.id}}" class="vidoverlay_action hidden bg-info-fade">
+										<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-action-one-view(video=${videoDTO})"></div>
+										</div>                           				
+										<img class="box-border-info" width="100%" height="420" th:src="${videoDTO.sharethumburl}"/> 
+										-->                           				
+                          			 	</div>
+                        			</div>
+                        			
+                        			
+                        			
+                        			
+                     				</div>
+			                        <div class="row" id="subpanelblockB">
+											<div class="col-md-8 col-xs-12 col-sm-12">
+													  <div class="pull-left mt-sm ml-sm bg-gray-dark">	
+				                               			<span class="text-info-dark text-sm-md m-sm text-bold" title="duration" th:text="${videoDTO.durationtxt}">15:45</span>
+						                              </div>
+													  <div class="pull-left mt-sm ml-sm bg-gray-dark">	
+				                               			<span class="text-info-dark text-sm-md m-sm text-bold" title="views"><span  th:text="${videoDTO.playscount}"></span> views</span>
+						                              </div>
+													           
+													                           
+				                    		</div>
+				                    		<div class="col-md-4 col-xs-12 col-sm-12">
+				                    		<div class="pull-left mt-sm">
+													  <div class="fb-like" data-href="https://www.facebook.com/Terrabis-1061662037215402/" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+
+				                    		</div>
+				                    		</div>
+				                    </div>	 	                    
+				              </div>    				
+				
+				
+				
+				
+				
+				</div>
+				 </div>
+           <!--  VIDEO FRAME -->
+           
+           	<!--  RATE THIS VIDEO -->
+   			<div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+   					<span class="text-sm-md">What do you think of the video? <span class="text-bold">Give us your rating below</span></span>
+<!--    				<div class="text-uppercase bg-info-dark h4 text-bold">What do you think of the video?<span class="text-uppercase text-sm-md text-bold pull-right"></span></div>
+ -->    		</div></div> 
+			
+			<div class="row videoratediv">
+											<div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+					 														<select id="videoratingselect">
+																				<option value="1" class="text-sm-md">1</option>
+																				<option value="2" class="text-sm-md">2</option>
+																				<option value="3" class="text-sm-md" selected="selected">3</option>
+																				<option value="4"  class="text-sm-md">4</option>
+																				<option value="5" class="text-sm-md">5</option>
+																			</select>						
+											</div>
+			</div> 
+			<!--  RATE THIS VIDEO -->   
+           
+           
+           <!--  MAP -->
+   			<div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+   				<div class="text-uppercase bg-info-dark h4 text-bold">MAP LOCATION<span class="text-uppercase text-sm-md text-bold pull-right"></span></div>
+    		</div></div> 
+
+	        <div class="row">
+	        <div class="col-md-12 col-xs-12 col-sm-12">
+	      		<div id="googlemap" class="gmaplg"></div>
+	      	</div>
+	      	        <div class="col-md-2 col-xs-12 col-sm-12"></div>
+	      	</div>	
+	                 
+	                 
+	                 
+	                  
+	                 
+	<!--  VIDEO INFO -->
+   <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+                        <div class="row mb-lg" th:if="${videoDTO.ownershipverified}">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="text-sm-md text-gray-dark">
+										  Made by <a th:href="@{'/user-'+${videoDTO.user.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.user.shortdesc}"></span> </a> 
+		                              <img  th:src="@{/images/verified.png}">
+		                              </p>
+		                              <p class="text-sm-md text-gray-dark">
+										  initially uploaded from  <a th:href="@{'/user-'+${videoDTO.uploader.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.uploader.shortdesc}"></span> </a> <span class="time_badge">
+										  on <span class="text-bold fullvideoplay_date" th:text="${videoDTO.shortAndSmart_DATECREATED}"></span>  </span>
+		                              </p>
+		                           </div>
+		                    </div> 
+		                       
+		                       <div class="row mb-lg" th:if="${!videoDTO.ownershipverified}">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="text-sm-md text-gray-dark">
+										  added <span class="text-bold fullvideoplay_date" th:text="${videoDTO.shortAndSmart_DATECREATED}"></span> 
+										  from  <a th:href="@{'/user-'+${videoDTO.user.UUID}+'/'}"><span class="fullvideoplay_username" th:text="${videoDTO.user.shortdesc}"></span> </a> <span class="time_badge"> </span><br/>
+										  <span class="text-sm-md" th:if="${(!videoDTO.ownershipverified) and (!videoDTO.vimeo)}">(Are you the maker of the video?  <a th:href="@{'/claim/request/' + ${videoDTO.id}}"><span class="text-bold">Claim</span> ownership</a>)</span>
+										  
+		                              </p>
+		                           </div>
+		                    </div> 
+		                       
+		                     <div class="row  mb-lg">
+		                        <div class="col-xs-12 text-left mt-lg">
+		                           <p class="text-gray-dark justify  fullvideoplay_description text-sm-md"  th:text="${videoDTO.descShort}">
+		                           </p>
+		                        </div>
+		                  </div>
+		                  </div>
+	</div>
+		<!--  VIDEO INFO -->	                  
+	                 
+	         
+      
+                
+     
+                  
+         	  <!--  RELATED VIDEOS -->
+            <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+   				<div class="text-uppercase bg-info-dark h4 text-bold"  th:if="${relatedListType=='NEARBY'}" th:text="${'NEARBY VIDEOS'}">Related Videos<span class="text-uppercase text-sm-md text-bold pull-right"></span></div>
+   				<div class="text-uppercase bg-info-dark h4 text-bold"  th:if="${relatedListType=='TAGMATCHED'}" th:text="${'RELATED VIDEOS'}">Related Videos<span class="text-uppercase text-sm-md text-bold pull-right"></span></div>
+   				<div class="text-uppercase bg-info-dark h4 text-bold"  th:if="${relatedListType=='LATEST'}" th:text="${'LATEST VIDEOS'}">Related Videos<span class="text-uppercase text-sm-md text-bold pull-right"></span></div>
+
+    		</div></div> 
+
+        <div class="row"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: box-related(videoListDTO=${relatedVideoListDTO},related=${relatedListType})"></div>
+      	</div></div>	
+  		<!--  RELATED VIDEOS -->
+
+
+        
+   		
+   		
+   	</div>	
+   		
+   		
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/jquery-bar-rating/dist/jquery.barrating.min.js" th:src="@{/vendor/jquery-bar-rating/dist/jquery.barrating.min.js}"></script> 
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA2NdWUBq9Xd9KdnVKIczih3DalRqmwLlQ&libraries=places"></script>  
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>
+	<script src="../static/js/map-utilities.js" th:src="@{/js/map-utilities.js}"> </script> 
+	<script src="../static/vendor/map-icons/dist/js/map-icons.js" th:src="@{/vendor/map-icons/dist/js/map-icons.js}"></script>   
+ 	 
+	   
+<!-- 	<script src="../static/js/video-one-view.js" th:src="@{/js/video-one-view.js}"> </script> -->     
+	
+	
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+
+	
+
+
+		//INIT SOCIAL BUTTONS AND CURRENT VIDEO
+		terrabisApp.currentVideo = [[${videoDTO}]];
+		$('.social_buttons').html(create_socialbuttons_html([[${videoDTO}]]));
+
+
+		
+		//CREATE MAP
+		terrabisApp.globalMap = createGoogleMap([[${videoDTOLocation.lat}]],[[${videoDTOLocation.lng}]],[[${PERS.googleMapType}]],"googlemap");
+		//ADD LISTENERS
+		google.maps.event.addListenerOnce(terrabisApp.globalMap, 'bounds_changed', function(){
+			var infoWindowContent = "<div class='googft-info-window'><b>"+terrabisApp.currentVideo.title+"</b><br><a href='http://www.terrabis.com/video/"+terrabisApp.currentVideo.UUID+"'><img width=\"280\" height=\"160\" src="+terrabisApp.currentVideo.sharethumburl+"><br></a></div>";
+			createGoogleMapMarkerWithInfoWindow(terrabisApp.globalMap.getCenter(),terrabisApp.globalMap,[[@{'/images/markers-list/map-marker-selected-medium.png'}]],infoWindowContent);
+
+			//CREATE MARKERS OF RELATED VIDEOS
+			var relatedVideoPointList = [[${relatedPointListDTO}]];
+			
+			
+			for(i=0; i<relatedVideoPointList.length; i++) {
+				infoWindowContent = "<div class='googft-info-window'><b>"+relatedVideoPointList[i].title+"</b><br><a href='http://www.terrabis.com/video/"+relatedVideoPointList[i].UUID+"'><img width=\"280\" height=\"160\" src="+relatedVideoPointList[i].sharethumburl+"><br></a></div>";
+				createGoogleMapMarkerWithInfoWindow(new google.maps.LatLng(relatedVideoPointList[i].latitude,relatedVideoPointList[i].longitude),terrabisApp.globalMap,[[@{'/images/markers-list/map-marker-selected-normal.png'}]],infoWindowContent);
+			}
+		
+		
+		});
+
+		
+
+		//PLAY
+		terrabisApp.countVideoPlayURI = [[@{'/rest/video/play/'}]];
+		countVideoPlay();
+		//$("#vidoverlay_play_iframe"+terrabisApp.currentVideo.id).attr( "src", terrabisApp.currentVideo.videourl+"?autoplay=1&rel=0&modestbranding=1&title=0&byline=0&portrait=0");
+		
+		
+		/****************** INIT VIDEO RATING -------------------*/
+  	    $('#videoratingselect').barrating('show', {
+	         theme: 'fontawesome-stars', //' bars-movie fontawesome-stars'
+	         showValues: true,
+	         onSelect: function(value, text, event) {
+	             if (typeof(event) !== 'undefined') {
+	             	 videoRate(value);
+	             }
+	         }
+	         
+	     }); 
+
+
+			
+
+
+});	
+/*]]>*/
+</script>  
+
+
+
+
+
+
+
+
+
+
+
+
+      </section>
+
+
+
+  </body>
+</html>  	  

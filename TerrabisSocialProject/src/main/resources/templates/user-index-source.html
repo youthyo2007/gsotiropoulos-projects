@@ -1,0 +1,148 @@
+        
+		           <!-- USER BAR LINKS FOR VIDEOS LIKES ETC -->
+   				<div class="row">
+		        <div class="col-md-12 col-xs-12 col-sm-12">		           
+                  <!-- START widget-->
+                  <div class="panel widget">
+                     <div class="row m-sm">
+                     
+                     	
+                        <div class="col-md-3 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center">
+                                 <em class="fa fa-youtube-play fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                        			<a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:all'}">
+	                                    <span class="mt0 h4 text-bold">VIDEOS</span>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center">
+                                 <em class="fa fa-road fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                                    <span class="mt0 h4 text-bold">PATHS</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>                        
+                        <div class="col-md-2 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center text-gray-dark">
+                                 <em class="icon-globe fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                                    <span class="mt0 h4 text-bold">MAP</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>     
+                         <div class="col-md-4 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center text-gray-dark">
+                                 <em class="fa fa-list fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                                    <span class="mt0 h4 text-bold">VIDEO PATHS</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>  
+                     </div>
+                  </div>
+                  <!-- END widget-->
+                  <div class="panel widget bg-gray text-inverse">                  
+                     <div class="row m-sm">
+                        <div class="col-md-3 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center">
+                                 <em class="fa  fa-smile-o fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                        			<a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:all'}">
+	                                    <span class="mt0 h4 text-bold">FOLLOWERS</span>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                      <div class="col-md-3 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center">
+                                 <em class="fa  fa-smile-o fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                        			<a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:all'}">
+	                                    <span class="mt0 h4 text-bold">FOLLOWING</span>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                         <div class="col-md-3 col-sm-6 col-xs-12 br">
+                           <div class="row row-table row-flush align-top">
+                              <div class="col-xs-2 text-center">
+                                 <em class="fa fa-youtube-play fa-2x"></em>
+                              </div>
+                              <div class="col-xs-10">
+                                 <div class="panel-body text-center">
+                        			<a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:all'}">
+	                                    <span class="mt0 h4 text-bold">CHANNELS</span>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>                        
+                        </div>  
+                  </div>                       
+            	</div>
+				</div>
+		        <!-- USER BAR FOR VIDEOS LIKES ETC -->
+		           
+		           
+		           
+				<!-- LATEST UPLOADS -->    
+		       <div class="row mt-xl mt-xl">
+		        <div class="col-md-12 col-xs-12 col-sm-12">	
+             
+			             <div class="col-lg-12">
+			                  <!-- START panel-->
+			                  <div id="" class="panel">
+			                     <div class="text-uppercase bg-warning h2 text-bold">TOP RATED VIDEOS <span class="text-uppercase h4 text-bold pull-right"><a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:toprated'}">+see more</a></span></div>
+			                     <div class="panel-body">
+			                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+			                     </div>
+			                     <div class="panel-footer">Panel Footer</div>
+			                  </div>
+			                  <!-- END panel-->
+			               </div>		        
+		        
+		      
+			             <div class="col-lg-12">
+			                  <!-- START panel-->
+			                  <div id="" class="panel">
+			                     <div class="text-uppercase bg-pink h2 text-bold">JUST UPLOADED <span class="text-uppercase h4 text-bold pull-right"><a th:href="@{'/user-' + ${userDTO.id}+'/videos/filter:latest'}">+see more</a></span></div>
+			                     <div class="panel-body">
+			                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+			                     </div>
+			                     <div class="panel-footer">Panel Footer</div>
+			                  </div>
+			                  <!-- END panel-->
+			               </div>				      
+		        </div>
+		        </div>	
+				<!-- END LATEST UPLOADS -->    
+		           

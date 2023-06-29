@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html>
+  <head>
+  </head>
+<body>
+
+
+
+
+		<div  th:fragment="video-catalog-view">
+
+						               	<img  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" width="600" height="75" th:src="@{/images/gopro_camera.jpg}"
+														          src="../images/gopro_camera.jpg"/>
+     	</div> 	 
+
+		<div  th:fragment="video-one-view">
+
+						               	<img  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" width="250" height="150" th:src="@{/images/gopro_camera.jpg}"
+														          src="../images/gopro_camera.jpg"/>
+     	</div> 	 
+
+
+
+		<div  th:fragment="user-index">
+
+						               	<img  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" width="600" height="75" th:src="@{/images/gopro_camera.jpg}"
+														          src="../images/gopro_camera.jpg"/>
+     	</div> 
+     	
+     	
+
+		<div  th:fragment="user-index-videos">
+
+						               	<img  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" width="400" height="75" th:src="@{/images/gopro_camera.jpg}"
+														          src="../images/gopro_camera.jpg"/>
+     	</div>      		 
+     	
+     			 
+
+		<div  th:fragment="video-map-list-view">
+
+						               	<img  th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}" width="600" height="75" th:src="@{/images/gopro_camera.jpg}"
+														          src="../images/gopro_camera.jpg"/>
+     	</div> 	
+
+		
+		<div  th:fragment="video-map-normal-view">
+         <div th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}"  class="advertoverlay-map hidden">
+             			          
+             			          
+						       <div class="row">
+						               <div class="col-md-12">
+						               	<img th:src="@{/images/phantom.jpg}"
+												          src="../images/phantom.jpg" class="img-responsive advertoverlay-map-img cursor-pointer"/>
+										</div>
+								</div>
+
+				<div  style="position: absolute; top: 0px; right: 0px; z-index: 1000001;">
+					<a class="text-white advertoverlay-map-close cursor-pointer" title="close"><em class="fa text-white fa-2x  fa-close pull-left"></em></a>
+				</div>
+			</div>	
+   		</div>	
+
+
+
+
+
+</body>
+</html>
+
+

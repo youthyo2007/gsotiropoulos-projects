@@ -1,0 +1,164 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-statistics-video">
+  <head>
+    <title>Terrabis - Statistics:Users:User Registrations Dashboard</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+
+         <div class="content-wrapper">
+            <div class="content-heading">
+					<span class="text-gray h3">Statistics:Users:User Registrations Dashboard</span>            
+            </div>
+  
+  
+     	<div class="row" th:replace="/fragments/stats-grid-view :: filter(STATSQUERYFRM=${STATSQUERYFRM},actionLink=@{'/statistics/users/dashboard-1/filter'})"> 
+     	</div>             
+  
+
+  
+
+         	<div class="row">
+		                          		  <div class="col-md-12 col-sm-12">
+		                          		  <div class="pull-left">
+           							<span class="text-gray"  style="font-size: 48px;" th:text="${'Total Users'}"></span><br/>    
+  		        						<span class="text-white" style="font-size: 32px;"  th:text="${stDTO.dash1DTO.totalUsers}"></span>
+	    											  </div>			
+	    											  </div>
+			</div> 
+
+
+          			<div class="row">  
+ 						<div id="lineChartUsersPerDay"></div>
+            		</div>
+
+         		       <div class="row mt-lg">  
+         		                        <div class="col-md-5 col-sm-12">
+							                 <div class="row">  
+							                   <div class="col-md-12 col-sm-12">
+									             	<div id="donutChartVideosPerUserCount"></div>
+									            </div> 	
+							                   <div class="col-md-6 col-sm-12">
+	 			             						<span class="text-white" style="font-size: 24px;"  th:text="${{stDTO.dash1DTO.top5UsersUploadPercentage}+'% Percent'}">Percent</span>    
+	        		        						<span class="text-sm-sm text-muted mt-lg"><br/>Top 5 Users Own <span class="text-white" th:text="${{stDTO.dash1DTO.top5UsersUploadPercentage}+'%'}"></span> Of Total Video Uploads</span>
+											   </div>	
+									          </div>   					                     							 
+				                     							 
+                    					</div>
+                    								          
+							              <div class="col-md-7 col-sm-12">
+									             <div id="barChartRegistrationsPerMonth">
+						                    </div>
+									      </div>    
+		       			</div> 	
+	
+
+<!--          		       <div class="row mt-lg">  
+							                <div class="col-md-4 col-sm-12">
+							                 <div class="row">  
+							                   <div class="col-md-12 col-sm-12">
+									             	<div id="donutChartVideosPerUserCount"></div>
+									            </div> 	
+							                   <div class="col-md-12 col-sm-12">
+	 			             						<span class="text-white" th:text="${{stDTO.dash1DTO.top5UsersUploadPercentage}+'% Percent'}">Percent</span>    
+	        		        						<span class="text-sm-sm text-muted mt-lg"><br/>Top 5 Users Uploaded Percentage Of Total Video Uploads</span>
+											   </div>	
+									          </div>   	
+						                    </div>
+						                    
+						                <div class="col-md-8 col-sm-12">
+                    					</div> 
+						                    
+									         
+		       			</div> 	 -->
+
+		
+		
+<!--              		       <div class="row mt-lg">  
+   					              <div class="col-md-12 col-sm-12">
+					             <div id="lineChartRegistrationsVsVideosPerDay">
+		                    </div>
+					      </div>                        					
+           				</div>     -->
+		      
+		      
+		       		       
+		   
+		   
+		   
+		   
+		       		       
+		       		       
+		       		       
+		       
+		       
+		       			            
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/vendor/dx-chart/dx.chartjs.js" th:src="@{/vendor/dx-chart/dx.chartjs.debug.js}"></script>     
+	<script src="../static/js/dx-chart-assistant.js" th:src="@{/js/dx-chart-assistant.js}"></script>     
+	<script src="../static/js/statistics-video-view.js" th:src="@{/js/statistics-user-view.js}"> </script> 
+	   <script src="../static/js/statistics-filter.js" th:src="@{/js/statistics-filter.js}"> </script>	
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+
+    	  
+
+		  var lineChartUsersPerDayData = JSON.parse([[${stDTO.dash1DTO.lineChartUsersPerDay}]]);
+		  var lineChartOptionsUsersPerDay = lineChartOptions(lineChartUsersPerDayData,' Registrations Per Day Line Graph','Calendar',[[${stDTO.dash1DTO.maxUsersPerDay}+2]]);
+		  $("#lineChartUsersPerDay").dxChart(lineChartOptionsUsersPerDay);
+
+    	  
+    	  
+    	  
+   		  //CREATE BAR CHART	
+  	   	  var barChartRegPerMonthData = JSON.parse([[${stDTO.dash1DTO.barChartRegistrationsPerMonth}]]);
+		  var barChartOptionsRegPerMonth = barChartOptions(barChartRegPerMonthData,'Registrations Per Month','Month Bar',[[${stDTO.dash1DTO.maxUsersPerMonth}+5]]);
+		  $("#barChartRegistrationsPerMonth").dxChart(barChartOptionsRegPerMonth);
+    	  
+		  
+		  
+		  
+/* 		  var lineChartRegistrationsVsVideosPerDayData = JSON.parse([[${stDTO.dash1DTO.lineChartRegVsVideos}]]);
+		  console.log([[${stDTO.dash1DTO.lineChartRegVsVideos}]]);
+		  var lineChartOptionsRegistrationsVsVideosPerDay = multiLineChartOptions(lineChartRegistrationsVsVideosPerDayData,'Registrations Vs Videos Uploaded Line Graph',['Registrations','Videos'], [[${stDTO.dash1DTO.maxRegVsVideosPerDay}+10]]);
+		  $("#lineChartRegistrationsVsVideosPerDay").dxChart(lineChartOptionsRegistrationsVsVideosPerDay);
+    	  
+		   */
+		  
+		  var donutChartVideosPerUserCountData = JSON.parse([[${stDTO.dash1DTO.donutChartVideosPerUsersCount}]]);
+		  var donutChartOptionsVideosPerUserCount = donutChartOptions(donutChartVideosPerUserCountData,'Videos Per User Segmentation');
+		  $("#donutChartVideosPerUserCount").dxPieChart(donutChartOptionsVideosPerUserCount);
+
+		  
+		  
+		  
+
+		});    	  
+    	  
+    	  
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  
+

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.NotificationMapper">
+
+
+    <resultMap type="com.socialvideo.data.dto.NotificationDTO" id="NotificationDTO">
+        <id column="id" property="id"/>
+        <result column="userid" property="userid"/>
+        <result column="videoid_fk" property="videoid"/>
+        <result column="actionuserid_fk" property="actionuserid"/>
+        <result column="collectionid_fk" property="collectionid"/>
+        <result column="socialnetworkid_fk" property="socialnetworkid"/>        
+        <result column="ratingid_fk" property="ratingid"/>
+        <result column="activity" property="activity"/>
+        <result column="status" property="status"/>
+        <result column="datecreated" property="datecreated"/>  
+        <association property="video" column="{videoid_fk=videoid_fk}" javaType="com.socialvideo.data.dto.PublicVideoDTO" select="com.socialvideo.data.mappers.PublicVideoMapper.selectNotificationDTO_Video"/>
+        <association property="actionuser" column="{userid_fk=actionuserid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectNotificationDTO_User"/>
+        <association property="socialnetwork" column="{id=socialnetworkid_fk}" javaType="com.socialvideo.data.dto.IDDescrDTO" select="com.socialvideo.data.mappers.LookupMapper.lookupSocialNetwork"/>
+        <association property="rating" column="{id=ratingid_fk}" javaType="com.socialvideo.data.dto.IDDescrDTO" select="com.socialvideo.data.mappers.LookupMapper.lookupRating"/>
+        <association property="collection" column="{id=collectionid_fk}" javaType="com.socialvideo.data.dto.CollectionDTO" select="com.socialvideo.data.mappers.CollectionMapper.selectNotificationDTO_Collection"/>
+    </resultMap> 
+
+
+    <resultMap type="com.socialvideo.data.dto.NotificationDTO" id="NotificationStatsDTO">
+        <result column="activity" property="activity"/>
+        <result column="total" property="total"/>      
+    </resultMap> 
+    
+    
+    
+    
+    
+    	 <update id="updateNotificationStatus" parameterType="map">
+	  		UPDATE notifications a set a.status =  #{status}
+	  		 <if test="userid != null and userid != ''.toString()">
+        		 WHERE a.userid_fk = #{userid}   
+      		</if>    
+	 	</update>
+    
+
+
+
+
+
+  <select id="selectNotificationsGroupByActivity" parameterType="map" resultMap="NotificationStatsDTO">
+ 		SELECT a.activity, count(*) as total FROM notifications a  WHERE a.userid_fk = #{userid}  
+		   <if test="status != null and status != ''.toString()">
+        		AND a.status = #{status} 
+      		</if>     
+		group by activity order by a.datecreated DESC;
+   </select>
+
+
+		
+
+    <select id="selectCountNotificationsOfUser" parameterType="map" resultType="java.lang.Integer">
+        SELECT  COUNT(DISTINCT(a.id)) AS total FROM notifications a WHERE a.userid_fk = #{userid} 
+        <if test="status != null and status != ''.toString()">
+        	AND a.status = #{status} 
+      	</if>      
+    </select>
+
+
+    <select id="selectNotificationsOfUser" parameterType="map" resultMap="NotificationDTO">
+        SELECT a.* FROM notifications a WHERE a.userid_fk = #{userid} 
+        <if test="status != null and status != ''.toString()">
+        	AND a.status = #{status} 
+      	</if>    
+        ORDER BY a.datecreated DESC LIMIT #{limit};  
+    </select>
+
+
+ 	<select id="selectNotifications" parameterType="map" resultMap="NotificationDTO">
+        SELECT a.* FROM notifications a WHERE 1=1
+        <if test="userid != null and userid != ''.toString()">
+        	AND a.userid_fk = #{userid} 
+      	</if>    
+        <if test="status != null and status != ''.toString()">
+        	AND a.status = #{status} 
+      	</if>    
+          <if test="dateCreatedFromString != null and dateCreatedFromString != ''.toString()">
+           <![CDATA[ and a.datecreated >= #{dateCreatedFromString} ]]>
+           </if>
+           
+          <if test="dateCreatedToString != null and dateCreatedToString != ''.toString()">
+           <![CDATA[ and a.datecreated <= #{dateCreatedToString} ]]>
+           </if>        	
+      	
+        ORDER BY a.datecreated DESC LIMIT #{limit};  
+    </select>
+
+
+
+</mapper>    
+    
+    
+
+
+
+
+
+

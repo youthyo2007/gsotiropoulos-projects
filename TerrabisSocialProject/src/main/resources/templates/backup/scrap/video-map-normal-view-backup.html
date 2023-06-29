@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html layout:decorator="layout-map">
+  <head>
+    <title>Terrabis - Map</title>
+         
+  </head>
+  <body>
+  
+  
+  
+  
+        <section layout:fragment="content">
+        
+        
+
+         
+         <!-- Page content-->
+         <div class="content-wrapper">
+         
+         
+
+         
+
+ <div class="row">
+   
+   
+   
+   <!-- LEFT COLUMN -->
+
+
+
+   <!-- ===================== RIGHT COLUMN ============================= -->
+  <div class="col-md-12">
+
+
+
+		<!-- ===================== FORM ============================= -->
+		 <div class="row">
+		  <div class="col-md-12">
+		  
+	
+		  
+                           <form id="" role="form" id="go" th:action="@{'/video/map-location/search'}" method="GET" th:object="${VIDEOQUERYFRM}">
+                           
+                           
+                           
+                           
+                           <div class="row">
+       
+                           
+     	 						<div id="title" class="col-md-12 col-xs-12 col-sm-12">
+     	 							 <span class="h2 text-info-dark">Where do you wan't to go?</span> 
+   								</div>
+   								
+   								<div id="search" class="col-md-10 col-xs-12 col-sm-12">
+			                           <div class="form-group">
+			                               <div class="input-group">
+			                                 <input id="querytxt" placeholder="Enter a location and any keyword e.g (New York # aerial drone night)" type="text" th:field="*{querytxt}" class="form-control input-lg m-b">
+			                                 <span class="input-group-btn" id="go">
+			                                    <button type="submit" class="btn btn-gray input-lg" style="border; border-color:black; border-width: 1px;"><span class="h4 text-bold">SEARCH</span></button>
+			                                 </span>
+			                              </div> 
+			                              
+			                             </div>   	
+			                             
+			                             
+			                             							
+   								</div>
+   								
+   								
+   								<!-- <div class="col-md-2 col-xs-12 col-sm-12 paginator">
+										 							
+   								</div> -->
+   								
+<!--    								<div id="paginator" class="col-md-3 col-xs-12 col-sm-12">
+    									 <ul class="pagination pull-right">
+										<li class="paginate_button previous disabled" aria-controls="datatable3" tabindex="0" id="datatable3_previous"><a href="#">Previous</a></li>
+										<li class="paginate_button active" aria-controls="datatable3" tabindex="0"><a href="#">1</a></li>
+										<li class="paginate_button " aria-controls="datatable3" tabindex="0"><a href="#">2</a></li>
+										<li class="paginate_button " aria-controls="datatable3" tabindex="0"><a href="#">3</a></li>
+										<li class="paginate_button " aria-controls="datatable3" tabindex="0"><a href="#">4</a></li>
+										<li class="paginate_button " aria-controls="datatable3" tabindex="0"><a href="#">5</a></li>
+										<li class="paginate_button " aria-controls="datatable3" tabindex="0"><a href="#">6</a></li>
+										<li class="paginate_button next" aria-controls="datatable3" tabindex="0" id="datatable3_next"><a href="#">Next</a></li>   									 
+   									 </ul>
+   								</div> -->
+   								
+   								
+   							</div>	
+   		
+
+   					    </form>		  
+		  
+		  
+<!--                           <form role="form" id="go" th:action="@{'/video/query-submit'}" method="POST" th:object="${videoqueryFrm}">
+                           <div class="form-group">
+                               <div class="input-group">
+                                 <input type="text" th:field="*{querytxt}"  class="form-control input-lg m-b" placeholder="Enter a location and any keyword e.g (New York , aerial drone night)">
+                                 <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info input-lg"><i class="fa fa-search fa-2x"></i></button>
+                                 </span>
+                              </div>
+
+                           </div>
+   					     
+                        </form> -->
+   		</div>
+   		</div>
+   		
+   		
+   		
+     	<div class="row">
+	 		<div  class="col-md-12 col-xs-12 col-sm-12 mb-lg" id="advselectedtags">
+			</div>	
+		</div>
+   		
+   		       <div class="row">  
+	              
+        		
+<!-- 	              <div class="col-md-7 col-sm-12">
+			              <div class="content-control">
+						                    pagignator
+						                    <ul class="breadcrumb paginator pull-right">
+						                    </ul>paginator
+			               </div>/content-control
+	              </div>     -->
+
+        		
+       </div> 		   
+       
+   		
+       <!-- ===================== GOOGLEMAP ============================= -->
+       <div class="row">
+               <div class="col-md-12">
+               		<div class="mapoverlay_loading hidden">
+			       <div class="row">
+			               <div class="col-md-12">
+			               		<p class="h3 text-gray text-bold">LOADING...</p>
+							</div>
+					</div>
+        			</div>
+        			
+        			
+        			<div th:if="${userFilter!=null}" class="mapoverlay_user -">
+        			
+			       <div class="row">
+			     
+						<div class="col-md-12 col-xs-12 col-sm-12" style="position:absolute; top:0px; left:92%;  height:25px; width:25px; z-index: 999999;">
+								  <span class="fa fa-times text-gray-dark cursor-pointer tag-user-close"></span>
+ 						</div>
+			      
+			       
+			               <div class="col-md-4">
+ 							<a th:href="@{'/user-' + ${userFilter.UUID}}">
+	 							<span th:if="${userFilter.avatar==null}" class="ml-sm fa fa-smile-o fa-2x text-gray-dark"></span>
+	                            <img th:if="${userFilter.avatar!=null}" th:src="*{'data:image/'+userFilter.avatar.extension+';base64,'+userFilter.avatar.imagebase64}" class="ml-sm img-thumbnail img-circle thumb64"/>
+                            </a>			               		 
+			      		</div>
+			      		         <div class="col-md-8"><span class="text-gray-dark text-sm" th:text="${userFilter.username}"></span></div>
+ 					
+			      		
+					</div>
+        			</div>
+        			
+        			
+        
+                <div th:if="${collectionFilter.videos.size()>0}" class="mapoverlay_collection -">
+        			
+			       <div class="row mt-sm">
+			     
+						<div class="col-md-12 col-xs-12 col-sm-12" style="position:absolute; top:0px; left:92%;  height:25px; width:25px; z-index: 999999;">
+								  <span class="fa fa-times text-gray-dark cursor-pointer tag-collection-close"></span>
+ 						</div>
+			      
+			       
+			               <div class="col-md-1">
+	 							<span  class="ml-sm fa fa-film text-gray-dark"></span>
+	              			</div>
+			      		         <div class="col-md-11"><span class="text-gray-dark text-left  text-sm mt-sm" th:text="${collectionFilter.title}"></span></div>
+ 					
+			      		
+					</div>
+        			</div>
+        
+        
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+               		<div class="mapoverlay_paginator">
+			       <div class="row">
+			               <div class="col-md-12">
+			               		<p class="paginator"></p>
+							</div>
+					</div>
+        			</div>        						                                
+        			
+        			
+
+               		<div class="mapoverlay_not_found hidden">
+			       <div class="row">
+			               <div class="col-md-12">
+			               		<p class="h3 text-gray text-bold"><br/></p>
+							</div>
+					</div>
+					
+                  <div class="row mb-lg m-lg">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
+                            <span class="h2 text-bold text-gray text-left text-uppercase" th:if="${VIDEOQUERYFRM.querytxt.trim().length()>0}">OOPS!, NO PLACES OR VIDEOS MATCHED YOUR SEARCH!</span><br/><br/>
+                            <span class="h2 text-bold text-gray text-left text-uppercase" th:if="${VIDEOQUERYFRM.querytxt.trim().length()==0}">YOU DIDN'T TYPE ANYTHING IN THE SEARCH BOX!</span><br/><br/>
+                            
+                        </div>  
+                        
+                        
+                        
+                        
+                        
+                          <div class="col-md-2 col-xs-12 col-sm-12">
+                            <span class="fa fa-meh-o fa-12x text-bold text-white text-left"></span>
+                        </div>  
+                        
+                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+                            <span class="h2 text-white text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()>0}">You might try as well another search. Don't forget to use the tag cloud on the left to find related videos as well</span>
+                            <span class="h2 text-white text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()==0}">Please enter your search terms and try again.</span>
+                        </div>  
+                        
+                        
+                        
+                 </div>						
+					
+					
+        			</div>
+        			        
+<!--         			<div id="panelblock" class="panel widget w-XL h-LG mapoverlay_video_rate hidden">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">                           				
+										<div class="vidoverlay_rate_map bg-info-fade-rate">
+										<div class="row row-table" th:replace="/fragments/video-grid-view ::  video-overlay-rating-map"></div>
+										</div>        	
+										<img class="w-XL h-LG vidoverlay_rate_map_img" src=""/> 
+                          			 </div>
+                        		</div>
+                     		</div>
+		              </div> -->
+		
+		
+		
+		    			
+<!--         		 	<div id="panelblock" class="panel widget w-XXXL h-XXXL mapoverlay_video_play hidden">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+       									<div class="vidoverlay_play_map">
+	                   						<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-play-map(colstyle='w-XXXL h-XXXL')"></div>
+	 									</div>	                           				       
+                          			 </div>
+                        		</div>
+                     		</div>
+		              </div> -->
+        			
+        			
+				    <div id="panelblock" class="panel widget w-XL h-XXXL  mapoverlay_video_preview hidden bg-white round-corner-md">
+         							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">                           				
+										<div class="vidoverlay_preview_map">
+										<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-preview-map"></div>
+										</div>        	
+										<img class="w-XL h-LG vidoverlay_preview_map_img" src=""/> 
+                          			 </div>
+                           				<div class="col-md-12 col-xs-12 col-sm-12 text-inverse text-sm  mt-lg mb-lg vidoverlay_preview_map_desc" style="height:110px;">           
+                           				 
+                           				</div>
+												
+												<div class="col-md-12 col-xs-12 col-sm-12" style="background-color: #11597D; height:30px;">
+												
+																 <div class="pull-left">	
+										
+										                           <a class="text-white m-sm" title="watched"><span  id="vidcount-play-icon_12" class="text-white fa-2x fa fa-youtube-play"></span></a>
+										                           	<span   class="mr-lg text-white text-sm-sm vidoverlay_preview_map_plays">15000</span>
+										 
+										
+										
+										
+										                           <a class="text-white m-sm" title="watched"><span  id="vidcount-like-icon_12" class="fa fa-thumbs-up fa-2x text-white" title="like"></span></a>
+										                           	<span  class="mr-lg text-white text-sm-sm vidoverlay_preview_map_likes">15000</span>
+										
+										                           <a class="text-white m-sm" title="watched"><span  id="vidcount-rating-icon_12" class="fa fa-star fa-2x text-white" title="rating"></span></a>
+										                           	<span  class="mr-lg text-white text-sm-sm vidoverlay_preview_map_rating">3.5</span>
+										                           	
+										                         </div>  					
+										
+										
+										      </div>                            				
+                           				
+                          			 
+                        		</div>
+                        		
+                        		
+                     		</div>
+		              </div>
+
+
+
+        
+        			<div class="box-shadow-info-lg round-corner-md">
+               			<div id="googlemap" class="gmaplg round-corner-md"></div>
+               		</div>
+           	</div>
+       </div>      
+       
+        
+        
+       <!-- CONTENT CONTROL BAR AND PAGINATOR  --> 
+       <div class="row mt-sm">
+       
+       						  <div class="col-md-6 col-sm-12">
+       						    		           <p class="text-sm-sm text-gray-more pull-left">*click on marker to start play **right click on the map for quick upload </p>
+       						  </div>	
+				              <div class="col-md-6 col-sm-12">
+						              <div class="content-control">
+									                    <ul class="control-nav pull-left" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    <!--pagignator-->
+<!-- 									                    <ul class="breadcrumb paginator pull-left"></ul> -->
+									                    <!--paginator-->
+						               </div><!-- /content-control -->
+				              </div>
+       </div> 
+       <!-- CONTENT CONTROL BAR  -->     
+      
+      	
+      	
+      	<!-- ===================== RESULTS ============================= -->
+       <!-- AJAX -->
+       <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid"></div></div>
+        
+        
+        <!-- LOAD DATA  -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+        	 <div class="col-md-12 col-xs-12 col-sm-12 load-more-data"></div>
+        	</div>
+        </div>	
+
+		<!-- LOAD MORE  -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <span class="h3 text-gray-more text-bold load-more-video cursor-pointer">
+<!--         	 LOAD MORE... -->
+        	 </span> 
+        	</div>
+        </div>	
+        
+        
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <br/><br/><br/><br/><br/><br/><br/><br/>
+        	 </div>
+        </div>	
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        <!-- DETAIL VIEW -->
+<!--         <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		 <div th:replace="/fragments/video-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	 -->
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+<!--         <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		 <div th:replace="/fragments/video-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div> -->	
+      	<!-- BOX VIEW -->
+
+    
+    
+<!--         THUMB VIEW
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		 <div th:replace="/fragments/video-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	 -->
+      	<!-- THUMB VIEW -->    
+
+ 	<!-- ===================== RESULTS ============================= -->
+
+   
+  <!-- ===================== RIGHT COLUMN ============================= -->
+ <!-- <div class="col-md-0">-</div> -->
+</div>
+</div>
+</div> 
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<script src="../static/vendor/jquery-bar-rating/dist/jquery.barrating.min.js" th:src="@{/vendor/jquery-bar-rating/dist/jquery.barrating.min.js}"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script>
+<script src="../static/vendor/dropzone/dropzone.js" th:src="@{/vendor/dropzone/dropzone.js}"></script> 
+<script src="../static/js/video-map-view.js" th:src="@{/js/video-map-view.js}"> </script> 
+<script src="../static/js/video-map-view-sidebar.js" th:src="@{/js/advanced-map-filters.js}"> </script> 
+<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script> 
+<script src="../static/js/grid-view-renderer.js" th:src="@{/js/grid-view-renderer.js}"> </script> 
+<script th:src="@{/js/video-upload-index.js}" src="../static/js/video-upload-index.js"></script> 
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+
+$( document ).ready(function() {
+
+	
+	
+			terrabisApp.showMapSearchForm = true;
+	
+
+			/***********************************************************************LOAD MORE DATA  SETUP ********************************************************************/
+	  		terrabisApp.paginatorLastPage = false;
+	  		
+	  		
+			//SCROLL TO BOTTOM LOAD MORE	  		
+	  		$(window).scroll(function() {
+	  		    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+	  		    	if(!terrabisApp.paginatorLastPage) {
+	  					loadMoreVideo(terrabisApp.paginatorMapURI);
+	  		    	}
+	  		    }
+	  		});
+	  		/***********************************************************************LOAD MORE DATA SETUP ********************************************************************/
+	  		
+
+
+	
+    /**********************  QUICK UPLOAD CLICK   ********************************/
+    
+    $(document).delegate('#quickUploadModalButton', 'click', function() {
+    	//INITIALIZE UPLOAD VIEW	
+		initializeUploadView(null);
+    	
+		//FULL SCREEN OVERLAY UPLOAD 
+		fullScreenOverlayUpload();
+    	
+    });
+
+
+	//INIT LOCATION FOR UPLOAD
+	terrabisApp.uploadLatitude = [[${GMAPRESULT.location.lat}]];
+	terrabisApp.uploadLongitude = [[${GMAPRESULT.location.lng}]];
+	
+
+
+
+
+	/**********************  QUERYTXT AUTOCOMPLETE  ********************************/
+	var input =  document.getElementById('querytxt');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+  
+	
+	
+
+	//INIT VARIABLES
+	var emptyGmapResult = [[${GMAPRESULT.emptyStatus}]];
+	//PAGE SPECIFIC GRID VIEW STYLE
+	terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+
+
+	
+	
+	
+	//IF EMPTY SHOW MESSAGE
+	if(emptyGmapResult) {
+		$(".mapoverlay_not_found").switchClass( "hidden", "-", 0, "easeInOutQuad" );
+		$( ".mapoverlay_not_found" ).delay(5000).fadeOut(3000, "linear", function() {
+			$(".mapoverlay_not_found").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+		  });
+		
+		
+	}
+	
+	
+	
+
+
+	
+	/**************************CREATE MAP *****************************************/
+	terrabisApp.globalMap = createMapBasedOnSearchResult([[${GMAPRESULT}]],[[${PERS.googleMapType}]],"googlemap");
+	
+	
+
+	//CREATE PATH IF FOUND
+	if([[${VIDEOQUERYFRM.advfilter.collectionid}]]=='') {
+		terrabisApp.isPath = false;
+	}
+	else {
+		terrabisApp.isPath = true;
+		terrabisApp.Path =[[${collectionFilter.videos}]];
+	}
+
+	
+	//LOAD MAP MARKERS FIRST TIME
+	//if(!emptyGmapResult) {
+	
+	 	//INITIALIZE QUERY DATA AND HIGHLIGHT CRITERIA MENU
+		//google.maps.event.addListenerOnce(terrabisApp.globalMap, 'bounds_changed', mapData_FetchMarkers);
+		 google.maps.event.addListenerOnce(terrabisApp.globalMap, 'bounds_changed', function(){
+
+			 //CREATE MARKERS
+		 	mapData_FetchMarkers(null);
+		 	
+		 	
+		 	//ADD LISTENERS ON ZOOM CHANGED AND VIEWPORT CHANGED 
+	 		terrabisApp.globalMap.addListener('dragend', mapData_FetchDataGrid);
+	 		terrabisApp.globalMap.addListener('zoom_changed', mapData_FetchDataGrid);
+		 	
+		 	
+		 	
+		 
+			 var queryData = init_queryCriteriaData();
+			 highlightCriteriaMenu(queryData);
+			 updateTagUICriteriaHtml();	
+			 
+			 
+			 		 /**********************  RIIGHT CLICK ON MAP ********************************/
+			if(([[${(#authorization.expression('isAuthenticated()'))}]])) { 
+				    google.maps.event.addListener(terrabisApp.globalMap, 'rightclick', createUploadMarkerOnMapRightClick);
+			};
+			//END QUICK UPLOAD LISTENER
+			 
+			 
+		 });
+	
+	
+
+
+	 
+	 
+		 //ADD MAPTYPE CHANGED LISTENER AND SAVED IT TO PERSONALIZAITON OBJECT
+		 google.maps.event.addListener(terrabisApp.globalMap, "maptypeid_changed", function() {
+		 	var callback = function(data, status, xhr) {
+			};
+	
+			var newMapType = terrabisApp.globalMap.getMapTypeId();
+			var formData = { googleMapType: newMapType};
+			terrabisApp.googleMapType = newMapType; 
+			restajax(terrabisApp.PERSGoogleMapTypeURI,formData,callback);	
+		});
+
+
+
+	 //} //END EMPTY RESULT
+
+
+
+
+	 
+	
+
+}); 	
+		
+	
+/*]]>*/
+</script>   
+
+
+
+
+
+
+
+
+
+
+<!-- UPLOAD CODE   -->
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+     
+$( document ).ready(function() {
+	
+	
+		/************************************* UPLOAD CODE *********************************/
+		
+
+		
+		
+		/************************************* VALIDATE FORM  *********************************/
+		var regYoutube = "/^.*((youtu.be/)|(v/)|(/u/w/)|(embed/)|(watch?))??v?=?([^#&?]*).*/";
+		var regVimeo = "/^.*(vimeo.com/)((channels/[A-z]+/)|(groups/[A-z]+/videos/))?([0-9]+)/";
+
+		var urlLinkValidator = {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video URL is required'
+		                },
+			            regexp: {
+			                regexp: /((http(s)?:\/\/)?)(www\.)?((vimeo\.com\/)|(youtube\.com\/)|(youtu.be\/))[\S]+/,
+			                message: 'This is not a valid YouTube or Vimeo URL'
+			            },	            
+		                remote: {
+			                        message: 'This video is already uploaded by another user',
+			                        data: function(validator, $field, value) {
+			                            return {
+			                            	videourl: validator.getFieldElements('linkedurl').val()
+			                            };
+			                        },
+			                        url: '/rest-validation/upload/duplicate/video-url',
+			                        type:  [[${_csrf.token}]]
+			                }  		            
+		        
+		            }
+		        };
+		        
+		        
+		var formValidation = $('#videofileuploadform').formValidation({
+		    framework: 'bootstrap',
+		    icon: {
+		        valid: 'fa  fa-check',
+		        invalid: 'fa fa-check fa-remove',
+		        validating: 'fa fa-refresh'
+		    },
+		    fields: {
+		        title: {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video title is required'
+		                }
+		            }
+		        },
+		        "footagedate": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Footage date is required'
+		                },
+			            date: {
+			                format: 'DD/MM/YYYY',
+			                message: 'The value is not a valid date'
+			            }
+			        }
+			                
+		        },
+		        "privacy": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video privacy is required'
+		                }
+		            }
+		        },
+/* 		        "linkedurl": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Video URL is required'
+		                },
+			            regexp: {
+			                regexp: /((http(s)?:\/\/)?)(www\.)?((vimeo\.com\/)|(youtube\.com\/)|(youtu.be\/))[\S]+/,
+			                message: 'This is not a valid YouTube or Vimeo URL'
+			            },	            
+		                remote: {
+			                        message: 'This video is already uploaded by another user',
+			                        data: function(validator, $field, value) {
+			                            return {
+			                            	videourl: validator.getFieldElements('linkedurl').val()
+			                            };
+			                        },
+			                        url: '/rest-validation/upload/duplicate/video-url',
+			                        type:  [[${_csrf.token}]]
+			                }  		            
+		        
+		            }
+		        }, */
+		        "description": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Enter a short description'
+		                }
+		            }
+		        },
+		        "category.id": {
+		            validators: {
+		                notEmpty: {
+		                    message: 'Category is required'
+		                }
+		            }
+		        }
+		    }
+			});	
+
+		
+		/************************************* UPLOAD CODE *********************************/
+
+
+});	
+
+
+/*]]>*/
+</script>  
+
+
+
+</section>
+      
+ 
+      
+  </body>
+</html>  
+	  

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.7.2.201511260958-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+	</configs>
+	<autoconfigs>
+		<config>java:com.socialvideo.web.controllers.UserSettingsViewController</config>
+		<config>java:com.socialvideo.web.controllers.RestDataFetchController</config>
+		<config>java:com.socialvideo.web.controllers.RestVideoController</config>
+		<config>java:com.socialvideo.web.controllers.IndexViewController</config>
+		<config>java:com.socialvideo.web.controllers.RestValidationController</config>
+		<config>java:com.socialvideo.web.controllers.VideoController</config>
+		<config>java:com.socialvideo.web.controllers.VideoOrganizerController</config>
+		<config>java:com.socialvideo.web.controllers.UserViewController</config>
+		<config>java:com.socialvideo.web.controllers.ErrorController</config>
+		<config>java:com.socialvideo.SocialVideoApplication</config>
+		<config>java:com.socialvideo.web.controllers.OAuthController</config>
+		<config>java:com.socialvideo.web.controllers.RegistrationController</config>
+		<config>java:com.socialvideo.config.RepositoryConfiguration</config>
+		<config>java:com.socialvideo.web.controllers.RestPersonalizeController</config>
+		<config>java:com.socialvideo.web.controllers.UploadController</config>
+		<config>java:com.socialvideo.web.controllers.StatisticsController</config>
+		<config>java:com.socialvideo.web.controllers.AdministrationController</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

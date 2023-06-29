@@ -1,0 +1,271 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-admin">
+  <head>
+    <title>Terrabis - Video Catalog</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+     
+     	   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=true)"></div>
+	   <div th:replace="/fragments/modal :: fullscreenoverlay-reject"></div>
+	   
+         <div class="content-wrapper">
+
+           <div class="content-heading visible-lg visible-md">
+   				   <span class="text-gray fa fa-youtube-play fa-2x">&nbsp;</span><span class="text-gray text-bold h1">Administration</span>           
+            </div>
+
+           <div class="content-heading visible-sm visible-xs">
+   				   <span class="text-gray fa fa-youtube-play">&nbsp;</span><span class="text-gray text-bold h3">Administration</span>           
+            </div>
+
+
+ 
+ 
+                  
+         	<div class="row" th:replace="/fragments/admin-grid-view :: filter(ADMINQUERYFRM=${ADMINQUERYFRM},actionLink=@{'/admin/videos/filter'})">              
+					</div>
+		       
+
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="h4 text-info pull-right"><span th:text="${{ADMINPAGINATOR.recordsCount} + ' results in '}"></span><span th:text="${{PERFORMANCETIME} + ' ms '}"></span>
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+
+<!--    		       <div class="row">  
+	              <div class="col-md-12 col-sm-12">
+			              <div class="content-control">
+						                    pagignator
+						                    <ul class="breadcrumb paginator pull-right">
+						                    </ul>paginator
+			               </div>/content-control
+	              </div>    
+		       </div>  -->
+		            
+         <!-- CONTENT CONTROL BAR  -->   
+         <div class="row">
+         	  <div th:replace="/fragments/video-grid-control :: admin-video-view(colclass='col-md-12 col-sm-12',selview=${view},selfilter=${filter})"></div>
+         </div>     
+         <!-- CONTENT CONTROL BAR  -->    
+
+ 	         		  		<form role="form" id="deletevideosform" th:action="@{'/admin/video/delete'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+
+	         		  		<form role="form" id="promotesiteindexvideosform" th:action="@{'/admin/video/promote:promote/type:siteindex'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="unpromotesiteindexvideosform" th:action="@{'/admin/video/promote:unpromote/type:siteindex'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="unpromotemapvideosform" th:action="@{'/admin/video/promote:unpromote/type:map'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+ 
+	         		  		<form role="form" id="promotemapvideosform" th:action="@{'/admin/video/promote:promote/type:map'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="approvevideosform" th:action="@{'/admin/video/approve'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+	         		  		<form role="form" id="rejectvideosform" th:action="@{'/admin/video/reject'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{rejectionreason}">
+	         		  		       <input type="hidden" th:field="*{rejectionreasontxt}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+
+	         		  		<form role="form" id="publishvideosform" th:action="@{'/admin/video/publish'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>
+
+	         		  		<form role="form" id="upublishvideosform" th:action="@{'/admin/video/unpublish'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${ADMINMANAGERFRM.selectedvideos}">
+							</form>  
+							
+
+
+<!-- ===================== RESULTS ============================= -->
+
+
+        <!-- ANALYTIC VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'ANALYTIC'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: analytic(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- ANALYTIC VIEW -->
+
+     
+        <!-- DETAIL VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+    
+    
+        <!-- THUMB VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/admin-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- THUMB VIEW -->  
+      	
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+     
+<!-- 
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+
+
+
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+
+
+    
+    
+
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+ -->
+      	
+	       <div class="row mb-sm mt-lg">  
+           <div class="col-md-12 col-sm-12">
+					         <div class="pull-right paginator">
+					         </div>           
+           </div>    
+	       </div>       	
+      	
+     
+
+
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <br/><br/><br/><br/><br/><br/><br/><br/>
+        	 </div>
+        </div>	
+
+   		</div>
+
+
+
+
+
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <!-- <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>    
+ -->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+ <script src="../static/js/admin-video-view.js" th:src="@{/js/admin-video-view.js}"> </script>  
+  <script src="../static/vendor/autocomplete/jquery.autocomplete.js" th:src="@{/vendor/autocomplete/jquery.autocomplete.js}"></script> 
+ <script src="../static/js/admin-filter.js" th:src="@{/js/admin-filter.js}"> </script> 
+	
+
+	 
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+	           
+      $(document).ready(function() {
+    	  
+    	//IF FILTER ENABLED
+  	    turnOnFilter([[${ADMINQUERYFRM.filteron}]]);
+    	
+  	  	terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+		terrabisApp.pageView = [[${execInfo.templateName}]];
+		terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+		terrabisApp.contextPath = [[${CTXPATH}]];    	
+		createHtml_Paginator([[${ADMINPAGINATOR}]]);
+		
+
+    	
+      });
+
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.mobile.MobileUserMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.mobile.MobileUserDTO" id="MobileUserDTO">
+        <id column="id" property="id"/>
+        <result property="UUID" column="UUID"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <association property="videoscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserVideos"/>
+        <association property="albumscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserAlbums"/>
+        <association property="playlistscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_UserPlaylists"/>
+        <association property="tweetscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Shares"/>
+        <association property="likescount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Likes"/>
+        <association property="playscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Plays"/>
+        <association property="ratingscount" column="{userid_fk=id}" javaType="java.lang.Integer" select="selectCount_Ratings"/>
+        <association property="avatar" column="{userid_fk=id}" javaType="com.socialvideo.data.dto.AvatarDTO" select="com.socialvideo.data.mappers.AvatarMapper.selectUserDTO_Avatar"/>
+    </resultMap> 
+
+
+   <resultMap type="com.socialvideo.data.dto.mobile.MobileUserDTOSmall" id="MobileUserDTOSmall">
+        <id column="id" property="id"/>
+        <result property="UUID" column="UUID"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+    </resultMap> 
+
+
+    <select id="selectVideoDTO_User" parameterType="map" resultMap="MobileUserDTOSmall">
+        SELECT a.* FROM users a WHERE a.id = #{userid_fk}
+    </select>
+
+		
+    <select id="selectUserByID" parameterType="map" resultMap="MobileUserDTO">
+        SELECT a.* FROM users a WHERE a.id = #{id}
+    </select>
+
+
+    <select id="selectUserByUUID" parameterType="map" resultMap="MobileUserDTO">
+        SELECT a.* FROM users a WHERE a.UUID = #{uuid}
+    </select>
+
+
+
+
+	<select id="selectCount_UserVideos" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM videos a WHERE a.userid_fk = #{userid_fk} and status = 1  
+	</select>
+
+	<select id="selectCount_UserAlbums"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collections a WHERE a.userid_fk = #{userid_fk} AND a.type=4
+	</select>
+		
+	<select id="selectCount_Likes" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM likesvideos a WHERE a.userid_fk = #{userid_fk}
+	</select>
+	
+
+	<select id="selectCount_Shares" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM shares a WHERE a.userid_fk = #{userid_fk}
+	</select>	
+	
+	
+	<select id="selectCount_Plays" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM playsvideos a WHERE a.userid_fk = #{userid_fk}
+	</select>	
+	
+	<select id="selectCount_Ratings" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM ratings a WHERE a.userid_fk = #{userid_fk}
+	</select>
+	
+		
+	<select id="selectCount_UserPlaylists"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collections a WHERE a.userid_fk = #{userid_fk} AND a.type=1
+	</select>
+		
+	<select id="selectCount_UserFavoriteVideos" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collectionsvideos a, collections b WHERE b.userid_fk = #{userid_fk} and b.type=3 and a.collectionid_fk=b.id  
+	</select>
+	
+	<select id="selectCount_UserWatchLaterVideos"  resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total FROM collectionsvideos a, collections b WHERE b.userid_fk = #{userid_fk} and b.type=2 and a.collectionid_fk=b.id
+	</select>	
+	
+
+</mapper>
+
+
+
+

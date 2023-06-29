@@ -1,0 +1,214 @@
+ <header id="headerdiv" class="topnavbar-wrapper" th:fragment="header(isindex)">
+         <!-- START Top Navbar-->
+         <nav role="navigation" th:class="${isindex=='true' ? 'navbar' : 'navbar topnavbar'}">
+            <!-- START navbar header-->
+            
+            
+            
+            <div class="navbar-header">
+               <a th:href="@{${isindex=='false' ? '/' : '/video/map/normal/_'}}" class="navbar-brand">
+                  <div class="brand-logo mt-sm">
+                      <!-- <img src="/images/logo.png" alt="App Logo" class="img-responsive"> -->
+                 	<span class="text-white fontlabel text-bold mt-lg">T</span>
+                 	<span class="text-white fontlabel text-bold mt-lg">E</span>
+                 	<span class="text-aqua fontlabel text-bold mt-lg mirror">R</span>
+                 	<span class="text-aqua fontlabel text-bold mt-lg">R</span>
+                 	<span class="text-white fontlabel text-bold mt-lg">A</span>
+                 	<span class="text-white fontlabel text-bold mt-lg">B</span>
+                 	<span class="text-white fontlabel text-bold mt-lg">I</span>
+                 	<span class="text-white fontlabel text-bold mt-lg">S</span>
+                  </div>
+                  <div class="brand-logo-collapsed mt-sm">
+                    <span th:if="${isindex=='false'}" class="text-white fontlabel text-bold mt-lg">T</span>
+                    	<span th:if="${isindex=='false'}" class="text-aqua fontlabel text-bold mt-lg">R</span>
+                    	<span th:if="${isindex=='false'}" class="text-aqua fontlabel text-bold mt-lg">R</span>
+                    <span  th:if="${isindex=='false'}" class="text-white fontlabel text-bold mt-lg">B</span>
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+               <!-- START Left navbar-->
+<!--                <ul class="nav navbar-nav">
+                  <li>
+                     Button used to collapse the left sidebar. Only visible on tablet and desktops
+                     <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     Button to show/hide the sidebar on mobile. Visible on mobile only.
+                     <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+
+               </ul> -->
+               
+                 <ul th:if="${isindex=='false'}" class="nav navbar-nav h4">
+                 
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+                 
+                 
+                 
+        			<li><a th:href="@{/video/map/normal/_}">map<span class="sr-only">(current)</span></a></li>
+        			<li><a th:href="@{/video/video-catalog/filter:latest}">videos</a></li>
+        			<li><a th:href="@{/video/album-catalog/filter:latest}">albums</a></li>
+        			<li><a th:href="@{/video/trending-catalog/filter:mostplayed/datefilter:10 days}">trending</a></li>
+        			<!-- <li><a th:href="@{/video/playlist-catalog/filter:latest}">video paths</a></li> -->
+        			
+        			
+<!--         			<li><a>channels</a></li>  -->
+        			        
+        			        
+        			        
+        			         
+        			         
+      			</ul>
+               <!-- END Left navbar-->
+               
+                       
+               
+               <!-- START Right Navbar-->
+               <ul class="nav navbar-nav navbar-right">
+               
+        		   <li class="mr-lg mt-sm" th:if="${(NAVBAR_SHOWSEARCHTXT==true)}">
+				                		<form role="form" id="go" th:action="@{'/video/search'}" method="GET" th:object="${VIDEOQUERYFRM}">
+				                           <div class="form-group" style="width: 400px;">
+				                              <div class="input-group">
+				                                 <input id="querytxt" name="querytxt" type="text" class="form-control">
+				                                 <span class="input-group-btn" id="go">
+				                                    <button type="submit" class="btn btn-gray"><span class="h4">SEARCH</span></button>
+				                                 </span>
+				                              </div>
+                    		<label class="radio-inline text-white"><input type="radio" name="querytype" value="MAP" th:checked="${VIDEOQUERYFRM.querytype=='MAP'}">map</label>
+							<label class="radio-inline text-white"><input type="radio" name="querytype" value="titledescription" th:checked="${VIDEOQUERYFRM.querytype=='titledescription'}">title or description</label>
+							<label class="radio-inline text-white"><input type="radio" name="querytype" value="tags" th:checked="${VIDEOQUERYFRM.querytype=='tags'}">tags</label>
+				                              
+				                              
+				                            </div>
+				                 	</form>                 
+				      			
+				      			
+				      </li>
+		
+               <li class="mt-sm">
+               	   <div class="form-group"  th:if="${(NAVBAR_SHOWUPLOADBUTTON==true)  and (#authorization.expression('isAuthenticated()'))}">
+			                          <a th:href="@{'/upload/video'}" class="btn btn-border btn-labeled  btn-info-dark" style="border; border-color: white; border-width: 1px;">
+			                           <span class="btn-label pull-left"><i class="fa fa-cloud-upload"></i>
+			                           </span>
+			                               <span class="h4 mt-sm text-uppercase pull-left">Upload&nbsp;&nbsp;</span>
+			                           </a>
+			                   </div>                 
+               
+               </li>
+               
+               
+               
+                  <!-- Search icon-->
+                  <!-- START Alert menu -->
+                   <li sec:authorize="isAuthenticated()" class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="fa fa-envelope"></em>
+                        <div class="label label-danger" th:if="${notificationUnreadedCount>0}" th:text="${notificationUnreadedCount}"></div>
+                     </a>
+                    
+                     <ul class="dropdown-menu animated flipInX" aria-labelledby="dropdownMenu1">
+                        <li>
+ 						<div th:replace="/fragments/navbar-panel :: alert"></div>
+                        </li>
+                     </ul>
+                  </li> 
+                  <!-- END Alert menu-->
+                  
+                  <!-- START Sign In menu th:if="${#authorization.expression('!isAuthenticated()')}"-->
+<!--                   <li sec:authorize="isAnonymous()"><a href="signup">signup</a></li> 
+ -->
+                   <li class="dropdown dropdown-list"  th:if="${(NAVBAR_SHOWSIGNBUTTON==null)  and (#authorization.expression('isAnonymous()'))}">
+               	   <div class="form-group mt-sm" data-toggle="dropdown">
+			                           <a href="#" class="btn btn-labeled  btn-gray" style="border; border-color: white; border-width: 1px;">
+			                               <span class="h4 mt-sm text-uppercase pull-left">Sign in</span>
+			                           </a>
+			                   </div>                 
+                     <ul  class="dropdown-menu animated fadeIn">
+                     <li>
+ 						<div th:replace="/fragments/navbar-panel :: signin"></div>
+ 					</li>	                     
+                     </ul>
+                  </li>
+                  <!-- END Sign In menu-->
+                  
+
+                  <!-- START sign up In menu-->
+<!--                   <li sec:authorize="isAnonymous()"><a href="/login">login</a></li> 
+ -->                  
+                   <li class="ml-lg mr-lg dropdown dropdown-list" sec:authorize="isAnonymous()">
+
+			                           <a href="#" data-toggle="dropdown">
+			                               <span class="h4 text-aqua">Join us</span>
+			                           </a>
+                     <ul class="dropdown-menu animated fadeIn">
+                     <li>
+ 						<div th:replace="/fragments/navbar-panel :: signup"></div>
+ 					</li>	                     
+                     </ul>
+                  </li>
+                  <!-- END Sign up menu-->                  
+                  
+                  
+                  
+                  
+                  
+                  <!-- START User Logged In  Menu-->
+                   <li class="dropdown dropdown-list"  sec:authorize="isAuthenticated()">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="fa fa-th"></em>
+                     </a>
+                     <ul class="dropdown-menu animated flipInX">
+                     <li>
+ 						<div th:replace="/fragments/navbar-panel :: profile"></div>
+ 					</li>	                     
+                     </ul>
+                  </li>
+                  
+                  
+
+                   <li class="dropdown dropdown-list" th:if="${#authorization.expression('hasRole(''ROLEADMIN'')')}">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="fa fa-cogs"></em>
+                     </a>
+                     <ul class="dropdown-menu animated flipInX">
+                     <li>
+ 						<div th:replace="/fragments/navbar-panel :: admin"></div>
+ 					</li>	                     
+                     </ul>
+                  </li>
+                  
+                  
+               </ul>
+               
+               
+       
+            </div>
+            <!-- END Nav wrapper-->
+            <!-- START Search form-->
+<!--             <form role="search" action="search.html" class="navbar-form">
+               <div class="form-group has-feedback">
+                  <input type="text" placeholder="Type and hit enter ..." class="form-control">
+                  <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
+               </div>
+               <button type="submit" class="hidden btn btn-default">Submit</button>
+            </form> -->
+            <!-- END Search form-->
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+     

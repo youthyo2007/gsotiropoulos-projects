@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - User Map</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+               <!-- Page content-->
+         <div class="content-wrapper">
+          <div th:replace="/fragments/user-index-detail :: header(title='Map')"></div>
+		</div> 
+          <!-- END CONTENT WRAPPER  --> 
+
+		
+		            
+         <!-- NAVIGATION BAR  -->   
+         <div class="row">
+         	  <div th:replace="/fragments/content-control-bar :: user-index-map(colclass='col-md-8 col-sm-12')"></div>
+         </div>     
+         <!-- NAVIGATION BAR  -->    
+
+      </section>
+
+
+  </body>
+</html>  	  

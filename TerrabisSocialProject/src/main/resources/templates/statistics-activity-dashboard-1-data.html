@@ -1,0 +1,154 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-statistics-data">
+  <head>
+    <title>Terrabis - Statistics:Activity:Daily Activity Dashboard:Data</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+	      <!-- FULLSCREENOVERLAY  -->    
+	   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=true)"></div>
+	   <div th:replace="/fragments/modal :: fullscreenoverlay-reject"></div>
+
+
+         <div class="content-wrapper">
+    
+    
+         
+         
+
+                     <div class="content-heading">
+					<span class="text-gray-more h3">Statistics:Activity:Daily Activity Dashboard:Data</span>            
+            		</div>         
+         
+         
+         	<div class="row" th:replace="/fragments/stats-grid-view :: filter(STATSQUERYFRM=${STATSQUERYFRM},actionLink=@{'/statistics/activity/dashboard-1/filter'})">              
+					</div>
+		       
+         
+           		       <div class="row">  
+	              <div class="col-md-12 col-sm-12">
+	              
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+		       
+		       
+       
+               <div class="row"  th:each="activity, iterStat: ${activityPerDayList}">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    	<span class="h2 text-bold text-gray-more"><span class="h2 text-bold text-inverse" th:text="${activity.datestring}"></span></span><br/><br/>
+                              <table th:attr="id=${'activitytable-'+{iterStat.index}}" class="table table-striped table-bordered table-hover">
+                              <thead>
+<!--                                  <tr class="bg-white">
+                                    <th class="text-gray"><span class="text-gray-more">new uploads</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">new users</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">plays</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">likes</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">ratings</span></th>
+                                    <th class="text-gray"><span class="text-gray-more">shares</span></th>
+                                 </tr> -->
+                              </thead>
+                              <tbody>
+                              	<tr>
+                                    <td width="100"><span class="text-inverse text-sm" th:text="${'new uploads '}"></span><button th:if="${activity.videocount>0}" class="btn btn-info" data-toggle="collapse" th:attr="data-target=${'#uploads_'+{activity.dateid}}" th:text="${{activity.videocount}}">...</button></td>
+                                    <td width="100"><span class="mt0 text-inverse text-sm" th:text="${'new users '}"></span></td>
+                                    <td width="100"><span class="mt0 text-inverse text-sm" th:text="${'likes '}"></span><button class="btn btn-info" th:if="${activity.likecount>0}" data-toggle="collapse" th:attr="data-target=${'#likes_'+{activity.dateid}}" th:text="${{activity.likecount}}">...</button></td>
+                                    <td width="100"><span class="mt0 text-inverse text-sm" th:text="${'ratings '}"></span><button class="btn btn-info" th:if="${activity.ratingcount>0}" data-toggle="collapse" th:attr="data-target=${'#ratings_'+{activity.dateid}}" th:text="${{activity.ratingcount}}">...</button></td>
+                                    <td width="100"><span class="mt0 text-inverse text-sm" th:text="${'shares '}"></span><button class="btn btn-info" th:if="${activity.sharecount>0}" data-toggle="collapse" th:attr="data-target=${'#shares_'+{activity.dateid}}" th:text="${{activity.sharecount}}">...</button></td>
+                                    <td width="100"><span class="mt0 text-inverse text-sm" th:text="${'plays '}"></span><button class="btn btn-info" th:if="${activity.playcount>0}" data-toggle="collapse" th:attr="data-target=${'#plays_'+{activity.dateid}}" th:text="${{activity.playcount}}">...</button></td>
+                                 </tr>
+                              </tbody>
+                              </table> 
+       
+   
+			       			</div>
+
+       			
+       						<div  th:attr="id=${'uploads_'+{activity.dateid}}" class="collapse">
+			       			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${activity.uploadList!=null}">
+			       				<span class="h4 text-bold text-uppercase text-info">UPLOADS</span>
+			       				<div th:replace="/fragments/stats-grid-view :: analytic(videoListDTO=${activity.uploadList},groupid=${activity.dateid+'uploads'})"></div>
+			       			</div>
+			       			</div>       			
+
+							<div  th:attr="id=${'likes_'+{activity.dateid}}" class="collapse">
+			       			<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${activity.likeList!=null}">
+			       				<span class="h4 text-bold text-uppercase text-info">LIKES</span>
+			       				<div th:replace="/fragments/stats-grid-view :: analytic(videoListDTO=${activity.likeList},,groupid=${activity.dateid+'likes'})"></div>
+			       			</div>   
+			       			</div>
+
+							<div  th:attr="id=${'ratings_'+{activity.dateid}}" class="collapse">
+			       			<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${activity.ratingList!=null}">
+			       				<span class="h4 text-bold text-uppercase text-info">RATINGS</span>
+			       				<div th:replace="/fragments/stats-grid-view :: analytic(videoListDTO=${activity.ratingList},groupid=${activity.dateid+'ratings'})"></div>
+			       			</div>   
+			       			</div>
+			       			
+							<div  th:attr="id=${'shares_'+{activity.dateid}}" class="collapse">
+			       			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${activity.shareList!=null}">
+			       				<span class="h4 text-bold text-uppercase text-info">SHARES</span>
+			       				<div th:replace="/fragments/stats-grid-view :: analytic(videoListDTO=${activity.shareList},groupid=${activity.dateid+'shares'})"></div>
+			       			</div> 
+			       			</div>        			
+
+
+							<div  th:attr="id=${'plays_'+{activity.dateid}}" class="collapse">
+			       			<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${activity.playList!=null}">
+			       				<span class="h4 text-bold text-uppercase text-info">PLAYS</span>
+			       				<div th:replace="/fragments/stats-grid-view :: analytic(videoListDTO=${activity.playList},groupid=${activity.dateid+'plays'})"></div>
+			       			</div> 
+			       			</div>        			
+       			
+
+       			
+       		</div>	
+       
+       
+       </div>
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+    <script src="../static/vendor/autocomplete-jquery/jquery.autocomplete.js" th:src="@{/vendor/autocomplete-jquery/jquery.autocomplete.js}"></script> 
+    <!-- DATATABLES-->
+   <script src="../static/vendor/datatables/media/js/jquery.dataTables.min.js" th:src="@{/vendor/datatables/media/js/jquery.dataTables.min.js}"></script> 
+   <script src="../static/vendor/datatables-colvis/js/dataTables.colVis.js" th:src="@{/vendor/datatables-colvis/js/dataTables.colVis.js}"></script> 
+   <script src="../static/vendor/datatable-bootstrap/js/dataTables.bootstrap.js" th:src="@{/vendor/datatable-bootstrap/js/dataTables.bootstrap.js}"></script> 
+   <script src="../static/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js" th:src="@{/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js}"></script> 
+   <script src="../static/js/paginator.js" th:src="@{/js/paginator.js}"> </script>     
+  <script src="../static/js/statistics-video-view.js" th:src="@{/js/statistics-video-view.js}"> </script>
+   <script src="../static/js/statistics-filter.js" th:src="@{/js/statistics-filter.js}"> </script>
+
+
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    	  
+    	  
+    	 	createHtml_PaginatorWithPageNumbers([[${STATSPAGINATOR}]]);
+    	  
+	    	turnOnFilter([[${STATSQUERYFRM.filteron}]]);
+	    	
+    	 	    	  
+
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

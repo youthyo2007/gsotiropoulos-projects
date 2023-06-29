@@ -1,0 +1,627 @@
+	
+
+	
+	
+	<aside class="aside" th:fragment="sidebar-mobile">
+               <!-- START Left navbar-->
+      <div class="aside-inner">
+              <form> <nav data-sidebar-anyclick-close="" class="sidebar">
+               <ul class="nav">
+<!--                  <li class="nav-heading">
+                     <span class="" data-localize="sidebar.heading.MENU" th:text="${#pageTitle}"></span>
+                  </li> 
+                  
+                  
+          -->
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <li class="borderlist">
+	                     <a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{'/upload/video'}"  class="btn-fb" title="Upload">
+	                        <em class="fa fa-cloud-upload text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.UPLOAD">UPLOAD</span>
+	                     </a>
+	               </li> 
+	              
+                  
+                  
+
+	               
+	               
+	               <li class="borderlist">
+	                     <a class="btn-fb sidebar-mobile-toggle-search" title="Search">
+	                        <em class="fa fa-search text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.SEARCH">SEARCH</span>
+	                     </a>
+	               </li> 	               
+
+
+	               <li class="borderlist">
+	                     <a th:href="@{'/video/map/normal/_'}" th:if="${execInfo.templateName != 'video-one-view-mobile'}" th:class="${{execInfo.templateName=='video-map-normal-view-mobile'}  ? 'btn-danger' : 'btn-fb'}" title="Map">
+	                        <em class="fa fa-map-marker text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.MAP">MAP</span>
+	                     </a>
+	               </li> 
+
+
+
+	               <li class="borderlist">
+	                     <a th:href="@{'/video/map/normal/_?videouuid=' + ${videoDTO.UUID}}"  class="btn-fb" th:if="${execInfo.templateName=='video-one-view-mobile'}" title="Map on this Area">
+	                        <em class="fa fa-map-marker text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.MAPAROUND">MAP THIS AREA</span>
+	                     </a>
+	               </li>
+	               
+
+
+
+
+               		<li class="borderlist sidebar-mobile-toggle-maptype" th:if="${execInfo.templateName=='video-map-normal-view-mobile'}">
+	                     <a class="btn-white" title="turn roadmap view on/off">
+	                        <em class="fa fa-road text-inverse -"></em>
+	                        <span class=" -  text-sm text-inverse text-uppercase" data-localize="sidebar.nav.ROADMAP">ROADMAP VIEW</span>
+	                     </a>
+	               </li> 
+
+
+
+              		<li class="borderlist sidebar-mobile-toggle-clustermap" th:if="${execInfo.templateName=='video-map-normal-view-mobile'}">
+	                     <a  class="btn-white" title="turn pin groups view on/off">
+	                        <em class="fa fa-circle-o text-inverse -"></em>
+	                        <span class=" -  text-sm text-inverse text-uppercase" data-localize="sidebar.nav.PINGROUPS">PIN GROUPS</span>
+	                     </a>
+	               </li> 
+
+
+	               <li class="borderlist">
+	                     <a th:href="@{'/video/video-catalog/filter:latest'}" th:class="${{execInfo.templateName=='video-catalog-view'}  ? 'btn-danger' : 'btn-fb'}"  title="Videos">
+	                        <em class="fa fa-youtube-play text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.VIDEOS">VIDEOS</span>
+	                     </a>
+	               </li> 
+	               
+	               <li class="borderlist">
+	                     <a th:href="@{'/video/album-catalog/filter:latest'}"   th:class="${{execInfo.templateName=='video-album-view'}  ? 'btn-danger' : 'btn-fb'}"  title="Albums">
+	                        <em class="fa fa-th-list text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.VIDEOS">ALBUMS</span>
+	                     </a>
+	               </li> 	 
+	               
+	              <li class="borderlist">
+	                     <a th:if="${#authorization.expression('isAnonymous()')}" th:href="@{'/authenticate/signin'}"   th:class="${{execInfo.templateName=='authenticate-signin-view'}  ? 'btn-danger' : 'btnfb'}" title="Sign In">
+	                        <em class="fa fa-lock text-inverse fa-2x -"></em>
+	                        <span class=" -  text-inverse text-bold text-uppercase" data-localize="sidebar.nav.SIGNIN">SIGN IN</span>
+	                     </a>
+	               </li> 	               
+	                             
+	               	                  
+               </ul> 
+               </nav>
+               </form>
+	</div>
+	</aside>
+      
+
+	
+	
+	
+	  <!-- sidebar search map-->
+      <aside class="aside" th:fragment="sidebar-search-map">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <form id="advsearchqueryform" th:action="@{'/video/map-advanced/search'}" th:object="${VIDEOQUERYFRM}"> <nav data-sidebar-anyclick-close="" class="sidebar">
+              <input id="advtags" name="advtags" type="hidden" th:value="${VIDEOQUERYFRM.advfilter.tags}">   
+               <input id="userid" name="userid" type="hidden" th:value="${VIDEOQUERYFRM.advfilter.userid}">   
+               <input id="collectionvideos" name="collectionvideos" type="hidden" th:value="${VIDEOQUERYFRM.advfilter.collectionvideos}">  
+               <input id="collectionid" name="collectionid" type="hidden" th:value="${VIDEOQUERYFRM.advfilter.collectionid}">
+                   
+             
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                     
+
+                  
+                  <!-- Iterates over all sidebar items-->
+<!--                   <li class="">
+                      <a th:href="@{/video/map?mapmode=full}" title="full screen">
+                     <em class="fa fa-desktop text-inverse map-fullmode"></em>
+                       <span class="text-gray-dark text-sm">switch to fullscreen</span>
+                      </a> 
+                  </li> -->
+                  
+          
+                   <li class="">
+                     <a href="#shoottype" class="bg-gray" title="Shooting Type Filter" data-toggle="collapse">
+                        <em class="fa fa-th-list fa-2x advmenu_shoottype -"></em>
+                        <span class="advmenu_shoottype - text-bold text-uppercase" data-localize="sidebar.nav.SHOOTINGTYPE">Shooting Type</span>
+                     </a>
+                     <ul id="shoottype" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more advmenu_shoottype">Shooting type</span></li>
+         
+                        <li class="">
+            								<div class="row ml-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${videoShootingTypeList}">
+                       								  <div class="form-group">
+					                      				<div class="radio c-radio shootingtyperadiobox">
+					                      				
+
+					                                 <label>
+					                                   <input type="radio" th:checked="${item.id == VIDEOQUERYFRM.advfilter.shootingtypeid}" name="shootingtype" th:value="${item.id}"/> 
+					                                    <span th:class="${'fa fa-check'}"></span><label class="text-inverse"  th:text="${item.id+'-'+item.descr}">item</label></label>
+					                              </div>
+				                           </div>    
+                       								</div>
+                       						</div>
+                        </li>
+                     </ul>
+                  </li>
+          
+          
+          
+                    <li class="">
+                     <a href="#videotype" class="bg-gray" title="Video Type Filter" data-toggle="collapse">
+                        <em class="fa fa-th-list fa-2x advmenu_videotype -"></em>
+                        <span class="advmenu_videotype - text-bold text-uppercase" data-localize="sidebar.nav.VIDEOTYPE">Video Type</span>
+                     </a>
+                     <ul id="videotype" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more advmenu_videotype">Video type</span></li>
+         
+                        <li class="">
+            								<div class="row ml-sm">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${videoTypeList}">
+                       								  <div class="form-group">
+					                      				<div class="radio c-radio videotyperadiobox">
+					                      				
+
+					                                 <label>
+					                                   <input type="radio" th:checked="${item.id == VIDEOQUERYFRM.advfilter.videotypeid}" name="videotype" th:value="${item.id}"/> 
+					                                    <span th:class="${'fa fa-check'}" th:attr="style='background-color:'+${VIDEOTYPECOLORSMAP.get(item.id)}+';'"></span>
+					                                    <label class="text-inverse"  th:text="${item.id+'-'+item.descr}">item</label>
+					                                 </label>
+					                              </div>
+				                           </div>    
+                       								</div>
+                       						</div>
+                        </li>
+                     </ul>
+                  </li>        
+                  
+
+<!-- 
+<div class="btn-group" data-toggle="buttons">
+                <label th:each="feature : ${featureList}" th:for="${#ids.next('features')}"
+                    th:class="${feature.id == 1} ? 'btn btn-default active' : 'btn btn-default'">
+                    <input type="radio" name="myRadios" th:field="*{features}"                      
+                        th:text="${feature.name}" th:value="${feature.id}" 
+                        th:checked="${feature.id == 1}" />
+                </label>
+            </div>
+
+ -->
+                  
+                  <li class=" ">
+                     <a href="#uploaddate" class="bg-gray mt-lg" title="Upload Date Filter" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-calendar fa-2x advmenu_uploaddate -"></em>
+                        <span class="advmenu_uploaddate - text-bold text-uppercase" data-localize="sidebar.nav.UPLOADDATE">Date</span>
+                     </a>
+                     <ul id="uploaddate" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span class="text-gray-more advmenu_uploaddate">Date</span></li>
+
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Upload Date</span></li> -->
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.uploaddate}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox c-checkbox-rounded uploadradiobox">
+					                                 <label>
+					                                  <input type="radio" th:checked="${item.value}" name="uploaddate" th:value="${item.key}"/>  
+					                                    <span class="fa fa-check"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+
+
+<!--                         <li class="">
+                        <div class="text-center">
+					            				<button type="button" class="btn btn-labeled btn-info advfilterupdatebtn m-lg">
+													<span class="h3 mt0 text-uppercase text-left">update</span>
+									            </button>
+						</div>			            						               
+					               
+					    </li> 
+ -->                        
+                     </ul>
+                  </li>
+                
+                
+                
+ 	 			<li class=" ">
+                     <a href="#videotags" class="bg-gray mt-lg" title="Tags" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-product-hunt fa-2x advmenu_tags -"></em>
+                        <span class="advmenu_tags - text-bold text-uppercase" data-localize="sidebar.nav.TAGS">Tags</span>
+                     </a>
+                     <ul id="videotags" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span class="text-gray-more advmenu_tags">Tags</span></li>
+
+<!--                         <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Footage Date</span></li> -->
+                        <li class="">
+						                 <div class="row mb-lg ml-sm mr-sm">
+						                          <div class="col-md-12 col-xs-12 col-sm-12">
+																		       <div class="row">
+																		        
+						<!-- 												        <div class="col-md-12 col-xs-12 col-sm-12 mt-lg">
+						                        								  	<div class="form-group">
+															                              <input id="advtagsfilter" type="text" class="form-control" placeholder="Enter a Tag">
+						                           									</div>
+																		       </div>  -->
+																		        
+																		        <div class="col-md-12 col-xs-12 col-sm-12">
+																		          <span id="advtagcloud" class="h4 text-info-light text-bold"></span>
+																		        
+																		        
+																		               	<!-- 	<div id="advtagcloud" class="h-MD mt-sm"></div> -->
+																		     	</div>
+						 				
+																		     	</div>
+																		     	
+												</div></div>
+						
+
+                        </li>
+                     </ul>
+                  </li>                
+                
+<!--                   
+
+ 	 			<li class=" ">
+                     <a href="#advfootagedate" title="Footage Date Filter" data-toggle="collapse">
+                        <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div>
+                        <em class="fa fa-calendar fa-2x advmenu_footagedate text-gray-more"></em>
+                        <span class="text-gray-more text-bold advmenu_footagedate" data-localize="sidebar.nav.FOOTAGEDATE">Footage Date</span>
+                     </a>
+                     <ul id="advfootagedate" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span class="text-gray-more advmenu_footagedate">Footage Date</span></li>
+
+                        <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Footage Date</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.footagedate}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox c-checkbox-rounded footageradiobox">
+					                                 <label>
+					                                  <input type="radio" th:checked="${item.value}" name="footagedate" th:value="${item.key}"/>  th:attr="id='advfilter-footagedate-'+${item.key}"
+					                                    <span class="fa fa-check"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+
+
+
+                        
+                     </ul>
+                  </li> -->
+    
+                  
+<!--                   <li class=" ">
+                     <a href="#weather" title="Weather Filter" data-toggle="collapse">
+                        <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div>
+                        <em class="wi wi-day-rain-wind fa-2x advmenu_weather"></em>
+                        <span class="text-gray-more text-bold advmenu_weather" data-localize="sidebar.nav.WEATHER">Weather</span>
+                     </a>
+                     <ul id="weather" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span class="text-gray-more advmenu_weather">Weather</span></li>
+                            <li class="sidebar-nav-detailheading"><span class="text-inverse ml-lg">Weather</span></li>
+                        <li class="">
+            								<div class="row m">
+                       								  <div class="col-md-12 col-xs-12 col-sm-12" th:each="item, indexItem : ${VIDEOQUERYFRM.advfilter.weather}">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox weathercheckbox">
+					                                 <label>
+					                                  <input type="checkbox" th:checked="${item.value}" th:value="${item.key}"/>  th:attr="id='advfilter-footagedate-'+${item.key}"
+					                                    <span class="wi wi-day-thunderstorm"></span><label class="text-inverse" th:text="${item.key}">item</label></label>
+					                              </div>
+				                           </div>     
+                       								</div>
+                       						</div>
+                        </li>
+                       
+                     </ul>
+                  </li> -->
+                  
+                  
+                  
+                  
+
+                  
+                  
+                    
+                  
+                  
+                </ul>
+               <!-- END sidebar nav-->
+            </nav></form>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+
+
+
+
+
+
+           <!-- sidebar-->
+      <aside class="aside" th:fragment="sidebar-organizer(selview)">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <form id="videomanagerform" method="POST" th:object="${VIDMANAGERFRM}"> 
+            <nav data-sidebar-anyclick-close="" class="sidebar">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- Iterates over all sidebar items-->
+                  <li class="h4 text-bold text-info-dark text-center">
+                     <span  data-localize="sidebar.heading.HEADER">VIDEO MANAGER</span>
+                  </li>
+						                  
+                  
+
+                  <li class=" " th:if="${selview=='videos' or selview=='favoritesbucket' or selview=='watchlater'}">
+                     <a href="#albums" title="Albums" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-th-list fa-2x mngmenu_albums"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_albums" data-localize="sidebar.nav.ALBUMS">ALBUMS</span>
+                     </a>
+                     <ul id="albums" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_albums">ALBUMS</span></li>
+                        <li class="">
+            								<div class="row m" th:each="item, indexItem : ${VIDMANAGERFRM.selectedalbums}">
+                       								  <div class="col-md-2 col-xs-10 col-sm-10">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox">
+					                                  		<label><input type="checkbox" class="albumcheckbox" th:checked="${item.value}" th:value="${item.key}"/>
+					                                    	<span class="fa fa-check"></span></label>
+					                              		</div>
+				                           			   </div> 
+                       								</div>
+                       								<div class="col-md-10 col-xs-10 col-sm-10">
+													<span class="text-muted"  th:text="${VIDMANAGERFRM.albums.get(item.key)}">item</span>
+													</div>
+                       						</div>
+                        </li>
+                        
+                        <li class="" th:if="${VIDMANAGERFRM.selectedalbums.size()>0}">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a class="btn btn-labeled  btn-info-dark disabled massbtn-album-add massaction">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">ADD VIDS</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+
+
+
+                        <li class="" th:if="${VIDMANAGERFRM.selectedalbums.size()==0}">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a id="newalbumModalButton" data-toggle="modal" data-target="#newalbumModal" class="btn btn-labeled  btn-info-dark albumbtn-new">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">NEW</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+
+
+
+<!--  
+                  <li class=" " th:if="${selview=='videos' or selview=='favoritesbucket' or selview=='watchlater'}">
+                     <a href="#playlists" title="Video Paths" data-toggle="collapse">
+                        <em class="fa fa-road fa-2x mngmenu_playlists"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_playlists" data-localize="sidebar.nav.PLAYLISTS">VIDEO PATHS</span>
+                     </a>
+                     <ul id="playlists" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_playlists">VIDEO PATHS</span></li>
+                        <li class="">
+            								<div class="row m" th:each="item, indexItem : ${VIDMANAGERFRM.selectedplaylists}">
+                       								  <div class="col-md-2 col-xs-10 col-sm-10">
+                       								  <div class="form-group">
+					                      				<div class="checkbox c-checkbox">
+					                                  		<label><input type="checkbox" class="playlistcheckbox" th:checked="${item.value}" th:value="${item.key}"/>
+					                                    	<span class="fa fa-check"></span></label>
+					                              		</div>
+				                           			   </div> 
+                       								</div>
+                       								<div class="col-md-10 col-xs-10 col-sm-10">
+													<span class="text-muted"  th:text="${VIDMANAGERFRM.playlists.get(item.key)}">item</span>
+													</div>
+                       						</div>
+                        </li>
+                        
+                        <li class="" th:if="${VIDMANAGERFRM.selectedplaylists.size()>0}">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a class="btn btn-labeled  btn-info-dark disabled massbtn-playlist-add massaction">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">ADD VIDS</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+
+
+
+                        <li class="" th:if="${VIDMANAGERFRM.selectedplaylists.size()==0}">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a id="newplaylistModalButton" data-toggle="modal" data-target="#newplaylistModal" class="btn btn-labeled  btn-info-dark playlistbtn-new">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">NEW</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+-->
+
+
+<!--
+      			<li class=" " th:if="${selview=='playlists'}">
+                     <a href="#playlists" title="Video Paths" data-toggle="collapse">
+                        <em class="fa fa-road fa-2x mngmenu_playlists"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_playlists" data-localize="sidebar.nav.PLAYLISTS">VIDEO PATHS</span>
+                     </a>
+                     <ul id="playlists" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_playlists">VIDEO PATHS</span></li>
+                        <li class="">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a id="newplaylistModalButton" data-toggle="modal" data-target="#newplaylistModal" class="btn btn-labeled  btn-info-dark playlistbtn-new">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">NEW</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+-->
+
+
+      			<li class=" " th:if="${selview=='albums'}">
+                     <a href="#albums" title="Albums" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-th-list fa-2x mngmenu_playlists"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_playlists" data-localize="sidebar.nav.ALBUMS">ALBUMS</span>
+                     </a>
+                     <ul id="albums" class="nav sidebar-subnav collapse in">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_albums">ALBUMS</span></li>
+                        <li class="">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a id="newalbumModalButton" data-toggle="modal" data-target="#newalbumModal" class="btn btn-labeled  btn-info-dark albumbtn-new">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">NEW</span>
+			                           </a>
+			                   </div>  
+          				</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+
+
+
+
+                  <li class=" " th:if="${selview=='videos'  or selview=='favoritesbucket'}">
+                     <a href="#watchlater" title="Watchlater" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-youtube-play fa-2x mngmenu_watchlater"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_watchlater" data-localize="sidebar.nav.WATCHLATER">WATCH LATER</span>
+                     </a>
+                     <ul id="watchlater" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_watchlater">WATCH LATER</span></li>
+                      <li class="">
+                        <div class="text-center">
+                            <div class="form-group m-lg">
+			                          <a class="btn btn-labeled  btn-info-dark disabled massbtn-watchlater-add massaction">
+			                           <span class="btn-label pull-left"><i class="fa fa-plus fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">ADD VIDS</span>
+			                           </a>
+			                   </div>  
+                        
+                        
+                        
+						</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+
+
+
+                  <li class=" " th:if="${selview=='map'}">
+                     <a href="#map" title="Map" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-map-marker fa-2x mngmenu_map"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_map" data-localize="sidebar.nav.MAP">PINS</span>
+                     </a>
+                     <ul id="map" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_map">PINS</span></li>
+                        <li class="">
+                        <div class="text-center">
+                            <div class="form-group  m-lg">
+			                          <a class="btn btn-labeled  btn-info disabled">
+			                           <span class="btn-label pull-left"><i class="fa fa-map-marker fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">RELOCATE</span>
+			                           </a>
+			                   </div>  
+						</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>      
+
+
+
+
+                  <li class=" " th:if="${selview=='favoritesbucket' or selview=='watchlater'}">
+                     <a href="#delete" title="Remove" data-toggle="collapse">
+                        <!-- <div class="pull-right label label-info"><span class="fa fa-remove" title="remove"></span></div> -->
+                        <em class="fa fa-remove fa-2x mngmenu_delete"></em>
+                        <span class="text-gray-more h4 text-bold mngmenu_remove" data-localize="sidebar.nav.REMOVE">REMOVE</span>
+                     </a>
+                     <ul id="delete" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header"><span  class="text-gray-more h4  text-bold mngmenu_delete">REMOVE</span></li>
+                        <li class="">
+                        <div class="text-center">
+                            <div class="form-group  m-lg">
+			                          <a id="watchlaterbtn-removevids" th:if="${selview=='watchlater'}" class="btn btn-labeled btn-info-dark disabled massbtn-watchlater-remove massaction">
+			                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">REMOVE</span>
+			                           </a>
+			                          <a id="favoritesbucketbtn-removevids" th:if="${selview=='favoritesbucket'}" class="btn btn-labeled btn-info-dark disabled massbtn-favorites-remove massaction">
+			                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+			                           </span>
+			                               <span id="massbtntxt" class="h4  mt text-bold pull-left">REMOVE</span>
+			                           </a>			                           
+			                   </div>  
+						</div>			            						               
+					    </li> 
+                        
+                     </ul>
+                  </li>
+                  
+                </ul>
+               <!-- END sidebar nav-->
+            </nav></form>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+
+     

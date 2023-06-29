@@ -1,0 +1,466 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-organizer">
+  <head>
+    <title>Terrabis - Video Organizer</title>
+ 
+ 
+ 
+ 
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+
+      <!-- FULLSCREENOVERLAY  -->    
+   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage='false')"></div>
+
+
+         <div class="content-wrapper">
+<!--             <div class="content-heading">
+					<span class="text-gray text-bold h1">Video Manager</span>            
+            </div> -->
+         
+         
+<!--             <div class="content-heading">
+		          <div th:replace="/fragments/user-index-detail :: video-organizer-header(title=${PERS.view},iconvar='fa-th-large',selview=${PERS.view})"></div>
+            </div>
+ -->		
+
+		
+		
+<!--          <div class="row" th:if="${view!='map'}">
+              <div class="col-md-12 col-sm-4">	
+    
+			                	<div class="form-group pull-left ml-lg">
+			                          <a id="gridbtn_viewselected" class="btn btn-labeled  btn-gray disabled">
+			                               <span class="h4  mt text-bold pull-left">selected view</span>
+			                           </a>
+			                   </div>  
+
+               	   				<div class="form-group pull-right mr-lg">
+			                          <a  id="gridbtn_clearall" class="btn btn-labeled  btn-gray disabled">
+			                           <span class="btn-label pull-left"><i class="fa fa-remove fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">unselect all</span>
+			                           </a>
+			                   </div>  
+			                   			                   
+               	   				<div class="form-group pull-right mr-lg">
+			                          <a  id="gridbtn_selectall" class="btn btn-labeled btn-gray -d">
+			                           <span class="btn-label pull-left"><i class="fa fa-check fa-2x"></i>
+			                           </span>
+			                               <span class="h4  mt text-bold pull-left">select all</span>
+			                           </a>
+			                   </div>  
+	         </div>  
+	         
+	            
+         </div>     --> 
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+		       
+		            
+         <!-- CONTENT CONTROL BAR  -->   
+         <div class="row">
+         	  <div th:replace="/fragments/video-grid-control :: video-organizer-view(colclass='col-md-12 col-sm-12', selview=${PERS.view}, selfilter=${PERS.filter})"></div>
+         </div>     
+         <!-- CONTENT CONTROL BAR  -->    
+
+
+
+							
+		         		  <form role="form" id="addvidtoplaylistform" th:action="@{'/video-organizer/collections/playlists/videos-add'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		  
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedvideos}">
+                     		       <input type="hidden" class="selectedplaylists" th:attr="id=${item.key}" th:field="*{selectedplaylists[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedplaylists}">
+							</form>
+							
+							<form role="form" id="addvidtoalbumform" th:action="@{'/video-organizer/collections/albums/videos-add'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		  
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedvideos}">
+                     		       <input type="hidden" class="selectedalbums" th:attr="id=${item.key}" th:field="*{selectedalbums[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedalbums}">
+							</form>
+							
+
+		         		  <form role="form" id="addvidtocollectionform" th:action="@{'/video-organizer/collections/videos-add'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		   
+                     		       <input type="hidden" th:field="*{selectedcollection}" value="-1">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedvideos}">
+							</form>
+
+		         		  <form role="form" id="removevidfromcollectionform" th:action="@{'/video-organizer/collections/videos-remove'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		      
+                     		       <input type="hidden" th:field="*{selectedcollection}" value="-1">
+                     		       <input type="hidden" class="selectedvideos" th:attr="id=${item.key}" th:field="*{selectedvideos[__${item.key}__]}" th:value="${item.value}"  th:each="item, indexItem : ${VIDMANAGERFRM.selectedvideos}">
+							</form>
+
+		         		  <form role="form" id="deletecollectionform" th:action="@{'/video-organizer/collections/remove'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		       
+                     		       <input type="hidden" th:field="*{selectedcollection}" value="-1">
+							</form>
+
+
+		         		  <form role="form" id="pathmoveupvideosform" th:action="@{'/video-organizer/collections/path-move-up'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		       
+                     		       <input type="hidden" th:field="*{selectedcollection}" value="-1">
+							</form>
+
+
+		         		  <form role="form" id="pathmovedownvideosform" th:action="@{'/video-organizer/collections/path-move-down'}" method="POST" th:object="${VIDMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selectedvideo}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">                     		       
+                     		       <input type="hidden" th:field="*{selectedcollection}" value="-1">
+							</form>
+
+
+
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+
+     
+        <!-- DETAIL VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL' and (PERS.view=='videos' or PERS.view=='pending' or PERS.view=='rejected' or PERS.view=='watchlater' or PERS.view=='favoritesbucket')}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/organizer-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX' and (PERS.view=='videos'  or PERS.view=='pending' or PERS.view=='rejected'  or PERS.view=='watchlater' or PERS.view=='favoritesbucket')}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/organizer-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+    
+    
+        <!-- THUMB VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB' and (PERS.view=='videos' or PERS.view=='pending' or PERS.view=='rejected' or PERS.view=='watchlater' or PERS.view=='favoritesbucket')}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/organizer-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- THUMB VIEW -->    
+      	
+      	
+  		 <div class="row">
+              <div class="col-md-12 col-sm-12">
+					         <div class="pull-right paginator">
+					         </div>           
+              </div>    
+	       </div> 
+		       
+      	
+      	<!-- VIDEO PATH VIEW -->
+        <div class="row" th:if="${view=='playlists'}">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+					<div th:replace="/fragments/organizer-grid-view :: playlist(collListDTO=${collectionListDTO},colstyle=3,showmngbuttons='true')"></div>
+      	</div>
+      	</div>	
+      	<!-- VIDEO PATH VIEW -->    
+     
+
+      	<!-- ALBUM VIEW -->
+        <div class="row" th:if="${view=='albums'}">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+					<div th:replace="/fragments/organizer-grid-view :: album(collListDTO=${collectionListDTO},colstyle=3,showmngbuttons='true')"></div>
+      	</div>
+      	</div>	
+      	<!-- ALBUM VIEW -->    
+
+
+
+   
+   
+</div>
+   
+   
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-organizer-view.js" th:src="@{/js/video-organizer-view.js}"> </script>  
+  	<script src="../static/vendor/royalslider/royalslider.min.js" th:src="@{/vendor/royalslider/royalslider.min.js}"></script> 
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	
+    	  	/**********************  GLOBAL VARIABLES ********************************/	 
+			terrabisApp.videoPlayURL = [[@{'/video/play?uri='}]];
+			terrabisApp.pageView = [[${execInfo.templateName}]];
+			terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+			terrabisApp.contextPath = [[${CTXPATH}]];
+		    terrabisApp.csrf_token = [[${_csrf.token}]];
+		    terrabisApp.csrf_param_name = [[${_csrf.parameterName}]];
+		    terrabisApp.watchlatercollection = [[${VIDMANAGERFRM.watchlatercollection.id}]];
+		    terrabisApp.favoritescollection = [[${VIDMANAGERFRM.favoritesbucketcollection.id}]];
+		    terrabisApp.persView = [[${PERS.view}]];
+		    
+		    
+		    
+		    	
+		    var PARTITIONS =  [[${videoListDTO}]];
+		    
+    		
+    		if(PARTITIONS.length>0) 
+				createHtml_Paginator([[${CATALOGPAGINATOR}]]);
+			else
+				createHtml_EmptyPaginator();
+		    
+		    
+		    
+		    
+		    
+    		//CHANGE GRID VIEW STYLE
+    		$(".gridviewstyle-control").click(function() {
+    			initializeGridViewControls(this.id);
+    			terrabisApp.gridViewStyle = this.id;
+    			createHtml_GridResultView(terrabisApp.data,false);
+    			
+    			//UPDATE SESSION WITH THE NEW STYLE
+    			//gridview_StyleChange(this.id);
+    			
+    		});
+    		
+    		
+    		
+    /**********************  MODAL CREATE COLECTION MODAL ********************************/	 
+	$('#newplaylistModal').on('shown.bs.modal', function (e) {
+	    setTimeout(function(){
+	    	$('#newplaylistform').find('input[name="newcollection.title"]').val("");
+	    	$('#newplaylistform').find('textarea[name="newcollection.description"]').val("");
+	    }, 30);                        
+	});
+    
+    
+	$('#newalbumModal').on('shown.bs.modal', function (e) {
+	    setTimeout(function(){
+	    	$('#newalbumform').find('input[name="newcollection.title"]').val("");
+	    	$('#newalbumform').find('textarea[name="newcollection.description"]').val("");
+	    }, 30);                        
+	});    
+    
+	
+    /**********************  MODAL CREATE COLECTION MODAL ********************************/	 
+	$('#editplaylistModal').on('shown.bs.modal', function (e) {
+		var dataset = e.relatedTarget.dataset;
+		setTimeout(function(){
+	    	$('#editplaylistform').find('input[name="newcollection.id"]').val(dataset.collectionid);
+	    	$('#editplaylistform').find('input[name="newcollection.title"]').val(dataset.title);
+	    	$('#editplaylistform').find('textarea[name="newcollection.description"]').val(dataset.description);
+	    }, 30);                        
+	});
+     
+	$('#editalbumModal').on('shown.bs.modal', function (e) {
+		var dataset = e.relatedTarget.dataset;
+		setTimeout(function(){
+	    	$('#editalbumform').find('input[name="newcollection.id"]').val(dataset.collectionid);
+	    	$('#editalbumform').find('input[name="newcollection.title"]').val(dataset.title);
+	    	$('#editalbumform').find('textarea[name="newcollection.description"]').val(dataset.description);
+	    }, 30);                        
+	});
+    
+    		
+    		
+    		
+    			/****************** FORM VALIDATION NEW COLLECTION FORM  **************************************************************/
+				var formValidationNewPlaylist = $('#newplaylistform').formValidation({
+			        framework: 'bootstrap',
+			        icon: {
+			            valid: 'fa  fa-check',
+			            invalid: 'fa fa-check fa-remove',
+			            validating: 'fa fa-refresh'
+			        },
+			        fields: {
+			            "newcollection.title": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Title is required'
+			                    }
+			                }
+			            },
+			            "newcollection.description": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'A short description is required'
+			                    }
+			                }
+			            },
+			            "newcollection.privacy": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Privacy levels required'
+			                    }
+			                }
+			            }
+			        }
+			    });
+			    		
+				var formValidationNewAlbum = $('#newalbumform').formValidation({
+			        framework: 'bootstrap',
+			        icon: {
+			            valid: 'fa  fa-check',
+			            invalid: 'fa fa-check fa-remove',
+			            validating: 'fa fa-refresh'
+			        },
+			        fields: {
+			            "newcollection.title": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Title is required'
+			                    }
+			                }
+			            },
+			            "newcollection.description": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'A short description is required'
+			                    }
+			                }
+			            },
+			            "newcollection.privacy": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Privacy levels required'
+			                    }
+			                }
+			            }
+			        }
+			    });
+    			
+    			
+    			
+    			
+    			
+    			/****************** FORM VALIDATION EDIT COLLECTION FORM  **************************************************************/
+				var formValidationEditPlaylist = $('#editplaylistform').formValidation({
+			        framework: 'bootstrap',
+			        icon: {
+			            valid: 'fa  fa-check',
+			            invalid: 'fa fa-check fa-remove',
+			            validating: 'fa fa-refresh'
+			        },
+			        fields: {
+			            "newcollection.title": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Title is required'
+			                    }
+			                }
+			            },
+			            "newcollection.description": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'A short description is required'
+			                    }
+			                }
+			            },
+			            "newcollection.privacy": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Privacy levels required'
+			                    }
+			                }
+			            }
+			        }
+			    });
+    			
+    			
+    			
+				var formValidationEditAlbum = $('#editalbumform').formValidation({
+			        framework: 'bootstrap',
+			        icon: {
+			            valid: 'fa  fa-check',
+			            invalid: 'fa fa-check fa-remove',
+			            validating: 'fa fa-refresh'
+			        },
+			        fields: {
+			            "newcollection.title": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Title is required'
+			                    }
+			                }
+			            },
+			            "newcollection.description": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'A short description is required'
+			                    }
+			                }
+			            },
+			            "newcollection.privacy": {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'Privacy levels required'
+			                    }
+			                }
+			            }
+			        }
+			    });
+    			
+    			
+    			
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+  	
+
+      </section>
+	
+	
+<!-- VIDEO GALLERY FOR PLAYLISTS 
+ $('.videoGallery').royalSlider({
+    arrowsNav: false,
+    fadeinLoadedSlide: true,
+    controlNavigationSpacing: 0,
+    controlNavigation: 'thumbnails',
+    thumbs: {
+      autoCenter: false,
+      fitInViewport: true,
+      orientation: 'vertical',
+      spacing: 0,
+      paddingBottom: 0
+    },
+    keyboardNavEnabled: true,
+    imageScaleMode: 'fill',
+    imageAlignCenter:true,
+    slidesSpacing: 0,
+    loop: false,
+    loopRewind: true,
+    numImagesToPreload: 3,
+    video: {
+      autoHideArrows:true,
+      autoHideControlNav:false,
+      autoHideBlocks: true
+    }, 
+    autoScaleSlider: true, 
+    autoScaleSliderWidth: 960,     
+    autoScaleSliderHeight: 450,
+
+    /* size of all images http://help.dimsemenov.com/kb/royalslider-jquery-plugin-faq/adding-width-and-height-properties-to-images */
+    imgWidth: 640,
+    imgHeight: 360
+
+  });	 -->
+
+
+
+  </body>
+</html>  	  

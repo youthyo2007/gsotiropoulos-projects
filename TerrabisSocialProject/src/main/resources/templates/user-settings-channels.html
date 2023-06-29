@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - User Settings Channels</title>
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+         <!-- Page content-->
+      <section>
+      
+               <!-- Page content-->
+         <div class="content-wrapper">
+         
+          <div th:replace="/fragments/user-settings :: user-settings-heading(settingsselected='channels')"></div>
+          <div th:replace="/fragments/user-settings :: user-settings-navigation(settingsselected='channels')"></div>
+         
+
+            
+          </div>  
+          <!-- END CONTENT WRAPPER  --> 
+
+      </section>
+
+
+
+      </section>
+  </body>
+</html>  	  

@@ -1,0 +1,232 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Search Results</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+     
+         <div class="content-wrapper">
+
+
+          <div class="row mb-lg">
+
+           <div class="col-md-12 col-sm-12 pull-right">
+          
+          
+           <div th:replace="/fragments/adverts :: video-map-list-view"></div>
+			</div>											          
+														          
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-left" th:if="${videosCount>0}">
+					<span class="text-gray-more text-bold h3"><span class="text-inverse text-bold h3" th:text="${videosCount}"></span> videos <span th:if="${VIDEOQUERYFRM.querytype=='TITLEtitledescription'}"> videos with title or description</span> <span th:if="${VIDEOQUERYFRM.querytype=='tags'}"> videos with tags </span> matching '<span class="text-inverse text-bold h3" th:text="${VIDEOQUERYFRM.querytxt.trim()}"></span>'</span>                
+                </div>  
+                
+                
+                
+                				  <div class="row mb-lg m-lg visible-md visible-lg" th:if="${videosCount==0}">
+
+					                          <div class="col-md-2 col-xs-12 col-sm-12">
+					                            <span class="fa fa-meh-o fa-12x text-bold text-gray-more text-left"></span>
+					                        </div>  
+					                        
+					                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+					                            <span class="h2 text-gray-more text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()>0}">
+					                            No videos found <span th:if="${VIDEOQUERYFRM.querytype=='TITLEtitledescription'}"> with title or description</span> <span th:if="${VIDEOQUERYFRM.querytype=='tags'}"> with tags </span> matching '<span class="text-inverse text-bold h3" th:text="${VIDEOQUERYFRM.querytxt.trim()}"></span>'
+					                            You might try as well another search!</span>
+					                            <span class="h2 text-gray-more text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()==0}">
+					                            no videos found <span th:if="${VIDEOQUERYFRM.querytype=='TITLEtitledescription'}"> with title or description</span> <span th:if="${VIDEOQUERYFRM.querytype=='tags'}"> with tags </span> matching '<span class="text-inverse text-bold h3" th:text="${VIDEOQUERYFRM.querytxt.trim()}"></span>'
+					                            Please enter your search terms and try again!</span>
+					                 			</div>		
+					                 			
+					                 			
+					                 			
+					                 							
+	    							</div>
+	    							
+	    							
+                				  <div class="row mb-lg m-lg visible-sm visible-xs" th:if="${videosCount==0}">
+
+					                          <div class="col-md-2 col-xs-12 col-sm-12">
+					                            <span class="fa fa-meh-o fa-3x text-bold text-gray-more text-left"></span>
+					                        </div>  
+					                        
+					                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+					                            <span class="h3 text-gray-more text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()>0}">
+					                            No videos found <span th:if="${VIDEOQUERYFRM.querytype=='TITLEtitledescription'}"> with title or description</span> <span th:if="${VIDEOQUERYFRM.querytype=='tags'}"> with tags </span> matching '<span class="text-inverse text-bold h3" th:text="${VIDEOQUERYFRM.querytxt.trim()}"></span>'
+					                            You might try as well another search!</span>
+					                            <span class="h3 text-gray-more text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()==0}">
+					                            no videos found <span th:if="${VIDEOQUERYFRM.querytype=='TITLEtitledescription'}"> with title or description</span> <span th:if="${VIDEOQUERYFRM.querytype=='tags'}"> with tags </span> matching '<span class="text-inverse text-bold h3" th:text="${VIDEOQUERYFRM.querytxt.trim()}"></span>'
+					                            Please enter your search terms and try again!</span>
+					                 			</div>		
+					                 			
+					                 			
+					                 			
+					                 							
+	    							</div>	    							
+	    							
+                
+	  
+   				             
+            </div>
+
+<!--  
+ 				<div class="row mt-lg">
+                <div class="col-md-12 text-center" th:if="${videosCount==0}"><br/><br/><br/>
+					<a th:href="@{'/video/map/normal'}" class="btn btn-info-dark btn-lg"><span class="h3  text-white">Go Back To Map</span></a>                
+                </div> 
+                </div>
+ -->
+
+
+
+   		       <div class="row mb-sm mt-md" th:if="${videosCount>0}">  
+	              <div class="col-md-12 col-sm-12">
+	              
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+		         <div class="row" th:if="${videosCount>0}" >
+		              <div class="col-md-12 col-sm-12">
+				              <div class="content-control">
+							                    <ul class="control-nav pull-right" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+							                    
+				               </div><!-- /content-control -->
+		              </div>
+		         </div>   
+
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+     
+        <!-- DETAIL VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'DETAIL'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: detail(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- DETAIL VIEW -->
+
+        <!-- BOX VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'BOX'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: box(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- BOX VIEW -->
+
+    
+    
+        <!-- THUMB VIEW -->
+        <div class="row" th:if="${PERS.item('GRIDSTYLE-'+execInfo.templateName) == 'THUMB'}"><div class="col-md-12 col-xs-12 col-sm-12">
+      		<div th:replace="/fragments/video-grid-view :: thumb(videoListDTO=${videoListDTO})"></div>
+      	</div></div>	
+      	<!-- THUMB VIEW -->     
+
+
+	       <div class="row mb-sm mt-lg">  
+           <div class="col-md-12 col-sm-12">
+					         <div class="pull-right paginator">
+					         </div>           
+           </div>    
+	       </div>   
+
+
+<!-- 		
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+        	 <div class="col-md-12 col-xs-12 col-sm-12 load-more-data"></div>
+        	</div>
+        </div>	
+
+	
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <span class="h3 text-gray-more text-bold load-more-video cursor-pointer" th:if="${MAPLISTPAGINATOR.currentPage+1!=MAPLISTPAGINATOR.totalPages}">
+        	 LOAD MORE...
+        	 </span> 
+        	</div>
+        </div>	 -->
+
+
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <br/><br/><br/><br/><br/><br/><br/><br/>
+        	 </div>
+        </div>	
+
+
+
+   		</div>
+
+
+
+
+
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>    
+	<script src="../static/js/grid-view-renderer.js" th:src="@{/js/grid-view-renderer.js}"> </script> 
+
+	 
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+	           
+      $(document).ready(function() {
+    	  
+    	  
+
+    	  
+    	  
+    		//PAGE SPECIFIC GRID VIEW STYLE
+    		terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+	  		//terrabisApp.data = [[${videoListDTO}]];
+    		var PARTITIONS =  [[${videoListDTO}]];
+	  		
+	  		
+	  		
+	  		/***********************************************************************SCROLL PAGINATOR SETUP ********************************************************************/
+	  		terrabisApp.paginatorLastPage =  [[${MAPLISTPAGINATOR.currentPage+1==MAPLISTPAGINATOR.totalPages}]];
+
+	  		
+			//VISIBLE NUMBERS PAGINATOR    		
+    		if(PARTITIONS.length>0) 
+    			createHtml_PaginatorWithPageNumbers([[${MAPLISTPAGINATOR}]]);
+			else
+				createHtml_EmptyPaginator();
+	  		
+	  		
+	  		
+			//SCROLL TO BOTTOM LOAD MORE	  		
+	  		$(window).scroll(function() {
+	  		    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+	  		    	if(!terrabisApp.paginatorLastPage) {
+	  					loadMoreVideo(terrabisApp.paginatorMapListURI);
+	  		    	}
+	  		    }
+	  		}); 
+	  		/***********************************************************************SCROLL PAGINATOR SETUP ********************************************************************/
+	  		
+	  		
+	  		
+      });
+
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

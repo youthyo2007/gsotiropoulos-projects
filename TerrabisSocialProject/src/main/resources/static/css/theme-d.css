@@ -1,0 +1,171 @@
+/* ========================================================================
+   Component: layout
+ ========================================================================== */
+body,
+.wrapper > section {
+  background-color: CACACA;
+}
+.wrapper > .aside {
+  background-color: #ffffff;
+}
+/* ========================================================================
+   Component: top-navbar
+ ========================================================================== */
+.topnavbar {
+  background-color: #fff;
+}
+.topnavbar .navbar-header {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1d2c4c+0,3b5998+100 */
+background: #1d2c4c; /* Old browsers */
+background: -moz-linear-gradient(left,  #1d2c4c 0%, #3b5998 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #1d2c4c 0%,#3b5998 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #1d2c4c 0%,#3b5998 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d2c4c', endColorstr='#3b5998',GradientType=1 ); /* IE6-9 */
+
+
+
+
+	
+}
+@media only screen and (min-width: 768px) {
+  .topnavbar .navbar-header {
+    background-image: none;
+  }
+}
+.topnavbar .navbar-nav > li > a,
+.topnavbar .navbar-nav > .open > a {
+  color: #363636;
+}
+.topnavbar .navbar-nav > li > a:hover,
+.topnavbar .navbar-nav > .open > a:hover,
+.topnavbar .navbar-nav > li > a:focus,
+.topnavbar .navbar-nav > .open > a:focus {
+  color: #c91111;
+}
+.topnavbar .navbar-nav > .active > a,
+.topnavbar .navbar-nav > .open > a,
+.topnavbar .navbar-nav > .active > a:hover,
+.topnavbar .navbar-nav > .open > a:hover,
+.topnavbar .navbar-nav > .active > a:focus,
+.topnavbar .navbar-nav > .open > a:focus {
+  background-color: transparent;
+}
+.topnavbar .navbar-nav > li > [data-toggle='navbar-search'] {
+  color: #ffffff;
+}
+.topnavbar .nav-wrapper {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1d2c4c+0,3b5998+100 */
+background: #1d2c4c; /* Old browsers */
+background: -moz-linear-gradient(left,  #1d2c4c 0%, #3b5998 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #1d2c4c 0%,#3b5998 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #1d2c4c 0%,#3b5998 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d2c4c', endColorstr='#3b5998',GradientType=1 ); /* IE6-9 */
+
+
+
+
+	
+}
+
+@media only screen and (min-width: 768px) {
+  .topnavbar {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1d2c4c+0,3b5998+100 */
+background: #1d2c4c; /* Old browsers */
+background: -moz-linear-gradient(left,  #1d2c4c 0%, #3b5998 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #1d2c4c 0%,#3b5998 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #1d2c4c 0%,#3b5998 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d2c4c', endColorstr='#3b5998',GradientType=1 ); /* IE6-9 */
+
+
+
+
+	
+}
+  .topnavbar .navbar-nav > .open > a,
+  .topnavbar .navbar-nav > .open > a:hover,
+  .topnavbar .navbar-nav > .open > a:focus {
+    box-shadow: 0 -3px 0 rgba(196, 8, 8, 0.5) inset;
+  }
+  .topnavbar .navbar-nav > li > a,
+  .topnavbar .navbar-nav > .open > a {
+    color: #DDDDDD;
+  }
+  .topnavbar .navbar-nav > li > a:hover,
+  .topnavbar .navbar-nav > .open > a:hover,
+  .topnavbar .navbar-nav > li > a:focus,
+  .topnavbar .navbar-nav > .open > a:focus {
+    color: #c91111;
+  }
+}
+/* ========================================================================
+   Component: sidebar
+ ========================================================================== */
+.sidebar {
+  background-color: #ffffff;
+}
+.sidebar .nav-heading {
+  color: #919da8;
+}
+.sidebar .nav > li > a,
+.sidebar .nav > li > .nav-item {
+  color: #515253;
+}
+.sidebar .nav > li > a:focus,
+.sidebar .nav > li > .nav-item:focus,
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > .nav-item:hover {
+  color: #363636;
+}
+.sidebar .nav > li > a > em,
+.sidebar .nav > li > .nav-item > em {
+  color: inherits;
+}
+.sidebar .nav > li.active,
+.sidebar .nav > li.open,
+.sidebar .nav > li.active > a,
+.sidebar .nav > li.open > a,
+.sidebar .nav > li.active .nav,
+.sidebar .nav > li.open .nav {
+  background-color: #fcfcfc;
+  color: #363636;
+}
+.sidebar .nav > li.active > a > em,
+.sidebar .nav > li.open > a > em {
+  color: #363636;
+}
+.sidebar .nav > li.active {
+  border-left-color: #363636;
+}
+.sidebar-subnav {
+  background-color: #ffffff;
+}
+.sidebar-subnav > .sidebar-subnav-header {
+  color: #515253;
+}
+.sidebar-subnav > li > a,
+.sidebar-subnav > li > .nav-item {
+  color: #515253;
+}
+.sidebar-subnav > li > a:focus,
+.sidebar-subnav > li > .nav-item:focus,
+.sidebar-subnav > li > a:hover,
+.sidebar-subnav > li > .nav-item:hover {
+  color: #363636;
+}
+.sidebar-subnav > li.active > a,
+.sidebar-subnav > li.active > .nav-item {
+  color: #363636;
+}
+.sidebar-subnav > li.active > a:after,
+.sidebar-subnav > li.active > .nav-item:after {
+  border-color: #363636;
+  background-color: #363636;
+}
+/* ========================================================================
+   Component: offsidebar
+ ========================================================================== */
+.offsidebar {
+  border-left: 1px solid #cccccc;
+  background-color: #ffffff;
+  color: #515253;
+}

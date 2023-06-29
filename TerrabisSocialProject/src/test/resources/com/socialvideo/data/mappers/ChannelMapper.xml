@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.ChannelMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.ChannelDTO" id="ChannelDTO">
+        <id column="id" property="id"/>
+        <result property="title" column="title"/>
+        <result property="userid" column="userid_fk"/>
+        <result property="privacy" column="privacy"/>
+        <result property="description" column="description"/>  
+        <result property="datecreated" column="datecreated"/>
+        <result property="datemodified" column="datemodified"/>        
+    </resultMap> 
+
+
+    <select id="selectUserChannels" parameterType="map" resultMap="ChannelDTO">
+       SELECT * FROM channels a WHERE a.userid_fk = #{userid}
+      <if test="privacy != null and privacy != ''">
+             AND a.privacy=#{privacy} 
+      </if>  
+       ORDER BY a.datecreated DESC limit #{limit}
+    </select>
+
+
+</mapper>
+
+
+
+

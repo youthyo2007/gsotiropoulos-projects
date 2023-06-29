@@ -1,0 +1,179 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout">
+  <head>
+    <title>Terrabis - Video Paths</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+         <div class="content-wrapper">
+           <div class="content-heading">
+   				  <span class="text-gray text-bold h1">Video Paths</span>           
+            </div>
+
+
+ 		<!-- ===================== RESULTS ============================= -->
+     
+           	<!-- PLAYLIST VIEW -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+<!--					<div th:replace="/fragments/video-grid-view :: playlist-catalog(collListDTO=${collectionListDTO}, colstyle=4,showavatar='true')"></div> -->
+
+
+
+<!-- PLAYLIST CATALOG VIEW -->
+	 <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">	 
+<div ID="ITERPOINT_ROW" class="row" th:each="coll, iterStat : ${collectionListDTO}">
+
+			
+			<div class="col-md-3 col-sm-12 col-xs-12">
+						<div th:replace="/fragments/user-index-detail :: avatar(user=${coll.user},fasize='fa-2x')"></div>
+			</div>
+
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<span class="h4  mt text-bold text-gray-dark pull-left" th:text="${coll.title}"></span>
+			</div>
+			
+			
+			
+         	 <div class="col-md-12 col-sm-12 col-xs-12 mb-sm">	
+   						 <span class="text-gray-dark text-sm pull-left" th:text="${coll.description}"></span>
+   						 	 <span class="text-gray-dark text-sm pull-right"></span>
+   			<hr class="separator"/>	
+	         </div>  
+
+
+	         
+             <div class="col-md-10 col-sm-10 col-xs-10 mt-SM mb-sm">	
+	    						<span class="h4  mt text-bold text-gray-dark pull-left" th:text="${coll.title}"></span>
+		         </div> 
+		         
+		          <div class="col-md-2 col-xs-2 col-sm-2 mt-sm">
+					<a th:href="@{'/video/map-collection-zoom?collection=' + ${coll.id}}">
+		                           <div class="row row-table row-flush align-top bg-gray">
+		                              <div class="col-xs-12">
+		                                 <div class="panel-body text-left">
+		                                    <span class="h4 text-bold text-inverse">DIRECTIONS</span>
+		                                 </div>
+		                              </div>
+				                           </div>
+				      </a>                     
+		
+		                           
+					</div>					          					     
+             	 
+
+		         
+
+
+
+<!-- RIGHT COLUMN  -->
+<div th:class="${showavatar=='true' ? 'col-md-9 col-sm-12 col-xs-12' : 'col-md-12 col-sm-12 col-xs-12'}"> 
+<div class="row">	
+
+		    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+		    <div class="row">
+				    <div ID="ITERPOINT_COLUMN" class="col-lg-6 col-md-6 col-xs-12 col-sm-6" th:each="vid, iterStat : ${coll.videos}">
+	       	                			<div th:attr="data-likescount=${{vid.likescount}},data-playscount=${{vid.playscount}}, data-ratingssum=${{vid.ratingssum}},data-title=${{vid.title}},data-description=${{vid.description}}, data-id=${{vid.id}},data-collectionid=${{coll.id}}, data-videourl=${{vid.videourl}}" class="panel widget w-MD videopanel" style="background: none;">
+										<div class="text-center bg-center" id="subpanelblockA">
+			                        			<div class="row">
+			                           				<div class="col-xs-12 col-md-12 col-sm-12">                         				
+													<div th:attr="id=${'vidoverlay_action_'+{vid.id}}" class="vidoverlay_action hidden">
+													<div class="row row-table" th:replace="/fragments/video-grid-view :: video-overlay-action(video=${vid})"></div>
+													</div>                          				
+	                           				
+												<img th:if="${(vid.link!=null) and (vid.youtube)}" class="w-MD h-MD box-border-info" th:src="${vid.thumburl}"/> 
+											    <img th:if="${(vid.link!=null) and (vid.vimeo)}" class="w-MD h-MD box-border-info"  th:attr="src=${vid.thumburl}"/>
+											    <iframe th:if="${vid.link==null or (!vid.link)}" class="w-MD h-MD"  th:attr="src=@{'/video/play?uri='+${vid.videoURI}+'&style=\'detail\''}" scrolling="no" frameborder="0" allowfullscreen></iframe>										
+	                          			 </div>
+	                        		</div>
+	                     		</div>
+	
+	                             <div class="row mt-sm">
+			                             <div class="col-md-10 col-xs-12 col-sm-12">
+			                              <div class="text-sm m0 text-bold text-inverse" th:text="${vid.title}"></div>
+			                           </div>
+										<div class="col-md-2 col-xs-12 col-sm-12">
+			                             <div class="pull-right">
+			                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${vid.durationtxt}">15:45</span>
+										</div>				                           
+			                    </div>
+			                    </div>
+			                    
+			                    <div class="row">
+			                             <div class="col-md-12 col-sm-12 col-xs-12">
+			                              <p class="m0 text-sm">
+											  from <a th:href="@{'/user-'+${vid.user.UUID}+'/'}"><span th:text="${vid.user.shortdesc}">email</span> </a> <span class="time_badge">
+											  added <span class="text-bold text-inverse" th:text="${vid.shortAndSmart_DATECREATED}">1 week ago</span>  </span>
+			                              </p>
+			                           </div>
+			                    </div>  
+			                    
+			                    
+			 					<div class="row" id="subpanelblockD">
+			                             <div class="col-md-12 col-xs-12 col-sm-12 text-sm>
+	            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn-thumb(video=${vid},showlike='true')">
+	                     		                           </div>
+	                           	</div>
+			                           </div>	
+	                    
+			                    
+			                    
+			                    
+		                  </div>				    
+		    
+
+	 </div>  
+	 </div> 
+	 </div>
+	 </div> <!--  RIGHT COLUMN-->
+	 </div> <!--  ITER POINT ROW-->
+	 
+	  
+</div>
+</div>
+<!-- PLAYLIST VIEW -->
+
+
+
+
+
+
+
+      		</div>
+
+      		
+      		
+      		
+      		
+      	</div>	
+      	<!-- PLAYLIST VIEW -->  
+     
+     </div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+	<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script>     
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    		//PAGE SPECIFIC GRID VIEW STYLE
+    		//terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

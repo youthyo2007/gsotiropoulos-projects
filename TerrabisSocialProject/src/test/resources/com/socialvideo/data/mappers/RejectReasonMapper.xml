@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.RejectReasonMapper">
+
+   <resultMap type="com.socialvideo.data.dto.IDDescrDTO" id="IDDescrDTO">
+        <id column="id" property="id"/>
+        <result property="descr" column="descr"/>
+    </resultMap> 
+
+    <select id="lookupRejectionReason" parameterType="map" resultMap="IDDescrDTO">
+        SELECT a.* FROM rejectionreasons a WHERE a.id = #{id}
+    </select>
+
+
+    <select id="selectRejectReasonsList" parameterType="map" resultMap="IDDescrDTO">
+       SELECT * FROM rejectionreasons a ORDER BY a.descr DESC
+    </select>
+  
+</mapper>
+
+
+
+

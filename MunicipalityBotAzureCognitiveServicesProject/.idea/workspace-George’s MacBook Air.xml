@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dbe3c67a-67c1-4b81-bf75-fd55c6a725e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cognitiveModels/Scrap/CorinthMunicipalityBot-InformativeDataModel.lu" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/GovDirectoryDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/TopLevelDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/TouristGuideDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/data/model/NERExtractionObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/data/model/UserProfileObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/scrap/Cards.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT.code-workspace" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/DimosKorBot.lu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/README-LUIS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/cognitiveModels/CorinthMunicipalityBotModel.lu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/cognitiveModels/DimosKorBot copy.lu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/cognitiveModels/FlightBooking.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/cognitiveModels/places.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/deploymentTemplates/template-with-new-rg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/deploymentTemplates/template-with-preexisting-rg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/playground.mongodb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/BookingDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/BookingDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/CancelAndHelpDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/Cards.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/DateResolverDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/DialogAndWelcomeBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/DialogBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/FlightBookingRecognizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/MainDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/MainDialogBackup.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/MultiLingualBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/core/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/data/model/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/data/model/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/data/repository/DepartmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/data/services/DepartmentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/data/services/MicrosoftTranslatorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/MicrosoftTranslator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/TranslationMiddleware.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/TranslationSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/model/LanguageDetectorResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/model/TranslatorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/java/com/microsoft/bot/sample/translation/model/TranslatorResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/resources/cards/welcomeCard.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/resources/departments.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/resources/hotels.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/resources/log4j2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/webapp/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/main/webapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/src/test/java/com/microsoft/bot/sample/core/ApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/cards/welcomeCard.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/BookingDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/BookingDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/CancelAndHelpDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/Cards.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/DateResolverDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/DialogAndWelcomeBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/DialogBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/FlightBookingRecognizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/MainDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/MainDialogBackup.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/MultiLingualBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/core/package-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/model/Contact.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/model/Department.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/repository/DepartmentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/services/DepartmentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/services/MicrosoftTranslatorService$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/data/services/MicrosoftTranslatorService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/MicrosoftTranslator$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/MicrosoftTranslator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/TranslationMiddleware.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/TranslationSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/model/LanguageDetectorResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/model/TranslatorResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/com/microsoft/bot/sample/translation/model/TranslatorResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/departments.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/hotels.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/classes/log4j2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionAssistantBOT/target/test-classes/com/microsoft/bot/sample/core/ApplicationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/README-LUIS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/cognitiveModels/FlightBooking.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/deploymentTemplates/template-with-new-rg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/deploymentTemplates/template-with-preexisting-rg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/BookingDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/BookingDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/CancelAndHelpDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/DateResolverDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/DialogAndWelcomeBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/DialogBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/FlightBookingRecognizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/MainDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/java/com/microsoft/bot/sample/core/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/resources/cards/welcomeCard.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/resources/log4j2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/webapp/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/main/webapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/src/test/java/com/microsoft/bot/sample/core/ApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/cards/welcomeCard.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/BookingDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/BookingDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/CancelAndHelpDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/DateResolverDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/DialogAndWelcomeBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/DialogBot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/FlightBookingRecognizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/MainDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/com/microsoft/bot/sample/core/package-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/classes/log4j2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DimosKorinthionBot/target/test-classes/com/microsoft/bot/sample/core/ApplicationTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2K6S7ZKNTYbZAXI4jRwcWD6LwIK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gsoti/OneDrive - Ministry of Digital Governance/Development/BotProjects/DimosKorinthionBotJava&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.run.dashboard.notification&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;27fa983bba03b1a78f9bc2b1e0e65818&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cognitiveModels/Scrap" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.microsoft.bot.sample.core" />
+      <recent name="com.microsoft.bot.sample.data.model" />
+      <recent name="scrap" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="bot-core" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="bot-core" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" />
+      <module name="DimosKorinthionBotJava" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.microsoft.bot.sample.core.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dbe3c67a-67c1-4b81-bf75-fd55c6a725e0" name="Changes" comment="" />
+      <created>1673293373140</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673293373140</updated>
+      <workItem from="1673293374256" duration="4027000" />
+      <workItem from="1673712791606" duration="638000" />
+      <workItem from="1673713516390" duration="1828000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/MainDialog.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/Application.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/GovDirectoryDialog.java</url>
+          <line>115</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/GovDirectoryDialog.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/core/GovDirectoryDialog.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/data/services/LuisNLPRecognizerService.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/data/services/LuisNLPRecognizerService.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/microsoft/bot/sample/data/services/LuisNLPRecognizerService.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

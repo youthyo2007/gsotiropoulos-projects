@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+  
+  
+  	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+   
+   
+        <link href="../static/vendor/bootstrap-social/bootstrap-social.css"
+          th:href="@{/vendor/bootstrap-social/bootstrap-social.css}" rel="stylesheet"/>    
+   
+     <link href="../static/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
+          th:href="@{/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/fullscreenoverlay/css/style5.css"
+          th:href="@{/vendor/fullscreenoverlay/css/style5.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+          th:href="@{/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css}" rel="stylesheet"/>
+   
+     <link href="../static/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+                 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"
+          th:href="@{/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/formvalidation-io/dist/css/formValidation.min.css" th:href="@{/vendor/formvalidation-io/dist/css/formValidation.min.css}" rel="stylesheet"/>
+
+
+     <link href="../static/vendor/video-js/dist/video-js.css" th:href="@{/vendor/video-js/dist/video-js.css}" rel="stylesheet"/>
+
+          
+                    <link href="../static/vendor/sweetalert2/dist/sweetalert2.css"
+          th:href="@{/vendor/sweetalert2/dist/sweetalert2.css}" rel="stylesheet"/>           
+                  
+                  
+     <link href="../static/vendor/royalslider/royalslider.css"
+          th:href="@{/vendor/royalslider/royalslider.css}" rel="stylesheet" />
+
+     <link href="../static/vendor/royalslider/rs-default.css"
+          th:href="@{/vendor/royalslider/rs-default.css}" rel="stylesheet" />
+          
+ 
+      <link href="../static/vendor/jqcloud/dist/jqcloud.min.css"
+          th:href="@{/vendor/jqcloud/dist/jqcloud.min.css}" rel="stylesheet" />
+     
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+
+          
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+            
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet"/>   
+  
+  
+  
+   <script th:replace="/fragments/google-analytics :: analytics"></script>
+  
+  </head>
+   <body class="layout">
+   
+     <div class="wrapper" th:if="${device.mobile}">
+     <div  th:replace="/fragments/header-mobile :: header(isindex='false')"></div>
+  		<div th:replace="/fragments/sidebar :: sidebar-mobile"></div>  
+    	<div layout:fragment="content"></div> 	
+    	<div th:replace="/fragments/footer :: footer"></div>
+  </div>
+
+  <div class="wrapper" th:if="${device.tablet}">
+     <div  th:replace="/fragments/header-mobile :: header(isindex='false')"></div>
+  		<div th:replace="/fragments/sidebar :: sidebar-mobile"></div>  
+    	<div layout:fragment="content"></div> 	
+    	<div th:replace="/fragments/footer :: footer"></div>
+  </div>
+
+
+  <div class="wrapper" th:if="${device.normal}">
+     <div  th:replace="/fragments/header :: header(isindex='false')"></div>
+    	<div layout:fragment="content"></div> 	
+    	<div th:replace="/fragments/footer :: footer"></div>
+  </div>
+   
+
+
+  <div th:replace="/fragments/layout-fragments :: scripts"></div>
+
+  </body>
+</html>       
+   
+          
+         

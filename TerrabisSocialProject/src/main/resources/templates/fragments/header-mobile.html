@@ -1,0 +1,123 @@
+ <header id="headerdiv" class="topnavbar-wrapper" th:fragment="header(isindex)">
+         <!-- START Top Navbar-->
+         <nav role="navigation" th:class="${isindex=='true' ? 'navbar' : 'navbar topnavbar'}">
+            <!-- START navbar header-->
+            
+            
+            
+            <div class="navbar-header">
+               <a th:href="@{${isindex=='false' ? '/' : '/video/map/normal/_'}}" class="navbar-brand">
+                  <div class="brand-logo">
+                      <!-- <img src="/images/logo.png" alt="App Logo" class="img-responsive"> -->
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">T</span>
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">E</span>
+                 	<span class="h3 text-info-dark fontlabel text-bold mt-lg mirror">R</span>
+                 	<span class="h3 text-info-dark fontlabel text-bold mt-lg">R</span>
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">A</span>
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">B</span>
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">I</span>
+                 	<span class="h3 text-white fontlabel text-bold mt-lg">S</span>
+                  </div>
+                  <div class="brand-logo-collapsed mt-sm">
+                    <span th:if="${isindex=='false'}" class="text-white fontlabel text-bold mt-lg">T</span>
+                    	<span th:if="${isindex=='false'}" class="text-info-dark fontlabel text-bold mt-lg">R</span>
+                    	<span th:if="${isindex=='false'}" class="text-info-dark fontlabel text-bold mt-lg">R</span>
+                    <span  th:if="${isindex=='false'}" class="text-white fontlabel text-bold mt-lg">B</span>
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+                 <ul th:if="${isindex=='false'}" class="nav navbar-nav navbar-right">
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                       <em class="fa fa-navicon"></em>
+                     </a>              
+                  </li>
+
+                       	  <li>
+                  </li>
+
+      			</ul>
+               <!-- END Left navbar-->
+            </div>            
+       
+       
+                      	<div id="searchform" class="bg-white hidden" style="position: absolute; top:0; width:100%; z-index: 989999999999;">
+               			 <form id="go" role="form" id="go" th:action="@{'/video/search'}" method="GET" th:object="${VIDEOQUERYFRM}">
+							          <div class="row">
+							          <div class="col-md-12 col-sm-12 col-xs-12">
+							   								<div id="mapsearchform">
+							   								
+										                           <div class="form-group">
+										                               <div class="input-group">
+										                                 <input id="querytxt" placeholder="Find places with videos" type="text" th:field="*{querytxt}" class="form-control input-lg m-b">
+										                                 <span class="input-group-btn" id="go">
+										                                    <button type="submit" class="btn  btn-info-dark input-lg"><span class="h4 text-bold">FIND</span></button>
+										                                 </span>
+										                                </div>
+										                           </div>
+							   								</div>    		
+							    	 </div>
+							    	 
+							    	 
+ 							<div class="row">
+							          <div class="col-md-12 col-sm-12 col-xs-12">							    	 
+							    	 
+							<div class="form-group">
+								<label class="radio-inline text-info h2"></label>
+	                    		<label class="radio-inline text-gray text-sm-md"><input type="radio" name="querytype" value="MAP" th:checked="${VIDEOQUERYFRM.querytype=='MAP'}">map</label>
+								<label class="radio-inline text-gray text-sm-md"><input type="radio" name="querytype" value="titledescription" th:checked="${VIDEOQUERYFRM.querytype=='titledescription'}">title/description</label>
+								<label class="radio-inline text-gray text-sm-md"><input type="radio" name="querytype" value="tags" th:checked="${VIDEOQUERYFRM.querytype=='tags'}">tags</label>
+							</div>  
+							</div></div>
+							    	 
+							    	 </div> 
+		            			
+		            			    </form>  
+		           </div> 			          
+								
+       
+       
+                   <!-- START Search form-->
+<!--             <form role="search"  th:action="@{'/video/search'}" method="GET" th:object="${VIDEOQUERYFRM}" class="navbar-form">
+               <div class="form-group has-feedback">
+                  <input id="querytxt" placeholder="Find places with videos" type="text" th:field="*{querytxt}" class="form-control">
+                  <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
+                  
+		               		<label class="radio-inline text-info"><input type="radio"name="querytype" value="MAP" th:checked="${VIDEOQUERYFRM.querytype=='MAP'}">map</label>
+							<label class="radio-inline text-info"><input type="radio" name="querytype" value="titledescription" th:checked="${VIDEOQUERYFRM.querytype=='titledescription'}">title or description</label>
+							<label class="radio-inline text-info"><input type="radio" name="querytype" value="tags" th:checked="${VIDEOQUERYFRM.querytype=='tags'}">tags</label>               
+                  
+               </div>
+               
+               
+               <button type="submit" class="hidden btn btn-default">Submit</button>
+            </form> -->
+            <!-- END Search form-->
+       
+<!--        	
+            <form role="search" th:action="@{'/video/search'}" class="navbar-form" method="GET" th:object="${VIDEOQUERYFRM}">
+               <div class="form-group has-feedback">
+                  <input id="querytxt" placeholder="Find places with videos" type="text" th:field="*{querytxt}" class="form-control">
+                  <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
+               </div>
+               
+		               		<label class="radio-inline text-info"><input type="radio" name="querytype" value="MAP" th:checked="${VIDEOQUERYFRM.querytype=='MAP'}">map</label>
+							<label class="radio-inline text-info"><input type="radio" name="querytype" value="titledescription" th:checked="${VIDEOQUERYFRM.querytype=='titledescription'}">title or description</label>
+							<label class="radio-inline text-info"><input type="radio" name="querytype" value="tags" th:checked="${VIDEOQUERYFRM.querytype=='tags'}">tags</label>               
+               
+               <button type="submit" class="btn btn-default">FIND</button>
+            </form>
+            END Search form   -->
+
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+     

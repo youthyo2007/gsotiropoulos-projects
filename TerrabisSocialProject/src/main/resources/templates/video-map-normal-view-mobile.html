@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html layout:decorator="layout-map">
+  <head>
+    <title>Terrabis - Map</title>
+         
+  </head>
+  <body>
+  
+  
+  
+  
+        <section layout:fragment="content">
+        
+   
+         
+         <div class="row" id="mapdiv">
+         
+
+         
+         
+          <div class="col-md-12 col-xs-12 col-sm-12">
+          			<div id="googlemap_container" style="width:100%; background-color: white;">
+
+             				
+
+
+               			
+                			<div id="selectedtagsdiv" style="position: absolute; bottom: 10px; left: 10px; z-index: 9999;">
+	 								<div id="advselectedtags"></div>	
+               			</div>
+               			
+
+	               		<div class="mapoverlay_paginator" style="opacity:0.9;">
+	               		 			<a id="showmapdatadiv" href="#mapdatadiv" class="page-scroll">
+ 							    	 <span class="">
+							    	 	
+										 <button type="button" class="btn btn-info"><span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;</button><br/>
+										 <span class="paginator text-white h4"></span>
+										 
+									</span> 
+									</a>
+	        			</div>    
+               			
+               			
+              			<!-- NOT FOUND   -->	 	
+                        <div class="mapoverlay_not_found hidden">
+								       <div class="row">
+								               <div class="col-md-12">
+								               		<p class="h4 text-gray text-bold"><br/></p>
+												</div>
+										</div>
+					
+					                  <div class="row mb-lg m-lg">
+
+					                          <div class="col-md-2 col-xs-12 col-sm-12">
+					                            <span class="fa fa-meh-o fa-3x text-bold text-white text-left"></span>
+					                        </div>  
+					                        
+					                          <div class="col-md-10 col-xs-12 col-sm-12"><br/><br/>
+					                            <span class="h4 text-white text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()>0}">You might try as well another search. Don't forget to use the tag cloud on the left to find related videos as well</span>
+					                            <span class="h4 text-white text-left"  th:if="${VIDEOQUERYFRM.querytxt.trim().length()==0}">Please enter your search terms and try again.</span>
+					                 </div>						
+	    							</div>
+	    				</div>			
+              
+            
+                     <!-- USER PINS    -->	 			
+               		<div th:if="${userDTO!=null}" class="mapoverlay_user -">
+       			       <div class="row">
+			     
+						<div class="col-md-12 col-xs-12 col-sm-12" style="position:absolute; bottom:0px; left:92%;  height:25px; width:25px; z-index: 999999;">
+								  <span class="fa fa-times text-gray-dark cursor-pointer tag-user-close"></span>
+ 						</div>
+			      
+			       
+			               <div class="col-md-4" style="position:absolute; bottom:0px; left:0%;">
+ 							<a th:href="@{'/user-' + ${userDTO.UUID}}">
+	 							<span th:if="${userDTO.avatar==null}" class="fa fa-smile-o fa-2x text-gray-dark"></span>
+	                            <img th:if="${userDTO.avatar!=null}" th:src="*{'data:image/'+userDTO.avatar.extension+';base64,'+userDTO.avatar.imagebase64}" class="img-thumbnail img-circle thumb64"/>
+                            </a>			               		 
+			      		</div>
+			      		         <div class="col-md-8" style="position:absolute; bottom:0px; left:20%;"><span class="text-info-dark h3 text-bold" th:text="${{userDTO.username} +' pins'}"></span></div>
+ 					
+			      		
+					</div>
+        			</div>
+  
+            
+            
+            
+
+
+               			
+               		<div id="googlemap"  style="height:100%; width: 100%; background-color: white;"></div>
+
+               		</div> 
+   
+   		</div>
+   		        
+    		
+   		
+   		</div>
+   		
+   		
+   		   				<div id="mapdatadiv" class="ml-sm">
+
+
+		                   		<div id="showmapdiv" style="position:fixed; bottom: 10px; right: 0px; z-index: 99; opacity:0.7;">
+							          <div class="row">
+							    	 <div class="col-md-12  pull-right">
+
+ 									<a href="#headerdiv" id="showmapdiv" class="page-scroll">
+ 							    	 <span class="cursor-pointer mapbtn-nav-map">
+							    	 	
+										 <button type="button" title="back to the map" class="btn btn-info"><span class="fa-2x"><span class="fa fa-arrow-up"></span></span></button>
+									</span> 
+									</a>
+							    	 </div>
+							    	 </div> 
+		            			
+               					</div>
+               					
+               					
+
+		<div class="row">		
+		<div class="col-md-12 col-xs-12 col-sm-12" >
+		
+
+		
+		
+		
+		       <!-- CONTENT CONTROL BAR AND PAGINATOR  --> 
+       <div class="row mt-sm">
+       
+       						  <div class="col-md-6 col-sm-12">
+       						    		           <p class="text-sm-sm text-gray-more pull-left">*click on marker to start play **right click on the map for quick upload </p>
+       						  </div>	
+				              <div class="col-md-6 col-sm-12">
+						              <div class="content-control">
+									                    <ul class="control-nav pull-left" th:replace="/fragments/video-grid-control :: gridviewstyle-control"></ul>
+									                    <!--pagignator-->
+<!-- 									                    <ul class="breadcrumb paginator pull-left"></ul> -->
+									                    <!--paginator-->
+						               </div><!-- /content-control -->
+				              </div>
+       </div> 
+       <!-- CONTENT CONTROL BAR  -->   
+		
+		
+
+		<!-- ===================== RESULTS ============================= -->
+       <!-- AJAX -->
+       <div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid"></div></div>
+
+
+        <!-- LOAD DATA  -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12">
+        	 <div class="col-md-12 col-xs-12 col-sm-12 load-more-data"></div>
+        	</div>
+        </div>	
+
+		<!-- LOAD MORE  -->
+        <div class="row">
+        	<div class="col-md-12 col-xs-12 col-sm-12 text-center">
+        	 <span class="h3 text-gray-more text-bold load-more-video paginatorViewport cursor-pointer">
+<!--         	 LOAD MORE... -->
+        	 </span> 
+        	</div>
+        </div>	
+
+        
+        
+        </div></div></div>
+
+  
+
+
+<script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBrqn9Rl-MX3yJPDKGXL_Ly7ej6DSC0sRw&libraries=places"></script> -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA2NdWUBq9Xd9KdnVKIczih3DalRqmwLlQ&libraries=places"></script>
+<script src="../static/js/map-utilities.js"  th:src="@{/js/map-utilities.js}"></script> 
+<script src="../static/vendor/markerclusterer/markerclusterer.js" th:src="@{/vendor/markerclusterer/markerclusterer.js}"></script> 
+<script src="../static/js/advanced-map-filters.js" th:src="@{/js/advanced-map-filters.js}"> </script> 
+<script src="../static/js/video-map-normal-view.js"  th:src="@{/js/video-map-normal-view.js}"></script> 	
+<script src="../static/js/personalization.js"  th:src="@{/js/personalization.js}"></script> 
+<script src="../static/js/video-grid-html-view.js" th:src="@{/js/video-grid-html-view.js}"> </script> 
+<script src="../static/js/grid-view-renderer.js" th:src="@{/js/grid-view-renderer.js}"> </script> 
+<script src="../static/vendor/map-icons/dist/js/map-icons.js" th:src="@{/vendor/map-icons/dist/js/map-icons.js}"></script>   
+ 
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+
+$( document ).ready(function() {
+	
+	
+	
+	//VIDEO TYPE COLORS
+	terrabisApp.videoTypeColorsList = JSON.parse([[${VIDEOTYPECOLORSLIST.value}]]);
+	terrabisApp.pinsClusterColorsList = JSON.parse([[${PINSCLUSTERCOLORSLIST.value}]]);
+	
+	
+	/**********************  ADVERT HANDLER ********************************/
+	var mapAdvertIsShown = [[${PERS.item('ADVERTSHOWN-MAPOVERLAYADVERT')}]];
+	if(mapAdvertIsShown=='false') {
+		$(".advertoverlay-map").switchClass("hidden", "-", 0, "easeInOutQuad" );
+	}
+	
+	
+	/**********************  MAP DIV HANDLER ********************************/
+	$('#showmapdiv').hide();
+	//RESIZE
+ 	$(window).resize(function () {
+    var h = $(window).height(),
+        offsetTop = 120; // Calculate the top offset
+
+    //$('#googlemap').css('height', (h - offsetTop));
+    $('#googlemap_container').css('height', (h - offsetTop));
+        
+	}).resize();
+
+ 	$(window).scroll(function() {
+ 	    if ($(this).scrollTop()>100)
+ 	     {
+ 	        $('#showmapdiv').fadeIn();
+ 	     }
+ 	    else
+ 	     {
+ 	      $('#showmapdiv').fadeOut();
+ 	     }
+ 	});
+			
+
+	/**********************  QUERYTXT AUTOCOMPLETE  ********************************/
+	var input =  document.getElementById('querytxt');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+  
+	
+	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    	var place = autocomplete.getPlace();
+    	$("#go").submit();
+    
+    });
+
+	//INIT VARIABLES
+	var emptyGmapResult = [[${GMAPRESULT.emptyStatus}]];
+	//PAGE SPECIFIC GRID VIEW STYLE
+	terrabisApp.gridViewStyle = [[${PERS.item('GRIDSTYLE-'+{execInfo.templateName})}]];
+
+	
+	//IF EMPTY SHOW MESSAGE
+	if(emptyGmapResult) {
+		$(".mapoverlay_not_found").switchClass( "hidden", "-", 0, "easeInOutQuad" );
+		$( ".mapoverlay_not_found" ).delay(5000).fadeOut(3000, "linear", function() {
+			$(".mapoverlay_not_found").switchClass( "-", "hidden", 0, "easeInOutQuad" );
+		  });
+	}
+
+		
+	/**************************INIT MAP *****************************************/
+	terrabisApp.minZoomLevel = [[${minzoomlevel}]];
+	terrabisApp.viewPortSize = [[${viewportpinssize}]];
+	terrabisApp.clusterMap = [[${PERS.clustererMode}]];
+	terrabisApp.clusterSize = [[${clusterSize}]];
+	terrabisApp.clusterZoomLevel = [[${clusterZoomLevel}]];
+
+	
+	terrabisApp.globalMap = createMapFromGMAPRESULT([[${GMAPRESULT}]],[[${PERS.googleMapType}]],"googlemap");
+	
+	
+	//CREATE A MAP OVERLAY TO GET THE MOUSE MOVEMENT IN ORDER TO PROJECT THE MOUSOVER PREVIEW DIV
+	var overlay = new google.maps.OverlayView();
+	overlay.draw = function() {};
+	overlay.setMap(terrabisApp.globalMap);
+	terrabisApp.mapOverlay = overlay;  
+	
+	
+	
+	
+	
+	
+	
+	//ADD LISTENERS
+	google.maps.event.addListenerOnce(terrabisApp.globalMap, 'bounds_changed', function(){
+ 	
+
+ 		 //INIT MAP
+ 		 initMapPins();
+ 		 
+ 		 
+ 		 
+ 		 //CREATE DATA GRID
+ 		 createDataGrid();
+
+ 		 terrabisApp.globalMap.addListener('dragend', globalMapBoundsChanged);
+ 		terrabisApp.globalMap.addListener('zoom_changed', globalMapBoundsChanged);
+ 		
+		  $('.mapoverlay_paginator').css('visibility','visible').hide().fadeIn("slow").removeClass('hidden');
+
+		//CREATE A CIRCLE AROUND THE LOADED VIDEO IF ANY
+	 		if([[${radiusDTO!=null}]]) {
+	 		 var radiusDTO = [[${radiusDTO}]];
+	 			createCirlceAroundPoint( terrabisApp.globalMap,radiusDTO.lat, radiusDTO.lng,10000);	
+	 		}
+		  
+
+	});
+	
+	
+	
+
+
+
+
+	 //ADD MAPTYPE CHANGED LISTENER AND SAVED IT TO PERSONALIZAITON OBJECT
+	 google.maps.event.addListener(terrabisApp.globalMap, "maptypeid_changed", function() {
+		 updateGoogleMapType();
+	});
+	
+	
+	 /**********************  RIIGHT CLICK ON MAP ********************************/
+		if(([[${(#authorization.expression('isAuthenticated()'))}]])) { 
+	    	google.maps.event.addListener(terrabisApp.globalMap, 'rightclick', createUploadMarkerOnMapRightClick);
+		};
+		//END QUICK UPLOAD LISTENER
+
+	 
+	
+	
+	
+
+}); 	
+		
+	
+/*]]>*/
+</script>   
+
+
+
+</section>
+      
+ 
+      
+  </body>
+</html>  
+	  

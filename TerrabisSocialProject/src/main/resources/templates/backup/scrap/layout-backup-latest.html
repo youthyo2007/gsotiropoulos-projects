@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!--  Each token will be replaced by their respective titles in the resulting page. -->
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
+
+
+<link href="../static/vendor/fontawesome/css/font-awesome.min.css"
+          th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet"/>
+           
+     <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css"
+          th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/animate.css/animate.min.css"
+          th:href="@{/vendor/animate.css/animate.min.css}" rel="stylesheet"/>
+
+     <link href="../static/vendor/weather-icons/css/weather-icons.min.css"
+          th:href="@{/vendor/weather-icons/css/weather-icons.min.css}" rel="stylesheet"/>
+          
+     <link href="../static/vendor/whirl/dist/whirl.css"
+          th:href="@{/vendor/whirl/dist/whirl.css}" rel="stylesheet"/>
+          
+      <link href="../static/css/main.css"
+          th:href="@{/css/main.css}" rel="stylesheet"/> 
+    
+     <link href="../static/vendor/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/vendor/bootstrap/dist/css/bootstrap.css}" rel="stylesheet"/>
+           
+     <link href="../static/css/app.css"
+          th:href="@{/css/app.css}" rel="stylesheet" />
+          
+           
+     <link href="../static/css/theme-d.css"
+          th:href="@{/css/theme-d.css}" rel="stylesheet" />          
+          
+
+  </head>
+  <body>
+  <div class="wrapper">
+    <div th:replace="/fragments/header_v2 :: header"></div>
+      <div layout:fragment="content"></div>
+
+    
+    <div th:replace="/fragments/footer :: footer"></div>
+   </div>
+
+
+   <!-- MODERNIZR-->
+    <script src="../static/vendor/modernizr/modernizr.js"
+            th:src="@{/vendor/modernizr/modernizr.js}"></script>   
+            
+    <script src="../static/vendor/jquery/dist/jquery.js"
+            th:src="@{/vendor/jquery/dist/jquery.js}"></script>   
+                        
+
+    <script src="../static/vendor/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/vendor/bootstrap/dist/js/bootstrap.js}"></script>   
+
+    <script src="../static/vendor/parsleyjs/dist/parsley.min.js"
+            th:src="@{/vendor/parsleyjs/dist/parsley.min.js}"></script>   
+
+   
+    <!-- STORAGE API-->
+    <script src="../static/vendor/jQuery-Storage-API/jquery.storageapi.js"
+            th:src="@{/vendor/jQuery-Storage-API/jquery.storageapi.js}"></script>  
+
+    <script src="../static/vendor/jquery.easing/js/jquery.easing.js"
+            th:src="@{/vendor/jquery.easing/js/jquery.easing.js}"></script>   
+
+    <script src="../static/vendor/animo.js/animo.js"
+            th:src="@{/vendor/animo.js/animo.js}"></script>   
+
+    <script src="../static/vendor/slimScroll/jquery.slimscroll.min.js"
+            th:src="@{/vendor/slimScroll/jquery.slimscroll.min.js}"></script>   
+
+    <script src="../static/vendor/screenfull/dist/screenfull.js"
+            th:src="@{/vendor/screenfull/dist/screenfull.js}"></script>   
+<!-- 
+    <script src="../static/vendor/jquery-validation/dist/jquery.validate.js"
+            th:src="@{/vendor/jquery-validation/dist/jquery.validate.js}"></script>   
+
+    <script src="../static/vendor/jquery.steps/build/jquery.steps.js"
+            th:src="@{/vendor/jquery.steps/build/jquery.steps.js}"></script>   
+
+    <script src="../static/js/user-settings-index-wizard.js"
+            th:src="@{/js/user-settings-index-wizard.js}"></script>    -->
+
+
+      
+   
+   <!-- GOOGLE MAPS-->
+<!--    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+   
+   <script src="../static/vendor/jQuery-gMap/jquery.gmap.min.js"
+            th:src="@{/vendor/jQuery-gMap/jquery.gmap.min.js}"></script> -->
+            
+       <script src="../static/js/app.js"
+            th:src="@{/js/app.js}"></script> 
+            
+            
+             
+    <!-- =============== PAGE UPLOAD SCRIPTS ===============-->
+   <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included-->
+   <script th:src="@{/vendor/jquery-ui/ui/widget.js}" src="../static/vendor/jquery-ui/ui/widget.js"></script>
+   <!-- The Templates plugin is included to render the upload/download listings-->
+    <script th:src="@{/vendor/blueimp-tmpl/js/tmpl.js}" src="../static/vendor/blueimp-tmpl/js/tmpl.js"></script>
+   <!-- The Load Image plugin is included for the preview images and image resizing functionality-->
+   <script th:src="@{/vendor/blueimp-load-image/js/load-image.all.min.js}" src="../static/vendor/blueimp-load-image/js/load-image.all.min.js"></script>
+   <!-- The Canvas to Blob plugin is included for image resizing functionality-->
+   <script th:src="@{/vendor/blueimp-canvas-to-blob/js/canvas-to-blob.js}" src="../static/vendor/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+   <!-- The Iframe Transport is required for browsers without support for XHR file uploads-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.iframe-transport.js}" src="../static/vendor/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+   <!-- The basic File Upload plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload.js"></script>
+   <!-- The File Upload processing plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-process.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+   <!-- The File Upload image preview & resize plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-image.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+   <!-- The File Upload audio preview plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-audio.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
+   <!-- The File Upload video preview plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-video.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
+   <!-- The File Upload validation plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-validate.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+   <!-- The File Upload user interface plugin-->
+   <script th:src="@{/vendor/blueimp-file-upload/js/jquery.fileupload-ui.js}" src="../static/vendor/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>      
+   
+<!--    
+   The Avatar File Upload Script
+   <script th:src="@{/js/video-upload-index.js}" src="../static/js/video-upload-index.js"></script>
+   
+    -->
+       
+
+
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$( document ).ready(function() {
+	
+	
+	 $('#videofileuploadserver').fileupload({
+	    	type:'POST',
+	        maxFileSize: 100000000, // 500 MB
+	    	disableImageResize: /Android(?!.*Chrome)|Opera/
+	    	.test(window.navigator.userAgent), 	
+	    	previewMaxWidth: 300,
+	        previewMaxHeight: 200,
+	        previewCrop: true,
+	   	    always: function(e, result) {
+	   	    alert(JSON.stringify(result));
+	   	    //window.location ='http://localhost:8080/upload/user-1/video-finalize';	
+	        }//UPLOAD DONE
+	        });	 
+	
+	
+	
+	
+	
+	
+	
+	/*
+	$( "#verifyupload" ).click(function() {
+		alert('verify');
+		
+	    	$.ajax({
+   		 	    url: [[${response.body.linkSecure}]],
+   	    	    type: 'PUT',
+   	    	 	beforeSend: function (xhr) {
+   	  				//xhr.setRequestHeader('Content-Range', 'bytes *//*');
+   	  			},
+   	  			always: function(e,result) {
+   	  			alert(JSON.stringify(result));
+   	    	    }//VERIFY DONE
+   	    	});
+	});
+	
+	
+	
+	
+	
+	
+	$( "#completeupload" ).click(function() {
+		alert('complete');
+		
+    	$.ajax({
+  		 	    url: 'https://api.vimeo.com'+[[${response.body.completeUri}]],
+	    	    type: 'DELETE',
+	    	 	beforeSend: function (xhr) {
+	   	  				xhr.setRequestHeader('Authorization', 'bearer cd5c98638ba3da13c789f7f2bfa947c9');
+	    	 	},
+	  			always: function(e,result) {
+	  			alert(JSON.stringify(result));
+	    	    }//VERIFY DONE
+	    	});
+	});
+
+	
+	
+    $('#videofileuploadcloud').fileupload({
+    	url:  [[${response.body.linkSecure}]],
+    	type:'PUT',
+        maxFileSize: 100000000, // 500 MB
+    	disableImageResize: /Android(?!.*Chrome)|Opera/
+    	.test(window.navigator.userAgent), 	
+    	previewMaxWidth: 300,
+        previewMaxHeight: 200,
+        previewCrop: true,
+   	    always: function(e, result) {
+   	    //window.location ='http://localhost:8080/upload/user-1/video-finalize';	
+        }//UPLOAD DONE
+        });	 
+    */
+
+});
+/*]]>*/
+</script>   
+       
+       
+
+  </body>
+</html>

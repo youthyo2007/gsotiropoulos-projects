@@ -1,0 +1,339 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout-admin">
+  <head>
+    <title>Terrabis - Administration</title>
+    
+ 
+  </head>
+  <body>
+        <!-- Main section-->
+      <section  layout:fragment="content">
+
+	      <!-- FULLSCREENOVERLAY  -->    
+	   <div th:replace="/fragments/modal :: fullscreenoverlay(hasimage=true)"></div>
+	   <div th:replace="/fragments/modal :: fullscreenoverlay-reject"></div>
+
+
+         <div class="content-wrapper">
+         
+         
+         
+            <form role="form" id="forceclaimform" th:action="@{'/admin/claims/force-claim'}" method="POST" th:object="${ADMINMANAGERFRM}">
+	         		  		       <input type="hidden" th:field="*{selecteditem}">
+	         		  		       <input type="hidden" th:field="*{selecteditemslist}">
+	         		  		       <input type="hidden" th:field="*{singleselection}" th:value="${singleselection}">
+                     		       <input type="hidden" th:field="*{view}" th:value="${view}">
+                     		       <input type="hidden" th:field="*{filter}" th:value="${filter}">
+    		</form>
+    						
+    						
+         
+              <div class="row" th:replace="/fragments/admin-grid-view :: filter(ADMINQUERYFRM=${ADMINQUERYFRM},actionLink=@{'/admin/claims/filter'})">              
+					</div>
+		       
+
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="h4 text-info pull-right"><span th:text="${ADMINPAGINATOR.recordsCount+' claims total'}"></span>
+						         </div>           
+	              </div>    
+		       </div> 
+
+
+
+   		       <div class="row">
+	              <div class="col-md-12 col-sm-12">
+						         <div class="pull-right paginator">
+						         </div>           
+	              </div>    
+		       </div> 
+         
+         
+
+ 		<!-- ===================== RESULTS ============================= -->
+
+
+
+
+      	<!-- BOX VIEW -->
+
+
+   				<div class="row bg-info">
+   				
+   				  <div class="col-md-1">
+						         <span class="h4 text-info">ID</span>           
+	              </div>
+	            
+	              <div class="col-md-3">
+						         <span class="h4 text-info">VIDEO</span>           
+	              </div>
+	              
+	              
+	              
+	              <div class="col-md-1">
+						         <span class="h4 text-info">SOURCE</span>
+						                    
+	              </div> 	              
+	              
+	              
+	              <div class="col-md-2">
+						         <span class="h4 text-info">CLAIMER</span>
+						                    
+	              </div> 
+	              
+
+	              <div class="col-md-1">
+						         <span class="h4 text-info">OWNERSHIP VERIFIED</span>           
+	              </div>
+	              	              
+	               <div class="col-md-1">
+						         <span class="h4 text-info">STATUS</span>           
+	              </div> 
+	              
+
+	               
+	               
+	               <div class="col-md-1">
+						         <span class="h4 text-info">DATE</span>
+						                    
+	              </div> 
+	               
+	               
+	               
+	               
+	                  
+		       </div> 
+
+       	<div class="row"><div class="col-md-12 col-xs-12 col-sm-12" id="videoGrid">
+		<div ID="ITERPOINT_ROW" th:if="${claim.video}" th:attr="data-claimid=${{claim.id}}, data-id=${{claim.video.id}}, data-link=${{claim.video.link}},data-videourl=${{claim.video.videourl}},data-thumburl=${{claim.video.thumburl}}" class="row mt-lg videopanel"  th:each="claim, iterStat : ${claimsListDTO}">
+				    
+				    
+				      <div class="col-md-1">
+						         <span class="h4 text-inverse" th:text="${claim.id}">ID</span>           
+	                  </div>
+				    
+				    <!-- VIDEO  -->
+				    <div ID="ITERPOINT_COLUMN" class="col-md-3">
+ 	                   			<div  class="panel widget w-MD" style="background: none;">
+		             <div class="">
+
+					 <div class="pull-left"><span class="text-inverse text-bold text-sm-md" th:text="'ID:'+${claim.video.id}"></span></div>	
+
+                     <div class="btn-group pull-right  mb-sm vidaction-menu">
+                     
+                      <button  class="btn btn-green mr-lg">
+                       <a  th:href="@{'/admin/video-settings/'+${claim.video.id}}" title="edit & approve">
+						                                 <em class="text-white text-bold fa fa-file-text-o"></em>
+						</a>                           
+                        </button>
+                        
+                        
+                                              <button  class="btn btn-info mr-lg">
+                       <a  th:href="@{'/video/map/normal/_?videouuid='+${claim.video.UUID}}" title="go to map">
+						                                 <em class="text-white text-bold fa fa-map-marker"></em>
+						</a>                           
+                        </button> 
+                        
+                        <button  class="btn btn-inverse mr-lg">
+                       <a  th:href="@{'/video/'+${claim.video.UUID}}" title="go to video view">
+						                                 <em class="text-white text-bold fa fa-television"></em>
+						</a>                           
+                        </button> 
+                     
+
+
+                     </div>
+					</div>	
+
+ 	     							<div class="text-center bg-center" id="subpanelblockA">
+                        			<div class="row">
+                           				<div class="col-xs-12 col-md-12 col-sm-12">
+	                   					<div th:attr="id=${'vidoverlay_play_'+{claim.video.id}}" class="vidoverlay_play hidden">
+	                   						<div class="row row-table" th:replace="/fragments/admin-grid-view :: video-overlay-play(video=${claim.video},colstyle='w-MD h-MD')"></div>
+	 									</div>	     
+	 									                      				
+										<div th:if="${(claim.video.link)}" th:attr="id=${'vidoverlay_action_'+{claim.video.id}}" class="vidoverlay_action bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/admin-grid-view :: video-overlay-action(video=${claim.video},colstyle='w-MD h-MD')"></div>
+										</div>
+										<div th:if="${(!claim.video.link)}" th:attr="id=${'vidoverlay_action_html5_'+{claim.video.id}}" class="vidoverlay_action_html5 bg-red-fade hidden">
+										<div class="row row-table" th:replace="/fragments/admin-grid-view :: video-overlay-action-html5(video=${claim.video},colstyle='w-MD h-MD')"></div>
+										</div>
+										
+										<img class="w-MD h-MD" th:src="${claim.video.thumburl}"/> 
+                          			 </div>
+                        		</div>
+                     		</div>
+
+                             <div class="row mt-sm" id="subpanelblockB">
+		                             <div class="col-md-10 col-xs-12 col-sm-12">
+		                              <div class="h4 m0 text-bold text-inverse" th:text="${claim.video.title}"></div>
+		                           </div>
+									<div class="col-md-2 col-xs-12 col-sm-12">
+		                             <div class="pull-right">
+		                               			<span class="bg-info-dark text-white text-bold text-sm" title="duration" th:text="${claim.video.durationtxt}">15:45</span>
+									</div>				                           
+		                    </div>
+		                    </div>
+		                    
+		                    
+		                    <div class="row" id="subpanelblockC">
+		                             <div class="col-md-12 col-sm-12 col-xs-12">
+		                              <p class="m0 text-sm" th:if="${!claim.video.ownershipverified}">
+										  <span class="time_badge">added <span class="text-bold text-inverse" th:text="${claim.video.shortAndSmart_DATECREATED}">1 week ago </span>  </span>
+										  from <a th:href="@{'/user-'+${claim.video.user.UUID}+'/'}"><span th:text="${claim.video.user.shortdesc}">email</span> </a>
+		                              </p>
+		                              <p class="m0 text-sm" th:if="${claim.video.ownershipverified}">
+										  <span class="time_badge">added <span class="text-bold text-inverse" th:text="${claim.video.shortAndSmart_DATECREATED}">1 week ago </span>  </span>
+										  made by <a th:href="@{'/user-'+${claim.video.user.UUID}+'/'}"><span th:text="${claim.video.user.shortdesc}">email</span> </a> 
+										  
+		                              </p>
+		                           </div>
+		                    </div>  		                    
+		                    
+		                    
+		                     
+		                     
+		 					<div class="row" id="subpanelblockD">
+		                             <div class="col-md-12 col-xs-12 col-sm-12 font14">
+            											<div class="row text-info" th:replace="/fragments/video-grid-view ::weather-and-likebtn(video=${claim.video},showlike='true')">
+                     		                           </div>
+                           								</div>
+		                           </div>		                    
+		              </div>
+
+        	 </div>   
+        	 
+        	 
+        	 
+        	  <div class="col-md-1">
+ 	 		  <a target="_blank" class="text-sm text-bold text-inverse" th:href="${'https://www.youtube.com/watch?v='+{claim.video.youtubeid}}" ><span class="fa fa-youtube fa-4x text-danger" th:if="${(!claim.video.isfile) and (claim.video.youtube)}"></span></a>	
+			 <a target="_blank" class="text-sm text-bold text-inverse" th:href="${'https://www.youtube.com/watch?v='+{claim.video.youtubeid}}" ><span class="fa fa-archive fa-4x text-gray-more" th:if="${(claim.video.isfile) and (claim.video.youtube)}"></span></a>	
+			 <a target="_blank" class="text-sm text-bold text-inverse" th:href="${'https://vimeo.com/'+{claim.video.vimeoid}}" ><span class="fa fa-vimeo fa-4x text-info" th:if="${(!claim.video.isfile) and (claim.video.vimeo)}"></span></a>
+        	 </div>
+        	 
+        	 <div class="col-md-2">
+	              
+	              
+	              											<a th:href="@{'/user-' + ${claim.claimer.UUID}}">
+															<span th:if="${claim.claimer.avatar==null}"  class="fa fa-smile-o fa-4x text-gray-dark"></span>
+															<img th:if="${claim.claimer.avatar!=null}" th:src="*{'data:image/'+claim.claimer.avatar.extension+';base64,'+claim.claimer.avatar.imagebase64}" class="img-thumbnail img-circle thumb64" />
+												          </a> <br/>
+	              
+	              
+
+	              
+	              
+						         <span class="h4 text-info">
+						         
+						         <a th:href="@{'/user-' + ${claim.claimer.UUID}}"><span class="mt0 text-inverse h4" th:text="${claim.claimer.username}"></span></a><br/>
+						         <span class="mt-sm text-gray-more" th:text="${claim.claimer.firstname}"></span>&nbsp;<span class="mt-sm text-gray-more" th:text="${claim.claimer.lastname}"></span>
+						         
+						         </span>
+						                    
+	              </div> 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	      <div class="col-md-1">
+						         <span class="h4 text-info" th:if="${claim.video.ownershipverified}">YES</span>           
+						         <span class="h4 text-inverse" th:if="${!claim.video.ownershipverified}">NO</span>           
+
+	              </div>
+	              	           
+	              	              
+	               <div class="col-md-1">
+						         <span class="h4 text-inverse" th:if="${claim.status==1}">PENDING</span>
+						         <span class="h4 text-info" th:if="${claim.status==2}">SUCCESS</span>
+						         <span class="h4 text-inverse" th:if="${claim.status==3}">FAILURE</span>      
+	              </div> 
+	              
+
+	               
+	               
+	               <div class="col-md-1">
+						         <span class="h4 text-info" th:text="${claim.dateCreatedAsString}">DATE</span>
+						                    
+	              </div> 
+        	 
+        	 
+        	 <div class="col-md-1">
+        	 
+        	            <button data-toggle="dropdown" class="btn btn-default"> <em  class="fa fa-th"></em> <b class="caret"></b>
+                        </button>
+                        <ul role="menu" class="dropdown-menu animated flipInX">
+                           <li><a class="vidaction-forceclaim"><em class="fa fa-check mr-sm"></em>Force Claim</a>
+                               <li><a th:href="@{'/admin/claims/delete?claimid=' + ${claim.id}}" ><em class="fa fa-remove mr-sm"></em>Delete Claim</a>
+                        </ul>
+        	 
+				</div>
+        	 
+        	 
+        	 
+        	 
+        	 
+		</div>
+		</div></div>
+      	<!-- BOX VIEW -->
+
+
+
+
+
+      	
+      	
+    	 		       <div class="row">
+             <div class="col-md-12 col-sm-12">
+				         <div class="pull-right paginator">
+				         </div>           
+             </div>    
+       </div> 
+      	   
+
+   		</div>
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <script src="../static/vendor/jquery/dist/jquery.js" th:src="@{/vendor/jquery/dist/jquery.js}"></script> 
+  <script src="../static/js/admin-claim-view.js" th:src="@{/js/admin-claim-view.js}"> </script>     
+  <script src="../static/js/admin-video-view.js" th:src="@{/js/admin-video-view.js}"> </script>     
+  <script src="../static/vendor/autocomplete/jquery.autocomplete.js" th:src="@{/vendor/autocomplete/jquery.autocomplete.js}"></script> 
+  <script src="../static/vendor/typeahead/typeahead.bundle.js" th:src="@{/vendor/typeahead/typeahead.bundle.js}"></script> 
+  <script src="../static/js/admin-filter.js" th:src="@{/js/admin-filter.js}"> </script>
+	
+	
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	           
+      $(document).ready(function() {
+    	  
+    	  
+		    
+    		//IF FILTER ENABLED
+    	    turnOnFilter([[${ADMINQUERYFRM.filteron}]]);
+			var RESULTLIST =  [[${claimsListDTO}]];
+    		
+    		if(RESULTLIST.length>0) 
+				createHtml_Paginator([[${ADMINPAGINATOR}]]);
+			else
+				createHtml_EmptyPaginator();
+			
+    		
+    
+
+    		
+      });
+	
+  	/*]]>*/
+  	</script> 
+
+      </section>
+
+
+
+  </body>
+</html>  	  

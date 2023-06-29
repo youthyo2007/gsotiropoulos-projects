@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.CollectionMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.CollectionDTO" id="CollectionDTO">
+        <id column="id" property="id"/>
+        <result property="userid" column="userid"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="privacy" column="privacy"/>
+        <result property="type" column="type"/>
+        <association property="videos" column="{collectionid_fk=id}" javaType="java.util.List" select="com.socialvideo.data.mappers.PublicVideoMapper.selectCollectionDTO_VideoList"/>
+        <association property="user" column="{userid_fk=userid_fk}" javaType="com.socialvideo.data.dto.UserDTOSmall" select="com.socialvideo.data.mappers.UserMapper.selectCollectionDTO_CollectionUser"/>
+        
+    </resultMap> 
+
+
+
+   <resultMap type="com.socialvideo.data.dto.CollectionDTO" id="CollectionEmptyDTO">
+        <id column="id" property="id"/>
+        <result property="userid" column="userid"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="privacy" column="privacy"/>
+        <result property="type" column="type"/>
+    </resultMap> 
+
+
+
+	  <select id="selectNotificationDTO_Collection" parameterType="map" resultMap="CollectionEmptyDTO">
+	         SELECT * FROM collections a WHERE a.id=#{id} 
+	  </select>
+	  
+
+	<update id="updatePathSort" parameterType="map">
+	  UPDATE collectionsvideos SET pathsort = #{sortindex} WHERE collectionid_fk = #{collectionid} AND videoid_fk = #{videoid} 
+	</update>
+
+    <select id="selectVideoDTO_CollectionList" parameterType="map" resultMap="CollectionEmptyDTO">
+       SELECT a.* FROM collections a, collectionsvideos b WHERE a.id=b.collectionid_fk and b.videoid_fk = #{videoid_fk} 
+    </select>
+    
+    
+	<delete  id="removeCollection" parameterType="map">
+ 		DELETE FROM collections WHERE id= #{collectionid} and userid_fk=#{userid_fk}
+    </delete>
+
+
+	  <select id="selectOneEmpty" parameterType="map" resultMap="CollectionEmptyDTO">
+	         SELECT * FROM collections a WHERE a.id=#{id} 
+	  </select>
+
+
+	  <select id="selectOne" parameterType="map" resultMap="CollectionDTO">
+	         SELECT * FROM collections a WHERE a.id=#{id} 
+	  </select>
+
+
+
+    <select id="selectCollectionsEmpty" parameterType="map" resultMap="CollectionDTO">
+       SELECT * FROM collections a WHERE 1=1
+        <if test="userid != null and userid != ' '">
+        	AND a.userid_fk = #{userid} 
+      	</if>
+
+      <if test="title != null and title != ' '">
+             AND a.title=#{title} 
+      </if>
+  
+      <if test="privacy != null and privacy != ' '">
+             AND a.privacy=#{privacy} 
+      </if>
+       
+      <if test="type != null and type != ' '">
+             AND a.type=#{type} 
+      </if>
+      
+      ORDER BY a.datecreated DESC 
+    </select>
+
+
+	 <select id="selectCountCollections" resultType="java.lang.Integer">
+       SELECT COUNT(*) AS total FROM collections a WHERE 1 = 1
+      <if test="type != null and type != ' '">
+             AND a.type=#{type} 
+      </if>       
+     </select>
+       
+       
+       
+    <select id="selectPaginatedCollections" parameterType="map" resultMap="CollectionDTO">
+       SELECT * FROM collections a WHERE 1=1 
+        <if test="userid != null and userid != ' '">
+        	AND a.userid_fk = #{userid} 
+      	</if>
+       
+      <if test="type != null and type != ' '">
+             AND a.type=#{type} 
+      </if>
+      LIMIT #{offset}, #{limit}; 
+    </select>       
+       
+       
+       
+       
+    <select id="selectCollections" parameterType="map" resultMap="CollectionDTO">
+       SELECT * FROM collections a WHERE 1=1
+        <if test="userid != null and userid != ' '">
+        	AND a.userid_fk = #{userid} 
+      	</if>
+
+      <if test="title != null and title != ' '">
+             AND a.title=#{title} 
+      </if>
+  
+      <if test="privacy != null and privacy != ' '">
+             AND a.privacy=#{privacy} 
+      </if>
+       
+      <if test="type != null and type != ' '">
+             AND a.type=#{type} 
+      </if>
+      ORDER BY a.datecreated DESC 
+    </select>
+    
+    
+
+    
+  
+  
+  
+    
+
+
+</mapper>
+
+
+
+

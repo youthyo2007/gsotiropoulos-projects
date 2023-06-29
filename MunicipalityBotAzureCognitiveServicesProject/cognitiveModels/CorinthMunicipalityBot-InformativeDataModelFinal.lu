@@ -1,0 +1,264 @@
+
+> LUIS application information
+> !# @app.name = CorinthMunicipalityBot-DataModel
+> !# @app.desc = Luis Model for Municipality of Corinthia
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 7.0.0
+> !# @app.tokenizerVersion = 1.0.0
+
+
+> # Intent definitions
+
+# Cancel
+- bye
+- cancel
+- exit
+- ignore
+- quit
+
+
+# CorinthMunicipality_FindAddress
+- address {@CorinthPOI_Name=city hall}
+- address for {@CorinthPOI_Location=corinth} {@CorinthPOI_Name=hospital}
+- address for {@CorinthPOI_Location=corinth} {@CorinthPOI_Name=technical projects and studies} {@CorinthPOI_Type=department}
+- address for {@CorinthPOI_Location=corinth} {@CorinthPOI_Name=urban planning}
+- address for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=finance} {@CorinthPOI_Location=city center}
+- address for {@CorinthPOI_Name=kep} on {@CorinthPOI_Location=corinth}
+- address for local {@CorinthPOI_Name=kep}
+- address for {@CorinthPOI_Type=museum} in {@CorinthPOI_Location=corinth}
+- address for {@CorinthPOI_Name=social welfare municipality} {@CorinthPOI_Type=department}
+- address for the {@CorinthPOI_Name=citizen service center} on {@CorinthPOI_Location=xiliomodi}
+- address of {@CorinthPOI_Name=supplies and services} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinthos}
+- address {@CorinthPOI_Name=social welfare} {@CorinthPOI_Type=department}
+- address to {@CorinthPOI_Name=city hall}
+- address to the {@CorinthPOI_Name=revenue and municipal property} {@CorinthPOI_Type=department}
+- address to {@CorinthPOI_Name=urban planning} {@CorinthPOI_Type=department} {@CorinthPOI_Location=corinth}
+- address {@CorinthPOI_Name=waste and recycling management} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- {@CorinthPOI_Name=citizen service center} at {@CorinthPOI_Location=baths of beautiful helen} address
+- {@CorinthPOI_Name=city hall} address
+- {@CorinthPOI_Name=city hall} {@CorinthPOI_Type=protocol} in {@CorinthPOI_Location=corinth} address
+- {@CorinthPOI_Location=corinth} {@CorinthPOI_Name=green} {@CorinthPOI_Type=department} address
+- {@CorinthPOI_Type=department} of {@CorinthPOI_Name=clininless and recycling} address
+- find address for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=education and lifelong learning} in {@CorinthPOI_Location=corinth}
+- find address for {@CorinthPOI_Name=mayors office}
+- find the address for {@CorinthPOI_Name=apostle paul} {@CorinthPOI_Type=church} in {@CorinthPOI_Location=coritnh}
+- find the address for {@CorinthPOI_Name=finance directorate services}
+- find the address for the {@CorinthPOI_Name=kapi} in {@CorinthPOI_Location=almyri}
+- find the address to {@CorinthPOI_Name=human management and resources} {@CorinthPOI_Type=department}
+- i need the address for {@CorinthPOI_Name=city hall} in {@CorinthPOI_Location=corinth}
+- i need the address for {@CorinthPOI_Name=open care centers for the elderly}
+- i need the address for the nearest {@CorinthPOI_Name=kep}
+- {@CorinthPOI_Name=mayors office} in {@CorinthPOI_Location=corinth} address
+- {@CorinthPOI_Name=municipal water supply and sewerage company} address
+- {@CorinthPOI_Name=social protection} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth} address
+- {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=protocol} address
+- the address for {@CorinthPOI_Name=apostle paul} {@CorinthPOI_Type=church} in {@CorinthPOI_Location=corinth}
+- the address for {@CorinthPOI_Name=city hall}
+- the address for {@CorinthPOI_Name=open care centers for the elderly} in {@CorinthPOI_Location=corinth}
+- the address for {@CorinthPOI_Name=revenue} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- the address for the {@CorinthPOI_Type=department} of {@CorinthPOI_Name=trade and services} in {@CorinthPOI_Location=corinth}
+- the address for the {@CorinthPOI_Name=legality control and constructions} {@CorinthPOI_Type=department}
+- the address for the {@CorinthPOI_Name=welfare community center}
+- the address of the {@CorinthPOI_Type=department} of {@CorinthPOI_Name=clininless and recycling} in {@CorinthPOI_Location=corinth}
+- the address of the {@CorinthPOI_Name=garbage collection services} in {@CorinthPOI_Location=corinth}
+- the address of the {@CorinthPOI_Name=public library} in {@CorinthPOI_Location=corinth}
+- the address of the {@CorinthPOI_Name=waste and recycling management} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=lexaio}
+- the address to {@CorinthPOI_Name=ancient theater} in {@CorinthPOI_Location=xiliomodi}
+- the address to {@CorinthPOI_Type=department} of {@CorinthPOI_Name=culture and sports}
+- the address to {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and civil protection} in {@CorinthPOI_Location=corinth}
+- the address to {@CorinthPOI_Name=revenue and municipal property} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- the address to {@CorinthPOI_Name=technical projects and studies} {@CorinthPOI_Type=department}
+- the address to the {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=korinthos}
+- the {@CorinthPOI_Name=supplies and services} {@CorinthPOI_Type=department} {@CorinthPOI_Location=coritnh} address
+- {@CorinthPOI_Name=town hall} address
+- what is the address for {@CorinthPOI_Name=city hall}
+- what is the address for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and quality of life} in {@CorinthPOI_Location=corinth}
+- what is the address for the nearest {@CorinthPOI_Type=open care center}
+- what is the address of {@CorinthPOI_Name=1st high school}
+- what is the address of the {@CorinthPOI_Name=vasilias vasilios} {@CorinthPOI_Type=tavern} in {@CorinthPOI_Location=agionori}
+- what is the address to {@CorinthPOI_Name=number one: all day food}
+- what is the address to the closest {@CorinthPOI_Type=pharmacy}
+- what s the address for the {@CorinthPOI_Name=corinth archaeological} {@CorinthPOI_Type=museum}
+- what s the address of {@CorinthPOI_Name=observatory} in {@CorinthPOI_Location=stefani}
+- what s the address of the {@CorinthPOI_Location=corinth} {@CorinthPOI_Type=railway station}
+- what s the address of the {@CorinthPOI_Name=ecclesiastical museum}
+- what's the address for the {@CorinthPOI_Name=city hall} in {@CorinthPOI_Location=corinth}
+- what's the address of the {@CorinthPOI_Type=technical services} {@CorinthPOI_Type=protocol} in {@CorinthPOI_Location=corinth}
+
+
+# CorinthMunicipality_FindContactNumber
+- a {@CorinthPOI_Name=city hall} in {@CorinthPOI_Location=corinth} phone number
+- a telephone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and civil protection} in {@CorinthPOI_Location=korinthos}
+- a telephone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and quality of life}
+- can i get the number for {@CorinthPOI_Name=revenue and municipal property} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=korinthos}
+- can i get the number to {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=protocol} on {@CorinthPOI_Location=dimokratias 1}
+- can i get the phone number for {@CorinthPOI_Name=garbage collection services} in {@CorinthPOI_Location=corinth}
+- can i get the phone number for {@CorinthPOI_Name=mayors office}
+- can i have the number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=culture and sports} in {@CorinthPOI_Name=city hall}
+- can i have the number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=trade and services}
+- can i have the number for {@CorinthPOI_Name=register office} {@CorinthPOI_Location=stefani}
+- can i have the telephone number for {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=protocol} in {@CorinthPOI_Location=corinth}
+- contact number for {@CorinthPOI_Name=revenue and municipal property} {@CorinthPOI_Type=department}
+- do you have the phone number for {@CorinthPOI_Name=finance directorate services}
+- find {@CorinthPOI_Name=human management and resources} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=municipality of corinthia} phone number
+- find me the telephone number of the {@CorinthPOI_Name=revenue} {@CorinthPOI_Type=department}
+- find number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=trade and services} on {@CorinthPOI_Location=corinth}
+- find number for {@CorinthPOI_Name=town hall} {@CorinthPOI_Type=protocol} in {@CorinthPOI_Location=corinth}
+- find phone number for {@CorinthPOI_Name=city planning} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- find phone number for {@CorinthPOI_Name=corinth} {@CorinthPOI_Type=hospital}
+- find telephone number for the {@CorinthPOI_Type=department} of {@CorinthPOI_Name=culture and sports}
+- find the number for the {@CorinthPOI_Type=department} of {@CorinthPOI_Name=expenses}
+- find the number for the {@CorinthPOI_Type=directorate} of {@CorinthPOI_Name=local development}
+- find the number to {@CorinthPOI_Location=corinth} {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and quality of life}
+- find the number to {@CorinthPOI_Name=municipal water supply and sewerage company} on {@CorinthPOI_Location=corinth avenue}
+- find the number to the {@CorinthPOI_Name=social welfare municipality} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- find the phone number to {@CorinthPOI_Name=social protection} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- find the telephone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=clininless and recycling} {@CorinthPOI_Location=corinth}
+- get phone number for {@CorinthPOI_Name=citizen service} {@CorinthPOI_Type=center} in {@CorinthPOI_Location=corinth}
+- i need a number for {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=protocol}
+- i need a phone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=urban and municipal status}
+- i need the number for {@CorinthPOI_Name=revenue and municipal property} {@CorinthPOI_Type=department} {@CorinthPOI_Location=corinth}
+- i need the telephone number of the {@CorinthPOI_Name=revenue} {@CorinthPOI_Type=department} in corinth
+- {@CorinthPOI_Name=kep} on {@CorinthPOI_Location=kato assos} phone number
+- I need the telephone number of {@CorinthPOI_Name=mayor's} {@CorinthPOI_Type=office}
+- telephone number for {@CorinthPOI_Name=city planning} {@CorinthPOI_Type=department} in {@CorinthPOI_Location=corinth}
+- telephone number for {@CorinthPOI_Name=corinth} {@CorinthPOI_Type=hospital}
+- telephone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=culture and sports}
+- telephone number for {@CorinthPOI_Type=department} of {@CorinthPOI_Name=trade and services} on {@CorinthPOI_Location=corinth}
+- telephone number for {@CorinthPOI_Type=directorate} of {@CorinthPOI_Name=local development}
+- telephone number for the {@CorinthPOI_Name=department of expenses}
+- telephone number for {@CorinthPOI_Name=town hall} {@CorinthPOI_Type=protocol} in {@CorinthPOI_Location=corinth}
+- the number to {@CorinthPOI_Location=corinthian} {@CorinthPOI_Type=department} of {@CorinthPOI_Name=environment and quality of life}
+- the number to {@CorinthPOI_Name=municipal water supply and sewerage company} on {@CorinthPOI_Location=corinth avenue}
+- the number to {@CorinthPOI_Name=social protection} {@CorinthPOI_Type=office} in {@CorinthPOI_Location=corinth}
+- the number to {@CorinthPOI_Name=social welfare municipality} {@CorinthPOI_Type=center} in {@CorinthPOI_Location=corinth}
+- the phone number for the {@CorinthPOI_Name=kep} closest to me
+- the phone number of the {@CorinthPOI_Name=green} {@CorinthPOI_Type=department}
+- the phone number to {@CorinthPOI_Name=technical services} {@CorinthPOI_Type=department}
+- what is the number to {@CorinthPOI_Name=city hall}
+- what is the phone number for {@CorinthPOI_Type=office} of {@CorinthPOI_Name=expenses} {@CorinthPOI_Location=corinth}
+- what is the phone number for the nearest {@CorinthPOI_Cuisine=fish} {@CorinthPOI_Type=restaurant}
+- what is the phone number of {@CorinthPOI_Name=mayor's press} {@CorinthPOI_Type=office}
+- what is the phone number of the {@CorinthPOI_Name=art and science} {@CorinthPOI_Type=gallery} in {@CorinthPOI_Location=corinth}
+- what is the telephone number for {@CorinthPOI_Name=community} of {@CorinthPOI_Location=agionori}
+- whats the phone number for {@CorinthPOI_Name=waste and recycling management} {@CorinthPOI_Type=department}
+
+
+# CorinthMunicipality_FindTourismPOI
+- {@CorinthPOI_Cuisine=barbecue} {@CorinthPOI_Type=restaurant} closest to my location
+- {@CorinthPOI_Rating=best} {@CorinthPOI_Cuisine=souvlaki} near {@CorinthPOI_Location=corinth city center}
+- {@CorinthPOI_Rating=best} {@CorinthPOI_Cuisine=brunch} near me
+- {@CorinthPOI_Rating=best} {@CorinthPOI_Cuisine=gyro} {@CorinthPOI_Type=restaurants} near me
+- {@CorinthPOI_Rating=best} {@CorinthPOI_Cuisine=steakhouse} {@CorinthPOI_Type=restaurant} in {@CorinthPOI_Location=agionori}
+- {@CorinthPOI_Rating=best} lunch in {@CorinthPOI_Location=xiliomodi}
+- {@CorinthPOI_Rating=best} lunch {@CorinthPOI_Type=restaurant} in {@CorinthPOI_Location= lexaio}
+- {@CorinthPOI_Rating=best} {@CorinthPOI_Cuisine=mexican} food in {@CorinthPOI_Location=corinth}
+- {@CorinthPOI_Rating=best} nearby {@CorinthPOI_Type=restaurants}
+- {@CorinthPOI_Cuisine=breakfast} {@CorinthPOI_Type=cafes} nearby
+- {@CorinthPOI_Cuisine=brunch} {@CorinthPOI_Type=restaurants} in {@CorinthPOI_Location=corinth}
+- {@CorinthPOI_Cuisine=greek} {@CorinthPOI_Type=restaurant} {@CorinthPOI_Location=Almyri}
+- {@CorinthPOI_Type=beach} in {@CorinthPOI_Location=Corinth}
+- find a {@CorinthPOI_Type=beaches} in my area
+- find {@CorinthPOI_Type=restaurants} in my location
+- find {@CorinthPOI_Type=musuems}
+- find {@CorinthPOI_Type=hotels} in {@CorinthPOI_Location=corinth}
+- find  {@CorinthPOI_Cuisine=fish} {@CorinthPOI_Type=taverns} in my area
+- find {@CorinthPOI_Type=coffee shops} on {@CorinthPOI_Location=Athikia}
+- find {@CorinthPOI_Name=george's} {@CorinthPOI_Type=cafe} in {@CorinthPOI_Location=Almyri}
+- find {@CorinthPOI_Type=museums} near me
+- find {@CorinthPOI_Type=taverns} in this area
+- find some {@CorinthPOI_Rating=good} {@CorinthPOI_Type=coffee shop} nearby
+- find some {@CorinthPOI_Rating=good} {@CorinthPOI_Type=restaurants} in {@CorinthPOI_Location=kalamia beach}
+- find some nearby {@CorinthPOI_PriceRange=cheap} {@CorinthPOI_Type=restaurants}
+- find some nearby {@CorinthPOI_Type=churches}
+- find the closest {@CorinthPOI_Cuisine=greek} {@CorinthPOI_Type=restaurant} that {@CorinthPOI_Amenities=allows pets}
+- find the closest open {@CorinthPOI_Name=gallery}
+- find the nearest {@CorinthPOI_Name=barbeque} {@CorinthPOI_Type=restaurant}
+- find the nearest open {@CorinthPOI_Cuisine=steak} place
+- find the nearest {@CorinthPOI_Name=public library}
+- {@CorinthPOI_Rating=five star} {@CorinthPOI_Cuisine=fish} {@CorinthPOI_Type=restaurants} near {@CorinthPOI_Location=kalamia beach}
+- {@CorinthPOI_Rating=good} {@CorinthPOI_Type=restaurants} near here
+- is there a {@CorinthPOI_Type=history museum} near me
+- is there an {@CorinthPOI_Type=art museum} in {@CorinthPOI_Location=city center}
+- is there any nearby {@CorinthPOI_Type=mall}
+- is there any {@CorinthPOI_Name=pizza house} near here
+- is there any {@CorinthPOI_Type=restaurant} within 1 km?
+- is there any {@CorinthPOI_Type=restaurant} in my area
+- {@CorinthPOI_Cuisine=ribs} {@CorinthPOI_Type=restaurant} {@CorinthPOI_Location=xiliomodi}
+- list {@CorinthPOI_Rating=five star} {@CorinthPOI_Type=restaurants} in {@CorinthPOI_Location=kalamia beach}
+- list {@CorinthPOI_Rating=four star} {@CorinthPOI_Type=restaurants} nearby
+- list of {@CorinthPOI_Type=restaurants} places near me
+- list of the {@CorinthPOI_Rating=best} {@CorinthPOI_Type=ancient sights} in {@CorinthPOI_Location=ancient corinth}
+- list the {@CorinthPOI_Type=malls} in {@CorinthPOI_Location=korinthos}
+- list the {@CorinthPOI_Rating=top} 3 closest {@CorinthPOI_Type=museums} near {@CorinthPOI_Location=city center}
+- list the {@CorinthPOI_Rating=top} 3 {@CorinthPOI_Type=cinemas} in {@CorinthPOI_Location=town}
+- local {@CorinthPOI_Type=bars} in {@CorinthPOI_Location=korinthos}
+- local {@CorinthPOI_Type=taverns} n {@CorinthPOI_Location=city center}
+- local {@CorinthPOI_Type=coffee shops}
+- local {@CorinthPOI_Cuisine=fish} {@CorinthPOI_Type=restaurants}
+- local {@CorinthPOI_Type=pubs} in this area
+- locate nearby {@CorinthPOI_Type=churches}
+- locate {@CorinthPOI_Location=corinth} {@CorinthPOI_Type=restaurants}
+- {@CorinthPOI_Cuisine=steak} {@CorinthPOI_Type=restaurants} on {@CorinthPOI_Location=lexaio}
+- what's the {@CorinthPOI_PriceRange=cheapest} {@CorinthPOI_Cuisine=italian} in {@CorinthPOI_Location=korinthos}
+- what's the closest {@CorinthPOI_Type=church} that is open now
+- what's the closest {@CorinthPOI_Type=museum} to me
+- what's the closest {@CorinthPOI_Type=village} to {@CorinthPOI_Location=corinth}
+- what's the closest place for {@CorinthPOI_Cuisine=steaks}
+- what's the closest place to get {@CorinthPOI_Cuisine=pizza}
+- what's the nearest {@CorinthPOI_Type=shopping mall} in {@CorinthPOI_Location=corinth}
+- what's the nearest {@CorinthPOI_Type=theater} near me
+- where are {@CorinthPOI_Type=museums} nearby
+- where are {@CorinthPOI_Type=museums}  in {@CorinthPOI_Location=korinthos}
+- where are {@CorinthPOI_Type=beaches} in {@CorinthPOI_Location=Corinth}
+- where can i get a {@CorinthPOI_PriceRange=cheap} {@CorinthPOI_Cuisine=vegan}
+- where can i get a {@CorinthPOI_Cuisine=fish} dinner in {@CorinthPOI_Location=Almyri}
+- where can i get {@CorinthPOI_PriceRange=cheap} {@CorinthPOI_Cuisine=steak} in {@CorinthPOI_Location=Stefani}
+- where is a {@CorinthPOI_PriceRange=cheap} {@CorinthPOI_Type=mexican} around here
+- where is {@CorinthPOI_Rating=good} for {@CorinthPOI_Cuisine=italian} nearby
+
+
+
+
+
+
+
+# None
+- winter is coming
+
+
+> # Entity definitions
+
+@ ml CorinthPOI_Amenities
+
+@ ml CorinthPOI_Cuisine
+
+@ ml CorinthPOI_Location
+
+@ ml CorinthPOI_Name
+
+@ ml CorinthPOI_PriceRange
+
+@ ml CorinthPOI_Product
+
+@ ml CorinthPOI_Rating
+
+@ ml CorinthPOI_Type
+
+
+> # PREBUILT Entity definitions
+
+@ prebuilt datetimeV2
+
+@ prebuilt dimension
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

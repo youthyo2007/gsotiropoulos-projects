@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+
+<mapper namespace="com.socialvideo.data.mappers.AvatarMapper">
+
+
+   <resultMap type="com.socialvideo.data.dto.AvatarDTO" id="AvatarDTO">
+        <id column="id" property="id"/>
+        <result property="userid" column="userid_fk"/>
+        <result property="datablob" column="datablob"/>
+        <result property="imagebase64" column="imagebase64"/>
+        <result property="extension" column="extension"/>
+        <result property="contenttype" column="contenttype"/>
+        <result property="size" column="size"/>
+        <result property="datecreated" column="datecreated"/>
+    </resultMap> 
+
+    <select id="selectUserDTO_Avatar" parameterType="map" resultMap="AvatarDTO">
+       SELECT a.* FROM avatars a WHERE a.userid_fk = #{userid_fk}
+    </select>
+    
+
+</mapper>
+
+
+
+
